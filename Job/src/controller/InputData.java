@@ -25,13 +25,34 @@ public class InputData {
 		return mav;
 	}
 
+	// 현정 작업용
+//	@RequestMapping("/input_result")
+//	public ModelAndView getDataHandler(@RequestParam Map map) {
+//		String data = "";
+//		boolean result = false;
+//		try {
+//			data = sDao.getData(map);
+//			result = sDao.insert2(data, (String) map.get("type"));
+//			
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("t1");
+//		mav.addObject("main", "data/input_result");
+//		mav.addObject("result", result);
+//		return mav;
+//	}
+	
+	// 상세검색 DB 추가용
 	@RequestMapping("/input_result")
-	public ModelAndView getDataHandler(@RequestParam Map map) {
+	public ModelAndView getDataHandler2(@RequestParam Map map) {
 		String data = "";
 		boolean result = false;
 		try {
 			data = sDao.getData(map);
-			result = sDao.insert(data, (String) map.get("type"));
+			result = sDao.insert(data);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
