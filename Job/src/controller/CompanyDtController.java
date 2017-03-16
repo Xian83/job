@@ -21,8 +21,7 @@ public class CompanyDtController {
 	public ModelAndView searchByNameHandler(@RequestParam Map map){
 		ModelAndView mav = new ModelAndView("company/detail_form");
 		String name = (String)map.get("search");
-		String target = "http://apis.data.go.kr/B552015/NpsBplcInfoInqireService/getDetailInfoSearch "+name+
-						"AOROfnhFjGLI3w%2FrqcCyfPFL%2FR%2BQa6b%2Fj3jJD2jvVWxAzLAGVrVK70XHsW7aj24FJQmBI%2B1gULpO8L3NZd4kOw%3D%3D";
+		String target = "인증키 ㅠㅠ";
 		
 		try {
 			URL url = new URL(target);

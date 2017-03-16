@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mappers.career">
 	<insert id="input" parameterType="java.util.HashMap">
-		insert into score values(#{CMPN_NM}, #{FINANCE_SCORE}, #{SLAVE_SCORE}, #{LOGO})
+		insert into score values(#{CMPN_NM}, #{FINANCE_SCORE}, #{SLAVE_SCORE}, #{LOGO}, #{DIVISION}, #{SCALE})
 	</insert>
 	
 </mapper>

@@ -18,12 +18,14 @@ public class CareerCatchDao {
 	@Autowired
 	SqlSessionFactory factory;
 	
-	public void addCareer(List image, List li) throws IOException {
+	public void addCareer(List image, List li, List division) throws IOException {
 		Map<String, Object> map = new HashedMap();
 		SqlSession sql = null;	
-		System.out.println(image.size());
-		System.out.println(li.size());
+		System.out.println("이미지 사이즈 = "+image.size());
+		System.out.println("점수 사이즈 = "+li.size());
+		System.out.println("디비전 사이즈 = "+division.size());
 		int cnt =0;
+		int d= -1;
 		for(int i=0; i<image.size(); i++){
 			cnt++;
 			int t = i*4 ;
@@ -54,6 +56,8 @@ public class CareerCatchDao {
 			map.put("FINANCE_SCORE", a);			
 			map.put("SLAVE_SCORE", b);	
 			map.put("LOGO", image.get(i));
+			map.put("DIVISION", division.get(++d));
+			map.put("SCALE", division.get(++d));
 
 //			try{
 //					sql = factory.openSession();
@@ -68,6 +72,7 @@ public class CareerCatchDao {
 //			}
 //			
 		}
+		
 		System.out.println(cnt);
 		
 		

@@ -32,9 +32,9 @@ public class CareerCatchController {
 		try {
 			List li = new ArrayList();
 			List image = new ArrayList<>();
-			for (int p = 1; p <= 50; p++) { // 50page
-				InputStream is = new URL("http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?CurrentPage=" + p
-						+ "&intCurrentPage=2&UserSetting=&PublicCode=&intPageSize=20&IPO=&AreaSido=&ThemeName=&ReportGubun=&State=&StableJum=0&ApplyYN=&SubName=&GangsoType=&GrowJum=0&CName=&Sort=t.TopOrder&JCode=&Size=&JScore=&GroupCode=&flag=Major&IsStock=&TypeJum=0&PageState=2")
+			List division = new ArrayList<>();
+			for (int p = 1; p <= 2328; p++) { // 50page
+				InputStream is = new URL("http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?CurrentPage="+p+"&intCurrentPage=2&UserSetting=&PublicCode=&intPageSize=20&IPO=&AreaSido=&ThemeName=&ReportGubun=&State=&StableJum=0&ApplyYN=&SubName=&GangsoType=&GrowJum=0&CName=&Sort=a.TotJum%20desc&JCode=&Size=&JScore=&GroupCode=&flag=Search&IsStock=&TypeJum=0&PageState=2")
 								.openStream();
 				BufferedReader br = new BufferedReader(new InputStreamReader(is));
 				// for (int i = 0; i <= 240; i++) {
@@ -71,11 +71,21 @@ public class CareerCatchController {
 
 					}
 				}
+				
+				Document doc2 = Jsoup.parse(sb.toString());
+				Elements elm2 = doc.select("p.txt span");
+				for (Element m : elm2) {
 
+					if (m.text().length() != 0) {
+
+						division.add(m.text());
+
+					}
+				}
 			}
-			// System.out.println("image size = "+ image.size());
-			// System.out.println("li size = "+ li.size());
-			cdao.addCareer(image, li);
+//			 System.out.println("image size = "+ image.size());
+//			 System.out.println("division size = "+ division.size());
+		cdao.addCareer(image, li, division);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
