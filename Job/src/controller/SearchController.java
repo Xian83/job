@@ -3,6 +3,8 @@ package controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,10 +28,26 @@ public class SearchController {
 		mav.setViewName("t1");
 		mav.addObject("main", "search/list_form");
 		
-		System.out.println("param search == " + search );  
 
 			List list = sdao.search1(search);
+			mav.addObject("list", list);
 	
 		return mav;
 	}
+	
+	@RequestMapping("/index_search")
+	public ModelAndView search1Handler2(@RequestParam (name="q") String search) throws IOException{
+		
+		ModelAndView mav = new ModelAndView();
+		/*mav.setViewName("t1");
+		mav.addObject("main", "search/list_form");*/
+		
+		System.out.println("q = " + search);
+		List list = sdao.search1(search);
+		mav.addObject("list", list);
+		System.out.println("요기 list = " + list);
+	
+		return mav;
+	}
+	
 }
