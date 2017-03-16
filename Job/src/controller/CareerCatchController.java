@@ -21,12 +21,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import model.CareerCatchDao;
 
-
 @Controller
 public class CareerCatchController {
 
 	@Autowired
 	CareerCatchDao cdao;
+
 	@RequestMapping("/test")
 	public void getDataHandler() {
 		try {
@@ -37,11 +37,11 @@ public class CareerCatchController {
 						+ "&intCurrentPage=2&UserSetting=&PublicCode=&intPageSize=20&IPO=&AreaSido=&ThemeName=&ReportGubun=&State=&StableJum=0&ApplyYN=&SubName=&GangsoType=&GrowJum=0&CName=&Sort=t.TopOrder&JCode=&Size=&JScore=&GroupCode=&flag=Major&IsStock=&TypeJum=0&PageState=2")
 								.openStream();
 				BufferedReader br = new BufferedReader(new InputStreamReader(is));
-//				for (int i = 0; i <= 240; i++) {
-//					br.readLine();
-//				}
+				// for (int i = 0; i <= 240; i++) {
+				// br.readLine();
+				// }
 				Pattern img = Pattern.compile("(<img\\s+)(.*)(/>)");// 이미지 파일 범위
-				
+
 				String line;
 				StringBuilder sb = new StringBuilder();
 				while ((line = br.readLine()) != null) {
@@ -51,36 +51,33 @@ public class CareerCatchController {
 						int s = mImg.start();
 						int e = mImg.end(); // 이미지 파일이 있는 정규식이 있다면 시작과 끝을 뽑음
 						String found = line.substring(s, e);
-						Pattern src = Pattern.compile("(src=)\'(http://.+\\.*)\'(.*)"); 																																					
+						Pattern src = Pattern.compile("(src=)\'(http://.+\\.*)\'(.*)");
 						Matcher mSrc = src.matcher(found); // 그룹을 2개로 나눠 이미지 정규식
 						if (mSrc.find()) {
 							String t = mSrc.group(2);
-						
-							
-							
-							image.add(t.substring(0,t.length()-11));
+
+							image.add(t.substring(0, t.length() - 11));
 						}
 					}
 				}
 				br.close();
 				Document doc = Jsoup.parse(sb.toString());
-				Elements elm= doc.select("dl.company_info a");
-				for(Element m : elm) {
-					
-					if(m.text().length() != 0){
-						
+				Elements elm = doc.select("dl.company_info a");
+				for (Element m : elm) {
+
+					if (m.text().length() != 0) {
+
 						li.add(m.text());
-						
+
 					}
 				}
-				
+
 			}
-//			System.out.println("image size = "+ image.size());
-//			System.out.println("li size = "+ li.size());
-			cdao.addCareer(image ,li);
-		
+			// System.out.println("image size = "+ image.size());
+			// System.out.println("li size = "+ li.size());
+			cdao.addCareer(image, li);
 		} catch (Exception e) {
-			System.out.println("e.." + e);
+			e.printStackTrace();
 		}
 
 	}
