@@ -41,7 +41,7 @@ public class SalaryDao {
 		return sb.toString();
 	}
 
-	public boolean insert(String data, String type) throws JsonParseException, JsonMappingException, IOException {		
+	public boolean insert2(String data, String type) throws JsonParseException, JsonMappingException, IOException {		
 		boolean result = false;
 		SqlSession sql = null;
 		
@@ -59,6 +59,40 @@ public class SalaryDao {
 					cnt = sql.insert("mappers.company.inputA", (Map) dataOne);
 				else if(type.equals("b"))
 					cnt = sql.insert("mappers.company.inputB", (Map) dataOne);
+				
+				if(cnt == 1){
+					sql.commit();
+					result = true;
+				} else
+					result = false;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		} finally{
+			sql.close();
+		}
+		return result;
+	}
+	
+	public boolean insert(String data) throws JsonParseException, JsonMappingException, IOException {		
+		boolean result = false;
+		SqlSession sql = null;
+		
+		try {
+			sql = factory.openSession();
+			
+			ObjectMapper om = new ObjectMapper();
+			Map map = om.readValue(data, Map.class);
+			Map map2 = (Map)map.get("data");
+			ArrayList list = (ArrayList) map2.get("list");
+
+			for (Object dataOne : list) {
+				int cnt = 0;
+				
+					cnt = sql.insert("mappers.company.inputC", (Map) dataOne);
+			
 				
 				if(cnt == 1){
 					sql.commit();

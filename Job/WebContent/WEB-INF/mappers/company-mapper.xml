@@ -9,4 +9,7 @@
 	<insert id="inputB" parameterType="java.util.HashMap">
 		insert into salary values(#{PK_NM}, #{CMPN_NM}, #{AVG_SALARY_FSS}, #{ROOKEY_SALARY_FSS})
 	</insert>
+	<insert id="inputC" parameterType="java.util.HashMap">
+		insert into rank values(#{PK_NM}, #{CMPN_NM}, #{WKP_ADRS}, #{STNDD_BIG_GB}, #{SALARY})
+	</insert>
 </mapper>
