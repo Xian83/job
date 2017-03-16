@@ -35,6 +35,7 @@ public class SearchController {
 		return mav;
 	}
 	
+	// 자동 완성 검색기능 - 미완성
 	@RequestMapping("/index_search")
 	public ModelAndView search1Handler2(@RequestParam (name="q") String search) throws IOException{
 		
@@ -45,7 +46,8 @@ public class SearchController {
 		System.out.println("q = " + search);
 		List list = sdao.search1(search);
 		mav.addObject("list", list);
-		System.out.println("요기 list = " + list);
+		// list는 출력되나, index에서 출력은 되지 않음
+		System.out.println("list = " + list);
 	
 		return mav;
 	}
