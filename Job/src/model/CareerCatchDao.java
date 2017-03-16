@@ -35,7 +35,7 @@ public class CareerCatchDao {
 				String m = ar[0];
 				ar=new String[]{m, "0점"};
 			}
-			a = ar[1].replace("점", " ");
+			a = ar[1].replace("점", "");
 			
 			String[] br;
 			br = new String[2];
