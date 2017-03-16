@@ -54,8 +54,7 @@
 })
 
 </script>
-
-<!-- 출력 안됨 -->
+나오냥
 <c:forEach var = "one" items ="${list }">
 		 ${one.CMPN_NM} <br/>  
 	</c:forEach>
