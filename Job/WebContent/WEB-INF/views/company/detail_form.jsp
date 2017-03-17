@@ -68,7 +68,7 @@
 			<p>동종업계 인기 많은 기업</p>
 			<c:forEach var="i" begin="0" end="5">
 				<div class="col-md-2">
-					<a href="/company/detail?cmpn_nm="+${same[i].CMPN_NM }> 
+					<a href="/company/detail?cmpn_nm=${same[i].CMPN_NM }"> 
 					<img src="${same[i].LOGO }" alt="Lights" style="width: 100%">
 						<div class="caption">
 							<p>${same[i].CMPN_NM }</p>
