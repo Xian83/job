@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
 input[id=aaa] {
-    width: 96%;
+    width: 95%;
     padding: 10px 5px;
 }
 </style>
@@ -36,7 +36,7 @@ input[id=aaa] {
 							width="50" height="50">
 					 </c:forEach></p>
 					<br />
-					<p>재직자점수 : ${score[0].SLAVE_SCORE } <c:forEach var="i" begin="0" end="${score[0].SLAVE_SCORE/20 }">
+					<p>재직자점수 : ${score[0].SLAVE_SCORE } <c:forEach var="i" begin="0" end="${score[0].SLAVE_SCORE/20}">
 						<img src="http://cfile24.uf.tistory.com/image/2419AD4652FC36A7345270" class="img-circle" alt="Cinque Terre"
 							width="50" height="50">
 					 </c:forEach></p>

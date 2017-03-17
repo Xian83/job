@@ -24,6 +24,7 @@ public class SearchDao {
 	@Autowired
 	SqlSessionFactory factory;
 	
+	// 회사 이름 검색 - 검색어 포함된 회사 목록
 	public List search1(String search) throws IOException {		
 		SqlSession sql = null;
 		List list = new ArrayList();
@@ -41,5 +42,26 @@ public class SearchDao {
 			sql.close();
 		}
 		return list;
+	}
+	
+	
+	// 일부분의 데이터를 리스트화 시켜주는 메서드
+	public List<HashMap> pasing(int start, int end,String search) {
+		List<HashMap> SomeCompanies = new ArrayList<>();
+		SqlSession sql = factory.openSession();
+		try {
+			Map map = new HashMap();
+				map.put("search", "%"+search+"%");
+				map.put("start", start);
+				map.put("end", end);
+			SomeCompanies = sql.selectList("mappers.search.pasing", map);  
+			 } catch (Exception e){
+				 e.printStackTrace();	
+			 } finally {
+				 sql.close();
+		} 
+	
+		return SomeCompanies;
+
 	}
 }

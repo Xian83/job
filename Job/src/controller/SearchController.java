@@ -1,9 +1,10 @@
 package controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,22 +21,40 @@ public class SearchController {
 	@Autowired
 	SearchDao sdao;
 	
-	// 기업명으로 검색 
+	// 湲곗뾽紐낆쑝濡� 寃��깋 
 	@RequestMapping("/company")
-	public ModelAndView search1Handler(@RequestParam (name="search", required=false) String search) throws IOException{
+	public ModelAndView search1Handler(HttpServletRequest request, @RequestParam (name="search", defaultValue="삼성") String search) throws IOException{
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
 		mav.addObject("main", "search/list_form");
 		
-
 		List list = sdao.search1(search);
+		System.out.println(list);
 		mav.addObject("list", list);
+		mav.addObject("listSize", list.size());
+		int cnt = list.size();
+
+
+		int size = cnt % 20 == 0 ? cnt / 20 : cnt / 20 + 1; 
+		mav.addObject("cnt", cnt);
+		mav.addObject("size", size);
 	
+		String pStr = request.getParameter("page") == null ? "1" : request.getParameter("page");
+		mav.addObject("page", pStr);
+		System.out.println(pStr);
+
+		int start = (Integer.parseInt(pStr) - 1) * 20 + 1;
+		int end = Integer.parseInt(pStr) * 20;
+	
+		List<HashMap> list2 = sdao.pasing(start, end, search); // 페이지 분할해서
+		mav.addObject("list2", list2);
+		
+
 		return mav;
 	}
 	
-	// 자동 완성 검색기능 - 미완성
+	// �옄�룞 �셿�꽦 寃��깋湲곕뒫 - 誘몄셿�꽦
 	/*@RequestMapping("/index_search")
 	public ModelAndView search1Handler2(@RequestParam (name="q") String search) throws IOException{
 		
@@ -46,10 +65,12 @@ public class SearchController {
 		System.out.println("q = " + search);
 		List list = sdao.search1(search);
 		mav.addObject("list", list);
-		// list는 출력되나, index에서 출력은 되지 않음
+		// list�뒗 異쒕젰�릺�굹, index�뿉�꽌 異쒕젰�� �릺吏� �븡�쓬
 		System.out.println("list = " + list);
 	
 		return mav;
 	}*/
+	
+
 	
 }
