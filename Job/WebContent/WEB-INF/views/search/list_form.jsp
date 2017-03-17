@@ -7,25 +7,30 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
+
 <div class="container">
 	<table class="table table-bordered">
-		<c:forEach var="obj" items="${list2 }" varStatus="vs">
-			<c:if test="${vs.count %2 == 1 }"><tr></c:if>
-				<td><a href="company/detail_form.jsp"><img
-						src="${obj.LOGO }" width="100" height="70" /></a> <a
-					href="company/detail_form.jsp"><h4>
-							<b>${obj.CMPN_NM }<b />
-						</h4></a>
-					<h5>${obj.DIVISION }| ${obj.SCALE }</h5>
-					<button type="button" class="btn btn-default">재무평가
-						${obj.FINANCE_SCORE }점</button>
-					<button type="button" class="btn btn-default">재직자 평판
-						${obj.FINANCE_SCORE }점</button>
-					<button type="button" class="btn btn-default">기업비교</button></td>
-			<c:if test="${vs.count %2 == 0 }"></tr></c:if>
+		<div class="media">
+ 			 <div class="media-left media-middle">
+  				<c:forEach var="obj" items="${list2 }" varStatus="vs">
+   					 <img src="${obj.LOGO }"  class="media-object" width="100" height="70">
+  			</div>
+ 		 <div class="media-body">
+   			 <h4 class="media-heading">
+   			 	<a href="/company/detail?cmpn_nm=${obj.CMPN_NM }"></h4><b>${obj.CMPN_NM }<b/></h4></a>
+				<h5>${obj.DIVISION }|${obj.SCALE }</h5>
+				<button type="button" class="btn btn-default">재무평가
+					${obj.FINANCE_SCORE }점</button>
+				<button type="button" class="btn btn-default">재직자 평판
+					${obj.FINANCE_SCORE }점</button>
+				<button type="button" class="btn btn-default">기업비교</button></td>
+			<c:if test="${vs.count %2 == 0 }">
+				</tr>
+			</c:if>
 		</c:forEach>
 	</table>
-</div>
+  </div>
+
 
 
 <!-- 페이지 뷰 -->
