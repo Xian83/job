@@ -1,176 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+	pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<div class="container-fluid">
+	<div class="row content">
+		<div class="col-md-8">
 
- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-   
- 
+			<h4 align="center">${salary[0].CMPN_NM }</h4>
+			<div class="row content">
+				<div class="col-sm-3 sidenav">
+					<img src="${score[0].LOGO }" class="img-circle" alt="Cinque Terre"
+						width="200" height="200">
+				</div>
+				<div class="col-sm-9 sidenav">
+					<table class="table table-bordered" align="center">
+						<thead>
+							<tr>
+								<th colspan="2">${score[0].CMPN_NM }</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>산업군 : ${score[0].DIVISION }</td>
+								<td>기업구분 : ${score[0].SCALE }</td>
+							</tr>
+					</table>
+					<p>재무점수 : ${score[0].FINANCE_SCORE }</p>
+					<br />
+					<p>재직자점수 : ${score[0].SLAVE_SCORE }</p>
+				</div>
 
-    .carousel-inner img {
-      width: 100%; /* Set width to 100% */
-      min-height: 200px;
-    }
+			</div>
+		</div>
+		<div class="col-md-4">
 
-   
-    @media (max-width: 600px) {
-      .carousel-caption {
-        display: none; 
-      }
-    }
-  </style>
-</head>
-<body>
+			<h2>I Love Money</h2>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>평균연봉</th>
+						<th>신입평균연봉</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>${salary[0].AVG_SALARY }원</td>
+						<td>${salary[0].ROOKEY_SALARY }원</td>
+					</tr>
+			</table>
+			사원수 : 999999999명
+		</div>
+	</div>
 
+	<div class="row content" align="center">
+		<p>동종업계 인기 많은 기업</p>
+		<c:forEach var="i" begin="0" end="5">
+			<div class="col-md-2">
+				<a href="/company/detail?cmpn_nm=${same[i].CMPN_NM }"> <img
+					src="${same[i].LOGO }" alt="Lights" style="width: 100%">
+					<div class="caption">
+						<p>${same[i].CMPN_NM }</p>
+					</div>
+				</a>
+			</div>
+		</c:forEach>
+	</div>
 
-<div align="center">
-<p>
-연습중
-</p>
+	<div class="row content">
+		<h4>리뷰</h4>
+		<form role="form">
+			<div class="form-group">
+				<textarea class="form-control" rows="3" required></textarea>
+			</div>
+			<input type="text" id="aaa" name="bbb" placeholder="ID"> <input
+				type="text" id="aaa" name="bbb" placeholder="contents" width="80">
+			<button type="submit" class="btn btn-success">올리기</button>
+		</form>
+	</div>
 </div>
-<div class="container">
-<div class="row">
-  <div class="col-sm-8">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-      </ol>
-
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner" role="listbox">
-        <div class="item active">
-          <img src="https://placehold.it/800x400?text=IMAGE" alt="Image">
-          <div class="carousel-caption">
-            <p>여기에 로고를</p>
-          </div>      
-        </div>
-
-        <div class="item">
-          <img src="https://placehold.it/800x400?text=여기는 기업정보를" alt="Image">
-          <div class="carousel-caption">
-            <h3>예를 들어</h3>
-            <p>기업이름</p>
-            <p>위치</p>
-          <p>입사</p>
-         <p>퇴사</p>
-          <p>총매출액등등</p>
-          </div>      
-        </div>
-      </div>
-
-      <!-- Left and right controls -->
-      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-  </div>
-  <div class="col-sm-4">
-    <div class="well">
-      <p>예상평균연봉</p>
-    </div>
-    <div class="well">
-       <p>신입평군연봉</p>
-    </div>
-    <div class="well">
-       <p>인원</p>
-    </div>
-  </div>
-</div>
-<hr>
-</div>
-
-<div class="container text-center">    
-  <h3>리뷰</h3>
-  <br>
-  <div class="row">
-    
-    </div>
-    <div class="col-sm-3">
-      <div class="well">
-       <p>아이디</p> 
-      </div>
-      <div class="well">
-       <p>아이디</p> 
-      </div>
-    </div>  
-    <div class="col-sm-9">
-      <div class="well">
-       <p>내용</p>
-      </div>
-      <div class="well">
-       <p>내용</p>
-      </div>
-    </div>  
-  </div>
-  <div align="center">
-    <form action="input_result" method="get">
-	리뷰: <input type="text" name="??"/>
-        <button type="submit">등록</button>
-</form>
-</div>
-<hr>
-</div>
-
-
-
-<div class="container text-center">    
-  <h3>부가기능</h3>
-  <br>
-  <div class="row">
-    <div class="col-sm-2">
-    <table>
-  <tr>
-    <th>.</th>
-    <th>.</th>
-  </tr>
-  <tr>
-    <td>.</td>
-    <td>.</td>
-  </tr>
-  <tr>
-    <td>.</td>
-    <td>.</td>
-  </tr>
-</table>
-      <p>그래프 1</p>
-    </div>
-    <div class="col-sm-2"> 
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      <p>차트 2</p>    
-    </div>
-    <div class="col-sm-2"> 
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      <p>그래프 3</p>
-    </div>
-    <div class="col-sm-2"> 
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      <p>차트 4</p>
-    </div> 
-    <div class="col-sm-2"> 
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      <p>표 5</p>
-    </div>     
-    <div class="col-sm-2"> 
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      <p>등등등 6</p>
-    </div> 
-  </div>
-</div><br>
-
-
-</body>
-</html>

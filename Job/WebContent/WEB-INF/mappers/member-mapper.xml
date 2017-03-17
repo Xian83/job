@@ -8,7 +8,7 @@
 		select count(*) from member where email=#{email} and
 		pass=#{pass}
 	</select>
-	<select id="idCheck" resultType="java.lang.Integer"
+	<select id="emailCheck" resultType="java.lang.Integer"
 		parameterType="java.lang.String">
 		select count(*) from member where email=#{email}
 	</select>
@@ -19,7 +19,11 @@
 
 	<insert id="add" parameterType="java.util.HashMap">
 		insert into member values( mem_seq.nextval, #{email}, 
-		#{pass}, #{name}, #{age}, #{gender}, sysdate)
+		#{pass}, #{name}, #{birth}, #{facebook}, sysdate)
+	</insert>
+	<insert id="addInfo" parameterType="java.util.HashMap">
+		insert into member_info values( #{email}, 
+		#{gender}, #{area}, #{STNDD_BIG_GB}, #{salary_min}, #{salary_max})
 	</insert>
 	<update id="update" parameterType="java.util.HashMap">
 		update member set

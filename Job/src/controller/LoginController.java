@@ -22,15 +22,6 @@ public class LoginController {
 	@Autowired
 	MemberDao mDao;
 	
-	// 페이스북 연동하기
-	@RequestMapping("/fb")
-	public ModelAndView fbSignUpHandler(){
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t1");
-		mav.addObject("main", "login/form_fb");
-		return mav;
-	}
-	
 	// 로그인 화면
 	@RequestMapping("/form")
 	public ModelAndView loginFormHandler(){
@@ -46,19 +37,19 @@ public class LoginController {
 		
 		boolean rst = mDao.existCheck(map);
 		if(rst){
-			Map userData = mDao.getData((String)map.get("id"));
+			Map userData = mDao.getData((String)map.get("email"));
 			
-			String id = (String) userData.get("ID");
+			String email = (String) userData.get("EMAIL");
 			String pass = (String) userData.get("PASS");
 			String name = (String) userData.get("NAME");
 			
 			session.setAttribute("auth", "yes");
 			session.setAttribute("leave_try", 1);
-			session.setAttribute("id", id);
+			session.setAttribute("email", email);
 			session.setAttribute("name", name);
 			
 			if(map.get("keep") != null){
-				Cookie c = new Cookie("login", id + "#" + pass + "#" + name);
+				Cookie c = new Cookie("login", email + "#" + pass + "#" + name);
 				c.setMaxAge(60 * 60 * 24);
 				c.setPath("/");
 				resp.addCookie(c);
@@ -89,5 +80,14 @@ public class LoginController {
 		session.removeAttribute("leave_try");
 		Thread.sleep(300);
 		resp.sendRedirect("/");
+	}
+	
+	// 페이스북 연동하기
+	@RequestMapping("/fb")
+	public ModelAndView fbSignUpHandler(){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("t1");
+		mav.addObject("main", "login/form_fb");
+		return mav;
 	}
 }
