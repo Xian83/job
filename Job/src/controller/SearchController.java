@@ -21,16 +21,16 @@ public class SearchController {
 	SearchDao sdao;
 	
 	// 기업명으로 검색 
-	@RequestMapping("/name")
-	public ModelAndView search1Handler(@RequestParam (name="search") String search) throws IOException{
+	@RequestMapping("/company")
+	public ModelAndView search1Handler(@RequestParam (name="search", required=false) String search) throws IOException{
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
 		mav.addObject("main", "search/list_form");
 		
 
-			List list = sdao.search1(search);
-			mav.addObject("list", list);
+		List list = sdao.search1(search);
+		mav.addObject("list", list);
 	
 		return mav;
 	}

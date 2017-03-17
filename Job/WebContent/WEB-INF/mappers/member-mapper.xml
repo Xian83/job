@@ -3,4 +3,32 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mappers.member">
+	<select id="existCheck" resultType="java.lang.Integer"
+		parameterType="java.util.HashMap">
+		select count(*) from member where id=#{id} and
+		pass=#{pass}
+	</select>
+	<select id="idCheck" resultType="java.lang.Integer"
+		parameterType="java.lang.String">
+		select count(*) from member where id=#{id}
+	</select>
+	<select id="getById" resultType="java.util.HashMap"
+		parameterType="java.lang.String">
+		select * from member where id=#{id}
+	</select>
+
+	<insert id="add" parameterType="java.util.HashMap">
+		insert into member values(#{id},
+		#{pass}, #{name}, #{age}, #{gender}, #{email}, sysdate)
+	</insert>
+	<update id="update" parameterType="java.util.HashMap">
+		update member set
+		pass=#{pass}, name=#{name}, age=#{age}, gender=#{gender},
+		email=#{email} where id=#{id}
+	</update>
+	<delete id="delete" parameterType="java.util.HashMap">
+		delete from member where
+		id=#{id} and pass=#{pass}
+	</delete>
+
 </mapper>
