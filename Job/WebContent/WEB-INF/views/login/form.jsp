@@ -6,8 +6,8 @@
 <div class="well">
 	<form action="/login/result" method="post">
 		<p>
-			<b>ID</b><br/>
-			<input type="text" name="id" class="form-control">
+			<b>EMAIL</b><br/>
+			<input type="text" name="email" class="form-control">
 		</p>		
 		<p>
 			<b>PASS</b><br/>
@@ -15,7 +15,7 @@
 		</p>
 		<p>
 			<input type="checkbox" name="keep"/>로그인 유지&nbsp;&nbsp;&nbsp;
-			<button type="submit" class="btn">로그인</button>
+			<button type="submit" class="btn btn-info">로그인</button>
 		</p>
 		<p>
 			아직 회원이 아니십니까? <a href="/join/step01"><i>회원가입 페이지로 이동</i></a>
