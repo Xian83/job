@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,39 +24,36 @@ public class RankController {
 		mav.setViewName("t1");
 		mav.addObject("main", "rank/form");
 		
-		List list = rdao.avgsalary();
+		Map map = rdao.salary();
+		List list2 = rdao.avgsalary2(map);
+		mav.addObject("list", list2);
+		
+		return mav;
+	}
+	
+	@RequestMapping("/avgsalary")
+	public ModelAndView InitHandler2(@RequestParam (name="avgsalary") String avg) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("t1");
+		mav.addObject("main", "rank/form");
+		
+		List list = rdao.avgsalary(avg);
 		mav.addObject("list", list);
 		
 		return mav;
 	}
 	
-	@RequestMapping("/sortsalary")
-	public ModelAndView InitHandler2() {
+	@RequestMapping("/rookeysalary")
+	public ModelAndView InitHandler3(@RequestParam (name="rookeysalary") String rookey) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
 		mav.addObject("main", "rank/form");
 		
-		List list = rdao.avgsalary();
+		List list = rdao.rookeysalary(rookey);
 		mav.addObject("list", list);
 		
 		return mav;
 	}
 	
-	@RequestMapping("/sortlocal")
-	public ModelAndView InitHandler3(@RequestParam (name="local") String local) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t1");
-		mav.addObject("main", "rank/form");
-		System.out.println(local);
-			if(local.equals("seoul")) {
-				local = "서울";
-			} else if (local.equals("geonggi")) {
-				local = "경기";
-			}
-		List list = rdao.localsalary(local);
-		mav.addObject("list", list);
-		
-		return mav;
-	}
 
 }
