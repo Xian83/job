@@ -2,6 +2,12 @@
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<style>
+input[id=aaa] {
+    width: 96%;
+    padding: 10px 5px;
+}
+</style>
 <div class="container-fluid">
 	<div class="row content">
 		<div class="col-md-8">
@@ -25,9 +31,15 @@
 								<td>기업구분 : ${score[0].SCALE }</td>
 							</tr>
 					</table>
-					<p>재무점수 : ${score[0].FINANCE_SCORE }</p>
+					<p>재무점수 : ${score[0].FINANCE_SCORE } <c:forEach var="i" begin="0" end="${score[0].FINANCE_SCORE/20 }">
+						<img src="http://cfile24.uf.tistory.com/image/2419AD4652FC36A7345270" class="img-circle" alt="Cinque Terre"
+							width="50" height="50">
+					 </c:forEach></p>
 					<br />
-					<p>재직자점수 : ${score[0].SLAVE_SCORE }</p>
+					<p>재직자점수 : ${score[0].SLAVE_SCORE } <c:forEach var="i" begin="0" end="${score[0].SLAVE_SCORE/20 }">
+						<img src="http://cfile24.uf.tistory.com/image/2419AD4652FC36A7345270" class="img-circle" alt="Cinque Terre"
+							width="50" height="50">
+					 </c:forEach></p>
 				</div>
 
 			</div>
@@ -48,7 +60,12 @@
 						<td>${salary[0].ROOKEY_SALARY }원</td>
 					</tr>
 			</table>
-			사원수 : 999999999명
+			<div class="col-md-8">사원수 : 999999999명</div>
+			<div class="col-md-4">
+				<form action="">
+					<button>관심목록추가</button>
+				</form>
+			</div>
 		</div>
 	</div>
 
@@ -67,13 +84,17 @@
 	</div>
 
 	<div class="row content">
-		<h4>리뷰</h4>
+		
 		<form role="form">
-			<div class="form-group">
-				<textarea class="form-control" rows="3" required></textarea>
+			<br/>
+			<div class="panel panel-default">
+				<div class="panel-heading">리뷰</div>
+				<div class="panel-body">홍길동 : 이회사좋아요</div>
+				<div class="panel-body">사장님 : 감사합니다</div>
 			</div>
-			<input type="text" id="aaa" name="bbb" placeholder="ID"> <input
-				type="text" id="aaa" name="bbb" placeholder="contents" width="80">
+	
+			<input type="text" id="aaa" name="bbb" placeholder="contents"
+				width="60">
 			<button type="submit" class="btn btn-success">올리기</button>
 		</form>
 	</div>
