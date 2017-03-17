@@ -54,14 +54,9 @@ public class SearchDao {
 				map.put("search", "%"+search+"%");
 				map.put("start", start);
 				map.put("end", end);
-			SomeCompanies = sql.selectList("mappers.search.pasing", map);  // mapper 쿼리 문에 매개 변수 필요하면 써 줘야 함 -
-																						// 여러개면 map으로 넣어야 함
-			
-			System.out.println("SomeCompanies ? " + SomeCompanies.toString());
-				System.out.println("페이징 처리 완료");
+			SomeCompanies = sql.selectList("mappers.search.pasing", map);  
 			 } catch (Exception e){
-				 e.printStackTrace();
-				 System.out.println("페이징 처리 실패");
+				 e.printStackTrace();	
 			 } finally {
 				 sql.close();
 		} 

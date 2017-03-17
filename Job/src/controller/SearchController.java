@@ -34,14 +34,11 @@ public class SearchController {
 		mav.addObject("list", list);
 		mav.addObject("listSize", list.size());
 		int cnt = list.size();
-		System.out.println("cnt ? " + cnt);
+
 
 		int size = cnt % 20 == 0 ? cnt / 20 : cnt / 20 + 1; 
 		mav.addObject("cnt", cnt);
 		mav.addObject("size", size);
-		
-		request.setAttribute("cnt", cnt);
-		request.setAttribute("size", size);
 	
 		String pStr = request.getParameter("page") == null ? "1" : request.getParameter("page");
 		mav.addObject("page", pStr);
@@ -49,15 +46,11 @@ public class SearchController {
 
 		int start = (Integer.parseInt(pStr) - 1) * 20 + 1;
 		int end = Integer.parseInt(pStr) * 20;
-		System.out.println("start ? " + start);
-		System.out.println("end ? " + end);
-		
+	
 		List<HashMap> list2 = sdao.pasing(start, end, search); // 페이지 분할해서
 		mav.addObject("list2", list2);
-		mav.addObject("list2.cnt", list2.size());
-	
-		System.out.println("검색 목록 페이징처리 작동함");
-	
+		
+
 		return mav;
 	}
 	
