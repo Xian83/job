@@ -11,7 +11,7 @@
 	<mvc:annotation-driven />
 	<mvc:default-servlet-handler/>
 	<context:component-scan base-package="controller"/>
-	<context:component-scan base-package="model"/>
+	<context:component-scan base-package="model"/> 
 	
 	<!-- View 연결용 Resolver 등록 -->
 	<!-- View 객체 처리용  -->
