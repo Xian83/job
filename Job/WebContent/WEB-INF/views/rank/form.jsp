@@ -46,7 +46,9 @@ href="company/detail_form.jsp"><h4><b>${obj.CMPN_NM }<b/></h4></a> <h5>${obj.DIV
                <button type="button" class="btn btn-default">재무평가 ${obj.FINANCE_SCORE }점</button>  
                <button type="button" class="btn btn-default">재직자 평판 ${obj.FINANCE_SCORE }점</button>  
                <button type="button" class="btn btn-default">기업비교</button>
-              <%--  <button type="button" class="btn btn-default">평균연봉 ${obj2.AVG_SALARY }</button> --%></td>
+               
+              <%-- <button type="button" class="btn btn-default">평균연봉 ${list1[i].AVG_SALARY }</button> --%> </td>
+               
          </tr>
       </c:forEach>
                
