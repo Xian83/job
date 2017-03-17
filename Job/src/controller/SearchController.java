@@ -20,9 +20,9 @@ public class SearchController {
 	@Autowired
 	SearchDao sdao;
 	
-	// 기업명으로 검색 
+	// 湲곗뾽紐낆쑝濡� 寃��깋 
 	@RequestMapping("/company")
-	public ModelAndView search1Handler(@RequestParam (name="search", required=false) String search) throws IOException{
+	public ModelAndView search1Handler(@RequestParam (name="search", defaultValue="삼성") String search) throws IOException{
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
@@ -35,7 +35,7 @@ public class SearchController {
 		return mav;
 	}
 	
-	// 자동 완성 검색기능 - 미완성
+	// �옄�룞 �셿�꽦 寃��깋湲곕뒫 - 誘몄셿�꽦
 	/*@RequestMapping("/index_search")
 	public ModelAndView search1Handler2(@RequestParam (name="q") String search) throws IOException{
 		
@@ -46,7 +46,7 @@ public class SearchController {
 		System.out.println("q = " + search);
 		List list = sdao.search1(search);
 		mav.addObject("list", list);
-		// list는 출력되나, index에서 출력은 되지 않음
+		// list�뒗 異쒕젰�릺�굹, index�뿉�꽌 異쒕젰�� �릺吏� �븡�쓬
 		System.out.println("list = " + list);
 	
 		return mav;
