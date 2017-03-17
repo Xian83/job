@@ -20,7 +20,8 @@ public class DetailController {
 	@RequestMapping("/detail")
 	public ModelAndView detailHandler(@RequestParam(name="cmpn_nm") String companyname){
 		
-		ModelAndView mav = new ModelAndView("company/detail_form");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("t1");
 		List scorelist =ddao.score(companyname);
 		List salarylist = ddao.salary(companyname);
 		HashMap map = (HashMap) scorelist.get(0);
@@ -29,7 +30,7 @@ public class DetailController {
 		mav.addObject("score",scorelist);
 		mav.addObject("same",samelist);
 		mav.addObject("salary", salarylist);
-		
+		mav.addObject("main", "company/detail_form");
 		
 		return mav ;
 	}
