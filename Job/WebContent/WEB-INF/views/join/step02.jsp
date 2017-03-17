@@ -4,22 +4,24 @@
 	<h3>STEP 01. 기본정보 입력</h3>
 </div>
 <div class="well">
-	<form action="/join/step02.jsp" method="post">
+	<form action="/join/step03" method="post">
 		<p>
-			<b>ID</b> <span id="checkId"></span><br /> <input type="text"
-				name="id" id="id" class="form-control" placeholder="아이디 입력">
+			<label for="comment"><b>Email</b> <span id="checkEmail"></span></label><br /> 
+			<input type="email"
+				id="email" name="email" class="form-control" placeholder="이메일 입력" required>
 		</p>
 		<p>
-			<b>PASS</b><br /> <input type="password" name="pw" id="pw1"
-				class="form-control" placeholder="비밀번호 입력">
+			<label for="comment"><b>Password</b></label><br />
+			<input type="password" name="pass" id="pw1"
+				class="form-control" placeholder="비밀번호 입력" required>
 		</p>
 		<p>
-			<b>PASS CONFIRM</b><span id="cmpResult" style="color: red"></span><br />
-			<input type="password" name="pwcheck" id="pw2" class="form-control"
-				placeholder="비밀번호 재입력">
+			<label for="comment"><b>Password Confirm</b> <span id="cmpResult" style="color: red"></span></label><br />
+			<input type="password" name="passcheck" id="pw2" class="form-control"
+				placeholder="비밀번호 재입력" required>
 		</p>
 		<p>
-			<button type="submit" class="btn" id="btn" disabled>다음 단계로</button>
+			<button type="submit" class="btn btn-info btn-block" id="btn" disabled>Next</button>
 		</p>
 	</form>
 </div>
@@ -47,23 +49,23 @@
 	}
 	
 	// ID 체크
-	document.getElementById("id").onblur = function(){
-		cid = this;
-		result = document.getElementById("checkId");		
+	document.getElementById("email").onblur = function(){
+		chk = this;
+		result = document.getElementById("checkEmail");		
 		if(this.value.length <4 && this.value.length >0) {
 			result.innerHTML = "4자 이상 입력";
 			result.style.color = 'red';
 			flag1=false;
 		} else {
-			checkID();			
+			checkEmail();			
 		}
 		sbtChange();
 	};
 	
-	function checkID(){
+	function checkEmail(){
 		var txt = '';
 		var xhr = new XMLHttpRequest();
-		xhr.open("get", "/join/check_Id.jsp?cid=" + cid.value , true);
+		xhr.open("get", "/join/check_Email?chk=" + chk.value , true);
 		xhr.send();
 		
 		xhr.onreadystatechange = function(){
@@ -71,11 +73,11 @@
 				txt = xhr.responseText;
 				console.log("결과 : " + txt);
 				if(txt == 'true'){
-					result.innerHTML = "중복된 아이디";
+					result.innerHTML = "사용 할 수 없는 이메일";
 					result.style.color = 'red';
 					flag1 = false;
 				} else if(txt == 'false') {
-					result.innerHTML = "사용 가능한 아이디";
+					result.innerHTML = "사용 가능한 이메일";
 					result.style.color = 'green';
 					flag1 = true;
 				}
@@ -101,5 +103,12 @@
 		}
 		sbtChange();
 	}	
+	
+	$("#checkEmail").on('invalid', function (e) {
+		result.innerHTML = "사용 할 수 없는 이메일";
+		result.style.color = 'red';
+		flag1 = false;
+	 });
+
 	
 </script>

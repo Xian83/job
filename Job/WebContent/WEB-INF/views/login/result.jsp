@@ -9,6 +9,6 @@
 	</c:when>
 	<c:otherwise>
 		<h2>회원정보 불일치! <b>2초</b> 후 로그인 페이지로 이동합니다.</h2>
-		<meta http-equiv="refresh" content="2;url=/login" />
+		<meta http-equiv="refresh" content="2;url=/login/form" />
 	</c:otherwise>
 </c:choose>
