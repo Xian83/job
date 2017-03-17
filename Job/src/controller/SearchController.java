@@ -1,9 +1,10 @@
 package controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,15 +23,40 @@ public class SearchController {
 	
 	// 湲곗뾽紐낆쑝濡� 寃��깋 
 	@RequestMapping("/company")
-	public ModelAndView search1Handler(@RequestParam (name="search", defaultValue="삼성") String search) throws IOException{
+	public ModelAndView search1Handler(HttpServletRequest request, @RequestParam (name="search", defaultValue="삼성") String search) throws IOException{
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
 		mav.addObject("main", "search/list_form");
 		
-
 		List list = sdao.search1(search);
+		System.out.println(list);
 		mav.addObject("list", list);
+		mav.addObject("listSize", list.size());
+		int cnt = list.size();
+		System.out.println("cnt ? " + cnt);
+
+		int size = cnt % 20 == 0 ? cnt / 20 : cnt / 20 + 1; 
+		mav.addObject("cnt", cnt);
+		mav.addObject("size", size);
+		
+		request.setAttribute("cnt", cnt);
+		request.setAttribute("size", size);
+	
+		String pStr = request.getParameter("page") == null ? "1" : request.getParameter("page");
+		mav.addObject("page", pStr);
+		System.out.println(pStr);
+
+		int start = (Integer.parseInt(pStr) - 1) * 20 + 1;
+		int end = Integer.parseInt(pStr) * 20;
+		System.out.println("start ? " + start);
+		System.out.println("end ? " + end);
+		
+		List<HashMap> list2 = sdao.pasing(start, end, search); // 페이지 분할해서
+		mav.addObject("list2", list2);
+		mav.addObject("list2.cnt", list2.size());
+	
+		System.out.println("검색 목록 페이징처리 작동함");
 	
 		return mav;
 	}
@@ -51,5 +77,7 @@ public class SearchController {
 	
 		return mav;
 	}*/
+	
+
 	
 }
