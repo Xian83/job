@@ -39,18 +39,21 @@
 
 <div class="container">
    <table class="table table-bordered">
-      <c:forEach var="obj" items="${list2 }" begin="1" end="50">
+      <c:forEach var="i" begin="0" end="49">
          <tr>
-            <td><a href="company/detail_form.jsp"><img src="${obj.LOGO }" width="100" height="70" /></a> <a
-href="company/detail_form.jsp"><h4><b>${obj.CMPN_NM }<b/></h4></a> <h5>${obj.DIVISION } | ${obj.SCALE }</h5> 
-               <button type="button" class="btn btn-default">재무평가 ${obj.FINANCE_SCORE }점</button>  
-               <button type="button" class="btn btn-default">재직자 평판 ${obj.FINANCE_SCORE }점</button>  
+            <td><a href="company/detail_form.jsp"><img src="${list2[i].LOGO }" width="100" height="70" /></a> <a
+href="company/detail_form.jsp"><h4><b>${obj.CMPN_NM }<b/></h4></a> <h5>${list2[i].DIVISION } | ${list2[i].SCALE }</h5> 
+               <button type="button" class="btn btn-default">재무평가 ${list2[i].FINANCE_SCORE }점</button>  
+               <button type="button" class="btn btn-default">재직자 평판 ${list2[i].FINANCE_SCORE }점</button>  
                <button type="button" class="btn btn-default">기업비교</button>
+              
+	           <button type="button" class="btn btn-default">평균연봉 ${list1[i].AVG_SALARY }</button> </td>
                
-              <%-- <button type="button" class="btn btn-default">평균연봉 ${list1[i].AVG_SALARY }</button> --%> </td>
-               
+ 			</td>              
          </tr>
       </c:forEach>
                
    </table>
 </div>
+               
+               
