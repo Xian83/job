@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,18 @@ public class DetailController {
 	@RequestMapping("/detail")
 	public ModelAndView detailHandler(@RequestParam(name="cmpn_nm") String companyname){
 		
-		ModelAndView mav = new ModelAndView("company/detail_form");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("t1");
 		List scorelist =ddao.score(companyname);
 		List salarylist = ddao.salary(companyname);
+		HashMap map = (HashMap) scorelist.get(0);
+		String div = (String)map.get("DIVISION");
+		List samelist = ddao.same(div);
 		mav.addObject("score",scorelist);
+		mav.addObject("same",samelist);
 		mav.addObject("salary", salarylist);
-		System.out.println(scorelist.toString());
-		System.out.println(salarylist.toString());
+		mav.addObject("main", "company/detail_form");
+		
 		return mav ;
 	}
 }

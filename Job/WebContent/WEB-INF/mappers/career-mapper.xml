@@ -9,12 +9,20 @@
 		#{DIVISION}, #{SCALE})
 	</insert>
 
-	<select id="detailscore" parameterType="java.lang.String" resultType="java.util.HashMap">
+	<select id="detailscore" parameterType="java.lang.String"
+		resultType="java.util.HashMap">
 		select * from score where CMPN_NM=#{COMPANYNAME}
 	</select>
 	
-	<select id="detailsalary" parameterType="java.lang.String" resultType="java.util.HashMap">
+		<select id="detailsalary" parameterType="java.lang.String"
+		resultType="java.util.HashMap">
 		select * from salary where CMPN_NM=#{COMPANYNAME}
+	</select>
+
+	<select id="detailsame" parameterType="java.lang.String"
+		resultType="java.util.HashMap">
+		select CMPN_NM, LOGO from score where
+		DIVISION=#{COMPANYNAME} order by FINANCE_SCORE DESC
 	</select>
 
 </mapper>

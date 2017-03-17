@@ -1,7 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.ibatis.session.SqlSession;
@@ -35,6 +37,17 @@ public class DetailDao {
 			return list;
 
 		} finally {
+			session.close();
+		}
+	}
+	
+	public List same(String DIVISION){
+		SqlSession session = factory.openSession();
+		List<HashedMap> list = new ArrayList<>();
+		try{
+			list = session.selectList("mappers.career.detailsame", DIVISION);
+			return list;
+		}finally{
 			session.close();
 		}
 	}

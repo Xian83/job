@@ -13,27 +13,7 @@ public class MemberDao {
 	@Autowired
 	SqlSessionFactory factory;
 	
-	//id Áßº¹ Ã¼Å©
-	public boolean existCheck(String id){
-		SqlSession sql = null;
-		try {
-			sql = factory.openSession();
-			int n = sql.selectOne("mappers.member.idCheck", id);
-			
-			if(n == 1)
-				return true;
-			else
-				return false;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		} finally{
-			sql.close();
-		}
-	}	
-	
-	// id ¿Í pass ÀÏÄ¡ÇÏ´ÂÁö È®ÀÎÇÏ´Â ÀÛ¾÷
+	// ë¡œê·¸ì¸ì‹œ emailê³¼ pass ë§¤ì¹­ ì—¬ë¶€ ì²´í¬
 	public boolean existCheck(Map data){
 		
 		SqlSession sql = null;
@@ -54,15 +34,15 @@ public class MemberDao {
 		}
 	}
 
-	//id¿¡ ÇØ´çÇÏ´Â ºÎ°¡Á¤º¸µéÀ» ¸®ÅÏÇÏ´Â ¸Ş¼Òµå
-	//¸®ÅÏÅ¸ÀÔÀ» MapÀ¸·Î ¼³Á¤ÇÏ°Å³ª, Member °´Ã¼¸¦ ¸¸µé¾î¼­ return
-	public HashMap<String,Object> getData(String id){
+	
+	// í•´ë‹¹ emailì˜ ì •ë³´ë¥¼ ê°€ì ¸ì˜¤ëŠ” ê²ƒ
+	public HashMap<String,Object> getData(String email){
 		HashMap<String, Object> data = new HashMap<>();
 		
 		SqlSession sql = null;
 		try {
 			sql = factory.openSession();
-			data = sql.selectOne("mappers.member.getById", id);			
+			data = sql.selectOne("mappers.member.getById", email);			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally{
@@ -72,26 +52,28 @@ public class MemberDao {
 		return data;
 	}
 	
-	public boolean update(Map data){
-		
-		SqlSession sql = null;
-		try {
-			sql = factory.openSession();
-			int cnt = sql.update("mappers.member.update", data);
-			
-			if(cnt == 1){
-				sql.commit();				
-				return true;
-			} else
-				return false;			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		} finally{
-			sql.close();
-		}
-	}
+	// íšŒì›ì •ë³´ìˆ˜ì •
+//	public boolean update(Map data){
+//		
+//		SqlSession sql = null;
+//		try {
+//			sql = factory.openSession();
+//			int cnt = sql.update("mappers.member.update", data);
+//			
+//			if(cnt == 1){
+//				sql.commit();				
+//				return true;
+//			} else
+//				return false;			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return false;
+//		} finally{
+//			sql.close();
+//		}
+//	}
 	
+	// íšŒì›íƒˆí‡´
 	public boolean delete(String id, String pass){
 		HashMap<String, Object> data = new HashMap<>();
 		data.put("id", id);
@@ -115,8 +97,28 @@ public class MemberDao {
 		}
 	}
 	
+	// íšŒì›ê°€ì…ì‹œ email ì¤‘ë³µ ì²´í¬
+	public boolean existCheck(String email){
+		SqlSession sql = null;
+		try {
+			sql = factory.openSession();
+			int n = sql.selectOne("mappers.member.emailCheck", email);
+			
+			if(n == 1)
+				return true;
+			else
+				return false;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally{
+			sql.close();
+		}
+	}	
+	
+	// íšŒì›ê°€ì… : ì‹ ê·œíšŒì› ê¸°ë³¸ì •ë³´ì…ë ¥
 	public boolean insert(Map data){
-		
 		SqlSession sql = null;
 		try {
 			sql = factory.openSession();
@@ -135,4 +137,23 @@ public class MemberDao {
 		}
 	}
 	
+	// íšŒì›ê°€ì… : ì‹ ê·œíšŒì› ì¶”ê°€ì •ë³´ì…ë ¥
+	public boolean insertInfo(Map data){
+		SqlSession sql = null;
+		try {
+			sql = factory.openSession();
+			int cnt = sql.insert("mappers.member.addInfo", data);
+			
+			if(cnt == 1){
+				sql.commit();				
+				return true;
+			} else
+				return false;			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally{
+			sql.close();
+		}
+	}
 }
