@@ -7,4 +7,11 @@
 		select * from SALARY order by AVG_SALARY desc  
 	</select>
 	
+	<select id="salary"  resultType="java.util.HashMap">
+		select * from SALARY order by AVG_SALARY desc  
+	</select>
+	
+	<select id="local"  parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from RANK where WKP_ADRS like #{local} order by SALARY desc  
+	</select>
 </mapper>
