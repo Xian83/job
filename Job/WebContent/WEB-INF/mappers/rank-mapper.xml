@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mappers.rank">
 	<select id="avgsalary"  resultType="java.util.HashMap">
-		select * from salary order by avg_salary desc  
+		select * from SALARY order by AVG_SALARY desc  
 	</select>
 	
 </mapper>
