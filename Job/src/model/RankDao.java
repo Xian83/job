@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,19 +33,19 @@ public class RankDao {
 	}*/
 	
 	// 디폴트 평균연봉 내림차순
-	public Map salary() {
+	public List salary() {
 		SqlSession sql = null;
-		Map map = new HashMap();
+		List list = new ArrayList();
 		try {
 			sql = factory.openSession();
-			map = sql.selectOne("mappers.rank.avgsalary");
-			
+			list = sql.selectList("mappers.rank.salary");
+			//System.out.println(list);
 		} catch (Exception e) {
 			e.printStackTrace();			
 		} finally{
 			sql.close();
 		}	
-		return map;
+		return list;
 	}
 	
 	// 평균연봉 
@@ -82,18 +81,24 @@ public class RankDao {
 	}
 	
 	// 평균연봉 로고까지
-	public List avgsalary2(Map map) {
+	public List avgsalary2(List<Map> list) {
 		SqlSession sql = null;
-		List list = new ArrayList();
+		List list2 = new ArrayList();
 		try {
 			sql = factory.openSession();
-			list = sql.selectList("mappers.search.search", map.get("CMPN_NM"));
+			
+			for(int i=0; i<list.size(); i++) {
+				String s =  (String)list.get(i).get("CMPN_NM");
+				Map map = sql.selectOne("mappers.rank.search", s);
+				list2.add(map);
+			}
+			System.out.println(list2.toString());
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally{
 			sql.close();
 		}
-		return list;
+		return list2;
 	}
 	
 	// 지역별 내림차순

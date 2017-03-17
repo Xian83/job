@@ -15,7 +15,7 @@
 		select * from SALARY order by ROOKEY_SALARY desc  
 	</select>
 	
-	<select id="search" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	<select id="search" parameterType="java.lang.String" resultType="java.util.HashMap">
 		select * from score where CMPN_NM = #{CMPN_NM} 
 	</select>
 	

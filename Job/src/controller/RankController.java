@@ -24,10 +24,10 @@ public class RankController {
 		mav.setViewName("t1");
 		mav.addObject("main", "rank/form");
 		
-		Map map = rdao.salary();
-		List list2 = rdao.avgsalary2(map);
-		mav.addObject("list", list2);
-		
+		List list = rdao.salary();
+		List list2 = rdao.avgsalary2(list);
+		mav.addObject("list1", list);
+		mav.addObject("list2", list2);
 		return mav;
 	}
 	
