@@ -1,2 +1,3 @@
 eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/views/search/list_form.jsp=UTF-8
 encoding//src/controller/SearchController.java=UTF-8

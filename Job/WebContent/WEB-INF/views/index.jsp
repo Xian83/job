@@ -55,6 +55,45 @@
 
 </script>
 
+
+
+<!-- 
+<div class="row">
+  <div class="col-md-4">
+    <div class="thumbnail">
+      <a href="/w3images/lights.jpg">
+        <img src="/w3images/lights.jpg" alt="Lights" style="width:100%">
+        <div class="caption">
+          <p>Lorem ipsum...</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="thumbnail">
+      <a href="/w3images/nature.jpg">
+        <img src="/w3images/nature.jpg" alt="Nature" style="width:100%">
+        <div class="caption">
+          <p>Lorem ipsum...</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="thumbnail">
+      <a href="/w3images/fjords.jpg">
+        <img src="/w3images/fjords.jpg" alt="Fjords" style="width:100%">
+        <div class="caption">
+          <p>Lorem ipsum...</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+ -->
+
+
+
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
@@ -67,21 +106,30 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <img src="img_chania.jpg" alt="Chania">
+   <div class="row">
+  <div class="col-md-4">
+    <div class="thumbnail">
+      <img src="img_chania.jpg" alt="Chania">  <img src="img_chania.jpg" alt="Chania">  <img src="img_chania.jpg" alt="Chania">
+</div>
     </div>
+  
 
     <div class="item">
       <img src="noimg.jpg" alt="Chania">
+       <img src="noimg.jpg" alt="Chania">
+        <img src="noimg.jpg" alt="Chania">
     </div>
 
     <div class="item">
       <img src="c.jpg" alt="Flower">
-    </div>
-
-    <div class="item">
-      <img src="img_flower2.jpg" alt="Flower">
+      <img src="c.jpg" alt="Flower">
+      <img src="c.jpg" alt="Flower">
     </div>
   </div>
+  </div>
+  </div>
+
+
 
   <!-- Left and right controls -->
   <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
