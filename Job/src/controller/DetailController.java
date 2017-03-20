@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import model.DetailDao;
+import model.ReviewsDao;
 
 @Controller
 @RequestMapping("/company")
 public class DetailController {
 	@Autowired
 	DetailDao ddao;
-	
+
 	@RequestMapping("/detail")
 	public ModelAndView detailHandler(@RequestParam(name="cmpn_nm") String companyname){
 		
@@ -24,11 +25,13 @@ public class DetailController {
 		mav.setViewName("t1");
 		List scorelist =ddao.score(companyname);
 		List salarylist = ddao.salary(companyname);
+		List reviewList = ddao.review(companyname);
 		HashMap map = (HashMap) scorelist.get(0);
 		String div = (String)map.get("DIVISION");
 		List samelist = ddao.same(div);
 		mav.addObject("score",scorelist);
 		mav.addObject("same",samelist);
+		mav.addObject("review",reviewList);
 		mav.addObject("salary", salarylist);
 		mav.addObject("main", "company/detail_form");
 		

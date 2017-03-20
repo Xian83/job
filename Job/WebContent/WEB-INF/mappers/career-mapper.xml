@@ -25,6 +25,10 @@
 		DIVISION=#{COMPANYNAME} order by FINANCE_SCORE DESC
 	</select>
 
-	
+	<select id="review" resultType="java.util.HashMap">
+		select * from reviews where CMPN_NM=#{COMPANYNAME} order by
+		WDATE asc
+	</select>
+
 
 </mapper>

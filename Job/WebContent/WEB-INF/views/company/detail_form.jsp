@@ -22,7 +22,7 @@ input[id=aaa] {
 					<table class="table table-bordered" align="center">
 						<thead>
 							<tr>
-								<th colspan="2">${score[0].CMPN_NM }</th>
+								<th colspan="2">${salary[0].CMPN_NM }</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -85,16 +85,18 @@ input[id=aaa] {
 
 	<div class="row content">
 		
-		<form role="form">
+		
 			<br/>
 			<div class="panel panel-default">
 				<div class="panel-heading">리뷰</div>
-				<div class="panel-body">홍길동 : 이회사좋아요</div>
-				<div class="panel-body">사장님 : 감사합니다</div>
+				<c:forEach var="review" items="${review }">
+				<div class="panel-body">${review.EMAIL } : ${review.CONTENTS }</div>
+				</c:forEach>
 			</div>
-	
-			<input type="text" id="aaa" name="bbb" placeholder="contents"
-				width="60">
+			<form role="form" action="/review/push">
+			<input type="hidden" name="cmpn_nm" value="${salary[0].CMPN_NM }">
+			<input type="text" id="aaa" name="content" placeholder="contents"
+				>
 			<button type="submit" class="btn btn-success">올리기</button>
 		</form>
 	</div>
