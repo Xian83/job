@@ -6,4 +6,10 @@
 	<select id="location" resultType="java.util.HashMap">
 		select * from location 
 	</select>
+	<select id="industry" resultType="java.util.HashMap">
+		select * from industry 
+	</select>
+	<!-- <insert id="addinfos" parameterType="java.util.HashMap" >
+		insert into MEMBER_INFO where area=#{area}, STNDD_BIG_GB=#{STNDD_BIG_GB}, salary_min=#{salary_min}, salary_max=#{salary_max}
+	</insert> -->
 </mapper>

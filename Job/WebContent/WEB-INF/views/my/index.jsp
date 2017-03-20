@@ -4,7 +4,7 @@
 <hr/>
 <div>
 	<!-- 회원정보관리 -->
-	<a href="my/info">회원정보관리</a><br/>
+	<a href="/my/info">회원정보관리</a><br/>
 	
 	<!-- 추천 기업 -->	
 	<a href="/my/recommand">추천 기업 정보</a>
