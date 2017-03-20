@@ -14,7 +14,7 @@
 	</select>
 	<select id="getById" resultType="java.util.HashMap"
 		parameterType="java.lang.String">
-		select * from member where id=#{email}
+		select * from member where email=#{email}
 	</select>
 
 	<insert id="add" parameterType="java.util.HashMap">

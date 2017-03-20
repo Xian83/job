@@ -1,16 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
-	</script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
 <html>
  <meta charset="utf-8">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-       <!--  <link href="css/font-awesome.min.css" rel="stylesheet"> -->
- 
-        <script src="js/jquery.js"></script>
-        <script src="js/bootstrap.min.js"></script>
 <head>
 	<style>
 		input[type=text] {
@@ -36,7 +30,7 @@
 <body>
 	<h1>검색 테스트용</h1>
 	<div align="center">
-	<form action="/search/name">
+	<form action="/search/company">
 		<input type="text" name="search" id="search" placeholder="Search.." />
 	</form>
 	</div>
