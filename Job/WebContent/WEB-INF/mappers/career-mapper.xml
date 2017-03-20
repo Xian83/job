@@ -27,7 +27,7 @@
 
 	<select id="review" resultType="java.util.HashMap">
 		select * from reviews where CMPN_NM=#{COMPANYNAME} order by
-		WDATE asc
+		WDATE desc
 	</select>
 
 

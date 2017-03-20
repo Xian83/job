@@ -4,8 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
 input[id=aaa] {
-    width: 95%;
-    padding: 10px 5px;
+	width: 95%;
+	padding: 10px 5px;
 }
 </style>
 <div class="container-fluid">
@@ -31,15 +31,23 @@ input[id=aaa] {
 								<td>기업구분 : ${score[0].SCALE }</td>
 							</tr>
 					</table>
-					<p>재무점수 : ${score[0].FINANCE_SCORE } <c:forEach var="i" begin="0" end="${score[0].FINANCE_SCORE/20 }">
-						<img src="http://cfile24.uf.tistory.com/image/2419AD4652FC36A7345270" class="img-circle" alt="Cinque Terre"
-							width="50" height="50">
-					 </c:forEach></p>
+					<p>
+						재무점수 : ${score[0].FINANCE_SCORE }
+						<c:forEach var="i" begin="0" end="${score[0].FINANCE_SCORE/20 }">
+							<img
+								src="http://cfile24.uf.tistory.com/image/2419AD4652FC36A7345270"
+								class="img-circle" alt="Cinque Terre" width="50" height="50">
+						</c:forEach>
+					</p>
 					<br />
-					<p>재직자점수 : ${score[0].SLAVE_SCORE } <c:forEach var="i" begin="0" end="${score[0].SLAVE_SCORE/20}">
-						<img src="http://cfile24.uf.tistory.com/image/2419AD4652FC36A7345270" class="img-circle" alt="Cinque Terre"
-							width="50" height="50">
-					 </c:forEach></p>
+					<p>
+						재직자점수 : ${score[0].SLAVE_SCORE }
+						<c:forEach var="i" begin="0" end="${score[0].SLAVE_SCORE/20}">
+							<img
+								src="http://cfile24.uf.tistory.com/image/2419AD4652FC36A7345270"
+								class="img-circle" alt="Cinque Terre" width="50" height="50">
+						</c:forEach>
+					</p>
 				</div>
 
 			</div>
@@ -84,20 +92,64 @@ input[id=aaa] {
 	</div>
 
 	<div class="row content">
-		
-		
-			<br/>
-			<div class="panel panel-default">
-				<div class="panel-heading">리뷰</div>
-				<c:forEach var="review" items="${review }">
-				<div class="panel-body">${review.EMAIL } : ${review.CONTENTS }</div>
-				</c:forEach>
-			</div>
-			<form role="form" action="/review/push">
+
+
+		<br />
+		<div class="panel panel-default">
+			<div class="panel-heading">리뷰</div>
+			<c:forEach var="review" items="${review }">
+				<div class="panel-body">${review.EMAIL }: ${review.CONTENTS }</div>
+			</c:forEach>
+		</div>
+		<form role="form" action="/review/push">
 			<input type="hidden" name="cmpn_nm" value="${salary[0].CMPN_NM }">
-			<input type="text" id="aaa" name="content" placeholder="contents"
-				>
+			<input type="text" id="aaa" name="content" placeholder="contents">
 			<button type="submit" class="btn btn-success">올리기</button>
 		</form>
 	</div>
+
+	<div class="row content" align="center">
+		<script type="text/javascript"
+			src="https://www.gstatic.com/charts/loader.js"></script>
+		<script>
+			google.charts.load('current', {
+				packages : [ 'corechart' ]
+			});
+		</script>
+
+		<div id="chart_div"></div>
+
+
+
+		<script type="text/javascript">
+			// 로딩 완료시 함수 실행하여 차트 생성
+			google.charts.setOnLoadCallback(drawChart);
+
+			var chart_options = {
+				title : '연봉비교',
+				width : 1000,
+				height : 400,
+				colors : [ 'red', 'blue', 'green', 'green', 'blue', 'navy',
+						'purple' ], // 항목 갯수에 맞게 컬러 설정
+				bar : {
+					groupWidth : '60%'
+				}, // 그래프 너비 %
+				isStacked : false
+			// 그래프 쌓기(스택), 기본값은 false
+			};
+
+			function drawChart() {
+
+				// 차트 데이터
+				var data = new google.visualization.arrayToDataTable([
+						[ '년대', '회사이름', '업계평균', '전체평균', ], [ '연봉', 2, 3, 4 ],
+						[ '신입연봉', 6, 4, 3 ], [ '매출', 5, 4, 3 ] ]);
+
+				var chart = new google.visualization.ColumnChart(document
+						.getElementById('chart_div'));
+				chart.draw(data, chart_options);
+			}
+		</script>
+	</div>
+
 </div>

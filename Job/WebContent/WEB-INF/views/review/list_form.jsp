@@ -26,24 +26,4 @@
 	</table>
 </div>
 
-<div align="center" class="well">
-	<c:if test="${page ne 1 }">
-		<a href="/board/list.jsp?page=${page -1 }">이전</a>
-	</c:if>
-	<c:forEach var="p" begin="1" end="${size }" varStatus="vs">
-		<c:choose>
-			<c:when test="${p eq page }">
-				<b style="color: red;">${p }</b>
-			</c:when>
-			<c:otherwise>
-				<a href="/board/list.jsp?page=${p }">${p }</a>
-			</c:otherwise>
-		</c:choose>
-		<c:if test="${vs.last eq false }">|</c:if>
-	</c:forEach>
-	<c:if test="${page ne size }">
-		<a href="/review/listform?page=${page +1 }">다음</a>
-	</c:if>
-</div>
-
 

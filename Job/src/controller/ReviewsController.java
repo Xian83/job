@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +36,7 @@ public class ReviewsController {
 		mav.addObject("rank",rankList);
 //		mav.addObject("score",scoreList);
 		mav.addObject("review", reviewList);
+	
 		mav.addObject("main","review/list_form");
 		
 		return mav;
@@ -41,7 +44,7 @@ public class ReviewsController {
 
 	
 	@RequestMapping("/push")
-	public ModelAndView reviewsPushHandler(@RequestParam Map map, HttpSession session){
+	public ModelAndView reviewsPushHandler(@RequestParam Map map, HttpSession session) throws UnsupportedEncodingException{
 		ModelAndView mav = new ModelAndView();
 		String email = (String)session.getAttribute("email");
 		String content = (String)map.get("content");
@@ -49,8 +52,8 @@ public class ReviewsController {
 		
 		rdao.push(company, content, email);
 		
-		mav.setViewName("t1");
-		mav.addObject("main","review/list_form");
+		mav.setViewName("redirect:/company/detail?cmpn_nm="+URLEncoder.encode(company,"UTF-8"));
+		
 		
 		
 		return mav;
