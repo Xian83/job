@@ -41,6 +41,7 @@ public class DetailController {
 		String u = t + "#";
 		Cookie c = new Cookie(u+"cmpn_nm", companyname);
 			c.setPath("/");
+			c.setMaxAge(60 * 60 * 12);
 		response.addCookie(c);  
 
 		return mav ;

@@ -39,7 +39,6 @@ public class CompareController {
 					map.put(cn, cv);
 					String pa = c.getPath();
 					int ma = c.getMaxAge();
-					//System.out.println(  cn +"["+cv+"]..." + pa+"("+ma+" sec)");
 					cookielist.add(map);
 				}
 			}
