@@ -42,23 +42,6 @@ public class LoginController {
 		boolean rst = mDao.existCheck(map);
 		if(rst){
 			login(map, session, resp);
-//			Map userData = mDao.getData((String)map.get("email"));
-//			
-//			String email = (String) userData.get("EMAIL");
-//			String pass = (String) userData.get("PASS");
-//			String name = (String) userData.get("NAME");
-//			
-//			session.setAttribute("auth", "yes");
-//			session.setAttribute("leave_try", 1);
-//			session.setAttribute("email", email);
-//			session.setAttribute("name", name);
-//			
-//			if(map.get("keep") != null){
-//				Cookie c = new Cookie("login", email + "#" + pass + "#" + name);
-//				c.setMaxAge(60 * 60 * 24);
-//				c.setPath("/");
-//				resp.addCookie(c);
-//			}
 		}
 		
 		ModelAndView mav = new ModelAndView();
