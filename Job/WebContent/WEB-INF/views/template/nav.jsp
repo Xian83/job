@@ -47,7 +47,7 @@
 					<li><a href="/compare/form">Compare</a></li>
 					<li><a href="/review/list_form">Review</a></li>
 					<li><a href="/rank/form">Rank</a></li>
-					<li><a href="/qna/form">QnA</a></li>
+					<li><a href="/contact/form">Contact</a></li>
 				<c:choose>
 					<c:when test="${auth eq null or auth eq 'no'}">
 						<li><a href="/login/form">Login</a></li>

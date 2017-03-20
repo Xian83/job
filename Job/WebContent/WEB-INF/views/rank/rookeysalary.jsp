@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
     
 <div class="container">
-	<b> 순위 조건 </b><br /> 
 			
 				<a href="/rank/form"> <button type="submit"> 평균연봉순 </button> </a>
 		
