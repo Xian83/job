@@ -17,7 +17,6 @@
 		<put-attribute name="main" expression="/WEB-INF/views/${main}.jsp"/>
 	</definition>
 	
-	
 	<definition name="t2_*/*" extends="default">
 		<put-attribute name="main" expression="/WEB-INF/views/{1}/{2}.jsp"/>
 	</definition>

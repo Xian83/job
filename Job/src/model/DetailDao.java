@@ -51,5 +51,16 @@ public class DetailDao {
 			session.close();
 		}
 	}
+	
+	public List review(String COMPANYNAME){
+		SqlSession session = factory.openSession();
+		List<HashedMap> list = new ArrayList<>();
+		try{
+			list = session.selectList("mappers.career.review", COMPANYNAME);
+			return list;
+		}finally{
+			session.close();
+		}
+	}
 
 }
