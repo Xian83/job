@@ -9,7 +9,7 @@
 	padding: 10px 25px;
 }
 
-input[type=text] {
+#search {
 	width: 300px;
 	box-sizing: border-box;
 	border: 2px solid #ccc;
@@ -25,7 +25,7 @@ input[type=text] {
 	transition: width 0.4s ease-in-out;
 }
 
-input[type=text]:focus {
+#search:focus {
 	width: 85%;
 }
 </style>
