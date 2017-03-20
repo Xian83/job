@@ -16,6 +16,11 @@
 		parameterType="java.lang.String">
 		select * from member where email=#{email}
 	</select>
+	<select id="getInfo" resultType="java.util.HashMap"
+		parameterType="java.lang.String">
+		select * from member_info where email=#{email}
+	</select>
+
 
 	<insert id="add" parameterType="java.util.HashMap">
 		insert into member values( mem_seq.nextval, #{email}, 
