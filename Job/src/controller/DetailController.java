@@ -3,6 +3,10 @@ package controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +22,7 @@ public class DetailController {
 	DetailDao ddao;
 	
 	@RequestMapping("/detail")
-	public ModelAndView detailHandler(@RequestParam(name="cmpn_nm") String companyname){
+	public ModelAndView detailHandler(@RequestParam(name="cmpn_nm") String companyname, HttpServletResponse response){
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
@@ -32,6 +36,13 @@ public class DetailController {
 		mav.addObject("salary", salarylist);
 		mav.addObject("main", "company/detail_form");
 		
+		// 쿠키생성
+		long t = System.currentTimeMillis();
+		String u = t + "#";
+		Cookie c = new Cookie(u+"cmpn_nm", companyname);
+			c.setPath("/");
+		response.addCookie(c);  
+
 		return mav ;
 	}
 }

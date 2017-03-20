@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 public class ContactController {
 	
-	// contact 메인
+	// contact 메인 1페이지
 	@RequestMapping("/form")
 	public ModelAndView InitHandler1() {
 		ModelAndView mav = new ModelAndView();
@@ -22,7 +22,7 @@ public class ContactController {
 		return mav;
 	}
 	
-	
+	// contact 메인 2페이지
 	@RequestMapping("/form2")
 	public ModelAndView InitHandler2() {
 		ModelAndView mav = new ModelAndView();
@@ -31,23 +31,16 @@ public class ContactController {
 		
 		return mav;
 	}
-	/*// addr
 	
-	@RequestMapping("/addr")
-	public ModelAndView InitHandler1() {
+	// contact 기타 페이지
+	@RequestMapping("/form_etc")
+	public ModelAndView InitHandler3() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
-		mav.addObject("main", "contact/addr");
+		mav.addObject("main", "contact/form_etc");
 		
 		return mav;
 	}
 	
-	@RequestMapping("/addrRst")
-	public ModelAndView InitHandler2() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t1");
-		mav.addObject("main", "contact/addrRst");
-		
-		return mav;
-	}*/
+	
 }

@@ -14,10 +14,7 @@
             
     <ul class="tabType tabType_05">
         <li class="on"><a href="/contact/form">회원가입∙정보</a></li>
-        <li class=""><a href="/help/faq/user?tab=2">이력서 관리∙활용</a></li>
-        <li class=""><a href="/help/faq/user?tab=3">입사지원하기</a></li>
-        <li class=""><a href="/help/faq/user?tab=4">채용정보</a></li>
-        <li class=""><a href="/help/faq/user?tab=5">기타</a></li>
+        <li class=""><a href="/contact/form_etc">기타</a></li>
     </ul>
 
             <form action="/help/faq/user" method="get">
@@ -205,3 +202,10 @@
             });
         });
     </script>
+    
+<div align="center">
+	<b>[ 위치 ] </b> <br/><br/>
+	
+	<img src="/mapdummy.jpg" width="500" height="300">
+
+</div>
