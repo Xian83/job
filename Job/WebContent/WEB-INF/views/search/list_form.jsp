@@ -1,31 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 <!-- <div class="bot">
 					<div class="inp"><input name="uc_Cond1$CompName" type="text" id="uc_Cond1_CompName" value="기업명을 입력해 주세요" onfocus="this.value=&#39;&#39;;" style="ime-mode:active;" onkeypress="if(event.keyCode==13){ EnterSearch();return false;}" /><a href="javascript:void(0);">
 							<img src="http://image.jinhak.com/job/corp/btn_search.gif" alt="검색" id="imgSearch" /></a></div>
 </div> -->
 
 	<!-- <input type = "text"name="val1" width="500" height="50" value="기업명을 입력해 주세요" /> -->
-	
-
-	
-<form class="form-horizontal">
-	<div class="form-group">
-		<div class="col-sm-10">
-			<input type="text" class="form-control" id="email"
-				placeholder="기업명을 입력해 주세요">
-		</div>
-		<button type="submit" class="btn btn-danger btn-md" >검색</button>
-	</div>
-</form>
-
-
 
 <div class="corp_src">
 		<div class="top at1"><dl>
@@ -112,11 +93,6 @@
 </dd>
 </dl>
 
-
-
-
-
-
 <div class="container">
 	<table class="table table-bordered">
 		<c:forEach var="obj" items="${list2 }" varStatus="vs">
@@ -149,8 +125,6 @@
 		</c:forEach>
 	</table>
 </div>
-
-
 
 
 <!-- 페이지 뷰 -->
