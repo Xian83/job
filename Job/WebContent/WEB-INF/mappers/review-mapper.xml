@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.review">
+	<select id="review" resultType="java.util.HashMap">
+		select * from reviews order by
+		WDATE desc
+	</select>
+
+	<select id="rank" resultType="java.util.HashMap">
+		select reviews.CMPN_NM,
+		RANK.STNDD_BIG_GB, RANK.WKP_ADRS from RANK, REVIEWS where
+		RANK.CMPN_NM=REVIEWS.CMPN_NM
+		order by REVIEWS.WDATE desc
+	</select>
+
+	<insert id="push" parameterType="java.util.HashMap">
+		insert into REVIEWS
+		VALUES(#{CMPN_NM},#{CONTENTS},SYSDATE,#{EMAIL})
+	</insert>
+
+
+</mapper>

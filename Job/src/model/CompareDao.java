@@ -16,7 +16,7 @@ public class CompareDao {
 	@Autowired
 	SqlSessionFactory factory;
 	
-	public List compare (Map map) {
+	/*public List compare (Map map) {
 		SqlSession sql = null;
 		List list = new ArrayList();
 		try {
@@ -28,5 +28,5 @@ public class CompareDao {
 			sql.close();
 		}
 		return list;
-	}
+	}*/
 }

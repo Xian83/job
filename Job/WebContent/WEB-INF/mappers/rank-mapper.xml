@@ -4,11 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mappers.rank">
 	<select id="avgsalary"  resultType="java.util.HashMap">
-		select * from SALARY order by AVG_SALARY desc  
+		<![CDATA[
+    	select * from ( select rownum RNUM, sc.* from (select * from SALARY order by AVG_SALARY desc ) sc) 
+    	where RNUM>=0 and RNUM<=49 ]]>
 	</select>
 	
 	<select id="rookeysalary" resultType="java.util.HashMap">
-		select * from SALARY order by ROOKEY_SALARY desc  
+		<![CDATA[
+    	select * from ( select rownum RNUM, sc.* from (select * from SALARY order by ROOKEY_SALARY desc ) sc) 
+    	where RNUM>=0 and RNUM<=49 ]]>  
 	</select>
 	
 	<select id="search" parameterType="java.lang.String" resultType="java.util.HashMap">
