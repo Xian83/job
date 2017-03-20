@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="mappers.review">
+
+
+	<select id="review" resultType="java.util.HashMap">
+		select * from reviews order by
+		WDATE DESC
+	</select>
+
+	<select id="r1" resultType="java.util.HashMap">
+		select * from score
+	</select>
+
+	<select id="r2" resultType="java.util.HashMap">
+		select * from salary
+	</select>
+
+</mapper>
