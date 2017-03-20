@@ -26,13 +26,13 @@
 				value="${map.name }"/>
 		</p>
 		<p>
-			<b>AGE</b><br/>
+	<%-- 		<b>AGE</b><br/>
 			<select class="form-control" name="age">
 				<%for(int i=19; i<=80; i++){ %>
 					<option value="<%=i%>" <%=val.get("age").equals(i) ? "selected" : "" %>><%=i %>¼¼</option>
 				<%} %>
 			</select>
-		</p>
+		</p> --%>
 		<p>
 			<b>GENDER</b><br/>
 			<select name="gender" class="form-control">
