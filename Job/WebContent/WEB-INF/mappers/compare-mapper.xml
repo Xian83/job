@@ -7,4 +7,7 @@
 		select * from SCORE where CMPN_NM = #{CMPN_NM}  
 	</select>
 	
+	<insert id="insert" parameterType="java.util.HashMap">
+		insert into COMPARE values (#{email }, #{cm1 }, #{cm2 }, sysdate)
+	</insert>
 </mapper>

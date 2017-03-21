@@ -9,8 +9,6 @@ input[id=aaa] {
 </style>
 
 <h2>비교 처리 페이지</h2>
-<!-- 처음뿌려지는 쿠키리스트가 가장 먼저본 기업 -->
-
 <hr />
 
 <div class="container-fluid">
@@ -30,7 +28,7 @@ input[id=aaa] {
 
 <div class="col-md-6">
 <c:forEach var="cm2" items="${list2 }">
-	${cm2.CMPN_NM }<br/>
+	<b>${cm2.CMPN_NM }</b><br/>
 	<img src="${cm2.LOGO }" class="img-circle" alt="Cinque Terre"
 						width="200" height="200"><br/>
 	${cm2.DIVISION }<br/> 

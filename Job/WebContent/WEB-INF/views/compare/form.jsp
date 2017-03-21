@@ -9,41 +9,49 @@ input[id=aaa] {
 }
 </style>
 
-<h2>비교 페이지 (최근 본 목록)</h2>
+<h2>비교 페이지 (최근 본 목록 10개까지만)</h2>
 <!-- 처음뿌려지는 쿠키리스트가 가장 먼저본 기업 -->
 
 <hr />
-
-	<a href="/compare/result?cm1=${clist[0] }&cm2=${clist[1] }"><button type="submit">비교</button></a>
-
-<input type="text" width="600" id="comparelist">
-
+	<form action="/compare/result">
+		회사1<input type="text" width="600" id="cm1" name="cm1" readonly>
+		회사2<input type="text" width="600" id="cm2" name="cm2" readonly>
+		<button type="submit">비교</button>
+	</form>
 <hr />
 
-<c:forEach items="${clist }" var="obj" begin="0" end="9">
-	<button id="bt"></button>
-	<input type="checkbox" name="clistcheck" id="check"> ${obj }<br/>
-			
+
+<c:forEach var="i" begin="0" end="${csize-1 }">
+	<input type="checkbox" value="${clist[i] }" id="check_${i}" class="chk"> ${clist[i] }<br/>
 </c:forEach>
 
 <script>
-	$("#bt").on("click", function() {
-		$("#check").prop("checked", true);
+
+$(".chk").on("change", function(){
+	//console.log($(this).val());
+	var val = $(this).val();
+	if($(this).prop("checked")) {
+		if($("#cm1").val()==""){
+			$("#cm1").val(val);
+		}else if($("#cm2").val()=="") {
+			$("#cm2").val(val);
+		}else {
+			window.alert("최대2개까지만 선택가능합니다.");
+			$(this).prop("checked", false);
+		}
+	} else {
+		if($("#cm1").val()==val){
+			$("#cm1").val("");
+		}else if($("#cm2").val()==val) {
+			$("#cm2").val("");
+		}		
+	}
+});
+	$("#bt_${i }").on("click", function() {
+		$("#check_${i}").prop("checked", true);
 		$("#comparelist").html("asdf");
 
 	});
+	
 
 </script>
-
-
-<%-- <div>
-
-<c:forEach var="cm1" items="${list1 }">
-	${cm1.CMPN_NM }
-</c:forEach>
-<hr/>
-<c:forEach var="cm2" items="${list2 }">
-	${cm2.CMPN_NM }
-</c:forEach>
-
-</div> --%>
