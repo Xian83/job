@@ -13,6 +13,7 @@
 			<img src="${url}" width="200" height="200" />
 			<hr />
 			<input type="file" class="form-control" name="pic" /> <br />
+			<input type="hidden" name="email" value="${sessionScope.email}" />
 			<button type="submit" class="btn">사진변경</button>
 		</form>
 	</div>
