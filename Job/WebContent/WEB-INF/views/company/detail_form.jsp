@@ -7,6 +7,7 @@ input[id=aaa] {
 	width: 95%;
 	padding: 10px 5px;
 }
+
 </style>
 <div class="container-fluid">
 	<div class="row content">
@@ -70,8 +71,24 @@ input[id=aaa] {
 			</table>
 			<div class="col-md-8">사원수 : 999999999명</div>
 			<div class="col-md-4">
-				<form action="">
-					<button>관심목록추가</button>
+				<form action="/company/interest">
+					<input type="hidden" name="cmpn_nm" value="${salary[0].CMPN_NM }">
+					<c:choose>
+						<c:when test="${sessionScope.auth eq 'no' }">
+							<button class="btn btn-primary disabled">관심목록추가</button>
+						</c:when>
+						<c:otherwise>
+							<c:choose>
+							<c:when test="${scrape eq 0 }">
+									<button class="btn btn-primary ">관심목록추가</button>
+								</c:when>
+								<c:otherwise>
+									<button class="btn btn-primary " style="background: red;">관심목록해제</button>
+								</c:otherwise>
+							</c:choose>
+						</c:otherwise>
+					</c:choose>
+					
 				</form>
 			</div>
 		</div>
@@ -98,13 +115,20 @@ input[id=aaa] {
 		<div class="panel panel-default">
 			<div class="panel-heading">리뷰</div>
 			<c:forEach var="review" items="${review }">
-				<div class="panel-body">${review.EMAIL }: ${review.CONTENTS }</div>
+				<div class="panel-body">${review.EMAIL }:${review.CONTENTS }</div>
 			</c:forEach>
 		</div>
 		<form role="form" action="/review/push">
 			<input type="hidden" name="cmpn_nm" value="${salary[0].CMPN_NM }">
 			<input type="text" id="aaa" name="content" placeholder="contents">
-			<button type="submit" class="btn btn-success">올리기</button>
+			<c:choose>
+			<c:when test="${sessionScope.auth eq 'no' }">
+				<button type="submit" class="btn btn-success disabled">올리기</button>
+			</c:when>
+			<c:otherwise> 
+				<button type="submit" class="btn btn-success">올리기</button>
+			</c:otherwise>
+			</c:choose>
 		</form>
 	</div>
 
