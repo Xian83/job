@@ -76,23 +76,25 @@ public class MyInfoDao {
 
 	
 	// 관심 정보 업데이트
-		public boolean update (String email){
-			boolean r;
+		public int update(Map data){
+			int r =0;
 			
 			SqlSession sql = null;
 			try {
 				sql = factory.openSession();
-				int cnt = sql.selectOne("mappers.my.industry", email);
-				System.out.println("update cnt =" + cnt);
-				if(cnt==1)
-					return true;
-				else
-					return false;
+				r = sql.update("mappers.my.update", data);
+				System.out.println("update r =" + r);
+				if(r==1)
+					sql.commit();
 				
 			}catch(Exception e){
 				e.printStackTrace();
-				return false;
+			} finally{
+				sql.close();
 			}
+			return r;
+		}
+		
 		}
 	
 /*	// 회원 정보 수정2(정보 수정해서 저장)
@@ -114,4 +116,4 @@ public class MyInfoDao {
 
 	
 	
-}
+

@@ -39,21 +39,19 @@ public class MyInfoController {
 		mav.addObject("industry", list2);
 		mav.addObject("infos", map);
 		mav.addObject("likeinfos", map2);
-		System.out.println("location =" + list);
-		System.out.println("map2 =" + map2);
-		System.out.println("infos =" + map);
-	
+		
 		return mav;
 	}
 	@RequestMapping("/result")
 	public ModelAndView resultHandler(HttpSession session, @RequestParam Map data) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
-		mav.addObject("main", "my/result");
+		//mav.addObject("main", "my/result");
 		
 		String email = (String) session.getAttribute("email");
-		mydao.update(email);
-
+		data.put("email", email);
+		int rst = mydao.update(data);
+		System.out.println("Map rst = " + rst);
 		System.out.println("파라미터 = " +data);
 		return mav;
 	}

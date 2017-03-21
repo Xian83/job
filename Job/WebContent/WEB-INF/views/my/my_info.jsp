@@ -45,8 +45,8 @@
 					</p>
 					<p>
 						<b>GENDER</b><br /> <select class="form-control" name="gender">
-								<option value="남" ${likeinfos.GENDER eq '남' ? 'selected' : ' '  }>남</option>
-								<option value="여" ${likeinfos.GENDER eq '여' ? 'selected' : ' '  }>여</option>
+								<option value="male" ${likeinfos.GENDER eq 'male' ? 'selected' : ' '  }>male</option>
+								<option value="female" ${likeinfos.GENDER eq 'female' ? 'selected' : ' '  }>female</option>
 						</select>
 					</p>
 					<p>
@@ -81,18 +81,18 @@
 					<br />
 				<select class="form-control" name="salary_min"> 
 					<c:forEach var="i" begin="1500" end="10000" step="500">
-						<option value="${likeinfos.SALARY_MIN}" ${i eq likeinfos.SALARY_MIN? 'selected' : ' '  }>최소 ${i} 이상</option>			
+						<option value="${i}" ${i eq likeinfos.SALARY_MIN? 'selected' : ' '  }>최소 ${i} 이상</option>			
 					</c:forEach>
 					</select>
 					<select class="form-control" name="salary_max"> 
 					<c:forEach var="i" begin="1500" end="10000" step="500">
-						<option value="${likeinfos.SALARY_MAX}" ${i eq likeinfos.SALARY_MAX? 'selected' : ' '  }>최대 ${i} 이하</option>			
+						<option value="${i}" ${i eq likeinfos.SALARY_MAX? 'selected' : ' '  }>최대 ${i} 이하</option>			
 					</c:forEach>
 				</select>
 		</p>
 			<p>
 				<button type="submit" class="btn">변경</button>
-				<a href="/my/leave.jsp"><button type="button" class="btn"
+				<a href="/my/leave"><button type="button" class="btn"
 								style="font-size: 11pt; color: gray; background-color: pink;">탈퇴</button></a>
 			</p>
 			</c:otherwise>
