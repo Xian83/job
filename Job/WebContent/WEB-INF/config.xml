@@ -35,6 +35,14 @@
 		<property name="suffix" value=".jsp"/>
 		<property name="order" value="9"/>
 	</bean>
+	<!-- 멀티파트 요청 처리용 빈 등록/ 파일업로드용 -->
+   <bean
+      class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+      id="multipartResolver">
+      <property name="uploadTempDir" value="/temp"></property>
+      <property name="defaultEncoding" value="utf-8" />
+      <property name="maxUploadSize" value="-1" />
+   </bean>
 		
 	
 	<!-- Oracle DB Server Setting -->

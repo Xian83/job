@@ -13,7 +13,7 @@ public class MemberDao {
 	@Autowired
 	SqlSessionFactory factory;
 
-	// 로그인시 email과 pass 매칭 여부 체크
+	// 濡쒓렇�씤�떆 email怨� pass 留ㅼ묶 �뿬遺� 泥댄겕
 	public boolean existCheck(Map data) {
 
 		SqlSession sql = null;
@@ -34,7 +34,7 @@ public class MemberDao {
 		}
 	}
 
-	// 해당 email의 정보를 가져오는 것
+	// �빐�떦 email�쓽 �젙蹂대�� 媛��졇�삤�뒗 寃�
 	public HashMap<String, Object> getData(String email) {
 		HashMap<String, Object> data = new HashMap<>();
 
@@ -51,7 +51,7 @@ public class MemberDao {
 		return data;
 	}
 
-	// 해당 email의 정보를 가져오는 것
+	// �빐�떦 email�쓽 �젙蹂대�� 媛��졇�삤�뒗 寃�
 	public HashMap<String, Object> getInfo(String email) {
 		HashMap<String, Object> data = new HashMap<>();
 
@@ -67,8 +67,10 @@ public class MemberDao {
 
 		return data;
 	}
+	
 
-	// 회원정보수정
+
+	// �쉶�썝�젙蹂댁닔�젙
 	// public boolean update(Map data){
 	//
 	// SqlSession sql = null;
@@ -89,7 +91,7 @@ public class MemberDao {
 	// }
 	// }
 
-	// 회원탈퇴
+	// �쉶�썝�깉�눜
 	public boolean delete(String id, String pass) {
 		HashMap<String, Object> data = new HashMap<>();
 		data.put("id", id);
@@ -113,7 +115,7 @@ public class MemberDao {
 		}
 	}
 
-	// 회원가입시 email 중복 체크
+	// �쉶�썝媛��엯�떆 email 以묐났 泥댄겕
 	public boolean existCheck(String email) {
 		SqlSession sql = null;
 		try {
@@ -133,7 +135,7 @@ public class MemberDao {
 		}
 	}
 
-	// 회원가입 : 신규회원 기본정보입력
+	// �쉶�썝媛��엯 : �떊洹쒗쉶�썝 湲곕낯�젙蹂댁엯�젰
 	public boolean insert(Map data) {
 		SqlSession sql = null;
 		try {
@@ -153,7 +155,7 @@ public class MemberDao {
 		}
 	}
 
-	// 회원가입 : 신규회원 추가정보입력
+	// �쉶�썝媛��엯 : �떊洹쒗쉶�썝 異붽��젙蹂댁엯�젰
 	public boolean insertInfo(Map data) {
 		SqlSession sql = null;
 		try {
