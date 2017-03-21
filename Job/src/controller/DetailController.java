@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,30 +25,52 @@ public class DetailController {
 	DetailDao ddao;
 
 	@RequestMapping("/detail")
-	public ModelAndView detailHandler(@RequestParam(name="cmpn_nm") String companyname, HttpServletResponse response){
-		
+	public ModelAndView detailHandler(@RequestParam(name = "cmpn_nm") String companyname, HttpServletResponse response,
+			HttpSession session) {
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
-		List scorelist =ddao.score(companyname);
+		String email;
+		List scorelist = ddao.score(companyname);
 		List salarylist = ddao.salary(companyname);
 		List reviewList = ddao.review(companyname);
+		
+		if (session.getAttribute("email") == null) {
+			email = "visitant";
+		} else {
+			email = (String) session.getAttribute("email");
+			int a = ddao.checkScrape(companyname, email);
+			mav.addObject("scrape",a);
+		}
+		ddao.insertVisit(companyname, email);
 		HashMap map = (HashMap) scorelist.get(0);
-		String div = (String)map.get("DIVISION");
+		String div = (String) map.get("DIVISION");
 		List samelist = ddao.same(div);
-		mav.addObject("score",scorelist);
-		mav.addObject("same",samelist);
-		mav.addObject("review",reviewList);
+		mav.addObject("score", scorelist);
+		mav.addObject("same", samelist);
+		mav.addObject("review", reviewList);
 		mav.addObject("salary", salarylist);
 		mav.addObject("main", "company/detail_form");
+		
+		
 		
 		// 쿠키생성
 		long t = System.currentTimeMillis();
 		String u = t + "#";
-		Cookie c = new Cookie(u+"cmpn_nm", companyname);
-			c.setPath("/");
-			c.setMaxAge(60 * 60 * 12);
-		response.addCookie(c);  
-
-		return mav ;
+		Cookie c = new Cookie(u + "cmpn_nm", companyname);
+		c.setPath("/");
+		c.setMaxAge(60 * 60 * 12);
+		response.addCookie(c);
+		
+		return mav;
+	}
+	
+	@RequestMapping("/interest")
+	public ModelAndView interestHandler(@RequestParam(name = "cmpn_nm") String companyname, HttpServletResponse response, HttpSession session) throws UnsupportedEncodingException{
+		ModelAndView mav = new ModelAndView();	
+		int a = ddao.insertInterest(companyname, (String)session.getAttribute("email"));
+		mav.addObject("scrape",a);
+		mav.setViewName("redirect:/company/detail?cmpn_nm="+URLEncoder.encode(companyname,"UTF-8"));
+		return mav;
 	}
 }

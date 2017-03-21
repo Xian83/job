@@ -43,12 +43,17 @@
 						<b>NAME</b><br /> <input class="form-control" name="name"
 							value="${infos.NAME}" />
 					</p>
-
+					<p>
+						<b>GENDER</b><br /> <select class="form-control" name="gender">
+								<option value="male" ${likeinfos.GENDER eq 'male' ? 'selected' : ' '  }>male</option>
+								<option value="female" ${likeinfos.GENDER eq 'female' ? 'selected' : ' '  }>female</option>
+						</select>
+					</p>
 					<p>
 						<b>BIRTH</b><br /> <select class="form-control" name="birth">
 							<c:forEach var="i" begin="1930" end="2017" step="1">
 								<option value="${i}"
-									<c:if test="${i eq infos.BIRTH }">selected</c:if>>${i }</option>
+									<c:if test="${i eq infos.BIRTH }">selected</c:if>>${i }년</option>
 							</c:forEach>
 						</select>
 					</p>
@@ -57,38 +62,38 @@
 				
 					<h4>관심 정보 추가</h4>
 					<b>LOCATION</b>
-					<br />
-				<select class="form-control" name="Location"> 
-					<c:forEach var="i" items="${location }">
-						<option value="${i.LOCATION}">${i.LOCATION}</option>				
+					<br />		
+				<select class="form-control" name="location"> 
+					<c:forEach var="i" items="${location}">
+						<option value="${i.LOCATION}" ${i.LOCATION eq likeinfos.AREA? 'selected' : ' '  }>${i.LOCATION}</option>				
 					</c:forEach>
-				</select>
-		</p>
-					
+				</select>		
 		<p>
 		<b>INDUSTRY</b><br />
 				<select class="form-control" name="industry"> 
 					<c:forEach var="i" items="${industry }">
-						<option value="${i.INDUSTRY}">${i.INDUSTRY}</option>				
+						<option value="${i.INDUSTRY}" ${i.INDUSTRY eq likeinfos.STNDD_BIG_GB? 'selected' : ' '  }>${i.INDUSTRY}</option>				
 					</c:forEach>
 				</select>
 		</p>
 		<p>
 		<b>SALARY</b>
 					<br />
-				<select class="form-control" name="salary"> 
-					<c:forEach var="i" items="${location }">
-						<option value="${i.LOCATION}">${i.LOCATION}</option>			
+				<select class="form-control" name="salary_min"> 
+					<c:forEach var="i" begin="1500" end="10000" step="500">
+						<option value="${i}" ${i eq likeinfos.SALARY_MIN? 'selected' : ' '  }>최소 ${i} 이상</option>			
 					</c:forEach>
-					<c:forEach var="i"  items="${industry }">
-						<option value="${i.INDUSTRY}">${i.INDUSTRY}</option>
-				</c:forEach>
+					</select>
+					<select class="form-control" name="salary_max"> 
+					<c:forEach var="i" begin="1500" end="10000" step="500">
+						<option value="${i}" ${i eq likeinfos.SALARY_MAX? 'selected' : ' '  }>최대 ${i} 이하</option>			
+					</c:forEach>
 				</select>
 		</p>
 			<p>
-				<button type="submit" class="btn">변경하기</button>
-				<a href="/my/leave.jsp"><button type="button" class="btn"
-								style="font-size: 11pt; color: gray; background-color: pink;">LEAVE</button></a>
+				<button type="submit" class="btn">변경</button>
+				<a href="/my/leave"><button type="button" class="btn"
+								style="font-size: 11pt; color: gray; background-color: pink;">탈퇴</button></a>
 			</p>
 			</c:otherwise>
 			</c:choose>
