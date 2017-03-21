@@ -33,29 +33,39 @@ public class MyInfoController {
 		Map map = mdao.getData(email);
 		List list = mydao.getlocations();
 		List list2 = mydao.getIndustries();
-		
-	
-		
+		Map map2 = mydao.getdata(email);
+			
 		mav.addObject("location", list);
 		mav.addObject("industry", list2);
 		mav.addObject("infos", map);
-		for(int i=0; i<2; i++) {
-			System.out.println("리스트?"+list2);
+		mav.addObject("likeinfos", map2);
+		
+	/*	PictureDao pDao = new PictureDao();
+		String picURL = pDao.getLastetImageURL(id);
+		if(picURL== null){
+			picURL = "/picture/default.jpg";
 		}
-		System.out.println("industry =" + list2);
-		System.out.println("map =" + map);
-	
+		MemberDao mDao = new MemberDao();  // 내용 갖다 써야하므로 생성자 만들어줌
+		HashMap<String, Object> val = mDao.getDetails(id);// 리턴되는 값에 이름, 나이, 성별, 이메일 주소들이 담겨져 있어야 함
+		
+		request.setAttribute("url", picURL);
+		request.setAttribute("map", val);
+		
+		*/
+		
 		return mav;
 	}
 	@RequestMapping("/result")
-	public ModelAndView resultHandler(@RequestParam Map data) {
+	public ModelAndView resultHandler(HttpSession session, @RequestParam Map data) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
-		mav.addObject("main", "my/result");
+		//mav.addObject("main", "my/result");
 		
-
-		boolean cnt = mydao.insert(data);
-		System.out.println("data = " +data);
+		String email = (String) session.getAttribute("email");
+		data.put("email", email);
+		int rst = mydao.update(data);
+		System.out.println("Map rst = " + rst);
+		System.out.println("파라미터 = " +data);
 		return mav;
 	}
 

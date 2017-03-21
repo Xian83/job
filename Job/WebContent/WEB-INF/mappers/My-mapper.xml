@@ -9,7 +9,13 @@
 	<select id="industry" resultType="java.util.HashMap">
 		select * from industry 
 	</select>
-	<!-- <insert id="addinfos" parameterType="java.util.HashMap" >
-		insert into MEMBER_INFO where area=#{area}, STNDD_BIG_GB=#{STNDD_BIG_GB}, salary_min=#{salary_min}, salary_max=#{salary_max}
-	</insert> -->
+		<update id="update" parameterType="java.util.HashMap" >
+		update MEMBER_INFO set GENDER=#{gender}, AREA=#{location}, STNDD_BIG_GB=#{industry}, SALARY_MIN=#{salary_min}, SALARY_MAX=#{salary_max} where email=#{email}
+	</update>
+		<select id="data" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from MEMBER_INFO where email=#{email}
+	</select>
+	
+	
+	<!-- select * from picture where id='%s' order by num desc", id -->
 </mapper>
