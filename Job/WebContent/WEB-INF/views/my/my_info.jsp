@@ -7,10 +7,9 @@
 <div class="well row">
 	<!-- 12µîºÐ  -->
 	<div class="col-md-3" align="center">
-		<form action="/my/update_picture.jsp" method="post"
+		<form action="/my/update_pic" method="post"
 			enctype="multipart/form-data">
 			<b>PICTURE</b><br />
-			<%-- <img src="<%=picURL %>" width="200" height="200"/> --%>
 			<img src="${url}" width="200" height="200" />
 			<hr />
 			<input type="file" class="form-control" name="pic" /> <br />

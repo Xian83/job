@@ -38,5 +38,5 @@
 		delete from member where
 		email=#{email} and pass=#{pass}
 	</delete>
-
+	
 </mapper>

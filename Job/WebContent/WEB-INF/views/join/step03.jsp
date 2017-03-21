@@ -65,7 +65,7 @@
 <!-- 			<button type="button" class="btn btn-primary" name="chk_info" value="female">여</button> -->
 <!-- 			</div> -->
 <!-- 		</div> -->
-		<p>
+
 			<button type="submit" class="btn btn-info btn-block" id="btn" disabled>Sign Up</button>
 		</p>
 	</form>
