@@ -27,7 +27,6 @@ public class MyInfoController {
 	public ModelAndView infoHandler(HttpSession session, @RequestParam Map data) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
-		mav.addObject("main", "my/my_info");
 		
 		String email = (String) session.getAttribute("email");
 		Map map = mdao.getData(email);
@@ -39,14 +38,15 @@ public class MyInfoController {
 		mav.addObject("industry", list2);
 		mav.addObject("infos", map);
 		mav.addObject("likeinfos", map2);
+		mav.addObject("main", "my/my_info");
 		
 	/*	PictureDao pDao = new PictureDao();
 		String picURL = pDao.getLastetImageURL(id);
 		if(picURL== null){
 			picURL = "/picture/default.jpg";
 		}
-		MemberDao mDao = new MemberDao();  // ³»¿ë °®´Ù ½á¾ßÇÏ¹Ç·Î »ý¼ºÀÚ ¸¸µé¾îÁÜ
-		HashMap<String, Object> val = mDao.getDetails(id);// ¸®ÅÏµÇ´Â °ª¿¡ ÀÌ¸§, ³ªÀÌ, ¼ºº°, ÀÌ¸ÞÀÏ ÁÖ¼ÒµéÀÌ ´ã°ÜÁ® ÀÖ¾î¾ß ÇÔ
+		MemberDao mDao = new MemberDao();  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¹Ç·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		HashMap<String, Object> val = mDao.getDetails(id);// ï¿½ï¿½ï¿½ÏµÇ´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½, ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½, ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ö¼Òµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ ï¿½ï¿½
 		
 		request.setAttribute("url", picURL);
 		request.setAttribute("map", val);
@@ -65,7 +65,7 @@ public class MyInfoController {
 		data.put("email", email);
 		int rst = mydao.update(data);
 		System.out.println("Map rst = " + rst);
-		System.out.println("ÆÄ¶ó¹ÌÅÍ = " +data);
+		System.out.println("ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ = " +data);
 		return mav;
 	}
 
