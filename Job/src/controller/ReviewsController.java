@@ -30,11 +30,11 @@ public class ReviewsController {
 		mav.setViewName("t1");
 		List reviewList = rdao.review();
 		List rankList = rdao.rank();
-//		List salaryList = rdao.salary();
+
 		int size = reviewList.size();
 		mav.addObject("size",size);
 		mav.addObject("rank",rankList);
-//		mav.addObject("score",scoreList);
+
 		mav.addObject("review", reviewList);
 	
 		mav.addObject("main","review/list_form");

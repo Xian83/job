@@ -62,5 +62,9 @@ public class DetailDao {
 			session.close();
 		}
 	}
+	
+	public void insertVisit(String COMPANYNAME, String email){
+		
+	}
 
 }
