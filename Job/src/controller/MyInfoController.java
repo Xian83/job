@@ -33,29 +33,28 @@ public class MyInfoController {
 		Map map = mdao.getData(email);
 		List list = mydao.getlocations();
 		List list2 = mydao.getIndustries();
-		
-	
-		
+		Map map2 = mydao.getdata(email);
+			
 		mav.addObject("location", list);
 		mav.addObject("industry", list2);
 		mav.addObject("infos", map);
-		for(int i=0; i<2; i++) {
-			System.out.println("리스트?"+list2);
-		}
-		System.out.println("industry =" + list2);
-		System.out.println("map =" + map);
+		mav.addObject("likeinfos", map2);
+		System.out.println("location =" + list);
+		System.out.println("map2 =" + map2);
+		System.out.println("infos =" + map);
 	
 		return mav;
 	}
 	@RequestMapping("/result")
-	public ModelAndView resultHandler(@RequestParam Map data) {
+	public ModelAndView resultHandler(HttpSession session, @RequestParam Map data) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
 		mav.addObject("main", "my/result");
 		
+		String email = (String) session.getAttribute("email");
+		mydao.update(email);
 
-		boolean cnt = mydao.insert(data);
-		System.out.println("data = " +data);
+		System.out.println("파라미터 = " +data);
 		return mav;
 	}
 

@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,25 +16,7 @@ public class MyInfoDao {
 	@Autowired
 	SqlSessionFactory factory;
 	
-	// 관심정보 추가
-	public boolean insert(Map data) {
-		SqlSession sql = null;
-		try {
-			sql = factory.openSession();
-			int cnt = sql.insert("mappers.my.addinfos", data);
 
-			if (cnt == 1) {
-				sql.commit();
-				return true;
-			} else
-				return false;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		} finally {
-			sql.close();
-		}
-	}
 	
 	// 회원 정보 수정 - 정보 불러오기 1
 	public List getlocations(){
@@ -53,7 +36,7 @@ public class MyInfoDao {
 		return data;
 	}
 	
-	// 회원 정보 수정 - 정보 불러오기 1
+	// 회원 정보 수정 - 정보 불러오기 2
 	public List getIndustries(){
 		List data = new ArrayList();
 		
@@ -72,7 +55,45 @@ public class MyInfoDao {
 		return data;
 	}
 	
+	// 회원 정보 수정 - 정보 불러오기 3
+		public Map getdata(String email){
+			Map data = new HashMap<>();
+			
+			SqlSession sql = null;
+			try {
+				System.out.println("getIndustries 준비");
+				sql = factory.openSession();
+				data = sql.selectOne("mappers.my.data", email);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally{
+				sql.close();
+			}
+			
+			return data;
+		}
+
+
 	
+	// 관심 정보 업데이트
+		public boolean update (String email){
+			boolean r;
+			
+			SqlSession sql = null;
+			try {
+				sql = factory.openSession();
+				int cnt = sql.selectOne("mappers.my.industry", email);
+				System.out.println("update cnt =" + cnt);
+				if(cnt==1)
+					return true;
+				else
+					return false;
+				
+			}catch(Exception e){
+				e.printStackTrace();
+				return false;
+			}
+		}
 	
 /*	// 회원 정보 수정2(정보 수정해서 저장)
 			public int update(String name, int age, String gender, String email,String id) {
