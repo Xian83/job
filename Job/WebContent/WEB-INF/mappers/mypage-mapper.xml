@@ -14,4 +14,23 @@
 		order by r.salary desc) where rownum <=5
 		]]>
 	</select>
+	
+	<insert id="addDummy" parameterType="java.util.HashMap">
+		insert into VISIT VALUES (#{email}, #{company}, sysdate)
+	</insert>
+	
+	<select id="getVisited" parameterType="java.lang.String" resultType="java.util.HashMap">
+		<![CDATA[
+			select * from (select CMPN_NM, count(*) as CNT from VISIT 
+			where email=#{email}
+			group by CMPN_NM order by count(*) desc) where rownum <=5
+		]]>
+	</select>
+	
+	<select id="getScarpData" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from SCRAP where EMAIL=#{email}
+	</select>
+	<select id="getCompareData" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from COMPARE where EMAIL=#{email}
+	</select>
 </mapper>

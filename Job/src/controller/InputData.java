@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import model.DataScarpDao;
+import model.MyPageDao;
 import model.SalaryDao;
 
 @Controller
@@ -21,6 +22,9 @@ public class InputData {
 	
 	@Autowired
 	DataScarpDao dataDao;
+	
+	@Autowired
+	MyPageDao dummy;
 
 	@RequestMapping("/input_data")
 	public ModelAndView formDataHandler() {
@@ -98,7 +102,7 @@ public class InputData {
 		List list = null;
 		boolean result = false;
 		list = dataDao.getData((String)map.get("PK_NM_HASH"));
-		result = dataDao.insert(list);
+		result = dataDao.insert2(list);
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
@@ -107,4 +111,17 @@ public class InputData {
 		return mav;
 	}
 	
+	// dummy data input
+	@RequestMapping("/input_result04")
+	public ModelAndView inputDataHandler5() {
+		boolean result = false;
+		
+		result = dummy.insert();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("t1");
+		mav.addObject("main", "data/input_result");
+		mav.addObject("result", result);
+		return mav;
+	}
 }
