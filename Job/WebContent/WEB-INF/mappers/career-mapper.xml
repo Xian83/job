@@ -35,5 +35,22 @@
 		values(#{EMAIL}, #{CMPN_NM}, SYSDATE)
 	</insert>
 
+	<select id="interest" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		select * from interest where CMPN_NM=#{CMPN_NM} and EMAIL=#{EMAIL}
+	</select>
+	
+	<update id="plus" parameterType="java.util.HashMap">
+		update interest set LOVE=1 where CMPN_NM=#{CMPN_NM} and EMAIL=#{EMAIL}
+	</update>
+	
+	<update id="minus" parameterType="java.util.HashMap">
+		update interest set LOVE=0 where CMPN_NM=#{CMPN_NM} and EMAIL=#{EMAIL}
+	</update>
+	
+	<insert id="push" parameterType="java.util.HashMap">
+		insert into interest
+		values(#{CMPN_NM}, #{EMAIL}, 1)
+	</insert>
 
 </mapper>

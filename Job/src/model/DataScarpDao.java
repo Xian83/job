@@ -125,9 +125,7 @@ public class DataScarpDao {
 		System.out.println("데이터 수집 완료 : " + cnt);
 		
 		// insert data
-		DBCollection collection = template.getCollection("company_detail");
-		collection.insert(datas);
-		template.insert(datas);
+		template.insertAll(datas);
 		
 		System.out.println("데이터 입력 완료 ");
 		return result;

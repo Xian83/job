@@ -1,5 +1,6 @@
 package model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,63 +41,89 @@ public class DetailDao {
 			session.close();
 		}
 	}
-	
-	public List same(String DIVISION){
+
+	public List same(String DIVISION) {
 		SqlSession session = factory.openSession();
 		List<HashedMap> list = new ArrayList<>();
-		try{
+		try {
 			list = session.selectList("mappers.career.detailsame", DIVISION);
 			return list;
-		}finally{
+		} finally {
 			session.close();
 		}
 	}
-	
-	public List review(String COMPANYNAME){
+
+	public List review(String COMPANYNAME) {
 		SqlSession session = factory.openSession();
 		List<HashedMap> list = new ArrayList<>();
-		try{
+		try {
 			list = session.selectList("mappers.career.review", COMPANYNAME);
 			return list;
-		}finally{
+		} finally {
 			session.close();
 		}
 	}
-	
-	public void insertVisit(String COMPANYNAME, String email){
+
+	public void insertVisit(String COMPANYNAME, String email) {
 		SqlSession session = factory.openSession();
 		Map map = new HashMap<>();
 		map.put("EMAIL", email);
 		map.put("CMPN_NM", COMPANYNAME);
-		try{
+		try {
 			session.insert("mappers.career.visit", map);
-		}finally {
+		} finally {
 			session.close();
 		}
 	}
-	
-	public int insertInterest(String COMPANYNAME, String email){
+
+	public int checkScrape(String COMPANYNAME, String email){
 		SqlSession session = factory.openSession();
 		Map map = new HashMap<>();
 		map.put("CMPN_NM", COMPANYNAME);
 		map.put("EMAIL", email);
 		List<HashMap> list = new ArrayList<>();
 		try{
-			list = session.selectList("mappers.career.interest",map);
-			
-			
-			if((int)list.get(0).get("LOVE")==0){
-				session.update("mappers.carrer.plus",map);
-				return 1;
-			}else if((int)list.get(0).get("LOVE")==1){
-				session.update("mappers.carrer.minus",map);
+			list = session.selectList("mappers.career.interest", map);
+			if (list.size() == 0) {
+				session.insert("mappers.career.push", map);
 				return 0;
-			}else{
-				session.insert("mappers.carrer.interest2", map);
-				return 1;
+			}else {
+				BigDecimal bd= (BigDecimal)list.get(0).get("LOVE");
+				return bd.intValue();
 			}
-				
-		}finally {
+		}finally{
+			session.close();
+		}
+	}
+	
+	public int insertInterest(String COMPANYNAME, String email) {
+		SqlSession session = factory.openSession();
+		Map map = new HashMap<>();
+		map.put("CMPN_NM", COMPANYNAME);
+		map.put("EMAIL", email);
+		List<HashMap> list = new ArrayList<>();
+		Integer love = 1;
+		try {
+			list = session.selectList("mappers.career.interest", map);
+			// System.out.println(list.toString());
+			// System.out.println(list.size());
+			if (list.size() == 0) {
+				session.insert("mappers.career.push", map);
+				return 1;
+			} else {
+				BigDecimal bd= (BigDecimal)list.get(0).get("LOVE");
+				love = bd.intValue();
+			}
+			
+			if (love == 0) {
+				session.update("mappers.career.plus", map);
+				return 1;
+			} else {
+				session.update("mappers.career.minus", map);
+				return 0;
+			}
+
+		} finally {
 			session.close();
 		}
 	}
