@@ -60,7 +60,7 @@
 					<br />
 					<p>
 				
-					<h4>관심 정보 추가</h4>
+					<h4>관심 정보 추가</h4> 
 					<b>LOCATION</b>
 					<br />		
 				<select class="form-control" name="location"> 

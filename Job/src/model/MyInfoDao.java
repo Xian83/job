@@ -18,13 +18,13 @@ public class MyInfoDao {
 	
 
 	
-	// È¸¿ø Á¤º¸ ¼öÁ¤ - Á¤º¸ ºÒ·¯¿À±â 1
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ 1
 	public List getlocations(){
 		List data = new ArrayList();
 		
 		SqlSession sql = null;
 		try {
-			System.out.println("getlocations ÁØºñ");
+			System.out.println("getlocations ï¿½Øºï¿½");
 			sql = factory.openSession();
 			data = sql.selectList("mappers.my.location");			
 		} catch (Exception e) {
@@ -36,13 +36,13 @@ public class MyInfoDao {
 		return data;
 	}
 	
-	// È¸¿ø Á¤º¸ ¼öÁ¤ - Á¤º¸ ºÒ·¯¿À±â 2
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ 2
 	public List getIndustries(){
 		List data = new ArrayList();
 		
 		SqlSession sql = null;
 		try {
-			System.out.println("getIndustries ÁØºñ");
+			System.out.println("getIndustries ï¿½Øºï¿½");
 			sql = factory.openSession();
 			data = sql.selectList("mappers.my.industry");
 			System.out.println("DAO industry =" + data);
@@ -55,15 +55,16 @@ public class MyInfoDao {
 		return data;
 	}
 	
-	// È¸¿ø Á¤º¸ ¼öÁ¤ - Á¤º¸ ºÒ·¯¿À±â 3
+	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ 3
 		public Map getdata(String email){
 			Map data = new HashMap<>();
 			
 			SqlSession sql = null;
 			try {
-				System.out.println("getIndustries ÁØºñ");
+				System.out.println("getIndustries ï¿½Øºï¿½");
 				sql = factory.openSession();
 				data = sql.selectOne("mappers.my.data", email);
+				System.out.println(data);
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally{
@@ -75,7 +76,7 @@ public class MyInfoDao {
 
 
 	
-	// °ü½É Á¤º¸ ¾÷µ¥ÀÌÆ®
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 		public int update(Map data){
 			int r =0;
 			
@@ -115,7 +116,7 @@ public class MyInfoDao {
 }
 
 	
-/*	// È¸¿ø Á¤º¸ ¼öÁ¤2(Á¤º¸ ¼öÁ¤ÇØ¼­ ÀúÀå)
+/*	// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½2(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½)
 			public int update(String name, int age, String gender, String email,String id) {
 				int rs =0;
 				try {
