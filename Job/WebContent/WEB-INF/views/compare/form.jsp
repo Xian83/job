@@ -2,7 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<h2>비교 페이지</h2>
+<style>
+input[id=aaa] {
+	width: 95%;
+	padding: 10px 5px;
+}
+</style>
+
+<h2>비교 페이지 (최근 본 목록)</h2>
 <!-- 처음뿌려지는 쿠키리스트가 가장 먼저본 기업 -->
 
 <hr />
@@ -29,7 +36,7 @@
 </script>
 
 
-<div>
+<%-- <div>
 
 <c:forEach var="cm1" items="${list1 }">
 	${cm1.CMPN_NM }
@@ -39,4 +46,4 @@
 	${cm2.CMPN_NM }
 </c:forEach>
 
-</div>
+</div> --%>

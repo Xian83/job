@@ -47,19 +47,20 @@ public class CompareController {
 		return mav;
 	}
 	
+	// 비교처리 페이지
 	@RequestMapping("/result")
 	public ModelAndView InitHandler1(@RequestParam (name="cm1") String cm1, @RequestParam (name="cm2") String cm2) {
 		ModelAndView mav = new ModelAndView();
 		
-		System.out.println(cm1);
-		System.out.println(cm2);
+		//System.out.println(cm1);
+		//System.out.println(cm2);
 		List list1 = cdao.compare(cm1);
 		List list2 = cdao.compare(cm2);
 		
 		mav.setViewName("t1");
 		mav.addObject("list1", list1);
 		mav.addObject("list2", list2);
-		mav.addObject("main", "compare/form");
+		mav.addObject("main", "compare/result");
 		return mav;
 	}
 }
