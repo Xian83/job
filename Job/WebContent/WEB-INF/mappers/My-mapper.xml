@@ -10,7 +10,7 @@
 		select * from industry 
 	</select>
 		<update id="update" parameterType="java.util.HashMap" >
-		update MEMBER_INFO set GENDER=#{gender}, AREA=${location}, STNDD_BIG_GB=#{industry}, SALARY_MIN=#{salary_min}, SALARY_MAX=${salary_max} where email=#{email}
+		update MEMBER_INFO set GENDER=#{gender}, AREA=#{location}, STNDD_BIG_GB=#{industry}, SALARY_MIN=#{salary_min}, SALARY_MAX=#{salary_max} where email=#{email}
 	</update>
 		<select id="data" parameterType="java.lang.String" resultType="java.util.HashMap">
 		select * from MEMBER_INFO where email=#{email}

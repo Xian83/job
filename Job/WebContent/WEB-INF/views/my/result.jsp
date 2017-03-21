@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h2>관심정보 결과</h2>
 <c:choose>
-	<c:when test="${rst ne null }">
+	<c:when test="${rst eq 1 }">
 		<h2>변경 성공!! <b>2초</b> 후 이전 페이지로 이동합니다.</h2>
 		<meta http-equiv="refresh" content="2;url=/my/info" />
 	</c:when>
