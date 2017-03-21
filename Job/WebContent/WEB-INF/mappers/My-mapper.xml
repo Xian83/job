@@ -16,7 +16,7 @@
 		SALARY_MAX=#{salary_max} where email=#{email}
 	</update>
 
-		<select id="data" parameterType="java.lang.String" resultType="java.util.HashMap">
+		
 
 	<select id="data" parameterType="java.lang.String" resultType="java.util.HashMap">
 
