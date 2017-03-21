@@ -16,17 +16,19 @@ public class CompareDao {
 	@Autowired
 	SqlSessionFactory factory;
 	
-	/*public List compare (Map map) {
+	public List compare (String cmpn) {
 		SqlSession sql = null;
 		List list = new ArrayList();
 		try {
 			sql = factory.openSession();
-			list = sql.selectList("mappers.compare.select", map.get("CMPN_NM"));
+			list = sql.selectList("mappers.compare.select", cmpn);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			sql.close();
 		}
 		return list;
-	}*/
+	}
+	
+	
 }
