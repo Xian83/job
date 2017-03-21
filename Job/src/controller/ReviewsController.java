@@ -53,9 +53,7 @@ public class ReviewsController {
 		rdao.push(company, content, email);
 		
 		mav.setViewName("redirect:/company/detail?cmpn_nm="+URLEncoder.encode(company,"UTF-8"));
-		
-		
-		
+	
 		return mav;
 	}
 }

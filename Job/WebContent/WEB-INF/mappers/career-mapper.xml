@@ -29,6 +29,11 @@
 		select * from reviews where CMPN_NM=#{COMPANYNAME} order by
 		WDATE desc
 	</select>
+	
+	<insert id="visit" parameterType="java.util.HashMap">
+		insert into visit
+		values(#{EMAIL}, #{CMPN_NM}, SYSDATE)
+	</insert>
 
 
 </mapper>
