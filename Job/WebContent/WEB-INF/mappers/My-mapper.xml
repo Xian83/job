@@ -15,4 +15,7 @@
 		<select id="data" parameterType="java.lang.String" resultType="java.util.HashMap">
 		select * from MEMBER_INFO where email=#{email}
 	</select>
+	
+	
+	<!-- select * from picture where id='%s' order by num desc", id -->
 </mapper>

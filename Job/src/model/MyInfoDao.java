@@ -95,7 +95,25 @@ public class MyInfoDao {
 			return r;
 		}
 		
+		
+/*	public String getLastetImageURL(String id) {
+	String picURL =  null;
+	try {
+		
+		String sql= String.format("select * from picture where id='%s' order by num desc", id);
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		if(rs.next()) {
+			picURL = rs.getString("url");
 		}
+		conn.close();
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+	return picURL;
+}*/
+}
+
 	
 /*	// 회원 정보 수정2(정보 수정해서 저장)
 			public int update(String name, int age, String gender, String email,String id) {

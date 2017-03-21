@@ -40,6 +40,19 @@ public class MyInfoController {
 		mav.addObject("infos", map);
 		mav.addObject("likeinfos", map2);
 		
+	/*	PictureDao pDao = new PictureDao();
+		String picURL = pDao.getLastetImageURL(id);
+		if(picURL== null){
+			picURL = "/picture/default.jpg";
+		}
+		MemberDao mDao = new MemberDao();  // 내용 갖다 써야하므로 생성자 만들어줌
+		HashMap<String, Object> val = mDao.getDetails(id);// 리턴되는 값에 이름, 나이, 성별, 이메일 주소들이 담겨져 있어야 함
+		
+		request.setAttribute("url", picURL);
+		request.setAttribute("map", val);
+		
+		*/
+		
 		return mav;
 	}
 	@RequestMapping("/result")
