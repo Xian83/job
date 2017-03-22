@@ -59,9 +59,9 @@ public class DetailController {
 		// 쿠키생성
 		long t = System.currentTimeMillis();
 		String u = t + "#";
-		Cookie c = new Cookie(u + "cmpn_nm", companyname);
+		Cookie c = new Cookie("cmpn_nm", companyname+"#");
 		c.setPath("/");
-		c.setMaxAge(60 * 60 * 12);
+		//c.setMaxAge(60 * 60 * 12);
 		response.addCookie(c);
 		
 		return mav;
