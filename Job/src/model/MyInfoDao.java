@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -113,21 +114,27 @@ public class MyInfoDao {
 		return r;
 	}
 
-	// ¸¶Áö¸·¿¡ µî·ÏÇÑ »çÁø ºÒ·¯¿À±â 	
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ 
 	public String getLastetImageURL(String email){
-		HashMap<String, Object> data = new HashMap<>();
+		List<HashMap> data = new ArrayList<>();
 		SqlSession sql = null;
 		
 		try {
 			sql = factory.openSession();
-			data = sql.selectOne("mappers.my.picUrl", email);	
+			data = sql.selectList("mappers.my.picUrl", email);	
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally{
 			sql.close();
 		}
 		
-		return data == null ? "null" : (String) data.get("URL");  		
+		HashMap<String, Object> map = new HashMap<>();
+		Iterator it = data.iterator();
+		for(int i = 0; i<1; i++){
+			map = (HashMap<String, Object>) it.next();
+		}
+		
+		return data == null ? "null" : (String) map.get("URL");  		
 	}
 
 
@@ -152,23 +159,23 @@ public class MyInfoDao {
 	}
 
 
-public int updateBirth(Map b) {
-	int r = 0;
-	SqlSession sql = null;
-	try {
-		sql = factory.openSession();
-		r = sql.update("mappers.my.updateBirth", b);
-		System.out.println("update b =" + r);
-		if (r == 1)
-			sql.commit();
+	public int updateBirth(Map b) {
+		int r = 0;
+		SqlSession sql = null;
+		try {
+			sql = factory.openSession();
+			r = sql.update("mappers.my.updateBirth", b);
+			System.out.println("update b =" + r);
+			if (r == 1)
+				sql.commit();
 
-	} catch (Exception e) {
-		e.printStackTrace();
-	} finally {
-		sql.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sql.close();
+		}
+		return r;
 	}
-	return r;
-}
 }
 /*
  * // È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½2(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½) public int update(String name, int age,
