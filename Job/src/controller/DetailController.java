@@ -57,7 +57,6 @@ public class DetailController {
 		
 		
 		// 쿠키생성
-		long t = System.currentTimeMillis();
 		String u = origin+"#"+companyname;
 		Cookie c = new Cookie("cmpn_nm", u);
 		c.setPath("/");

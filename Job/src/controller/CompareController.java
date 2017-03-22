@@ -77,7 +77,7 @@ public class CompareController {
 		} else {
 			System.out.println("비회원이라서 비교불가");
 			mav.setViewName("t1");
-			mav.addObject("main", "redirect:/compare/form");
+			mav.addObject("main", "index");
 		}
 		return mav;
 	}

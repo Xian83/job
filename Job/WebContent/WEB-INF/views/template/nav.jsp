@@ -40,7 +40,7 @@
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="/">itJOB</a>
-			</div>
+			</div>t + "#";
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="/search/company">Search</a></li>

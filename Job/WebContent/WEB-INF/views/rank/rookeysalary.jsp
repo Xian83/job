@@ -25,7 +25,7 @@
             <div class="media-left media-middle">
 	            <c:choose>
 	            	<c:when test="${list2[i] eq null }">
-						<img src="/logo.jpg" width="100" height="70">	            		
+						<img src="/picture/logo.jpg" width="100" height="70">	            		
 	            	</c:when>
 	            	<c:otherwise>
 		            	<a href="/company/detail?cmpn_nm=${list2[i].CMPN_NM }"><img src="${list2[i].LOGO }" width="100" height="70" /></a> 
