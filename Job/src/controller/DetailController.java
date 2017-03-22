@@ -3,7 +3,6 @@ package controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,12 +12,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import model.DetailDao;
-import model.ReviewsDao;
 
 @Controller
 @RequestMapping("/company")
@@ -27,7 +26,8 @@ public class DetailController {
    DetailDao ddao;
 
    @RequestMapping("/detail")
-   public ModelAndView detailHandler(@RequestParam(name="cmpn_nm") String companyname, HttpServletResponse response, HttpSession session){
+   public ModelAndView detailHandler(@RequestParam(name="cmpn_nm") String companyname, HttpServletResponse response, HttpSession session, 
+		   @CookieValue(name="cmpn_nm",defaultValue="") String origin){
  
 
 		ModelAndView mav = new ModelAndView();
@@ -57,11 +57,10 @@ public class DetailController {
 		
 		
 		// 쿠키생성
-		long t = System.currentTimeMillis();
-		String u = t + "#";
-		Cookie c = new Cookie(u + "cmpn_nm", companyname);
+		String u = origin+"#"+companyname;
+		Cookie c = new Cookie("cmpn_nm", u);
 		c.setPath("/");
-		c.setMaxAge(60 * 60 * 12);
+		//c.setMaxAge(60 * 60 * 12);
 		response.addCookie(c);
 		
 		return mav;

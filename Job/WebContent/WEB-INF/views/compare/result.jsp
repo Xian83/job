@@ -13,20 +13,19 @@ input[id=aaa] {
 
 <div class="container-fluid">
 
-<div class="col-md-6">
+<div class="col-md-6" align="center">
 
 <c:forEach var="cm1" items="${list1 }">
 	<b>${cm1.CMPN_NM }</b><br/> 
 	<img src="${cm1.LOGO }" class="img-circle" alt="Cinque Terre"
 						width="200" height="200"><br/>
-	${cm1.DIVISION }<br/> 
-	${cm1.SCALE }<br/>
+	${cm1.DIVISION }<br/> t + "#";
 	재무평가 : ${cm1.FINANCE_SCORE }<br/> 
 	재직자 평가 : ${cm1.SLAVE_SCORE }<br/> 
 </c:forEach>
 </div>
 
-<div class="col-md-6">
+<div class="col-md-6" align="center">
 <c:forEach var="cm2" items="${list2 }">
 	<b>${cm2.CMPN_NM }</b><br/>
 	<img src="${cm2.LOGO }" class="img-circle" alt="Cinque Terre"
