@@ -28,5 +28,10 @@
 	<insert id="addPic" parameterType="java.util.HashMap">
 		insert into PICTURE values(pic_seq.nextval, #{email}, #{url})
 	</insert>
-
+	<update id="updatePass" parameterType="java.util.HashMap">
+		update MEMBER set PASS=#{pass} where EMAIL=#{email}
+	</update>
+	<update id="updateBirth" parameterType="java.util.HashMap">
+		update MEMBER set BIRTH=#{birth} where EMAIL=#{email}
+	</update>
 </mapper>

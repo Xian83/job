@@ -26,7 +26,7 @@ public class LoginController {
 	@Autowired
 	MemberDao mDao;
 	
-	// 로그인 화면
+	// 濡쒓렇�씤 �솕硫�
 	@RequestMapping("/form")
 	public ModelAndView loginFormHandler(){
 		ModelAndView mav = new ModelAndView();
@@ -35,7 +35,7 @@ public class LoginController {
 		return mav;
 	}
 	
-	// 로그인 결과 출력
+	// 濡쒓렇�씤 寃곌낵 異쒕젰
 	@RequestMapping("/result")
 	public ModelAndView loginResultHandle(@RequestParam Map map, HttpSession session, HttpServletResponse resp){
 		
@@ -51,17 +51,17 @@ public class LoginController {
 		return mav;
 	}
 	
-	//로그아웃
+	//濡쒓렇�븘�썐
 	@RequestMapping("/logout")
 	public void logoutHandle(HttpSession session, HttpServletResponse resp) throws IOException, InterruptedException{
 		
-		//쿠키 삭제
+		//荑좏궎 �궘�젣
 		Cookie c = new Cookie("login", null);
 		c.setMaxAge(0);
 		c.setPath("/");
 		resp.addCookie(c);
 		
-		//로그인 정보 지우기
+		//濡쒓렇�씤 �젙蹂� 吏��슦湲�
 		session.setAttribute("auth", "no");
 		session.removeAttribute("id");
 		session.removeAttribute("name");
@@ -70,7 +70,7 @@ public class LoginController {
 		resp.sendRedirect("/");
 	}
 	
-	// 페이스북 연동하기
+	// �럹�씠�뒪遺� �뿰�룞�븯湲�
 	@ResponseBody
 	@RequestMapping("/fbLogin")
 	public Map fbSignInHandler(@RequestParam Map map, HttpSession session, HttpServletResponse resp){
@@ -79,24 +79,24 @@ public class LoginController {
 		boolean res = false;
 		Map info = new HashMap();
 		try {
-			// 넘어온 info 정보 객체화
+			// �꽆�뼱�삩 info �젙蹂� 媛앹껜�솕
 			info = om.readValue((String)map.get("info"), Map.class);
-			// 멤버 가입여부 체크
+			// 硫ㅻ쾭 媛��엯�뿬遺� 泥댄겕
 			rst = mDao.existCheck((String)info.get("email"));
 			info.put("exist", rst);
-			System.out.println("가입여부 : " + rst);
+			System.out.println("媛��엯�뿬遺� : " + rst);
 			
-			// 가입 진행
+			// 媛��엯 吏꾪뻾
 			if(!rst){
 				String m = (String) info.get("birthday");
-				// 가입 진행
+				// 媛��엯 吏꾪뻾
 				info.put("facebook", "Y");
 				info.put("pass", "pass");
 				info.put("birth",  m.split("/")[2]);
 				res = mDao.insert(info);
-				System.out.println(info.get("name") + ", 가입 결과 : " +  res);
+				System.out.println(info.get("name") + ", 媛��엯 寃곌낵 : " +  res);
 			}
-			// 로그인
+			// 濡쒓렇�씤
 			login(info, session, resp);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -109,11 +109,13 @@ public class LoginController {
 		
 		String email = (String) userData.get("EMAIL");
 		String name = (String) userData.get("NAME");
+		String pass = (String) userData.get("PASS");
 		
 		session.setAttribute("auth", "yes");
 		session.setAttribute("leave_try", 1);
 		session.setAttribute("email", email);
 		session.setAttribute("name", name);
+		session.setAttribute("pass", pass);
 		
 		if(map.get("keep") != null){
 			Cookie c = new Cookie("login", email + "#" + name);

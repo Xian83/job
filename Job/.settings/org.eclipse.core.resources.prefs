@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
 encoding//WebContent/WEB-INF/views/search/list_form.jsp=UTF-8
 encoding//src/controller/JoinController.java=UTF-8
+encoding//src/controller/LoginController.java=UTF-8
+encoding//src/controller/MyInfoController.java=UTF-8
 encoding//src/controller/SearchController.java=UTF-8
 encoding//src/model/MemberDao.java=UTF-8
 encoding//src/model/RankDao.java=UTF-8

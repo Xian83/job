@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,15 +35,15 @@ public class MyInfoController {
 		mav.setViewName("t1");
 
 		mav.addObject("main", "my/my_info");
-
-		String email = (String) session.getAttribute("email");
 		
-		Map map = mdao.getData(email); // 기본정보
-		Map map2 = mydao.getdata(email); // 추가정보
-		List list = mydao.getlocations(); // 관심지역
-		List list2 = mydao.getIndustries(); // 관심산업군
-
-		// DB에서 프로필 사진 가져와서 처리
+		String email = (String) session.getAttribute("email");
+		Map map = mdao.getData(email); // 湲곕낯�젙蹂�
+		Map map2 = mydao.getdata(email); // 異붽��젙蹂�
+		List list = mydao.getlocations(); // 愿��떖吏��뿭
+		List list2 = mydao.getIndustries(); // 愿��떖�궛�뾽援�
+		
+		
+		// DB�뿉�꽌 �봽濡쒗븘 �궗吏� 媛��졇���꽌 泥섎━
 		String picURL = mydao.getLastetImageURL(email);
 		if (picURL == null || picURL.equals("null"))
 			picURL = "/default.jpg";
@@ -53,14 +54,16 @@ public class MyInfoController {
 		mav.addObject("infos", map);
 		mav.addObject("likeinfos", map2);
 		mav.addObject("main", "my/my_info");
-
+		
+		System.out.println("FACEBOOK = " + map.get("FACEBOOK"));
+		System.out.println("FACEBOOK map = " + map);
 		/*
 		 * PictureDao pDao = new PictureDao(); String picURL =
 		 * pDao.getLastetImageURL(id); if(picURL== null){ picURL =
-		 * "/picture/default.jpg"; } MemberDao mDao = new MemberDao(); // ����
-		 * ���� ����ϹǷ� ������ ������� HashMap<String, Object> val =
-		 * mDao.getDetails(id);// ���ϵǴ� ���� �̸�, ����, ����, �̸��� �ּҵ���
-		 * ����� �־�� ��
+		 * "/picture/default.jpg"; } MemberDao mDao = new MemberDao(); // 占쏙옙占쏙옙
+		 * 占쏙옙占쏙옙 占쏙옙占쏙옙球퓐占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占� HashMap<String, Object> val =
+		 * mDao.getDetails(id);// 占쏙옙占싹되댐옙 占쏙옙占쏙옙 占싱몌옙, 占쏙옙占쏙옙, 占쏙옙占쏙옙, 占싱몌옙占쏙옙 占쌍소듸옙占쏙옙
+		 * 占쏙옙占쏙옙占� 占쌍억옙占� 占쏙옙
 		 * 
 		 * request.setAttribute("url", picURL); request.setAttribute("map",
 		 * val);
@@ -78,9 +81,22 @@ public class MyInfoController {
 
 		String email = (String) session.getAttribute("email");
 		data.put("email", email);
-		int rst = mydao.update(data);
-		System.out.println("Map rst = " + rst);
-		System.out.println("�Ķ���� = " + data);
+		int rst = mydao.update(data);		
+	
+		String pass = (String) data.get("passcheck");
+		Map m = new HashMap<>();
+			m.put("pass", pass);
+			m.put("email", email);
+		int rst2 = mydao.updatePass(m);
+		
+		String birth = (String) data.get("birth");
+		Map b = new HashMap<>();
+			b.put("birth", birth);
+			b.put("email", email);
+			System.out.println("map b = " + b );
+		int rst3 = mydao.updateBirth(b);
+		System.out.println("rst3  = " + rst3 );
+
 		return mav;
 	}
 
@@ -89,20 +105,20 @@ public class MyInfoController {
 			throws Exception {
 		ModelAndView mav = new ModelAndView();
 
-		// 사진 타입인 경우만 업로드 진행
+		// �궗吏� ���엯�씤 寃쎌슦留� �뾽濡쒕뱶 吏꾪뻾
 		String ct = file.getContentType();
 		if (ct.startsWith("image")) {
-			// 파일 업로드
+			// �뙆�씪 �뾽濡쒕뱶
 			Map map = fdao.execute(file);
 
-			// DB 업로드
+			// DB �뾽濡쒕뱶
 //			String email = (String) session.getAttribute("eamil");
 			String email = req.getParameter("email");
 			String url = (String) map.get("filelink");
 			
 			boolean res = fdao.insert(email, url);
 			if (!res)
-				mav.addObject("msg", "사진 업로드 실패");
+				mav.addObject("msg", "�궗吏� �뾽濡쒕뱶 �떎�뙣");
 		} else {
 			mav.addObject("msg", "Not Image File");
 		}
