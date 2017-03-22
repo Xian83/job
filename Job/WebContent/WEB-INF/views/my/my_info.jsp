@@ -29,13 +29,13 @@
 					<p>
 						<label for="comment"><b>New Password</b></label><br /> <input
 							type="password" name="pass" id="pw1" class="form-control"
-							placeholder="비밀번호 입력" required>
+							placeholder="비밀번호 입력" >
 					</p>
 					<p>
 						<label for="comment"><b>Password Confirm</b> <span
 							id="cmpResult" style="color: red"></span></label><br /> <input
 							type="password" name="passcheck" id="pw2" class="form-control"
-							placeholder="비밀번호 재입력" required>
+							placeholder="비밀번호 재입력" >
 				
 					</p>
 					 </c:if> 
@@ -92,7 +92,7 @@
 		</p>
 			<p>
 				<button type="submit" class="btn" id="btn">변경</button>
-				<a href="/my/leave"><button type="button" class="btn"
+				<a href="/my/leave_form"><button type="button" class="btn"
 								style="font-size: 11pt; color: gray; background-color: pink;">탈퇴</button></a>
 			</p>
 		

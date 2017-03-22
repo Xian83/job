@@ -23,7 +23,7 @@
 	</select>
 
 	<select id="picUrl" parameterType="java.lang.String" resultType="java.util.HashMap">
-		select * from PICTURE where EMAIL=#{email} order by NUM desc
+		select * from (select * from PICTURE where EMAIL=#{email} order by NUM DESC) where rownum=1
 	</select>
 	<insert id="addPic" parameterType="java.util.HashMap">
 		insert into PICTURE values(pic_seq.nextval, #{email}, #{url})
@@ -34,4 +34,5 @@
 	<update id="updateBirth" parameterType="java.util.HashMap">
 		update MEMBER set BIRTH=#{birth} where EMAIL=#{email}
 	</update> 
+	
 </mapper>
