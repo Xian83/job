@@ -21,7 +21,7 @@ input[id=aaa] {
 <hr />
 
 
-<c:forEach var="i" begin="0" end="${csize }">
+<c:forEach var="i" begin="0" end="${csize-1 }">
 	<input type="checkbox" value="${clist[i] }" id="check_${i}" class="chk"> ${clist[i] }<br/>
 </c:forEach>
 
