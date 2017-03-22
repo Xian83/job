@@ -25,7 +25,7 @@
 					value="${infos.EMAIL}" disabled="true">
 			</p>
 			
-				 <c:if test="${infos.FACEBOOK eq N }">
+				 <c:if test="${infos.FACEBOOK eq 'N' }">
 					<p>
 						<label for="comment"><b>New Password</b></label><br /> <input
 							type="password" name="pass" id="pw1" class="form-control"

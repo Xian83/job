@@ -29,7 +29,7 @@
 		insert into PICTURE values(pic_seq.nextval, #{email}, #{url})
 	</insert>
 	<update id="updatePass" parameterType="java.util.HashMap">
-		update MEMBER set BIRTH=#{birth}, PASS=#{pass} where EMAIL=#{email}
+		update MEMBER set PASS=#{pass} where EMAIL=#{email}
 	</update>
 	<update id="updateBirth" parameterType="java.util.HashMap">
 		update MEMBER set BIRTH=#{birth} where EMAIL=#{email}

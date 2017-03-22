@@ -81,13 +81,16 @@ public class MyInfoController {
 
 		String email = (String) session.getAttribute("email");
 		data.put("email", email);
-		int rst = mydao.update(data);		
-	
+		int rst = mydao.update(data);	
+		String pass1 = (String) session.getAttribute("pass");
 		String pass = (String) data.get("passcheck");
+		System.out.println("pass1 = " + pass1 + "/ pass = " + pass);
+		if(pass1 != pass) {
 		Map m = new HashMap<>();
 			m.put("pass", pass);
 			m.put("email", email);
 		int rst2 = mydao.updatePass(m);
+		}
 		
 		String birth = (String) data.get("birth");
 		Map b = new HashMap<>();

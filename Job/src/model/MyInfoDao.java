@@ -21,7 +21,7 @@ public class MyInfoDao {
 //		int p = 0;
 //		SqlSession sql = null;
 //		try {
-//			System.out.println("insertPic �غ�");
+//			System.out.println("insertPic 占쌔븝옙");
 //			sql = factory.openSession();
 //			p = sql.insert("mappers.member.addPic", map);
 //
@@ -38,13 +38,13 @@ public class MyInfoDao {
 //		}
 //	}
 
-	// ȸ�� ���� ���� - ���� �ҷ����� 1
+	// 회占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙 - 占쏙옙占쏙옙 占쌀뤄옙占쏙옙占쏙옙 1
 	public List getlocations() {
 		List data = new ArrayList();
 
 		SqlSession sql = null;
 		try {
-			System.out.println("getlocations �غ�");
+			System.out.println("getlocations 占쌔븝옙");
 			sql = factory.openSession();
 			data = sql.selectList("mappers.my.location");
 		} catch (Exception e) {
@@ -56,13 +56,13 @@ public class MyInfoDao {
 		return data;
 	}
 
-	// ȸ�� ���� ���� - ���� �ҷ����� 2
+	// 회占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙 - 占쏙옙占쏙옙 占쌀뤄옙占쏙옙占쏙옙 2
 	public List getIndustries() {
 		List data = new ArrayList();
 
 		SqlSession sql = null;
 		try {
-			System.out.println("getIndustries �غ�");
+			System.out.println("getIndustries 占쌔븝옙");
 			sql = factory.openSession();
 			data = sql.selectList("mappers.my.industry");
 			System.out.println("DAO industry =" + data);
@@ -75,13 +75,13 @@ public class MyInfoDao {
 		return data;
 	}
 
-	// ȸ�� ���� ���� - ���� �ҷ����� 3
+	// 회占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙 - 占쏙옙占쏙옙 占쌀뤄옙占쏙옙占쏙옙 3
 	public Map getdata(String email) {
 		Map data = new HashMap<>();
 
 		SqlSession sql = null;
 		try {
-			System.out.println("getIndustries �غ�");
+			System.out.println("getIndustries 占쌔븝옙");
 			sql = factory.openSession();
 			data = sql.selectOne("mappers.my.data", email);
 			System.out.println(data);
@@ -94,7 +94,7 @@ public class MyInfoDao {
 		return data;
 	}
 
-	// ���� ���� ������Ʈ
+	// 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙트
 	public int update(Map data) {
 		int r = 0;
 
@@ -114,7 +114,7 @@ public class MyInfoDao {
 		return r;
 	}
 
-	// �������� ����� ���� �ҷ����� 
+	// 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙 占쌀뤄옙占쏙옙占쏙옙 
 	public String getLastetImageURL(String email){
 		List<HashMap> data = new ArrayList<>();
 		SqlSession sql = null;
@@ -177,14 +177,3 @@ public class MyInfoDao {
 		return r;
 	}
 }
-/*
- * // ȸ�� ���� ����2(���� �����ؼ� ����) public int update(String name, int age,
- * String gender, String email,String id) { int rs =0; try {
- * 
- * String sql = String.
- * format("update member set name='%s', age=%d, gender='%s', email='%s' where id='%s'"
- * , name,age,gender,email,id); //PreparedStatement ps =
- * conn.prepareStatement(sql); //rs = ps.executeUpdate();
- * 
- * }catch(Exception e) { e.printStackTrace(); } return rs; }
- */
