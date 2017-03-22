@@ -1,11 +1,13 @@
 package controller;
 
 import java.io.BufferedReader;
-import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,7 +19,6 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import model.CareerCatchDao;
 
@@ -27,14 +28,15 @@ public class CareerCatchController {
 	@Autowired
 	CareerCatchDao cdao;
 
-	@RequestMapping("/test")
+	@RequestMapping("/test01")
 	public void getDataHandler() {
 		try {
 			List li = new ArrayList();
 			List image = new ArrayList<>();
 			List division = new ArrayList<>();
 			for (int p = 1; p <= 2328; p++) { // 50page
-				InputStream is = new URL("http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?CurrentPage="+p+"&intCurrentPage=2&UserSetting=&PublicCode=&intPageSize=20&IPO=&AreaSido=&ThemeName=&ReportGubun=&State=&StableJum=0&ApplyYN=&SubName=&GangsoType=&GrowJum=0&CName=&Sort=a.TotJum%20desc&JCode=&Size=&JScore=&GroupCode=&flag=Search&IsStock=&TypeJum=0&PageState=2")
+				InputStream is = new URL("http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?CurrentPage=" + p
+						+ "&intCurrentPage=2&UserSetting=&PublicCode=&intPageSize=20&IPO=&AreaSido=&ThemeName=&ReportGubun=&State=&StableJum=0&ApplyYN=&SubName=&GangsoType=&GrowJum=0&CName=&Sort=a.TotJum%20desc&JCode=&Size=&JScore=&GroupCode=&flag=Search&IsStock=&TypeJum=0&PageState=2")
 								.openStream();
 				BufferedReader br = new BufferedReader(new InputStreamReader(is));
 				// for (int i = 0; i <= 240; i++) {
@@ -71,7 +73,7 @@ public class CareerCatchController {
 
 					}
 				}
-				
+
 				Document doc2 = Jsoup.parse(sb.toString());
 				Elements elm2 = doc.select("p.txt span");
 				for (Element m : elm2) {
@@ -83,12 +85,56 @@ public class CareerCatchController {
 					}
 				}
 			}
-//			 System.out.println("image size = "+ image.size());
-//			 System.out.println("division size = "+ division.size());
-		cdao.addCareer(image, li, division);
+			// System.out.println("image size = "+ image.size());
+			// System.out.println("division size = "+ division.size());
+			cdao.addCareer(image, li, division);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	// 동종 산업 최상위 순위
+	@RequestMapping("/test")
+	public void getData2Handler() {
+		List<HashMap> li = new ArrayList<>();
 
+		// DB에 이미 있다고 가정하고 작업 진행
+		// step 1 : get url by company name
+		String url = "http://www.careercatch.co.kr/Comp/Controls/ifrmCompInfo.aspx?CompID=695091";
+
+		try {
+			Document doc = Jsoup.connect(url).get();
+			for (int i = 0; i < 8; i++) {
+				HashMap<String, Object> map = new HashMap<>();
+				DecimalFormat df = new DecimalFormat("00");
+
+				// get rank, company name, company score(재무평가, 재직자평판)
+				Elements e = doc.select("#rptList2_ctl" + df.format(i) + "_tr td:not(.bdr1, .al1 nowrap)");
+				// 5 (주)잇츠스킨 91.47
+//				System.out.println(e.text());
+				
+				// score String split
+				String[] ar = e.text().trim().split("\\s+");
+//				System.out.println(ar[0]);
+//				System.out.println(ar[1]);
+//				System.out.println(ar[2]);
+										
+				// input data into HashMap
+				map.put("rank", Integer.parseInt(ar[0]));
+				map.put("cmpn", ar[1]);
+				map.put("score", Double.parseDouble(ar[2]));
+				
+				li.add(map);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		for (HashMap data : li) {
+			System.out.println(data.get("rank"));
+			System.out.println(data.get("cmpn"));
+			System.out.println(data.get("score"));
+		}
 	}
 }
