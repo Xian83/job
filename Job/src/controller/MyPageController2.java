@@ -105,4 +105,13 @@ public class MyPageController2 {
 		mav.addObject("list", list);
 		return mav;
 	}
+	
+	@RequestMapping("/applyInfo")
+	public ModelAndView applyHandler() {
+	
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("t1");
+		mav.addObject("main", "/my/applyInfo");
+		return mav;
+	}
 }

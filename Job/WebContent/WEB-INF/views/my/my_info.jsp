@@ -13,18 +13,19 @@
 			<img src="${url}" width="200" height="200" />
 			<hr />
 			<input type="file" class="form-control" name="pic" /> <br />
+			<input type="hidden" name="email" value="${sessionScope.email}" />
 			<button type="submit" class="btn">사진변경</button>
 		</form>
 	</div>
 	<div class="col-md-9">
-		<form action="/my/result" method="post">
+		<form action="/my/result" method="get">
 			<p>
 				<label for="comment"><b>Email</b> <span id="checkEmail"></span></label><br />
 				<input type="email" id="email" name="email" class="form-control"
 					value="${infos.EMAIL}" disabled="true">
 			</p>
-			<c:choose>
-				<c:when test="${infos.FACEBOOK eq N }">
+			
+				 <c:if test="${infos.FACEBOOK eq 'N' }">
 					<p>
 						<label for="comment"><b>New Password</b></label><br /> <input
 							type="password" name="pass" id="pw1" class="form-control"
@@ -35,9 +36,9 @@
 							id="cmpResult" style="color: red"></span></label><br /> <input
 							type="password" name="passcheck" id="pw2" class="form-control"
 							placeholder="비밀번호 재입력" required>
+				
 					</p>
-				</c:when>
-				<c:otherwise>
+					 </c:if> 
 					<p>
 						<b>NAME</b><br /> <input class="form-control" name="name"
 							value="${infos.NAME}" />
@@ -90,27 +91,50 @@
 				</select>
 		</p>
 			<p>
-				<button type="submit" class="btn">변경</button>
+				<button type="submit" class="btn" id="btn">변경</button>
 				<a href="/my/leave"><button type="button" class="btn"
 								style="font-size: 11pt; color: gray; background-color: pink;">탈퇴</button></a>
 			</p>
-			</c:otherwise>
-			</c:choose>
+		
 		</form>
 	</div>
 </div>
 
 <script>
+
+	//버튼 활성화
+	var flag1 = false;
+	var flag2 = false;
+
+	
+	function sbtChange() {
+		if(flag1 && flag2 ) {
+			document.getElementById("btn").disabled = false;
+		}else {
+			document.getElementById("btn").disabled = false;
+		}
+	}
+	
+	document.getElementById("pw1").onkeyup = function(){
+		compare();
+		sbtChange();
+	}
+	document.getElementById("pw2").onkeyup = function(){
+		compare();
+		sbtChange();
+	}
+	
+	
 	// 비밀번호 체크
-	function compare() {
+	function compare(){
 		var pw1 = document.getElementById("pw1").value;
 		var pw2 = document.getElementById("pw2").value;
-
-		if (pw2.length == 0) {
+		
+		if(pw2.length == 0 ){
 			document.getElementById("cmpResult").innerHTML = "";
-		} else if (pw1 == pw2 && pw2.length > 0) {
+		} else if(pw1 == pw2 && pw2.length > 0){
 			document.getElementById("cmpResult").style.color = 'green';
-			document.getElementById("cmpResult").innerHTML = " 비밀번호 일치";
+			document.getElementById("cmpResult").innerHTML = " 비밀번호 일치";	
 			flag2 = true;
 		} else {
 			document.getElementById("cmpResult").style.color = 'red';
@@ -118,12 +142,8 @@
 			flag2 = false;
 		}
 		sbtChange();
-	}
+	}	
+	
 
-	// 이메일 체크	
-	$("#checkEmail").on('invalid', function(e) {
-		result.innerHTML = "사용 할 수 없는 이메일";
-		result.style.color = 'red';
-		flag1 = false;
-	});
+	
 </script>
