@@ -8,8 +8,8 @@
 	
 			<c:forEach var="i" begin="0" end="${size-1 }">
 				<div class="media" style="background: #FFE4E1; border-style: solid; border-color: #C1CDC1  ">
-					<div class="media-left">
-						<img src="/img.jpg" class="media-object img-circle" style="width:140px; ">
+					<div class="media-left media-middle" align="center">
+						<img src="/img.jpg" class="media-object img-circle" style="width:120px; ">
 						<p align="center">${review[i].EMAIL }</p>
 					</div>
 					<div class="media-body">
