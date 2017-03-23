@@ -41,7 +41,7 @@ public class SearchController {
 
 		return mav;
 	}
-	
+
 	// default Search Paging 처리
 	public ModelAndView paging(List list, ModelAndView mav, HttpServletRequest request, String CName) {
 
@@ -69,8 +69,8 @@ public class SearchController {
 	public HashMap detailSearchHandler(@RequestParam Map map, HttpServletRequest request) {
 		// 테스트용 데이터 세팅
 		map.put("search", "삼성");
-		// map.put("AreaSido", new String[]{"부산", "서울"});
-		// map.put("JCode", new String[]{"J1", "J2"});
+		map.put("AreaSido", new String[] { "부산", "서울" });
+		map.put("JCode", new String[] { "J1", "J2" });
 		// map.put("Size", new String[]{"0", "1"});
 
 		List list = null;

@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,65 +13,103 @@ import org.springframework.stereotype.Service;
 @Service
 public class RankDao {
 
-	
 	@Autowired
 	SqlSessionFactory factory;
-	
-	
-	// �뵒�뤃�듃 �룊洹좎뿰遊� �궡由쇱감�닚
-	public List avgsalary() {
+
+	// AvgSalary Top 50
+	public List<HashMap> avgsalary(int count) {
 		SqlSession sql = null;
-		List list = new ArrayList();
+		List<HashMap> list = new ArrayList<>();
 		try {
 			sql = factory.openSession();
-			list = sql.selectList("mappers.rank.avgsalary");
-			//System.out.println(list);
+			list = sql.selectList("mappers.rank.avg", count);
+			// System.out.println(list);
 		} catch (Exception e) {
-			e.printStackTrace();			
-		} finally{
-			sql.close();
-		}	
-		return list;
-	}
-	
-	
-	
-	// �떊�엯�뿰遊�
-	public List rookeysalary() {
-		SqlSession sql = null;
-		List list = new ArrayList();
-		try {
-			sql = factory.openSession();
-			list = sql.selectList("mappers.rank.rookeysalary");
-			
-		} catch (Exception e) {
-			e.printStackTrace();			
-		} finally{
-			sql.close();
-		}	
-		return list;
-	}
-	
-	// �룊洹좎뿰遊� 濡쒓퀬源뚯�
-	public List search(List<Map> list) {
-		SqlSession sql = null;
-		List list2 = new ArrayList();
-		try {
-			sql = factory.openSession();
-			
-			for(int i=0; i<list.size(); i++) {
-				String s =  (String)list.get(i).get("CMPN_NM");
-				Map map = sql.selectOne("mappers.rank.search", s);
-				list2.add(map);
-			}
-			//System.out.println(list2.toString());
-		}catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
+			sql.close();
+		}
+		return list;
+	}
+
+	// RookieSalary Top 50
+	public List<HashMap> rookiesalary(int count) {
+		SqlSession sql = null;
+		List<HashMap> list = new ArrayList<>();
+		try {
+			sql = factory.openSession();
+			list = sql.selectList("mappers.rank.rookie", count);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sql.close();
+		}
+		return list;
+	}
+
+	// Finance Score Top 50
+	public List<HashMap> financeScore(int count) {
+		SqlSession sql = null;
+		List<HashMap> list = new ArrayList<>();
+		try {
+			sql = factory.openSession();
+			list = sql.selectList("mappers.rank.finance", count);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sql.close();
+		}
+		return list;
+	}
+
+	// Finance Score Top 50
+	public List<HashMap> employeeScore(int count) {
+		SqlSession sql = null;
+		List<HashMap> list = new ArrayList<>();
+		try {
+			sql = factory.openSession();
+			list = sql.selectList("mappers.rank.employee", count);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sql.close();
+		}
+		return list;
+	}
+
+	// Scrap count Top 3
+	public List<HashMap> scrapCount(int count) {
+		SqlSession sql = null;
+		List<HashMap> list = new ArrayList<>();
+		try {
+			sql = factory.openSession();
+			list = sql.selectList("mappers.rank.scrap", count);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sql.close();
+		}
+		return list;
+	}
+
+	public List getCompanyInfo(List list) {
+		
+		SqlSession sql = null;
+		List list2 = null;
+		
+		try {
+			sql = factory.openSession();
+			list2 = sql.selectList("mappers.rank.getInfo", list);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			sql.close();
 		}
 		return list2;
 	}
-	
-	
 }
