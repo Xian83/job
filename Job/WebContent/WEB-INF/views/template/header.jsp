@@ -31,7 +31,7 @@
 </style>
 </head>
 <body>
-	<div align="center" class="jumbotron" style="padding-top: 20px;">
+	<div align="center" class="jumbotron" style="padding-top: 150px;">
 		<h2>이력서 쓰기전에, 면접가기 전에</h2><br/>
 		<form action="/search/company">
 			<input type="text" name="search" id="search" placeholder="궁금한 기업명 입력" />

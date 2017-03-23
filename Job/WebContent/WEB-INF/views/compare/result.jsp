@@ -19,7 +19,7 @@ input[id=aaa] {
 	<b>${cm1.CMPN_NM }</b><br/> 
 	<img src="${cm1.LOGO }" class="img-circle" alt="Cinque Terre"
 						width="200" height="200"><br/>
-	${cm1.DIVISION }<br/> t + "#";
+	${cm1.DIVISION }<br/>
 	재무평가 : ${cm1.FINANCE_SCORE }<br/> 
 	재직자 평가 : ${cm1.SLAVE_SCORE }<br/> 
 </c:forEach>
