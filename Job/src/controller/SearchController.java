@@ -30,7 +30,7 @@ public class SearchController {
 		mav.addObject("main", "search/list_form");
 		
 		List list = sdao.search1(search);
-		System.out.println(list);
+//		System.out.println(list);
 		mav.addObject("list", list);
 		mav.addObject("listSize", list.size());
 		int cnt = list.size();
@@ -42,7 +42,7 @@ public class SearchController {
 	
 		String pStr = request.getParameter("page") == null ? "1" : request.getParameter("page");
 		mav.addObject("page", pStr);
-		System.out.println(pStr);
+//		System.out.println(pStr);
 
 		int start = (Integer.parseInt(pStr) - 1) * 20 + 1;
 		int end = Integer.parseInt(pStr) * 20;
