@@ -3,6 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<i class="fa fa-bar-chart" style="font-size:36px">
+
 <style>
 
 
@@ -159,7 +162,7 @@ body {
 <br/>
 
 <div align="right">
-<button type="button" class="btn btn-default btn btn-sm" >재무평가순 &#xf080;</button>
+<button type="button" class="btn btn-default btn btn-sm" >재무평가순 </button>
 <button type="button" class="btn btn-default btn btn-sm" >가나다순</button>
 <br/>
 </div>
