@@ -53,7 +53,7 @@
 					<li><a href="/search/company">Search</a></li>
 					<li class="dropdown"><a class="dropdown-toggle" 
 						data-toggle="dropdown" href="#">Company<span class="caret"></span></a>
-						<ul class="dropdown-menu" style="background: #f4511e; width: 0px; ">
+						<ul class="dropdown-menu" style="background: #f4511e;  min-width: 1px ">
 							<li><a href="/compare/form">Compare</a></li>
 							<li><a href="/review/list_form">Review</a></li>
 							<li><a href="/rank/form">Rank</a></li>

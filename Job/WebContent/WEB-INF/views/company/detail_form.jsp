@@ -12,17 +12,17 @@ input[id=aaa] {
 	<div class="row content">
 		<div class="col-md-8">
 
-			<h4 align="center">${salary[0].CMPN_NM }</h4>
+			
 			<div class="row content">
 				<div class="col-sm-3 sidenav">
-					<img src="${score[0].LOGO }" class="img-circle" alt="Cinque Terre"
+					<img src="${score[0].LOGO }" class="img-circle" alt="LOGO"
 						width="200" height="200">
 				</div>
 				<div class="col-sm-9 sidenav">
-					<table class="table table-bordered" align="center">
+					<table class="table table-bordered" align="center" style="text-align: center;">
 						<thead>
 							<tr>
-								<th colspan="2">${salary[0].CMPN_NM }</th>
+								<th colspan="2" style="text-align: center;">${score[0].CMPN_NM }</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -54,12 +54,12 @@ input[id=aaa] {
 		</div>
 		<div class="col-md-4">
 
-			<h2>I Love Money</h2>
-			<table class="table table-bordered">
+			
+			<table class="table table-bordered" style="text-align: center;">
 				<thead>
 					<tr>
-						<th>평균연봉</th>
-						<th>신입평균연봉</th>
+						<th style="text-align: center;">평균연봉</th>
+						<th style="text-align: center;">신입평균연봉</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -93,7 +93,7 @@ input[id=aaa] {
 			</div>
 		</div>
 	</div>
-
+<hr/>
 	<div class="row content" align="center">
 		<p style="font-size: 20; line-height: 1.5; color: blue;">동종업계 인기
 			많은기업</p>
@@ -108,7 +108,7 @@ input[id=aaa] {
 			</div>
 		</c:forEach>
 	</div>
-
+<hr/>
 	<div class="row content">
 
 
@@ -226,18 +226,18 @@ input[id=aaa] {
 			<p style="font-size: 20; line-height: 1.5; color: blue;">동종산업 기업
 				순위</p>
 			<hr />
-			<table class="table table-bordered" align="center">
+			<table class="table table-bordered" style="text-align: center; ">
 				<thead>
-					<tr align="center">
-						<th colspan="1">구분</th>
-						<th colspan="1">순위</th>
-						<th colspan="2">기업명</th>
-						<th colspan="1">점수</th>
+					<tr align="center" style="text-align: center;">
+						<th colspan="1" style="text-align: center;">구분</th>
+						<th colspan="1" style="text-align: center;">순위</th>
+						<th colspan="2" style="text-align: center;">기업명</th>
+						<th colspan="1" style="text-align: center;">점수</th>
 					</tr>
 				</thead>
 				<tbody>		
 				<tr>
-						<td colspan="1" rowspan="8" align="center">동종산업 최상위</td>	
+						<td colspan="1" rowspan="8" style="vertical-align: middle;">동종산업 최상위</td>	
 						<tr>		
 						<c:forEach begin="1" end="7">
 							<td>1</td>
@@ -247,6 +247,32 @@ input[id=aaa] {
 						</c:forEach>
 					</tr>
 			</table>
+		</div>
+		<div class="col-md-6">
+		<p style="font-size: 20; line-height: 1.5; color: blue;">여기에 뭘넣을까</p>
+		<hr/>
+		<table class="table table-bordered" style="text-align: center; ">
+				<thead>
+					<tr align="center" style="text-align: center;">
+						<th colspan="1" style="text-align: center;">구분</th>
+						<th colspan="1" style="text-align: center;">순위</th>
+						<th colspan="2" style="text-align: center;">기업명</th>
+						<th colspan="1" style="text-align: center;">연봉</th>
+					</tr>
+				</thead>
+				<tbody>		
+				<tr>
+						<td colspan="1" rowspan="8" style="vertical-align: middle;">동종산업 연봉 순위</td>	
+						<tr>		
+						<c:forEach begin="1" end="7">
+							<td>1</td>
+							<td colspan="2">현대</td>
+							<td>9만9천원</td>
+						</tr>
+						</c:forEach>
+					</tr>
+			</table>
+		<hr/>
 		</div>
 	</div>
 
