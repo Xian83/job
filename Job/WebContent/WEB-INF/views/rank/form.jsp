@@ -33,33 +33,33 @@
 		        
 		        <td>
 		        <c:choose>
-	            	<c:when test="${list2[i] eq null }">
+	            	<c:when test="${list[i] eq null }">
 						<img src="/picture/logo.jpg" width="50px;" height="40px;">	            		
 	            	</c:when>
 	            	<c:otherwise>
-		            	<a href="/company/detail?cmpn_nm=${list2[i].CMPN_NM }"><img src="${list2[i].LOGO }" width="50px;" height="40px;" /></a> 
+		            	<a href="/company/detail?cmpn_nm=${list[i].CMPN_NM }"><img src="${list[i].LOGO }" width="50px;" height="40px;" /></a> 
 	            	</c:otherwise>
 	            </c:choose>
 	            </td>
 		        
 		        <td>
 		        <c:choose>
-	            	<c:when test="${list2[i] eq null }">
+	            	<c:when test="${list[i] eq null }">
 						회사명 없음	 
 			  	</c:when>
 	            	<c:otherwise>
-            			<a href="/company/detail?cmpn_nm=${list2[i].CMPN_NM }"><b>${list2[i].CMPN_NM }<b/></a> 
+            			<a href="/company/detail?cmpn_nm=${list[i].CMPN_NM }"><b>${list[i].CMPN_NM }<b/></a> 
             	    </c:otherwise>
 	            </c:choose>
 	            </td>
 	            
 		        <td>
 		        <c:choose>
-	            	<c:when test="${list2[i] eq null }">
+	            	<c:when test="${list[i] eq null }">
 						0	 
 			  	</c:when>
 	            	<c:otherwise>
-            			<b>${list1[i].AVG_SALARY }<b/>
+            			<b>${list[i].AVG_SALARY }<b/>
             	    </c:otherwise>
 	            </c:choose>
 	            </td>
