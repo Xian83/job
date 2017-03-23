@@ -3,15 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mappers.search">
-   <select id="search" parameterType="java.lang.String" resultType="java.util.HashMap">
-      select * from score where CMPN_NM like #{search} 
-   </select>
-   <select id="pasing"  parameterType="java.util.HashMap"  resultType="java.util.HashMap">
+	<select id="search" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from score where CMPN_NM like #{search}
+	</select>
+	<select id="pasing" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
    <![CDATA[
       select * from (
               select rownum RNUM, sc.* from (
                   select * from score where CMPN_NM like #{search} order by SLAVE_SCORE desc) sc)where RNUM>=${start} and RNUM<=${end}
                   ]]>
-   </select>
-   
+	</select>
+
+	<select id="pasinglist" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		SELECT * FROM SCORE WHERE CMPN_NM in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
 </mapper>
