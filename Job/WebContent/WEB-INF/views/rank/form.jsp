@@ -2,26 +2,28 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
     
+   
 
-<div class="container">
+<div class="container" >
 
-  <ul class="nav nav-tabs">
+  <ul class="nav nav-tabs" style="width: 100%;">
     <li class="active"><a data-toggle="tab" href="/rank/form">평균연봉순</a></li>
     <li><a data-toggle="tab" href="/rank/rookeysalary">신입연봉순</a></li>
     <li><a data-toggle="tab" href="/rank/form">재무평가점수순</a></li>
     <li><a data-toggle="tab" href="/rank/form">재직자평가순</a></li>
   </ul>
 <br/>
-  <div class="tab-content">
+  <div class="tab-content" style="width: 100%;">
     <div id="home" class="tab-pane fade in active">
     	<div class="table-responsive">          
-		  <table class="table" text-align="center">
+		  <table class="table" text-align="center" style="width: 100%;">
 		    <thead>
 		      <tr>
 		        <th>#</th>
 		        <th>로고</th>
 		        <th>회사명</th>
 		        <th>평균연봉</th>
+		        <th>비교그래프</th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -32,10 +34,10 @@
 		        <td>
 		        <c:choose>
 	            	<c:when test="${list2[i] eq null }">
-						<img src="/picture/logo.jpg" width="70" height="50">	            		
+						<img src="/picture/logo.jpg" width="50px;" height="40px;">	            		
 	            	</c:when>
 	            	<c:otherwise>
-		            	<a href="/company/detail?cmpn_nm=${list2[i].CMPN_NM }"><img src="${list2[i].LOGO }" width="100" height="70" /></a> 
+		            	<a href="/company/detail?cmpn_nm=${list2[i].CMPN_NM }"><img src="${list2[i].LOGO }" width="50px;" height="40px;" /></a> 
 	            	</c:otherwise>
 	            </c:choose>
 	            </td>
@@ -46,7 +48,7 @@
 						회사명 없음	 
 			  	</c:when>
 	            	<c:otherwise>
-            			<a href="/company/detail?cmpn_nm=${list2[i].CMPN_NM }"><h4><b>${list2[i].CMPN_NM }<b/></h4></a> 
+            			<a href="/company/detail?cmpn_nm=${list2[i].CMPN_NM }"><b>${list2[i].CMPN_NM }<b/></a> 
             	    </c:otherwise>
 	            </c:choose>
 	            </td>
@@ -57,11 +59,14 @@
 						0	 
 			  	</c:when>
 	            	<c:otherwise>
-            			<h4><b>${list1[i].AVG_SALARY }<b/></h4>
+            			<b>${list1[i].AVG_SALARY }<b/>
             	    </c:otherwise>
 	            </c:choose>
 	            </td>
 	            
+	            <td>
+	            	그래프자리
+	            </td>
 		      </tr>
 		    </c:forEach>
 		    </tbody>

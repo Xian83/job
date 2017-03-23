@@ -32,21 +32,30 @@
                <div class="item active">
                   <div class="container" align="center">
                      <div class="row" align="center">
-                      	<div class="col-md-1"></div>
+                      	
                         <div class="col-md-3" style="width: 200px;">
-                           <div class="thumbnail href1" style="width: 200px;"><img src="/picture/logo.jpg"></div>
+                           <div class="thumbnail href1" style="width: 200px;"><p>공백<br/><br/></p><p>logo </p><br/>
+                           <p>회사명 </p><br/> <p>평균연봉 </p><br/>
+                           </div>
                         </div>
+                       
+                     	<div class="col-md-1"></div>
                         <div class="col-md-3" style="width: 200px;">
-                           <div class="thumbnail href2" style="width: 200px;"><img src="/picture/logo.jpg"></div>
+                           <div class="thumbnail href2" style="width: 200px;"><p>공백<br/><br/></p><p>logo </p><br/>
+                           <p>회사명 </p><br/> <p>평균연봉 </p><br/>
+                           </div>
                         </div>
+                   		<div class="col-md-1"></div>
                         <div class="col-md-3" style="width: 200px;">
-                           <div class="thumbnail href3" style="width: 200px;"><img src="/picture/logo.jpg"></div>
+                           <div class="thumbnail href3" style="width: 200px;"><p>공백<br/><br/></p><p>logo </p><br/>
+                           <p>회사명 </p><br/> <p>평균연봉 </p><br/>
+                           </div>
                         </div>
-                        <div class="col-md-1"></div>
+                 
                      </div>
+	          		
                   </div>
  				</div>
-          
 
                 <div class="item">
                   <div class="container" align="center">
@@ -118,19 +127,19 @@
      </div>
      <div class="col-sm-2" style="width: 200px;" align="center">
         <button type="submit" width: 200px;><a href="/compare/form"><img src="/picture/logo.jpg" alt="compare" width="200px" height="220"></a></button>
-        <p><strong>상세검색</strong></p>
+        <p><strong>기업비교</strong></p>
      </div>
      <div class="col-sm-2" style="width: 200px;" align="center">
         <button type="submit" width: 200px;><a href="/rank/form"><img src="/picture/logo.jpg" alt="rank" width="200px" height="220"></a></button>
-        <p><strong>상세검색</strong></p>
+        <p><strong>기업순위</strong></p>
      </div>
         <div class="col-sm-2" style="width: 200px;" align="center">
         <button type="submit" width: 200px;><a href="/my/recommand"><img src="/picture/logo.jpg" alt="hit" width="200px" height="220"></a></button>
-        <p><strong>상세검색</strong></p>
+        <p><strong>추천기업</strong></p>
      </div>
      <div class="col-sm-2" style="width: 200px;" align="center">
         <button type="submit" width: 200px;><a href="/my/applyInfo"><img src="/picture/logo.jpg" alt="calendar" width="200px" height="220"></a></button>
-        <p><strong>상세검색</strong></p>
+        <p><strong>공채달력</strong></p>
      </div>
      
   </div>
