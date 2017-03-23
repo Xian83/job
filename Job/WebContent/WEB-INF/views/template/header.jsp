@@ -10,7 +10,7 @@
 }
 
 #search {
-	width: 300px;
+	width: 600px;
 	box-sizing: border-box;
 	border: 2px solid #ccc;
 	border-radius: 4px;
@@ -26,7 +26,7 @@
 }
 
 #search:focus {
-	width: 85%;
+	width: 80%;
 }
 </style>
 </head>

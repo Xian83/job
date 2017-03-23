@@ -7,23 +7,22 @@ input[id=aaa] {
 	width: 95%;
 	padding: 10px 5px;
 }
-
 </style>
 <div class="container-fluid">
 	<div class="row content">
 		<div class="col-md-8">
 
-			<h4 align="center">${salary[0].CMPN_NM }</h4>
+			
 			<div class="row content">
 				<div class="col-sm-3 sidenav">
-					<img src="${score[0].LOGO }" class="img-circle" alt="Cinque Terre"
+					<img src="${score[0].LOGO }" class="img-circle" alt="LOGO"
 						width="200" height="200">
 				</div>
 				<div class="col-sm-9 sidenav">
-					<table class="table table-bordered" align="center">
+					<table class="table table-bordered" align="center" style="text-align: center;">
 						<thead>
 							<tr>
-								<th colspan="2">${salary[0].CMPN_NM }</th>
+								<th colspan="2" style="text-align: center;">${score[0].CMPN_NM }</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -55,12 +54,12 @@ input[id=aaa] {
 		</div>
 		<div class="col-md-4">
 
-			<h2>I Love Money</h2>
-			<table class="table table-bordered">
+			
+			<table class="table table-bordered" style="text-align: center;">
 				<thead>
 					<tr>
-						<th>평균연봉</th>
-						<th>신입평균연봉</th>
+						<th style="text-align: center;">평균연봉</th>
+						<th style="text-align: center;">신입평균연봉</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -74,12 +73,13 @@ input[id=aaa] {
 				<form action="/company/interest">
 					<input type="hidden" name="cmpn_nm" value="${salary[0].CMPN_NM }">
 					<c:choose>
-						<c:when test="${sessionScope.auth eq 'no' }">
+						<c:when
+							test="${sessionScope.auth eq 'no' or sessionScope.auth eq null }">
 							<button class="btn btn-primary disabled">관심목록추가</button>
 						</c:when>
 						<c:otherwise>
 							<c:choose>
-							<c:when test="${scrape eq 0 }">
+								<c:when test="${scrape eq 0 }">
 									<button class="btn btn-primary ">관심목록추가</button>
 								</c:when>
 								<c:otherwise>
@@ -88,14 +88,15 @@ input[id=aaa] {
 							</c:choose>
 						</c:otherwise>
 					</c:choose>
-					
+
 				</form>
 			</div>
 		</div>
 	</div>
-
+<hr/>
 	<div class="row content" align="center">
-		<p>동종업계 인기 많은 기업</p>
+		<p style="font-size: 20; line-height: 1.5; color: blue;">동종업계 인기
+			많은기업</p>
 		<c:forEach var="i" begin="0" end="5">
 			<div class="col-md-2">
 				<a href="/company/detail?cmpn_nm=${same[i].CMPN_NM }"> <img
@@ -107,7 +108,7 @@ input[id=aaa] {
 			</div>
 		</c:forEach>
 	</div>
-
+<hr/>
 	<div class="row content">
 
 
@@ -122,58 +123,165 @@ input[id=aaa] {
 			<input type="hidden" name="cmpn_nm" value="${salary[0].CMPN_NM }">
 			<input type="text" id="aaa" name="content" placeholder="contents">
 			<c:choose>
-			<c:when test="${sessionScope.auth eq 'no' }">
-				<button type="submit" class="btn btn-success disabled">올리기</button>
-			</c:when>
-			<c:otherwise> 
-				<button type="submit" class="btn btn-success">올리기</button>
-			</c:otherwise>
+				<c:when
+					test="${sessionScope.auth eq 'no' or sessionScope.auth eq null }">
+					<button type="submit" class="btn btn-success disabled">올리기</button>
+				</c:when>
+				<c:otherwise>
+					<button type="submit" class="btn btn-success">올리기</button>
+				</c:otherwise>
 			</c:choose>
 		</form>
 	</div>
 
 	<div class="row content" align="center">
-		<script type="text/javascript"
-			src="https://www.gstatic.com/charts/loader.js"></script>
-		<script>
-			google.charts.load('current', {
-				packages : [ 'corechart' ]
-			});
-		</script>
+		<div class="col-md-6">
+			<script type="text/javascript"
+				src="https://www.gstatic.com/charts/loader.js"></script>
+			<script>
+				google.charts.load('current', {
+					packages : [ 'corechart' ]
+				});
+			</script>
 
-		<div id="chart_div"></div>
+			<div id="chart_div"></div>
 
 
 
-		<script type="text/javascript">
-			// 로딩 완료시 함수 실행하여 차트 생성
-			google.charts.setOnLoadCallback(drawChart);
+			<script type="text/javascript">
+				// 로딩 완료시 함수 실행하여 차트 생성
+				google.charts.setOnLoadCallback(drawChart);
 
-			var chart_options = {
-				title : '연봉비교',
-				width : 1000,
-				height : 400,
-				colors : [ 'red', 'blue', 'green', 'green', 'blue', 'navy',
-						'purple' ], // 항목 갯수에 맞게 컬러 설정
-				bar : {
-					groupWidth : '60%'
-				}, // 그래프 너비 %
-				isStacked : false
-			// 그래프 쌓기(스택), 기본값은 false
-			};
+				var chart_options = {
+					title : '연봉비교',
+					width : 1000,
+					height : 400,
+					colors : [ 'red', 'blue', 'green' ], // 항목 갯수에 맞게 컬러 설정
+					bar : {
+						groupWidth : '60%'
+					}, // 그래프 너비 %
+					isStacked : false
+				// 그래프 쌓기(스택), 기본값은 false
+				};
 
-			function drawChart() {
+				function drawChart() {
 
-				// 차트 데이터
-				var data = new google.visualization.arrayToDataTable([
-						[ '년대', '회사이름', '업계평균', '전체평균', ], [ '연봉', 2, 3, 4 ],
-						[ '신입연봉', 6, 4, 3 ], [ '매출', 5, 4, 3 ] ]);
+					// 차트 데이터
+					var data = new google.visualization.arrayToDataTable([
+							[ '년대', '회사이름', '업계평균', '전체평균', ],
+							[ '연봉', 2, 3, 4 ], [ '신입연봉', 6, 4, 3 ],
+							[ '매출', 5, 4, 3 ] ]);
 
-				var chart = new google.visualization.ColumnChart(document
-						.getElementById('chart_div'));
-				chart.draw(data, chart_options);
-			}
-		</script>
+					var chart = new google.visualization.ColumnChart(document
+							.getElementById('chart_div'));
+					chart.draw(data, chart_options);
+				}
+			</script>
+		</div>
+		<div class="col-md-6">
+			<script type="text/javascript">
+				google.charts.load("current", {
+					packages : [ "corechart" ]
+				});
+				google.charts.setOnLoadCallback(drawChart);
+				function drawChart() {
+					var data = google.visualization.arrayToDataTable([
+							[ "Element", "Density", {
+								role : "style"
+							} ], [ "매출액", 100, "#b87333" ],
+							[ "영업이익", 90, "silver" ], [ "당기손익", 75.5, "gold" ],
+
+					]);
+
+					var view = new google.visualization.DataView(data);
+					view.setColumns([ 0, 1, {
+						calc : "stringify",
+						sourceColumn : 1,
+						type : "string",
+						role : "annotation"
+					}, 2 ]);
+
+					var options = {
+						title : "회사 ㅇㅇ , 단위(만원)",
+						width : 600,
+						height : 400,
+						bar : {
+							groupWidth : "70%"
+						},
+						legend : {
+							position : "none"
+						},
+					};
+					var chart = new google.visualization.BarChart(document
+							.getElementById("barchart_values"));
+					chart.draw(view, options);
+				}
+			</script>
+			<div id="barchart_values" style="width: 900px; height: 300px;"></div>
+		</div>
+	</div>
+
+	<div class="row content">
+		<div class="col-md-6">
+			<p style="font-size: 20; line-height: 1.5; color: blue;">동종산업 기업
+				순위</p>
+			<hr />
+			<table class="table table-bordered" style="text-align: center; ">
+				<thead>
+					<tr align="center" style="text-align: center;">
+						<th colspan="1" style="text-align: center;">구분</th>
+						<th colspan="1" style="text-align: center;">순위</th>
+						<th colspan="2" style="text-align: center;">기업명</th>
+						<th colspan="1" style="text-align: center;">점수</th>
+					</tr>
+				</thead>
+				<tbody>		
+				<tr>
+						<td colspan="1" rowspan="8" style="vertical-align: middle;">동종산업 최상위</td>	
+						<tr>		
+						<c:forEach begin="1" end="7">
+							<td>1</td>
+							<td colspan="2">삼성전자</td>
+							<td>89.9</td>
+						</tr>
+						</c:forEach>
+					</tr>
+			</table>
+		</div>
+		<div class="col-md-6">
+		<p style="font-size: 20; line-height: 1.5; color: blue;">여기에 뭘넣을까</p>
+		<hr/>
+		<table class="table table-bordered" style="text-align: center; ">
+				<thead>
+					<tr align="center" style="text-align: center;">
+						<th colspan="1" style="text-align: center;">구분</th>
+						<th colspan="1" style="text-align: center;">순위</th>
+						<th colspan="2" style="text-align: center;">기업명</th>
+						<th colspan="1" style="text-align: center;">연봉</th>
+					</tr>
+				</thead>
+				<tbody>		
+				<tr>
+						<td colspan="1" rowspan="8" style="vertical-align: middle;">동종산업 연봉 순위</td>	
+						<tr>		
+						<c:forEach begin="1" end="7">
+							<td>1</td>
+							<td colspan="2">현대</td>
+							<td>9만9천원</td>
+						</tr>
+						</c:forEach>
+					</tr>
+			</table>
+		<hr/>
+		</div>
+	</div>
+
+	<div class="row content">
+		<p style="font-size: 20; line-height: 1.5; color: blue;">근무환경 및
+			복리후생</p>
+		<hr />
+		회사위치 / <br /> 회사제도 /<br /> 사내문화 /<br />
+
 	</div>
 
 </div>

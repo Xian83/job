@@ -51,9 +51,9 @@
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right nav navbar-nav">
 					<li><a href="/search/company">Search</a></li>
-					<li class="dropdown"><a class="dropdown-toggle"
+					<li class="dropdown"><a class="dropdown-toggle" 
 						data-toggle="dropdown" href="#">Company<span class="caret"></span></a>
-						<ul class="dropdown-menu">
+						<ul class="dropdown-menu" style="background: #f4511e;  min-width: 1px ">
 							<li><a href="/compare/form">Compare</a></li>
 							<li><a href="/review/list_form">Review</a></li>
 							<li><a href="/rank/form">Rank</a></li>
