@@ -3,20 +3,53 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mappers.rank">
-	<select id="avgsalary"  resultType="java.util.HashMap">
+	<select id="avg" resultType="java.util.HashMap" parameterType="java.lang.Integer">
 		<![CDATA[
-    	select * from ( select rownum RNUM, sc.* from (select * from SALARY order by AVG_SALARY desc ) sc) 
-    	where RNUM>=0 and RNUM<=49 ]]>
+		select * from ( 
+			select s2.*, s1.AVG_SALARY,s1.ROOKIE_SALARY from salary s1, score s2 
+			where s1.CMPN_NM=s2.CMPN_NM order by s1.AVG_SALARY desc
+		) where rownum<=#{count}
+    	]]>
 	</select>
-	
-	<select id="rookeysalary" resultType="java.util.HashMap">
+
+	<select id="rookie" resultType="java.util.HashMap"
+		parameterType="java.lang.Integer">
 		<![CDATA[
-    	select * from ( select rownum RNUM, sc.* from (select * from SALARY order by ROOKEY_SALARY desc ) sc) 
-    	where RNUM>=0 and RNUM<=49 ]]>  
+    	select * from ( 
+			select s2.*, s1.AVG_SALARY,s1.ROOKIE_SALARY from salary s1, score s2 
+			where s1.CMPN_NM=s2.CMPN_NM order by s1.ROOKIE_SALARY desc
+		) where rownum<=#{count} 
+    	]]>
 	</select>
-	
-	<select id="search" parameterType="java.lang.String" resultType="java.util.HashMap">
-		select * from score where CMPN_NM = #{CMPN_NM} 
+	<select id="finance" resultType="java.util.HashMap"
+		parameterType="java.lang.Integer">
+		<![CDATA[
+    	  select * from ( 
+			select * from score  
+			order by score.FINANCE_SCORE desc
+		) where rownum <=#{count}
+    	]]>
 	</select>
-	
+	<select id="employee" resultType="java.util.HashMap"
+		parameterType="java.lang.Integer">
+		<![CDATA[
+    	select * from ( 
+			select * from score  
+			order by EMPLOYEE_SCORE desc
+		) where rownum <=#{count}
+    	]]>
+	</select>
+	<select id="scrap" resultType="java.util.HashMap" parameterType="java.lang.Integer">
+		<![CDATA[
+    	select * from (
+			select CMPN_NM, count(*) as cnt from SCRAP group by CMPN_NM order by cnt desc
+		) where rownum <=#{count}
+    	]]>
+	</select>
+	<select id="getInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT * FROM SCORE WHERE CMPN_NM in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item.CMPN_NM}
+		</foreach>
+	</select>
 </mapper>

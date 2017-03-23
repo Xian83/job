@@ -14,65 +14,58 @@ import model.RankDao;
 @Controller
 @RequestMapping("/rank")
 public class RankController {
-	
+
 	@Autowired
 	RankDao rdao;
-	
-	// ¼øÀ§ ±âº»ÆäÀÌÁö - Æò±Õ¿¬ºÀ
+
+	// rank page main
 	@RequestMapping("/form")
 	public ModelAndView InitHandler() {
+		List list = rdao.avgsalary(50);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
 		mav.addObject("main", "rank/form");
-		
-		List list = rdao.avgsalary();
-		List list2 = rdao.search(list);
-		mav.addObject("list1", list);
-		mav.addObject("list2", list2);
+		mav.addObject("list", list);
+				
 		return mav;
 	}
-	
-	
-	// ¼øÀ§ ½ÅÀÔ¿¬ºÀ
+
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½
 	@RequestMapping("/rookeysalary")
 	public ModelAndView InitHandler2() {
+		List list = rdao.rookiesalary(50);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
 		mav.addObject("main", "rank/rookeysalary");
+		mav.addObject("list", list);
 		
-		List list = rdao.rookeysalary();
-		List list2 = rdao.search(list);
-		mav.addObject("list1", list);
-		mav.addObject("list2", list2);
 		return mav;
 	}
-	
-	// ¼øÀ§ Àç¹«Æò°¡
+
+	// ì¬ë¬´í‰ê°€
 	@RequestMapping("/financescore")
 	public ModelAndView InitHandler3() {
+		List list = rdao.financeScore(50);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
 		mav.addObject("main", "rank/financescore");
-		
-		List list = rdao.rookeysalary();
-		List list2 = rdao.search(list);
-		mav.addObject("list1", list);
-		mav.addObject("list2", list2);
+		mav.addObject("list", list);
 		return mav;
 	}
-	
-	// ¼øÀ§ ÀçÁ÷ÀÚÆò°¡
-		@RequestMapping("/slavescore")
-		public ModelAndView InitHandler4() {
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName("t1");
-			mav.addObject("main", "rank/slavescore");
-			
-			List list = rdao.rookeysalary();
-			List list2 = rdao.search(list);
-			mav.addObject("list1", list);
-			mav.addObject("list2", list2);
-			return mav;
-		}
+
+	// ì¬ì§ì í‰ê°€ ì ìˆ˜
+	@RequestMapping("/slavescore")
+	public ModelAndView InitHandler4() {
+		List list = rdao.employeeScore(50);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("t1");
+		mav.addObject("main", "rank/slavescore");
+		mav.addObject("list", list);
+		return mav;
+	}
 
 }

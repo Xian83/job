@@ -24,18 +24,18 @@
             <div class="media">
             <div class="media-left media-middle">
 	            <c:choose>
-	            	<c:when test="${list2[i] eq null }">
+	            	<c:when test="${list[i] eq null }">
 						<img src="/picture/logo.jpg" width="100" height="70">	            		
 	            	</c:when>
 	            	<c:otherwise>
-		            	<a href="/company/detail?cmpn_nm=${list2[i].CMPN_NM }"><img src="${list2[i].LOGO }" width="100" height="70" /></a> 
+		            	<a href="/company/detail?cmpn_nm=${list[i].CMPN_NM }"><img src="${list[i].LOGO }" width="100" height="70" /></a> 
 	            	</c:otherwise>
 	            </c:choose>
          	</div>
             <div class="media-body">
             
                <c:choose>
-	            	<c:when test="${list2[i] eq null }">
+	            	<c:when test="${list[i] eq null }">
 						회사명 없음	 
 						<h5>산업군 내용없음</h5> 
 						<button type="button" class="btn btn-default">재무평가 0점</button>  
@@ -44,12 +44,12 @@
               			<button type="button" class="btn btn-default">신입연봉 0</button> </td>           		
 	            	</c:when>
 	            	<c:otherwise>
-            			<a href="/company/detail?cmpn_nm=${list2[i].CMPN_NM }"><h4><b>${list2[i].CMPN_NM }<b/></h4></a> 
-            			<h5>${list2[i].DIVISION } | ${list2[i].SCALE }</h5> 
-            			<button type="button" class="btn btn-default">재무평가 ${list2[i].FINANCE_SCORE }점</button>  
-             		    <button type="button" class="btn btn-default">재직자 평판 ${list2[i].FINANCE_SCORE }점</button>  
+            			<a href="/company/detail?cmpn_nm=${list[i].CMPN_NM }"><h4><b>${list[i].CMPN_NM }<b/></h4></a> 
+            			<h5>${list[i].DIVISION } | ${list[i].SCALE }</h5> 
+            			<button type="button" class="btn btn-default">재무평가 ${list[i].FINANCE_SCORE }점</button>  
+             		    <button type="button" class="btn btn-default">재직자 평판 ${list[i].EMPLOYEE_SCORE }점</button>  
               			<button type="button" class="btn btn-default">기업비교</button>
-              			<button type="button" class="btn btn-default">신입연봉 ${list1[i].ROOKEY_SALARY }</button> </td>
+              			<button type="button" class="btn btn-default">신입연봉 ${list[i].ROOKIE_SALARY }</button> </td>
 		            </c:otherwise>
 	            </c:choose>
             
