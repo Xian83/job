@@ -59,18 +59,23 @@ public class SearchDao {
 	}
 
 	// get Search Result by detail condition
-	public List getData(Map map) throws IOException {
-		List list = new ArrayList();
-		
+	public List getData(List list) throws IOException {
+		List list2 = new ArrayList();
+		/*
 		String name = (String) map.get("search");
-		String[] area = (String[]) map.get("AreaSido");
+		String[] area = list
 		String[] industry = (String[]) map.get("JCode");
-		String[] size = (String[]) map.get("Size");
-
+		String[] size = (String[]) map.get("Size");*/
+		
+		/*System.out.println("name" + name);
+		System.out.println("area" + area);
+		System.out.println("industry" + industry);
+		System.out.println("size" + size);*/
+		System.out.println("list = " + list);
 		String condition = "";
 		// Search Condition Setting
 		// company name condition add
-		if (name != null)
+		/*if (name != null)
 			condition += "&CName=" + name;
 
 		// area condition add
@@ -87,7 +92,7 @@ public class SearchDao {
 		if (size != null) {
 			for (int i = 0; i < size.length; i++)
 				condition += "&Size=" + size[i];
-		}
+		}*/
 
 		String url = "http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?flag=Search" 
 				+ condition + "&intCurrentPage=1&intPageSize=20";
@@ -128,7 +133,7 @@ public class SearchDao {
 			e.printStackTrace();
 		}
 
-		return list;
+		return list2;
 	}
 	
 	// detail search result paging

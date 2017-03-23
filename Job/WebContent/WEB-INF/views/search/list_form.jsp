@@ -1,14 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<i class="fa fa-bar-chart" style="font-size:36px"></i>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <style>
-
-
 .navbar-nav>li {
 	margin-left: 30;
 	font-size: 12;
@@ -38,6 +34,7 @@ body {
 </style>
  <div align="center">
 <div class="corp_src well" align="center">
+	<form action="/search/detail" method="get">
 		<div class="row" align="center">
 			<div class="col-md-4">
 				<dl>
@@ -150,13 +147,24 @@ body {
 		<div class="inp">
 			<input name="uc_Cond1$CompName" type="text"
 				id="uc_Cond1_CompName" value="기업명을 입력해 주세요" 
+				style="ime-mode: active; width:800; height:37"
+				onkeypress="if(event.keyCode==13){ EnterSearch();return false;}" />
+	<!-- <a href="javascript:void(0);">
+	<input name="uc_Cond1$CompName" type="text"
+				id="uc_Cond1_CompName" value="기업명을 입력해 주세요" 
 				onfocus="this.value=&#39;&#39;;" style="ime-mode: active; width:800; height:37"
 				onkeypress="if(event.keyCode==13){ EnterSearch();return false;}" />
-			<a href="javascript:void(0);"><img
+	<a href="javascript:void(0);"> -->
+	
+<!-- 	<img
 				src="http://image.jinhak.com/job/corp/btn_search.gif" alt="검색"
-				id="imgSearch" /></a>
+				id="imgSearch" /></a> 
+		<p> -->
+		<button type="submit" id="sc" class="btn">검색</button> 
+		</p>
 		</div>
 	</div>
+	</form>
 </div>
 </div>
 <br/>
@@ -166,7 +174,7 @@ body {
 <button type="button" class="btn btn-default btn btn-sm" >가나다순</button>
 <br/>
 </div>
-<!-- 목록 뷰 -->
+<%-- <!-- 목록 뷰 -->
 <div class="container">
 	<table class="table table-bordered">
 		<c:forEach var="obj" items="${list2 }" varStatus="vs">
@@ -197,10 +205,10 @@ body {
 			</c:if>
 		</c:forEach>
 	</table>
-</div>
+</div> --%>
 
 
-<!-- 페이지 뷰 -->
+<%-- <!-- 페이지 뷰 -->
 <div align="center">
 	<c:if test="${page ne 1 }">
 		<a href="/search/company?page=${page -1 }">이전</a>
@@ -223,7 +231,7 @@ body {
 	<br />
 </div>
 
-
+ --%>
 
 <!-- 상세 조건 검색 - 체크박스 이벤트 처리  -->
 <script type="text/javascript" charset="utf-8">
@@ -434,10 +442,31 @@ body {
 		var params = "&AreaSido=" + encodeURIComponent(Sido) //지역 시도
 				+ "&JCode=" + encodeURIComponent(JinhakCode) //산업(업종)
 				+ "&Size=" + encodeURIComponent(Size) //규모
-				+ "&CName=" + encodeURIComponent(CName) //기업명
+				+ "&search=" + encodeURIComponent(CName) //기업명
 		;
 
 		// alert("params : " + params);
 		$("#ifrmList")[0].src = "/Comp/Controls/ifrmCompList.aspx?" + params;
+		
+		// 내가 함 - 검색 버튼 누르면 파람값 넘기기 
+		$("#sc").onclick(function(){
+			$.ajax({
+				"url" : "/search/detail?"+params   // 일단 ajax로 파라미터 q를 넘김  => ajax에서 파라미터 받고, 보낼 값 형식 지정해야 함
+			}).done(function(a){								// 파라미터 값이 하나 있으니 아무 변수이름(상관x) 하나 지정해서 값 받음
+				$("#result").append("회사이름 : "+CMPN_NM+"<br/>");  
+				$("#result").append("로고 : "+LOGO+"<br/>");  
+				$("#result").append("재무평가 : "+FINANCE_SCORE+"<br/>");  
+				$("#result").append("재직자평판 : "+EMPLOYEE_SCORE+"<br/>"); 
+				$("#result").append("규모 : "+SCALE+"<br/>"); 
+				$("#result").append("분야 : "+DIVISION+"<br/>"); 
+			});
+		})
+		
 	}
+
 </script>
+
+
+<div id="result">
+
+</div>

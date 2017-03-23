@@ -1,13 +1,16 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.UsesSunHttpServer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,37 +60,45 @@ public class SearchController {
 		int end = Integer.parseInt(pStr) * 20;
 
 		// 페이지 분할
-		List<HashMap> list2 = sdao.pasing(start, end, CName);
+		/*List<HashMap> list2 = sdao.pasing(start, end, CName);
 		mav.addObject("list2", list2);
-
+*/
 		return mav;
 	}
 
 	// Detail Search Result Ajax
 	@RequestMapping("/detail")
 	@ResponseBody
-	public HashMap detailSearchHandler(@RequestParam Map map, HttpServletRequest request) {
-		// 테스트용 데이터 세팅
-		map.put("search", "삼성");
-		// map.put("AreaSido", new String[]{"부산", "서울"});
-		// map.put("JCode", new String[]{"J1", "J2"});
-		// map.put("Size", new String[]{"0", "1"});
-
-		List list = null;
-		HashMap data = new HashMap();
-
-		try {
-			list = sdao.getData(map);
-			data = paging(list, request, data);
+	public List detailSearchHandler(@RequestParam(name="chkSido") String[] AreaSido, 
+					@RequestParam(name="chkJinhakCode") String[] JCode, @RequestParam(name="chkSize") String[] Size, 
+						@RequestParam(name="search") String[] search ) {
+		
+		System.out.println("chkSido 잘 넘어 옴? " + AreaSido);
+		System.out.println("chkJinhakCode 잘 넘어 옴? " + JCode);
+		System.out.println("chkSize 잘 넘어 옴? " + Size);
+		System.out.println("search 잘 넘어 옴? " + search);
+		
+		
+		// 리스트로 보내면 뒷 처리가 난감해짐. 맵으로 보내서 받아서 쓰는 방법 생각해 볼 것!
+		List list = new ArrayList();
+		list.add(AreaSido);
+		list.add(JCode);
+		list.add(Size);
+		list.add(search);
+		// HashMap data = new HashMap();
+			
+	/*try {
+			list = sdao.getData(list);
+			//data = paging(list, request, data);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		// list2, page, size 만 넘겨주면 된다.
-		return data;
-	}
+		return list;
+	}*/
 
-	public HashMap paging(List list, HttpServletRequest request, HashMap data) {
+	/*public HashMap paging(List list, HttpServletRequest request, HashMap data) {
 
 		int cnt = list.size();
 		int size = cnt % 20 == 0 ? cnt / 20 : cnt / 20 + 1;
@@ -103,6 +114,8 @@ public class SearchController {
 		data.put("size", size);
 		data.put("page", pStr);
 		return data;
-	}
+	}*/
 
+		return list;
+	}
 }
