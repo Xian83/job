@@ -46,7 +46,7 @@ public class MyInfoController {
 		// DB�뿉�꽌 �봽濡쒗븘 �궗吏� 媛��졇���꽌 泥섎━
 		String picURL = mydao.getLastetImageURL(email);
 		if (picURL == null || picURL.equals("null"))
-			picURL = "/default.jpg";
+			picURL = "/picture/default.jpg";
 
 		mav.addObject("url", picURL);
 		mav.addObject("location", list);
@@ -57,19 +57,7 @@ public class MyInfoController {
 		
 		System.out.println("FACEBOOK = " + map.get("FACEBOOK"));
 		System.out.println("FACEBOOK map = " + map);
-		/*
-		 * PictureDao pDao = new PictureDao(); String picURL =
-		 * pDao.getLastetImageURL(id); if(picURL== null){ picURL =
-		 * "/picture/default.jpg"; } MemberDao mDao = new MemberDao(); // 占쏙옙占쏙옙
-		 * 占쏙옙占쏙옙 占쏙옙占쏙옙球퓐占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占� HashMap<String, Object> val =
-		 * mDao.getDetails(id);// 占쏙옙占싹되댐옙 占쏙옙占쏙옙 占싱몌옙, 占쏙옙占쏙옙, 占쏙옙占쏙옙, 占싱몌옙占쏙옙 占쌍소듸옙占쏙옙
-		 * 占쏙옙占쏙옙占� 占쌍억옙占� 占쏙옙
-		 * 
-		 * request.setAttribute("url", picURL); request.setAttribute("map",
-		 * val);
-		 * 
-		 */
-
+	
 		return mav;
 	}
 
@@ -82,6 +70,7 @@ public class MyInfoController {
 		String email = (String) session.getAttribute("email");
 		data.put("email", email);
 		int rst = mydao.update(data);	
+		
 		String pass1 = (String) session.getAttribute("pass");
 		String pass = (String) data.get("passcheck");
 		System.out.println("pass1 = " + pass1 + "/ pass = " + pass);
@@ -107,7 +96,6 @@ public class MyInfoController {
 	public ModelAndView update_pic(@RequestParam(name="pic") MultipartFile file, HttpSession session, MultipartHttpServletRequest req)
 			throws Exception {
 		ModelAndView mav = new ModelAndView();
-
 		// �궗吏� ���엯�씤 寃쎌슦留� �뾽濡쒕뱶 吏꾪뻾
 		String ct = file.getContentType();
 		if (ct.startsWith("image")) {
@@ -129,5 +117,37 @@ public class MyInfoController {
 		mav.setViewName("redirect:/my/info");
 		return mav;
 
+	}
+	
+	
+	@RequestMapping("/leave_form")
+	public ModelAndView leave_formHandler(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("t1");
+		mav.addObject("main", "/my/leave_form");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/leave_result")
+	public ModelAndView leave_resultHandler(HttpSession session, @RequestParam Map map ) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("t1");
+		mav.addObject("main", "/my/leave_result");
+
+		String id = (String) session.getAttribute("email");
+		String pass1 = (String) session.getAttribute("pass");
+		String pass = (String) map.get("pass");
+		
+		// 탈퇴 시도하다 멈췄어요!!
+		/*System.out.println("탈퇴 pass1 = " + pass1 + " / pass =" + pass);
+		if(pass1 == pass) {
+			System.out.println("비번 확인 함?");
+			boolean rst = mdao.delete(id, pass);
+			System.out.println("boolean b   = " + rst );
+			
+		}*/
+		
+		return mav;
 	}
 }

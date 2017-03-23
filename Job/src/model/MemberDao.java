@@ -104,6 +104,7 @@ public class MemberDao {
 
 			if (cnt == 1) {
 				sql.commit();
+				System.out.println("탈퇴 했을 거임");
 				return true;
 			} else
 				return false;

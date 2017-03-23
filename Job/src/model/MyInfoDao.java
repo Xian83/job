@@ -116,25 +116,20 @@ public class MyInfoDao {
 
 	// 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙 占쌀뤄옙占쏙옙占쏙옙 
 	public String getLastetImageURL(String email){
-		List<HashMap> data = new ArrayList<>();
+		Map data = new HashMap();
 		SqlSession sql = null;
 		
 		try {
 			sql = factory.openSession();
-			data = sql.selectList("mappers.my.picUrl", email);	
+			data = sql.selectOne("mappers.my.picUrl", email);	
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally{
 			sql.close();
 		}
 		
-		HashMap<String, Object> map = new HashMap<>();
-		Iterator it = data.iterator();
-		for(int i = 0; i<1; i++){
-			map = (HashMap<String, Object>) it.next();
-		}
 		
-		return data == null ? "null" : (String) map.get("URL");  		
+		return data == null ? "null" : (String) data.get("URL");	
 	}
 
 
