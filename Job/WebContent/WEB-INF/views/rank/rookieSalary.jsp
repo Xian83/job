@@ -6,9 +6,9 @@
 <div class="container">
 	
 			<a href="/rank/form"> <button type="submit"> 평균연봉순 </button> </a>
-			<a href="/rank/rookeysalary"> <button type="submit"> 신입연봉순 </button> </a>
-			<a href="/rank/financescore"> <button type="submit"> 재무평가점수순 </button> </a>
-			<a href="/rank/slavescore"> <button type="submit"> 재직자평가순 </button> </a>
+			<a href="/rank/rookie"> <button type="submit"> 신입연봉순 </button> </a>
+			<a href="/rank/finance"> <button type="submit"> 재무평가점수순 </button> </a>
+			<a href="/rank/employee"> <button type="submit"> 재직자평가순 </button> </a>
 </div>
 
 

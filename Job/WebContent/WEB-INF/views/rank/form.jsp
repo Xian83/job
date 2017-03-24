@@ -8,9 +8,9 @@
 
   <ul class="nav nav-tabs" style="width: 100%;">
     <li class="active"><a data-toggle="tab" href="/rank/form">평균연봉순</a></li>
-    <li><a data-toggle="tab" href="/rank/rookeysalary">신입연봉순</a></li>
-    <li><a data-toggle="tab" href="/rank/form">재무평가점수순</a></li>
-    <li><a data-toggle="tab" href="/rank/form">재직자평가순</a></li>
+    <li><a data-toggle="tab" href="/rank/rookie">신입연봉순</a></li>
+    <li><a data-toggle="tab" href="/rank/finance">재무평가점수순</a></li>
+    <li><a data-toggle="tab" href="/rank/employee">재직자평가순</a></li>
   </ul>
 <br/>
   <div class="tab-content" style="width: 100%;">
