@@ -161,7 +161,7 @@ public class DetailDao {
 				li1.add(map);
 			}
 			data.put("rank8", li1);
-			
+
 			// employee increase ratio
 			Elements e2 = doc.select(".bg1 .al3");
 			String[] ar = e2.text().trim().split("\\s+");
@@ -169,7 +169,7 @@ public class DetailDao {
 				li2.add(ar[i]);
 			}
 			data.put("employee", li2);
-			
+
 			// industry scale rank
 			Elements e3 = doc.select("td:not(.bdr1, .al1 nowrap, .al3)");
 			String[] arr = e3.text().trim().split("\\s+");
@@ -179,66 +179,38 @@ public class DetailDao {
 					li3.add(str);
 			}
 			data.put("scale", li3);
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		return data;
 	}
-	
+
 	// 작업 미완성
 	public HashMap<String, List> getInfo02(String CompID) {
 		HashMap<String, List> data = new HashMap<>();
-		List<HashMap> li1 = new ArrayList<>();
-		List<String> li2 = new ArrayList<>();
-		List<String> li3 = new ArrayList<>();
+		List<String> li1 = new ArrayList<>();
 
-		String url = "http://www.careercatch.co.kr/Comp/Controls/ifrmCompInfo.aspx?CompID=" + CompID;
+		String url = "http://www.careercatch.co.kr/Comp/CompSummary.aspx?CompID=" + CompID;
 
 		try {
 			Document doc = Jsoup.connect(url).get();
-			for (int i = 0; i < 8; i++) {
-				HashMap<String, Object> map = new HashMap<>();
-				DecimalFormat df = new DecimalFormat("00");
-
-				// get rank, company name, company score(finance)
-				Elements e = doc.select("#rptList2_ctl" + df.format(i) + "_tr td:not(.bdr1, .al1 nowrap)");
-
-				// score String split
-				String[] ar = e.text().trim().split("\\s+");
-
-				// input data into HashMap
-				map.put("rank", Integer.parseInt(ar[0]));
-				map.put("cmpn", ar[1]);
-				map.put("score", Double.parseDouble(ar[2]));
-
-				li1.add(map);
-			}
-			data.put("rank8", li1);
 			
-			// employee increase ratio
-			Elements e2 = doc.select(".bg1 .al3");
-			String[] ar = e2.text().trim().split("\\s+");
-			for (int i = 12; i < ar.length; i++) {
-				li2.add(ar[i]);
-			}
-			data.put("employee", li2);
+			// 매출액, 영억이익, 당기손익, 사원수 
+			Elements e1 = doc.select(".table1 td");
+			String[] ar = e1.text().trim().split("\\s+");
+			li1.add(ar[6]);
+			li1.add(ar[7]);
+			li1.add(ar[8]);
+			li1.add(ar[10]);
+			System.out.println(ar[6] + " : " + ar[10]);
 			
-			// industry scale rank
-			Elements e3 = doc.select("td:not(.bdr1, .al1 nowrap, .al3)");
-			String[] arr = e3.text().trim().split("\\s+");
-			System.out.println("e3 : " + e3.text());
-			for (String str : arr) {
-				if (str.endsWith("위"))
-					li3.add(str);
-			}
-			data.put("scale", li3);
-			
+			// 회사 위치, 회사 제도, 사내문화 / 분위기
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		return data;
 	}
 }

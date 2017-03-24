@@ -22,8 +22,9 @@
 		        <th>#</th>
 		        <th>로고</th>
 		        <th>회사명</th>
+		        <th>분야</th>
+		        <th>규모</th>
 		        <th>평균연봉</th>
-		        <th>비교그래프</th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -49,6 +50,28 @@
 			  	</c:when>
 	            	<c:otherwise>
             			<a href="/company/detail?cmpn_nm=${avg[i].CMPN_NM }"><b>${avg[i].CMPN_NM }<b/></a> 
+            	    </c:otherwise>
+	            </c:choose>
+	            </td>
+	            
+	            <td>
+	            <c:choose>
+	            	<c:when test="${avg[i] eq null }">
+						정보없음	 
+			  	    </c:when>
+	            	<c:otherwise>
+            			<b>${avg[i].DIVISION }<b/> 
+            	    </c:otherwise>
+	            </c:choose>
+	            </td>
+	            
+	            <td>
+	            <c:choose>
+	            	<c:when test="${avg[i] eq null }">
+						정보없음	 
+			  	    </c:when>
+	            	<c:otherwise>
+            			<b>${avg[i].SCALE }<b/>
             	    </c:otherwise>
 	            </c:choose>
 	            </td>
@@ -82,8 +105,9 @@
 		        <th>#</th>
 		        <th>로고</th>
 		        <th>회사명</th>
+		        <th>분야</th>
+		        <th>규모</th>
 		        <th>신입연봉</th>
-		        <th>비교그래프</th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -113,6 +137,28 @@
 	            </c:choose>
 	            </td>
 	            
+	            <td>
+	            <c:choose>
+	            	<c:when test="${rookie[i] eq null }">
+						정보없음	 
+			  	    </c:when>
+	            	<c:otherwise>
+            			<b>${rookie[i].DIVISION }<b/>
+            	    </c:otherwise>
+	            </c:choose>
+	            </td>
+	            
+	            <td>
+	            <c:choose>
+	            	<c:when test="${rookie[i] eq null }">
+						정보없음	 
+			  	    </c:when>
+	            	<c:otherwise>
+            			<b>${rookie[i].SCALE }<b/>
+            	    </c:otherwise>
+	            </c:choose>
+	            </td>
+	            
 		        <td>
 		        <c:choose>
 	            	<c:when test="${rookie[i] eq null }">
@@ -124,9 +170,6 @@
 	            </c:choose>
 	            </td>
 	            
-	            <td>
-	            	그래프자리
-	            </td>
 		      </tr>
 		    </c:forEach>
 		    </tbody>
@@ -141,8 +184,9 @@
 		        <th>#</th>
 		        <th>로고</th>
 		        <th>회사명</th>
-		        <th>재무평가</th>
-		        <th>비교그래프</th>
+		        <th>분야</th>
+		        <th>규모</th>
+		        <th>재무평가점수</th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -172,6 +216,28 @@
 	            </c:choose>
 	            </td>
 	            
+	            <td>
+	            <c:choose>
+	            	<c:when test="${finance[i] eq null }">
+						정보없음	 
+			  	    </c:when>
+	            	<c:otherwise>
+            			<b>${finance[i].DIVISION }<b/>
+            	    </c:otherwise>
+	            </c:choose>
+	            </td>
+	            
+	            <td>
+	            <c:choose>
+	            	<c:when test="${finance[i] eq null }">
+						정보없음	 
+			  	    </c:when>
+	            	<c:otherwise>
+            			<b>${finance[i].SCALE }<b/>
+            	    </c:otherwise>
+	            </c:choose>
+	            </td>
+	            
 		        <td>
 		        <c:choose>
 	            	<c:when test="${finance[i] eq null }">
@@ -183,9 +249,7 @@
 	            </c:choose>
 	            </td>
 	            
-	            <td>
-	            	그래프자리
-	            </td>
+	            
 		      </tr>
 		    </c:forEach>
 		    </tbody>
@@ -200,8 +264,9 @@
 		        <th>#</th>
 		        <th>로고</th>
 		        <th>회사명</th>
-		        <th>재직자평점</th>
-		        <th>비교그래프</th>
+		        <th>분야</th>
+		        <th>규모</th>
+		        <th>재직자평가점수</th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -231,6 +296,28 @@
 	            </c:choose>
 	            </td>
 	            
+	            <td>
+	            <c:choose>
+	            	<c:when test="${employee[i] eq null }">
+						정보없음	 
+			  	    </c:when>
+	            	<c:otherwise>
+            			<b>${employee[i].DIVISION }<b/>
+            	    </c:otherwise>
+	            </c:choose>
+	            </td>
+	            
+	            <td>
+	            <c:choose>
+	            	<c:when test="${employee[i] eq null }">
+						정보없음	 
+			  	    </c:when>
+	            	<c:otherwise>
+            			<b>${employee[i].SCALE }<b/>
+            	    </c:otherwise>
+	            </c:choose>
+	            </td>
+	            
 		        <td>
 		        <c:choose>
 	            	<c:when test="${employee[i] eq null }">
@@ -242,9 +329,6 @@
 	            </c:choose>
 	            </td>
 	            
-	            <td>
-	            	그래프자리
-	            </td>
 		      </tr>
 		    </c:forEach>
 		    </tbody>
@@ -253,5 +337,4 @@
     </div>
   </div>
 </div>
-
 
