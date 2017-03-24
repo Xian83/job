@@ -12,4 +12,13 @@
 	<insert id="inputC" parameterType="java.util.HashMap">
 		insert into rank values(#{PK_NM}, #{CMPN_NM}, #{WKP_ADRS}, #{STNDD_BIG_GB}, #{SALARY})
 	</insert>
+	<insert id="inputD" parameterType="java.util.HashMap">
+		insert into salary values(#{PK_NM}, #{CMPN_NM}, #{AVG_SALARY}, #{ROOKIE_SALARY})
+	</insert>
+	<select id="getScore" parameterType="java.lang.String" resultType="java.util.HashMap" >
+		select * from score
+	</select>
+	<select id="getSalary" parameterType="java.lang.String" resultType="java.util.HashMap" >
+		select * from salary
+	</select>
 </mapper>
