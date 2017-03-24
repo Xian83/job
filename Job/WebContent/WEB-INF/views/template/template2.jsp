@@ -40,7 +40,7 @@
 	<div style="min-height: 20%;">
 		<tiles:insertAttribute name="header" />
 	</div>
-	<div style="min-height: 65%; margin-left: 10px; margin-right: 100px;">
+	<div style="min-height: 60%; margin-left: 10px; margin-right: 10px;">
 		<div class="col-md-4">
 			<tiles:insertAttribute name="left" />
 		</div>
@@ -48,11 +48,8 @@
 			<tiles:insertAttribute name="main" />
 		</div>
 	</div>
-	<div style="min-height: 10%;">
+	<div style="min-height: 15%;">
 		<tiles:insertAttribute name="footer" />
-	</div>
-	
+	</div>	
 </body>
-
-
 </html>

@@ -6,10 +6,21 @@
 	height: 100px;
 	text-align: center;
 }
+hr[id='hh']{
+    border: none;
+   
+    color: #CDB79E;
+    background-color: #CDB79E;
+    height: 2px;
+    width: 100%;
+}
+
+출처: http://nine01223.tistory.com/192 [스프링연구소(spring-lab)]
+
 </style>
 <div class="panel panel-default ">
-		<div class="panel-heading " align="center" style="background: #f4511e">
-			프로필
+		<div class="panel-heading " align="center" style="background: #f4511e; height: 90px">
+			<h2>프로필</h2>
 			
 		</div>
 
@@ -23,7 +34,7 @@
 				<input type="hidden" name="email" value="${sessionScope.email}"/>
 				<button type="submit" class="btn">사진변경</button>
 			</form>
-			<hr />	
+			<hr id="hh"/>	
 			<table>
 				<tr>
 					<th><a href="/my/info"><i class="fa fa-address-card" style="font-size:36px"></i><br/>자기정보관리</a></th>
