@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.jsoup.Jsoup;
@@ -59,66 +61,19 @@ public class SearchDao {
 	}
 
 	// get Search Result by detail condition
-	public List getData(String [] AreaSido, String [] JCode, String [] Size, String search ) throws IOException {
-		List<String> list = new ArrayList();
-		
-
-		String condition = "";
-		// Search Condition Setting
-		// company name condition add
-		if (search != null)
-			condition += "&CName=" + search;
-
-		// area condition add
-		if (AreaSido != null) {
-			for (int i = 0; i < AreaSido.length; i++)
-				condition += "&AreaSido=" + AreaSido[i];
-		}
-		// industry condition add
-		if (JCode != null) {
-			for (int i = 0; i < JCode.length; i++)
-				condition += "&JCode=" + JCode[i];
-		}
-		// company size condition add
-		if (Size != null) {
-			for (int i = 0; i < Size.length; i++)
-				condition += "&Size=" + Size[i];
-		}
-
-		String url = "http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?flag=Search" 
-				+ condition + "&intCurrentPage=1&intPageSize=20";
-		
-		// --------------------------------------------------------------
-		// Search		
-		try {
-			int page = 1;	// current page
-			int total = 0;	// total data count
+	public List getData(HttpServletRequest req){
+		List list = new ArrayList();
+		try{
+			String url = getURL(req);
 			
-			search : 
-			while(true){
-				
-				// connect
-				Document doc = Jsoup.connect(url + "&CurrentPage=" + page).get();
-				System.out.println("URL : " + url + "&CurrentPage=" + page);
-				System.out.println(doc.toString() + "=======================");
-				// check total count
-				Element cnt = doc.select(".iframe p").first();
-				String[] ar = cnt.text().split("\\s+");
-				ar[1] = ar[1].replaceAll("\\,", "");
-				total = Integer.parseInt(ar[1].substring(0, ar[1].length()-1));
-				System.out.println(total);
-				
-				// break condition
-				if(total == 0 || page ==  5)
-					break search;
-				
-				// store company names to list
-				Elements cname = doc.select("dl.company_info dt");				
-				String[] cmpn = cname.text().split("\\s+");
-				list.addAll(Arrays.asList(cmpn));
-				
-				page++;
-			}
+			// connect
+			Document doc = Jsoup.connect(url).get();
+			System.out.println("URL : " + url);
+
+			// store company names to list
+			Elements cname = doc.select("dl.company_info dt");
+			String[] cmpn = cname.text().split("\\s+");
+			list.addAll(Arrays.asList(cmpn));
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -126,7 +81,7 @@ public class SearchDao {
 
 		return list;
 	}
-	
+
 	// detail search result paging
 	public List<HashMap> pasing2(int start, int end, List list) {
 		List<HashMap> cmpn_info = new ArrayList<>();
@@ -144,5 +99,65 @@ public class SearchDao {
 		}
 
 		return cmpn_info;
+	}
+
+	public int getTotal(HttpServletRequest req) {
+		List list = new ArrayList();
+		int total = 0; // total data count
+
+		try {
+			// make full URL w/ condition
+			String url = getURL(req);
+
+			// connect
+			Document doc = Jsoup.connect(url).get();
+
+			// get total count
+			Element cnt = doc.select(".iframe p").first();
+			String[] ar = cnt.text().split("\\s+");
+			ar[1] = ar[1].replaceAll("\\,", "");
+			total = Integer.parseInt(ar[1].substring(0, ar[1].length() - 1));
+			System.out.println(total);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return total;
+	}
+
+	// get URL
+	public String getURL(HttpServletRequest req) {
+		String name = req.getParameter("search");
+		String[] area = req.getParameterValues("chkSido");
+		String[] industry = req.getParameterValues("chkJinhakCode");
+		String[] size = req.getParameterValues("chkSize");
+		String page = req.getParameter("page") == null ? "1" : req.getParameter("page");
+
+		String condition = "";
+		// Search Condition Setting
+		// company name condition add
+		if (name != null)
+			condition += "&CName=" + name;
+
+		// area condition add
+		if (area != null) {
+			for (int i = 0; i < area.length; i++)
+				condition += "&AreaSido=" + area[i];
+		}
+		// industry condition add
+		if (industry != null) {
+			for (int i = 0; i < industry.length; i++)
+				condition += "&JCode=" + industry[i];
+		}
+		// company size condition add
+		if (size != null) {
+			for (int i = 0; i < size.length; i++)
+				condition += "&Size=" + size[i];
+		}
+
+		String url = "http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?flag=Search" + condition
+				+ "&intCurrentPage=1&intPageSize=20";
+
+		return url + "&CurrentPage=" + page;
 	}
 }
