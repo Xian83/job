@@ -63,7 +63,7 @@ public class SearchDao {
 	// get Search Result by detail condition
 	public List getData(HttpServletRequest req){
 		List list = new ArrayList();
-	
+		
 		try {
 			String url = getURL(req);
 			

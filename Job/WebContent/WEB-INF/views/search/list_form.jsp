@@ -9,170 +9,177 @@
 	margin-left: 30;
 	font-size: 12;
 }
-.well{
-	width : 1100;	
-	border : 2px solid #f45757;
+
+.well {
+	width: 1100;
+	border: 2px solid #f45757;
 	background-color: #ffffff;
 }
+
 body {
-	color : #202b69;
-}
-.btn-group-sm>.btn, .btn-sm {
-	border-radius : 20px;
-	background-color: rgba(249, 208, 208, 0.99); 
-	bold : 3px;
-	margin-bottom : 6px;
-}
- .btn-default {
-	color : #607D8B;
-	border: 2px;
-}
-.table-bordered {
-	border-top : 10px;
+	color: #202b69;
 }
 
+.btn-group-sm>.btn, .btn-sm {
+	border-radius: 20px;
+	background-color: rgba(249, 208, 208, 0.99);
+	bold: 3px;
+	margin-bottom: 6px;
+}
+
+.btn-default {
+	color: #607D8B;
+	border: 2px;
+}
+
+.table-bordered {
+	border-top: 10px;
+}
 </style>
- <div align="center">
-<div class="corp_src well" align="center">
-	<form action="/search/detail" method="get">
-		<div class="row" align="center">
-			<div class="col-md-4">
-				<dl>
-					<dt>
-						<img src="http://image.jinhak.com/job/corp/src_dt01.png" alt="지역별" />
-					</dt>
-					<dd>
-						<hr/>
-						<ul class="nav navbar-nav">
-							<li><input type="checkbox" name="chkSido" id="chkSido전체"
-								value="전체" /><label for="chkSido전체">전체                    </label></li>
-							<li><input type="checkbox" name="chkSido" id="chkSido서울"
-								value="서울" /><label for="chkSido서울">서울</label></li>
-							<li><input type="checkbox" name="chkSido" id="chkSido부산"
-								value="부산" /><label for="chkSido부산">부산</label></li>
-							<li><input type="checkbox" name="chkSido" id="chkSido대구"
-								value="대구" /><label for="chkSido대구">대구</label></li>
-							<li><input type="checkbox" name="chkSido" id="chkSido인천"
-								value="인천" /><label for="chkSido인천">인천</label></li>
-							<li><input type="checkbox" name="chkSido" id="chkSido광주"
-								value="광주" /><label for="chkSido광주">광주</label></li>
-							<li><input type="checkbox" name="chkSido" id="chkSido대전"
-								value="대전" /><label for="chkSido대전">대전</label></li>
-							<li><input type="checkbox" name="chkSido" id="chkSido울산"
-								value="울산" /><label for="chkSido울산">울산</label></li>
-							<li><input type="checkbox" name="chkSido" id="chkSido세종"
-								value="세종" /><label for="chkSido세종">세종</label></li>
-							<li><input type="checkbox" name="chkSido" id="chkSido경기"
-								value="경기" /><label for="chkSido경기">경기</label></li>
-							<li><input type="checkbox" name="chkSido" id="chkSido강원"
-								value="강원" /><label for="chkSido강원">강원</label></li>
-							<li><input type="checkbox" name="AreaSido" id="chkSido충북"
-								value="충북" /><label for="chkSido충북">충북</label></li>
-							<li><input type="checkbox" name="chkSido" id="chkSido충남"
-								value="충남" /><label for="chkSido충남">충남</label></li>
-							<li><input type="checkbox" name="chkSido" id="chkSido전북"
-								value="전북" /><label for="chkSido전북">전북</label></li>
-							<li><input type="checkbox" name="chkSido" id="chkSido전남"
-								value="전남" /><label for="chkSido전남">전남</label></li>
-							<li><input type="checkbox" name="chkSido" id="chkSido경북"
-								value="경북" /><label for="chkSido경북">경북</label></li>
-							<li><input type="checkbox" name="chkSido" id="chkSido경남"
-								value="경남" /><label for="chkSido경남">경남</label></li>
-							<li><input type="checkbox" name="chkSido" id="chkSido제주"
-								value="제주" /><label for="chkSido제주">제주</label></li>
-						</ul>
-					</dd>
-				</dl>
+<div align="center">
+	<div class="corp_src well" align="center">
+		<form action="/search/detail" method="get">
+			<div class="row" align="center">
+				<div class="col-md-4">
+					<dl>
+						<dt>
+							<img src="http://image.jinhak.com/job/corp/src_dt01.png"
+								alt="지역별" />
+						</dt>
+						<dd>
+							<hr />
+							<ul class="nav navbar-nav">
+								<li><input type="checkbox" name="chkSido" id="chkSido전체"
+									value="전체" /><label for="chkSido전체">전체 </label></li>
+								<li><input type="checkbox" name="chkSido" id="chkSido서울"
+									value="서울" /><label for="chkSido서울">서울</label></li>
+								<li><input type="checkbox" name="chkSido" id="chkSido부산"
+									value="부산" /><label for="chkSido부산">부산</label></li>
+								<li><input type="checkbox" name="chkSido" id="chkSido대구"
+									value="대구" /><label for="chkSido대구">대구</label></li>
+								<li><input type="checkbox" name="chkSido" id="chkSido인천"
+									value="인천" /><label for="chkSido인천">인천</label></li>
+								<li><input type="checkbox" name="chkSido" id="chkSido광주"
+									value="광주" /><label for="chkSido광주">광주</label></li>
+								<li><input type="checkbox" name="chkSido" id="chkSido대전"
+									value="대전" /><label for="chkSido대전">대전</label></li>
+								<li><input type="checkbox" name="chkSido" id="chkSido울산"
+									value="울산" /><label for="chkSido울산">울산</label></li>
+								<li><input type="checkbox" name="chkSido" id="chkSido세종"
+									value="세종" /><label for="chkSido세종">세종</label></li>
+								<li><input type="checkbox" name="chkSido" id="chkSido경기"
+									value="경기" /><label for="chkSido경기">경기</label></li>
+								<li><input type="checkbox" name="chkSido" id="chkSido강원"
+									value="강원" /><label for="chkSido강원">강원</label></li>
+								<li><input type="checkbox" name="AreaSido" id="chkSido충북"
+									value="충북" /><label for="chkSido충북">충북</label></li>
+								<li><input type="checkbox" name="chkSido" id="chkSido충남"
+									value="충남" /><label for="chkSido충남">충남</label></li>
+								<li><input type="checkbox" name="chkSido" id="chkSido전북"
+									value="전북" /><label for="chkSido전북">전북</label></li>
+								<li><input type="checkbox" name="chkSido" id="chkSido전남"
+									value="전남" /><label for="chkSido전남">전남</label></li>
+								<li><input type="checkbox" name="chkSido" id="chkSido경북"
+									value="경북" /><label for="chkSido경북">경북</label></li>
+								<li><input type="checkbox" name="chkSido" id="chkSido경남"
+									value="경남" /><label for="chkSido경남">경남</label></li>
+								<li><input type="checkbox" name="chkSido" id="chkSido제주"
+									value="제주" /><label for="chkSido제주">제주</label></li>
+							</ul>
+						</dd>
+					</dl>
+				</div>
+				<div class="col-md-4">
+					<dl>
+						<dt>
+							<img src="http://image.jinhak.com/job/corp/src_dt02.png"
+								alt="산업별" />
+						</dt>
+						<dd>
+							<hr />
+							<ul class="nav navbar-nav">
+								<li><input type="checkbox" name="chkJinhakCode"
+									id="chkJinhakCode전체" value="전체" /><label for="chkJinhakCode전체">전체</label></li>
+								<li><input type="checkbox" name="chkJinhakCode"
+									id="chkJinhakCode전체" value="J2" /><label for="chkJinhakCode전체">제조·화학</label></li>
+								<li><input type="checkbox" name="chkJinhakCode"
+									id="chkJinhakCodeJ2" value="J2" /><label for="chkJinhakCodeJ2">은행·금융</label></li>
+								<li><input type="checkbox" name="chkJinhakCode"
+									id="chkJinhakCodeJ3" value="J3" /><label for="chkJinhakCodeJ3">IT·미디어</label></li>
+								<li><input type="checkbox" name="chkJinhakCode"
+									id="chkJinhakCodeJ4" value="J4" /><label for="chkJinhakCodeJ4">의료·보건</label></li>
+								<li><input type="checkbox" name="chkJinhakCode"
+									id="chkJinhakCodeJ5" value="J5" /><label for="chkJinhakCodeJ5">건설·부동산</label></li>
+								<li><input type="checkbox" name="chkJinhakCode"
+									id="chkJinhakCodeJ6" value="J6" /><label for="chkJinhakCodeJ6">판매·유통</label></li>
+								<li><input type="checkbox" name="chkJinhakCode"
+									id="chkJinhakCodeJ7" value="J7" /><label for="chkJinhakCodeJ7">교육·출판</label></li>
+								<li><input type="checkbox" name="chkJinhakCode"
+									id="chkJinhakCodeJ8" value="J8" /><label for="chkJinhakCodeJ8">여가·스포츠</label></li>
+								<li><input type="checkbox" name="chkJinhakCode"
+									id="chkJinhakCodeJ9" value="J9" /><label for="chkJinhakCodeJ9">기타서비스</label></li>
+								<li><input type="checkbox" name="chkJinhakCode"
+									id="chkJinhakCodeJ10" value="J10" /><label
+									for="chkJinhakCodeJ10">공공서비스</label></li>
+							</ul>
+						</dd>
+					</dl>
+				</div>
+				<div class="col-md-4">
+					<dl>
+						<dt>
+							<img src="http://image.jinhak.com/job/corp/src_dt04.png"
+								alt="규모별" />
+						</dt>
+						<dd>
+							<hr />
+							<ul class="nav navbar-nav">
+								<li><input type="checkbox" name="chkSize" id="chkSize전체"
+									value="전체" /><label for="chkSize전체">전체</label></li>
+								<li><input type="checkbox" name="chkSize" id="chkSize1"
+									value="1" /><label for="chkSize1">대기업</label></li>
+								<li><input type="checkbox" name="chkSize" id="chkSize3"
+									value="3" /><label for="chkSize3">중견기업</label></li>
+								<li><input type="checkbox" name="chkSize" id="chkSize2"
+									value="2" /><label for="chkSize2">중소기업</label></li>
+								<li><input type="checkbox" name="chkSize" id="chkSize0"
+									value="0" /><label for="chkSize0">기타</label></li>
+							</ul>
+						</dd>
+					</dl>
+				</div>
 			</div>
-			<div class="col-md-4">
-				<dl>
-					<dt>
-						<img src="http://image.jinhak.com/job/corp/src_dt02.png" alt="산업별" />
-					</dt>
-					<dd>
-					<hr/>
-						<ul class="nav navbar-nav" >
-							<li><input type="checkbox" name="chkJinhakCode" id="chkJinhakCode전체"
-								value="전체" /><label for="chkJinhakCode전체">전체</label></li>
-							<li><input type="checkbox" name="chkJinhakCode" id="chkJinhakCode전체"
-								value="J2" /><label for="chkJinhakCode전체">제조·화학</label></li>
-							<li><input type="checkbox" name="chkJinhakCode" id="chkJinhakCodeJ2"
-								value="J2" /><label for="chkJinhakCodeJ2">은행·금융</label></li>
-							<li><input type="checkbox" name="chkJinhakCode" id="chkJinhakCodeJ3"
-								value="J3" /><label for="chkJinhakCodeJ3">IT·미디어</label></li>
-							<li><input type="checkbox" name="chkJinhakCode" id="chkJinhakCodeJ4"
-								value="J4" /><label for="chkJinhakCodeJ4">의료·보건</label></li>
-							<li><input type="checkbox" name="chkJinhakCode" id="chkJinhakCodeJ5"
-								value="J5" /><label for="chkJinhakCodeJ5">건설·부동산</label></li>
-							<li><input type="checkbox" name="chkJinhakCode" id="chkJinhakCodeJ6"
-								value="J6" /><label for="chkJinhakCodeJ6">판매·유통</label></li>
-							<li><input type="checkbox" name="chkJinhakCode" id="chkJinhakCodeJ7"
-								value="J7" /><label for="chkJinhakCodeJ7">교육·출판</label></li>
-							<li><input type="checkbox" name="chkJinhakCode" id="chkJinhakCodeJ8"
-								value="J8" /><label for="chkJinhakCodeJ8">여가·스포츠</label></li>
-							<li><input type="checkbox" name="chkJinhakCode" id="chkJinhakCodeJ9"
-								value="J9" /><label for="chkJinhakCodeJ9">기타서비스</label></li>
-							<li><input type="checkbox" name="chkJinhakCode"
-								id="chkJinhakCodeJ10" value="J10" /><label
-								for="chkJinhakCodeJ10">공공서비스</label></li>
-						</ul>
-					</dd>
-				</dl>
-			</div>
-			<div class="col-md-4">
-				<dl>
-					<dt>
-						<img src="http://image.jinhak.com/job/corp/src_dt04.png" alt="규모별" />
-					</dt>
-					<dd>
-					<hr/>
-						<ul class="nav navbar-nav">
-							<li><input type="checkbox" name="chkSize" id="chkSize전체"
-								value="전체" /><label for="chkSize전체">전체</label></li>
-							<li><input type="checkbox" name="chkSize" id="chkSize1"
-								value="1" /><label for="chkSize1">대기업</label></li>
-							<li><input type="checkbox" name="chkSize" id="chkSize3"
-								value="3" /><label for="chkSize3">중견기업</label></li>
-							<li><input type="checkbox" name="chkSize" id="chkSize2"
-								value="2" /><label for="chkSize2">중소기업</label></li>
-							<li><input type="checkbox" name="chkSize" id="chkSize0"
-								value="0" /><label for="chkSize0">기타</label></li>
-						</ul>
-					</dd>
-				</dl>
-			</div>
-	</div>
-	<br/>
-	<div class="bot">
-		<div class="inp">
-			<input name="uc_Cond1$CompName" type="text"
-				id="uc_Cond1_CompName" value="기업명을 입력해 주세요" 
-				style="ime-mode: active; width:800; height:37"
-				onkeypress="if(event.keyCode==13){ EnterSearch();return false;}" />
-	<!-- <a href="javascript:void(0);">
+			<br />
+			<div class="bot">
+				<div class="inp">
+					<input name="search" type="text" id="search" value="기업명을 입력해 주세요"
+						style="ime-mode: active; width: 800; height: 37"
+						onkeypress="if(event.keyCode==13){ EnterSearch();return false;}" />
+					<!-- <a href="javascript:void(0);">
 	<input name="uc_Cond1$CompName" type="text"
 				id="uc_Cond1_CompName" value="기업명을 입력해 주세요" 
 				onfocus="this.value=&#39;&#39;;" style="ime-mode: active; width:800; height:37"
 				onkeypress="if(event.keyCode==13){ EnterSearch();return false;}" />
 	<a href="javascript:void(0);"> -->
-	
-<!-- 	<img
+
+					<!-- 	<img
 				src="http://image.jinhak.com/job/corp/btn_search.gif" alt="검색"
 				id="imgSearch" /></a> 
 		<p> -->
-		<button type="submit" id="sc" class="btn">검색</button> 
-		</p>
-		</div>
+					<button type="button" id="sc" class="btn">검색</button>
+					</p>
+				</div>
+			</div>
+		</form>
 	</div>
-	</form>
 </div>
-</div>
-<br/>
+<br />
 
 <div align="right">
-<button type="button" class="btn btn-default btn btn-sm" >재무평가순 </button>
-<button type="button" class="btn btn-default btn btn-sm" >가나다순</button>
-<br/>
+	<button type="button" class="btn btn-default btn btn-sm">재무평가순
+	</button>
+	<button type="button" class="btn btn-default btn btn-sm">가나다순</button>
+	<br />
 </div>
 <%-- <!-- 목록 뷰 -->
 <div class="container">
@@ -234,11 +241,51 @@ body {
  --%>
 
 <!-- 상세 조건 검색 - 체크박스 이벤트 처리  -->
+<div id="result" style="height: 300"></div>
 <script type="text/javascript" charset="utf-8">
+
+$("#sc").click(function(){
+	
+	var aw = {"size":1,"list2":[{"CMPN_NM":"메디헬스","LOGO":"http://image.jinhak.com/job/site/tmp02.gif","FINANCE_SCORE":63.5,"EMPLOYEE_SCORE":100,"SCALE":"중소기업","DIVISION":"판매ㆍ유통"},
+		{"CMPN_NM":"메디헬스","LOGO":"http://image.jinhak.com/job/site/tmp02.gif","FINANCE_SCORE":63.5,"EMPLOYEE_SCORE":100,"SCALE":"중소기업","DIVISION":"판매ㆍ유통"},
+		{"CMPN_NM":"메디헬스","LOGO":"http://image.jinhak.com/job/site/tmp02.gif","FINANCE_SCORE":63.5,"EMPLOYEE_SCORE":100,"SCALE":"중소기업","DIVISION":"판매ㆍ유통"}],"page":"1"};
+	console.log(aw.list2[0]);
+	for(var i=0; i<aw.list2.length; i++) {
+		$("#result").append("회사이름 : "+aw.list2[i].CMPN_NM+"<br/>");  
+		 $("#result").append("로고 : "+aw.list2[i].LOGO+"<br/>");  
+		$("#result").append("재무평가 : "+aw.list2[i].FINANCE_SCORE+"<br/>");  
+		$("#result").append("재직자평판 : "+aw.list2[i].EMPLOYEE_SCORE+"<br/>"); 
+		$("#result").append("규모 : "+aw.list2[i].SCALE+"<br/>"); 
+		$("#result").append("분야 : "+aw.list2[i].DIVISION+"<br/>"); 
+	}
+});
+	
+
+
+/*<script type="text/javascript" charset="utf-8">
+$("#sc").on("click",function(){
+	var chkSido = [];
+	
+	$("input[name='chkSido']:checked").each(function() {
+		chkSido.push($(this).val());
+	});
+	
+	console.log(chkSido);
+	
+	$.ajax({
+		"url" : "/search/detail",
+		"method" : "get"
+		 "data" :  
+	}).done(function(){
+		
+	});
+	
+});
+	
 	$(function() {
 
 		//검색, 검색조건 저장 클릭 시
-		$("#imgSearch").on("click", function() {
+		$("#sc").on("click", function() {
 			//alert($("select[name=ddlScale] option:selected").val());
 			//alert($('input:checkbox[name=chkSido]:checked').map(function() {return this.value;}).get().join(','));
 			//return;
@@ -423,8 +470,8 @@ body {
 		if (($('input:checkbox[name=chkSize]').length - 1) == $('input:checkbox[name=chkSize]:checked:not("#chkSize전체")').length)
 			Size = "전체";
 
-		var CName = $('#uc_Cond1_CompName').length == 0 ? "" : $(
-				'#uc_Cond1_CompName').val().trim();
+		var CName = $('#search').length == 0 ? "" : $(
+				'#search').val().trim();
 		if (CName == "기업명을 입력해 주세요")
 			CName = "";
 
@@ -439,34 +486,52 @@ body {
 		if (SortVal == null)
 			SortVal = $('#txtSortVal').val();
 
-		var params = "&AreaSido=" + encodeURIComponent(Sido) //지역 시도
+		var params = "&chkSido=" + encodeURIComponent(Sido) //지역 시도
 				+ "&JCode=" + encodeURIComponent(JinhakCode) //산업(업종)
 				+ "&Size=" + encodeURIComponent(Size) //규모
 				+ "&search=" + encodeURIComponent(CName) //기업명
 		;
+		
 
 		// alert("params : " + params);
 		$("#ifrmList")[0].src = "/Comp/Controls/ifrmCompList.aspx?" + params;
 		
 		// 내가 함 - 검색 버튼 누르면 파람값 넘기기 
+		var chkSido = document.getElementById("chkSido").value;
+		var chkJinhakCode = document.getElementById("chkJinhakCode").value;
+		var chkSize = document.getElementById("chkSize").value;
+		var search = document.getElementById("search").value;
+		
+		var params2 = "&chkSido=" + chkSido //지역 시도
+		+ "&JCode=" + chkJinhakCode //산업(업종)
+		+ "&Size=" + chkSize //규모
+		+ "&search=" + search //기업명
+	;
+
+		System.out.println("param2 = " +params2);
+		console.log("param2 = " +params2);
 		$("#sc").onclick(function(){
+			
+			{"size":1,"list2":[{"CMPN_NM":"메디헬스","LOGO":"http://image.jinhak.com/job/site/tmp02.gif","FINANCE_SCORE":63.5,"EMPLOYEE_SCORE":100,"SCALE":"중소기업","DIVISION":"판매ㆍ유통"},
+				{"CMPN_NM":"메디헬스","LOGO":"http://image.jinhak.com/job/site/tmp02.gif","FINANCE_SCORE":63.5,"EMPLOYEE_SCORE":100,"SCALE":"중소기업","DIVISION":"판매ㆍ유통"},
+				{"CMPN_NM":"메디헬스","LOGO":"http://image.jinhak.com/job/site/tmp02.gif","FINANCE_SCORE":63.5,"EMPLOYEE_SCORE":100,"SCALE":"중소기업","DIVISION":"판매ㆍ유통"}],"page":"1"}
+			}
 			$.ajax({
-				"url" : "/search/detail?"+params   // 일단 ajax로 파라미터 q를 넘김  => ajax에서 파라미터 받고, 보낼 값 형식 지정해야 함
+				"url" : "/search/detail?"+params2 // 일단 ajax로 파라미터 q를 넘김  => ajax에서 파라미터 받고, 보낼 값 형식 지정해야 함
 			}).done(function(a){								// 파라미터 값이 하나 있으니 아무 변수이름(상관x) 하나 지정해서 값 받음
-				$("#result").append("회사이름 : "+CMPN_NM+"<br/>");  
-				$("#result").append("로고 : "+LOGO+"<br/>");  
-				$("#result").append("재무평가 : "+FINANCE_SCORE+"<br/>");  
-				$("#result").append("재직자평판 : "+EMPLOYEE_SCORE+"<br/>"); 
-				$("#result").append("규모 : "+SCALE+"<br/>"); 
-				$("#result").append("분야 : "+DIVISION+"<br/>"); 
+				console.log(a);
+				$("#result").append("회사이름 : "+a[0]+" / "+a[1]+"<br/>");  
+			
+				$("#result").append("로고 : "+a.LOGO+"<br/>");  
+				$("#result").append("재무평가 : "+a.FINANCE_SCORE+"<br/>");  
+				$("#result").append("재직자평판 : "+a.EMPLOYEE_SCORE+"<br/>"); 
+				$("#result").append("규모 : "+a.SCALE+"<br/>"); 
+				$("#result").append("분야 : "+a.DIVISION+"<br/>"); 
 			});
 		})
 		
 	}
-
+	  */
 </script>
 
 
-<div id="result">
-
-</div>

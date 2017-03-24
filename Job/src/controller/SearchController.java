@@ -67,12 +67,10 @@ public class SearchController {
 	@ResponseBody
 	public HashMap detailSearchHandler(HttpServletRequest req) {
 		HashMap data = new HashMap();
-		
-		// Paging 
 		int cnt = sdao.getTotal(req);
 		int size = cnt % 20 == 0 ? cnt / 20 : cnt / 20 + 1;
 		String pStr = req.getParameter("page") == null ? "1" : req.getParameter("page");
-		
+
 		int start = (Integer.parseInt(pStr) - 1) * 20 + 1;
 		int end = Integer.parseInt(pStr) * 20;
 
