@@ -28,28 +28,37 @@
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox" align="center">
-
-               <div class="item active">
+				
+               <div class="item active"> <b> < 평균연봉 > </b>
                   <div class="container" align="center">
                      <div class="row" align="center">
                       	
-                        <div class="col-md-3" style="width: 200px;">
-                           <div class="thumbnail href1" style="width: 200px;"><p>공백<br/><br/></p><p>logo </p><br/>
-                           <p>회사명 </p><br/> <p>평균연봉 </p><br/>
+                        <div class="col-md-3" style="width: 220px;">
+                        <a href="/company/detail?cmpn_nm=${avg[0].CMPN_NM }"><button type="submit" style="background: white;">
+                           <div class="thumbnail href1" style="width: 200px; border: none;">
+                           <p><img src="${avg[0].LOGO }" width="150" height="100"><br/><br/></p><p>${avg[0].CMPN_NM } </p><br/>
+                           <p>${avg[0].AVG_SALARY } </p><br/>
                            </div>
+                        </button></a>
                         </div>
                        
                      	<div class="col-md-1"></div>
-                        <div class="col-md-3" style="width: 200px;">
-                           <div class="thumbnail href2" style="width: 200px;"><p>공백<br/><br/></p><p>logo </p><br/>
-                           <p>회사명 </p><br/> <p>평균연봉 </p><br/>
+                        <div class="col-md-3" style="width: 220px;">
+                        <a href="/company/detail?cmpn_nm=${avg[1].CMPN_NM }"><button type="submit" style="background: white;">
+                           <div class="thumbnail href2" style="width: 200px; border: none;">
+                           <p><img src="${avg[1].LOGO }" width="150" height="100"><br/><br/></p><p>${avg[1].CMPN_NM } </p><br/>
+                           <p>${avg[1].AVG_SALARY }  </p><br/>
                            </div>
+                        </button></a>
                         </div>
                    		<div class="col-md-1"></div>
-                        <div class="col-md-3" style="width: 200px;">
-                           <div class="thumbnail href3" style="width: 200px;"><p>공백<br/><br/></p><p>logo </p><br/>
-                           <p>회사명 </p><br/> <p>평균연봉 </p><br/>
+                        <div class="col-md-3" style="width: 220px;">
+                        <a href="/company/detail?cmpn_nm=${avg[2].CMPN_NM }"><button type="submit" style="background: white;">
+                           <div class="thumbnail href3" style="width: 200px; border: none;">
+                           <p><img src="${avg[2].LOGO }" width="150" height="100"><br/><br/></p><p>${avg[2].CMPN_NM } </p><br/>
+                           <p>${avg[2].AVG_SALARY }  </p><br/>
                            </div>
+                        </button></a>
                         </div>
                  
                      </div>
@@ -57,20 +66,37 @@
                   </div>
  				</div>
 
-                <div class="item">
+                <div class="item"> 신입연봉
                   <div class="container" align="center">
                      <div class="row" align="center">
-                      	<div class="col-md-1"></div>
-                        <div class="col-md-3" style="width: 200px;">
-                           <div class="thumbnail href1" style="width: 200px;"><img src="/picture/logo.jpg"></div>
-                        </div>
-                        <div class="col-md-3" style="width: 200px;">
-                           <div class="thumbnail href2" style="width: 200px;"><img src="/picture/logo.jpg"></div>
-                        </div>
-                        <div class="col-md-3" style="width: 200px;">
-                           <div class="thumbnail href3" style="width: 200px;"><img src="/picture/logo.jpg"></div>
+                      	
+                        <div class="col-md-3" style="width: 220px;">
+                        <a href="/company/detail?cmpn_nm=${avg[0].CMPN_NM }"><button type="submit" style="background: white;">
+                           <div class="thumbnail href1" style="width: 200px; border: none;">
+                           <p><img src="${avg[0].LOGO }" width="150" height="100"><br/><br/></p><p>${avg[0].CMPN_NM } </p><br/>
+                           <p>${avg[0].AVG_SALARY } </p><br/>
+                           </div>
+                        </button></a>
                         </div>
                         <div class="col-md-1"></div>
+                        <div class="col-md-3" style="width: 220px;">
+                        <a href="/company/detail?cmpn_nm=${avg[0].CMPN_NM }"><button type="submit" style="background: white;">
+                           <div class="thumbnail href1" style="width: 200px; border: none;">
+                           <p><img src="${avg[0].LOGO }" width="150" height="100"><br/><br/></p><p>${avg[0].CMPN_NM } </p><br/>
+                           <p>${avg[0].AVG_SALARY } </p><br/>
+                           </div>
+                        </button></a>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3" style="width: 220px;">
+                        <a href="/company/detail?cmpn_nm=${avg[0].CMPN_NM }"><button type="submit" style="background: white;">
+                           <div class="thumbnail href1" style="width: 200px; border: none;">
+                           <p><img src="${avg[0].LOGO }" width="150" height="100"><br/><br/></p><p>${avg[0].CMPN_NM } </p><br/>
+                           <p>${avg[0].AVG_SALARY } </p><br/>
+                           </div>
+                        </button></a>
+                        </div>
+                        
                      </div>
                   </div>
  				</div>
@@ -79,13 +105,13 @@
                   <div class="container" align="center">
                      <div class="row" align="center">
                       	<div class="col-md-1"></div>
-                        <div class="col-md-3" style="width: 200px;">
+                        <div class="col-md-3" style="width: 220px;">
                            <div class="thumbnail href1" style="width: 200px;"><img src="/picture/logo.jpg"></div>
                         </div>
-                        <div class="col-md-3" style="width: 200px;">
+                        <div class="col-md-3" style="width: 220px;">
                            <div class="thumbnail href2" style="width: 200px;"><img src="/picture/logo.jpg"></div>
                         </div>
-                        <div class="col-md-3" style="width: 200px;">
+                        <div class="col-md-3" style="width: 220px;">
                            <div class="thumbnail href3" style="width: 200px;"><img src="/picture/logo.jpg"></div>
                         </div>
                         <div class="col-md-1"></div>
@@ -96,12 +122,12 @@
 
             <!-- Left and right controls -->
             <a class="left carousel-control" href="#myCarousel" role="button"
-               data-slide="prev"> <span
-               class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+               data-slide="prev" style="background: white;"> <span
+               class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="color: black;"></span>
                <span class="sr-only">Previous</span>
             </a> <a class="right carousel-control" href="#myCarousel" role="button"
-               data-slide="next"> <span
-               class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+               data-slide="next" style="background: white;"> <span
+               class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: black;"></span>
                <span class="sr-only">Next</span>
             </a>
          </div>
