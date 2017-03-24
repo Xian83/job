@@ -64,7 +64,7 @@
 							<li><a href="/login/form">Login</a></li>
 						</c:when>
 						<c:when test="${auth eq 'yes'}">
-							<li><a href="/my/index">My Page</a></li>
+							<li><a href="/my/info">My Page</a></li>
 							<li><a href="/login/logout">Logout</a></li>
 						</c:when>
 					</c:choose>

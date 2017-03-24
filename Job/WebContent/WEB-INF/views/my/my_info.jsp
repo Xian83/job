@@ -6,18 +6,8 @@
 <div></div>
 <div class="well row">
 	<!-- 12등분  -->
-	<div class="col-md-3" align="center">
-		<form action="/my/update_pic" method="post"
-			enctype="multipart/form-data">
-			<b>PICTURE</b><br />
-			<img src="${url}" width="200" height="200" />
-			<hr />
-			<input type="file" class="form-control" name="pic" /> <br />
-			<input type="hidden" name="email" value="${sessionScope.email}" />
-			<button type="submit" class="btn">사진변경</button>
-		</form>
-	</div>
-	<div class="col-md-9">
+
+	<div class="col-md-12">
 		<form action="/my/result" method="get">
 			<p>
 				<label for="comment"><b>Email</b> <span id="checkEmail"></span></label><br />

@@ -5,7 +5,7 @@
 <mapper namespace="mappers.career">
 	<insert id="input" parameterType="java.util.HashMap">
 		insert into score
-		values(#{CMPN_NM}, #{FINANCE_SCORE}, #{SLAVE_SCORE}, #{LOGO},
+		values(#{CMPN_NM}, #{FINANCE_SCORE}, #{EMPLOYEE_SCORE}, #{LOGO},
 		#{DIVISION}, #{SCALE})
 	</insert>
 
@@ -22,7 +22,7 @@
 	<select id="detailsame" parameterType="java.lang.String"
 		resultType="java.util.HashMap">
 		select CMPN_NM, LOGO from score where
-		DIVISION=#{COMPANYNAME} order by FINANCE_SCORE DESC
+		DIVISION=#{DIVISION} order by FINANCE_SCORE DESC
 	</select>
 
 	<select id="review" resultType="java.util.HashMap">

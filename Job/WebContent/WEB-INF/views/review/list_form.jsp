@@ -12,18 +12,18 @@ input[id=msg] {
 <div class="container">
 	<div class="col-md-10">
 	
-			<c:forEach var="i" begin="0" end="${size-1 }">
+			<c:forEach var="i" begin="0" end="${size }">
 				<div class="media" style="background: #FFE4E1; border-style: solid; border-color: #C1CDC1  ">
 					<div class="media-left media-middle" align="center">
 <%-- 				
 					자기 컴퓨터(서버)에서 업로드한 프로필 사진이라면, 보일 겁니다.
 					<img src="${review[i].picURL }" class="media-object img-circle" style="width:120px; "> 
 --%>
-						<img src="/img.jpg" class="media-object img-circle" style="width:120px; ">
+						<img src="${review[i].picURL }" class="media-object img-circle" style="width:120px; ">
 						<p align="center">${review[i].EMAIL }</p>
 					</div>
 					<div class="media-body">
-						<h4 class="media-heading"><a href="/company/detail?cmpn_nm=${review[i].CMPN_NM }">${review[i].CMPN_NM }</h4></a>
+						<h4 class="media-heading"><a href="/company/detail?cmpn_nm=${review[i].CMPN_NM }">${page *6-5+i}. ${review[i].CMPN_NM }</h4></a>
 						<p>${ review[i].CONTENTS}</p>
 					</div>
 				 </div>
@@ -83,6 +83,9 @@ input[id=msg] {
 				var obj = JSON.parse(xhr.responseText);
 				var html = "";
 				for (var i = 0; i < obj.length; i++) {
+					if(obj[i].id==null){
+						obj[i].id="방문자";
+					}
 					html += "<b>[" + obj[i].id + "]</b> ";
 					html += obj[i].msg + "<br>";
 				}
