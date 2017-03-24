@@ -1,26 +1,28 @@
 package model;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class SalaryDao {
 	@Autowired
 	SqlSessionFactory factory;
-	
-	public List<HashMap> getSalary() {
-		List<HashMap> list = null;
+
+	// same industry Avg Salary, Rookie Salary
+	public HashMap getSalary(String type) {
+		HashMap map = new HashMap<>();
 		SqlSession sql = null;
 
 		try {
 			sql = factory.openSession();
-			list = sql.selectList("mappers.company.getSalary");
+			if(type.equals("all"))
+				map = sql.selectOne("mappers.company.getSalaryAll");
+			else
+				map = sql.selectOne("mappers.company.getSalaryIndustry", type);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -28,7 +30,6 @@ public class SalaryDao {
 			sql.close();
 		}
 
-		return list;
+		return map;
 	}
-	
 }

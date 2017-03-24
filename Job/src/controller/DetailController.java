@@ -18,44 +18,65 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import model.DetailDao;
+import model.SalaryDao;
 
 @Controller
 @RequestMapping("/company")
 public class DetailController {
    @Autowired
    DetailDao ddao;
+   
+   @Autowired
+   SalaryDao sDao;
 
    @RequestMapping("/detail")
    public ModelAndView detailHandler(@RequestParam(name="cmpn_nm") String companyname, HttpServletResponse response, HttpSession session, 
 		   @CookieValue(name="cmpn_nm",defaultValue="") String origin){
  
-
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
-		String email;
-		List scorelist = ddao.score(companyname);
-		List salarylist = ddao.salary(companyname);
+		mav.addObject("main", "company/detail_form");
+				
+		// get data by Company name
+		HashMap scorelist = ddao.score(companyname);	
+		HashMap salarylist = ddao.salary(companyname);
 		List reviewList = ddao.review(companyname);
 		
-		if (session.getAttribute("email") == null) {
+		// member check & 관심기업 여부 확인
+		String email = (String) session.getAttribute("email");
+		if (email == null) {
 			email = "visitant";
 		} else {
-			email = (String) session.getAttribute("email");
 			int a = ddao.checkScrape(companyname, email);
-			mav.addObject("scrape",a);
+			mav.addObject("scrape", a);	// 0 : 아님, 1: 관심기업 
 		}
+		
+		// increase visit count to DB
 		ddao.insertVisit(companyname, email);
-		HashMap map = (HashMap) scorelist.get(0);
-		String div = (String) map.get("DIVISION");
+		
+		// get same industry company list (finance score desc)
+		String div = (String) scorelist.get("DIVISION");
 		List samelist = ddao.same(div);
+		
+		// salary info
+		HashMap industry = sDao.getSalary(div);	//same industry
+		HashMap allCompany = sDao.getSalary("all");	//all company
+				
+		String CompID = "695091";	// DB에 쌓아야 한다.
+		// career catch site data
+		HashMap<String,List> info01 = ddao.getInfo01(CompID);
+		HashMap<String,List> info02 = ddao.getInfo01(CompID); 
+		
+		// data set for view
 		mav.addObject("score", scorelist);
 		mav.addObject("same", samelist);
 		mav.addObject("review", reviewList);
 		mav.addObject("salary", salarylist);
-		mav.addObject("main", "company/detail_form");
-		
-		
-		
+		mav.addObject("industry", industry);	// HashMap(avg, rookie)
+		mav.addObject("allCompany", allCompany);// HashMap(avg, rookie)
+		mav.addObject("info01", info01);// HashMap<List>(rank8, employee, scale)
+		mav.addObject("info02", info02);// HashMap<List>(rank, cmpn, score)
+				
 		// 쿠키생성
 		String u = origin+"#"+companyname;
 		Cookie c = new Cookie("cmpn_nm", u);

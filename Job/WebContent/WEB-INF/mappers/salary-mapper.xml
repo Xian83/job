@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.salary">
+	
+	<select id="getSalaryIndustry" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select avg(s.AVG_SALARY) as avg, avg(s.ROOKIE_SALARY) as rookie
+		from SALARY s, SCORE sc 
+		where sc.CMPN_NM = s.CMPN_NM and sc.DIVISION=#{DIVISION}
+	</select>
+	<select id="getSalaryAll" resultType="java.util.HashMap">
+		select avg(s.AVG_SALARY) as avg, avg(s.ROOKIE_SALARY) as rookie
+		from SALARY s, SCORE sc where sc.CMPN_NM = s.CMPN_NM
+	</select>
+</mapper>
