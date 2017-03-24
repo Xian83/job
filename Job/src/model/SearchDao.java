@@ -59,40 +59,31 @@ public class SearchDao {
 	}
 
 	// get Search Result by detail condition
-	public List getData(List list) throws IOException {
-		List list2 = new ArrayList();
-		/*
-		String name = (String) map.get("search");
-		String[] area = list
-		String[] industry = (String[]) map.get("JCode");
-		String[] size = (String[]) map.get("Size");*/
+	public List getData(String [] AreaSido, String [] JCode, String [] Size, String search ) throws IOException {
+		List<String> list = new ArrayList();
 		
-		/*System.out.println("name" + name);
-		System.out.println("area" + area);
-		System.out.println("industry" + industry);
-		System.out.println("size" + size);*/
-		System.out.println("list = " + list);
+
 		String condition = "";
 		// Search Condition Setting
 		// company name condition add
-		/*if (name != null)
-			condition += "&CName=" + name;
+		if (search != null)
+			condition += "&CName=" + search;
 
 		// area condition add
-		if (area != null) {
-			for (int i = 0; i < area.length; i++)
-				condition += "&AreaSido=" + area[i];
+		if (AreaSido != null) {
+			for (int i = 0; i < AreaSido.length; i++)
+				condition += "&AreaSido=" + AreaSido[i];
 		}
 		// industry condition add
-		if (industry != null) {
-			for (int i = 0; i < industry.length; i++)
-				condition += "&JCode=" + industry[i];
+		if (JCode != null) {
+			for (int i = 0; i < JCode.length; i++)
+				condition += "&JCode=" + JCode[i];
 		}
 		// company size condition add
-		if (size != null) {
-			for (int i = 0; i < size.length; i++)
-				condition += "&Size=" + size[i];
-		}*/
+		if (Size != null) {
+			for (int i = 0; i < Size.length; i++)
+				condition += "&Size=" + Size[i];
+		}
 
 		String url = "http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?flag=Search" 
 				+ condition + "&intCurrentPage=1&intPageSize=20";
@@ -109,7 +100,7 @@ public class SearchDao {
 				// connect
 				Document doc = Jsoup.connect(url + "&CurrentPage=" + page).get();
 				System.out.println("URL : " + url + "&CurrentPage=" + page);
-				
+				System.out.println(doc.toString() + "=======================");
 				// check total count
 				Element cnt = doc.select(".iframe p").first();
 				String[] ar = cnt.text().split("\\s+");
@@ -133,7 +124,7 @@ public class SearchDao {
 			e.printStackTrace();
 		}
 
-		return list2;
+		return list;
 	}
 	
 	// detail search result paging

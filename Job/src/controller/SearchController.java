@@ -69,49 +69,25 @@ public class SearchController {
 	// Detail Search Result Ajax
 	@RequestMapping("/detail")
 	@ResponseBody
-	public List detailSearchHandler(@RequestParam(name="chkSido") String[] AreaSido, 
-					@RequestParam(name="chkJinhakCode") String[] JCode, @RequestParam(name="chkSize") String[] Size, 
-						@RequestParam(name="search") String[] search ) {
+	public List detailSearchHandler(@RequestParam(name="chkSido") String[] chkSido, 
+					@RequestParam(name="chkJinhakCode") String[] chkJinhakCode, @RequestParam(name="chkSize") String[] chkSize, 
+						@RequestParam(name="search") String search1 ) {
 		
-		System.out.println("chkSido 잘 넘어 옴? " + AreaSido);
-		System.out.println("chkJinhakCode 잘 넘어 옴? " + JCode);
-		System.out.println("chkSize 잘 넘어 옴? " + Size);
-		System.out.println("search 잘 넘어 옴? " + search);
-		
-		
-		// 리스트로 보내면 뒷 처리가 난감해짐. 맵으로 보내서 받아서 쓰는 방법 생각해 볼 것!
+		String [] AreaSido = chkSido;
+		String [] JCode = chkJinhakCode;
+		String [] Size = chkSize;
+		String search = search1;
+	
 		List list = new ArrayList();
-		list.add(AreaSido);
-		list.add(JCode);
-		list.add(Size);
-		list.add(search);
-		// HashMap data = new HashMap();
-			
-	/*try {
-			list = sdao.getData(list);
-			//data = paging(list, request, data);
-=======
-	public HashMap detailSearchHandler(@RequestParam Map map, HttpServletRequest request) {
-		// 테스트용 데이터 세팅
-		map.put("search", "삼성");
-		map.put("AreaSido", new String[] { "부산", "서울" });
-		map.put("JCode", new String[] { "J1", "J2" });
-		// map.put("Size", new String[]{"0", "1"});
-
-		List list = null;
-		HashMap data = new HashMap();
-
+		
 		try {
-			list = sdao.getData(map);
-			data = paging(list, request, data);
->>>>>>> branch 'master' of https://github.com/Xian83/job
+			list =  sdao.getData(AreaSido, JCode, Size, search);
+	
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		// list2, page, size 만 넘겨주면 된다.
-		return list;
-	}*/
+
 
 	/*public HashMap paging(List list, HttpServletRequest request, HashMap data) {
 
@@ -133,4 +109,5 @@ public class SearchController {
 
 		return list;
 	}
+
 }
