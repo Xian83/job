@@ -10,16 +10,7 @@
 <div class="panel panel-default ">
 		<div class="panel-heading " align="center" style="background: #f4511e">
 			프로필
-			<div class="btn-group " align="right">
-				<a class="btn dropdown-toggle" data-toggle="dropdown"> <i
-					class="fa fa-align-justify"></i> <span class="caret"></span>
-				</a>
-				<ul class="dropdown-menu">
-					<li>자주 본 기업</li>
-					<li>최근 본 기업</li>
-					<li>공채달력</li>
-				</ul>
-			</div>
+			
 		</div>
 
 		<div class="panel-body" align="center" style="background: #ECF1EF">
@@ -35,10 +26,13 @@
 			<hr />	
 			<table>
 				<tr>
-					<th><a href="/my/info">회원정보관리</a></th>
-					<th><a href="/my/recommand">추천 기업 정보</a></th>
-					<th><a href="/my/interest">스크랩한 기업 정보</a></th>
+					<th><a href="/my/info"><i class="fa fa-address-card" style="font-size:36px"></i><br/>자기정보관리</a></th>
+					<th><a href="/my/recommand"><i class="fa fa-thumbs-o-up" style="font-size:36px"></i><br/>추천 기업 정보</a></th>
+					<th><a href="/my/interest"><i class="fa fa-files-o" style="font-size:36px;"></i><br/>스크랩한 기업 정보</a></th>
 				</tr>
+					<th><a href="/my/info"><i class="fa fa-eye" style="font-size:36px"></i><br/>자주 본 기업</a></th>
+					<th><a href="/my/recommand"><i class="fa fa-spinner" style="font-size:36px;"></i><br/>최근 본 기업</a></th>
+					<th><a href="/my/interest"><i class="fa fa-columns" style="font-size:36px;"></i><br/>공채달력</a></th>
 			</table>
 		</div>
 
