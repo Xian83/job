@@ -1,14 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-
+<head>
+<style>
+input[id=msg] {
+	width: 30%;
+}
+</style>
+</head>
+<body>
 <div class="container">
 	<div class="col-md-10">
 	
 			<c:forEach var="i" begin="0" end="${size-1 }">
 				<div class="media" style="background: #FFE4E1; border-style: solid; border-color: #C1CDC1  ">
 					<div class="media-left media-middle" align="center">
+<%-- 				
+					자기 컴퓨터(서버)에서 업로드한 프로필 사진이라면, 보일 겁니다.
+					<img src="${review[i].picURL }" class="media-object img-circle" style="width:120px; "> 
+--%>
 						<img src="/img.jpg" class="media-object img-circle" style="width:120px; ">
 						<p align="center">${review[i].EMAIL }</p>
 					</div>
@@ -40,11 +50,8 @@
 		</div>
 	</div>
 
-	<style>
-input[id=msg] {
-	width: 30%;
-}
-</style>
+
+
 	<div class="col-md-2">
 		<div class="container">
 			<div class="well" id="result"
@@ -91,5 +98,5 @@ input[id=msg] {
 	}
 	setInterval(getChatLog, 200);
 </script>
-
+</body>
 

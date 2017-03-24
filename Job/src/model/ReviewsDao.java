@@ -1,8 +1,7 @@
 package model;
 
-import java.io.IOException;
 import java.util.*;
-import org.apache.commons.collections.map.HashedMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,26 +13,51 @@ public class ReviewsDao {
 	@Autowired
 	SqlSessionFactory factory;
 
-	public List<HashedMap> review() {
+	@Autowired
+	MyInfoDao myDao;
+
+	public HashMap totalCount() {
 		SqlSession session = factory.openSession();
-		List<HashedMap> list = new ArrayList<>();
+		HashMap map = new HashMap();
 		try {
-			list = session.selectList("mappers.review.review");
-			return list;
+			map = session.selectOne("mappers.review.total");
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			session.close();
 		}
+		return map;
 	}
 
-	public List<HashedMap> rank() {
+	public List<HashMap> review(int start, int end) {
+		List<HashMap> list = new ArrayList<>();
+		
+		HashMap map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		
 		SqlSession session = factory.openSession();
-		List<HashedMap> list = new ArrayList<>();
 		try {
-			list = session.selectList("mappers.review.rank");
-			return list;
+			list = session.selectList("mappers.review.getPage", map);
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			session.close();
 		}
+		return list;
+	}
+
+	public List<HashMap> rank() {
+		SqlSession session = factory.openSession();
+		List<HashMap> list = new ArrayList<>();
+		try {
+			list = session.selectList("mappers.review.rank");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return list;
 	}
 
 	public int push(String cmpn_nm, String content, String email) {
@@ -47,16 +71,28 @@ public class ReviewsDao {
 		try {
 			a = session.insert("mappers.review.push", map);
 			System.out.println(a);
-			return a;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return a;
-
 		} finally {
 			session.close();
+		}
+		return a;
+	}
 
+	public List<HashMap> getPicture(List<HashMap> list) {
+		String email = "";
+		String picURL = "";
+
+		for (HashMap obj : list) {
+			email = (String) obj.get("EMAIL");
+			picURL = myDao.getLastetImageURL(email);
+			if (picURL == null || picURL.equals("null"))
+				picURL = "/picture/default.jpg";
+			obj.put("pictURL", picURL);
 		}
 
+		return list;
 	}
 
 	//

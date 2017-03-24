@@ -2,6 +2,7 @@ package controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,22 +23,29 @@ public class ReviewsController {
 	@Autowired
 	ReviewsDao rdao;
 	
-	
 	@RequestMapping("/list_form")
-	public ModelAndView reviewsHandler(){
+	public ModelAndView reviewsHandler(@RequestParam(name="page", defaultValue="1")String page){
+		 
+		// paging
+		int div = 6;	// review per page
+		int cnt = Integer.parseInt(String.valueOf(rdao.totalCount().get("COUNT")));	// total data count
+		int size = cnt % div == 0 ? cnt / div : cnt / div + 1;	// page count
+
+		int start = (Integer.parseInt(page) - 1) * div + 1;
+		int end = Integer.parseInt(page) * div;
+				
+		List<HashMap> review = rdao.review(start, end);	// get reviews
+		review = rdao.getPicture(review); 				// add picURL
+		
+		List<HashMap> rank = rdao.rank();				// ?? 				
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
-		List reviewList = rdao.review();
-		List rankList = rdao.rank();
-
-		int size = reviewList.size();
-		mav.addObject("size",size);
-		mav.addObject("rank",rankList);
-
-		mav.addObject("review", reviewList);
-	
 		mav.addObject("main","review/list_form");
+		mav.addObject("page", page);
+		mav.addObject("size", size);
+		mav.addObject("review", review);
+		mav.addObject("rank",rank);
 		
 		return mav;
 	}
