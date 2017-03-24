@@ -29,7 +29,7 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox" align="center">
 				
-               <div class="item active"> <b> < 평균연봉 > </b>
+               <div class="item active"> <b> < 평균연봉 top3 > </b>
                   <div class="container" align="center">
                      <div class="row" align="center">
                       	
@@ -66,33 +66,33 @@
                   </div>
  				</div>
 
-                <div class="item"> 신입연봉
+                <div class="item"> <b> < 신입연봉 top3 > </b>
                   <div class="container" align="center">
                      <div class="row" align="center">
                       	
                         <div class="col-md-3" style="width: 220px;">
-                        <a href="/company/detail?cmpn_nm=${avg[0].CMPN_NM }"><button type="submit" style="background: white;">
+                        <a href="/company/detail?cmpn_nm=${rookie[0].CMPN_NM }"><button type="submit" style="background: white;">
                            <div class="thumbnail href1" style="width: 200px; border: none;">
-                           <p><img src="${avg[0].LOGO }" width="150" height="100"><br/><br/></p><p>${avg[0].CMPN_NM } </p><br/>
-                           <p>${avg[0].AVG_SALARY } </p><br/>
+                           <p><img src="${rookie[0].LOGO }" width="150" height="100"><br/><br/></p><p>${rookie[0].CMPN_NM } </p><br/>
+                           <p>${rookie[0].ROOKIE_SALARY } </p><br/>
                            </div>
                         </button></a>
                         </div>
                         <div class="col-md-1"></div>
                         <div class="col-md-3" style="width: 220px;">
-                        <a href="/company/detail?cmpn_nm=${avg[0].CMPN_NM }"><button type="submit" style="background: white;">
+                        <a href="/company/detail?cmpn_nm=${rookie[1].CMPN_NM }"><button type="submit" style="background: white;">
                            <div class="thumbnail href1" style="width: 200px; border: none;">
-                           <p><img src="${avg[0].LOGO }" width="150" height="100"><br/><br/></p><p>${avg[0].CMPN_NM } </p><br/>
-                           <p>${avg[0].AVG_SALARY } </p><br/>
+                           <p><img src="${rookie[1].LOGO }" width="150" height="100"><br/><br/></p><p>${rookie[1].CMPN_NM } </p><br/>
+                           <p>${rookie[1].ROOKIE_SALARY } </p><br/>
                            </div>
                         </button></a>
                         </div>
                         <div class="col-md-1"></div>
                         <div class="col-md-3" style="width: 220px;">
-                        <a href="/company/detail?cmpn_nm=${avg[0].CMPN_NM }"><button type="submit" style="background: white;">
+                        <a href="/company/detail?cmpn_nm=${rookie[2].CMPN_NM }"><button type="submit" style="background: white;">
                            <div class="thumbnail href1" style="width: 200px; border: none;">
-                           <p><img src="${avg[0].LOGO }" width="150" height="100"><br/><br/></p><p>${avg[0].CMPN_NM } </p><br/>
-                           <p>${avg[0].AVG_SALARY } </p><br/>
+                           <p><img src="${rookie[2].LOGO }" width="150" height="100"><br/><br/></p><p>${rookie[2].CMPN_NM } </p><br/>
+                           <p>${rookie[2].ROOKIE_SALARY } </p><br/>
                            </div>
                         </button></a>
                         </div>
@@ -101,20 +101,37 @@
                   </div>
  				</div>
 
-                <div class="item">
+                <div class="item"> <b> < 재무평점 top3 > </b>
                   <div class="container" align="center">
                      <div class="row" align="center">
-                      	<div class="col-md-1"></div>
+                      	
                         <div class="col-md-3" style="width: 220px;">
-                           <div class="thumbnail href1" style="width: 200px;"><img src="/picture/logo.jpg"></div>
-                        </div>
-                        <div class="col-md-3" style="width: 220px;">
-                           <div class="thumbnail href2" style="width: 200px;"><img src="/picture/logo.jpg"></div>
-                        </div>
-                        <div class="col-md-3" style="width: 220px;">
-                           <div class="thumbnail href3" style="width: 200px;"><img src="/picture/logo.jpg"></div>
+                        <a href="/company/detail?cmpn_nm=${finance[0].CMPN_NM }"><button type="submit" style="background: white;">
+                           <div class="thumbnail href1" style="width: 200px; border: none;">
+                           <p><img src="${finance[0].LOGO }" width="150" height="100"><br/><br/></p><p>${finance[0].CMPN_NM } </p><br/>
+                           <p>${finance[0].FINANCE_SCORE } </p><br/>
+                           </div>
+                        </button></a>
                         </div>
                         <div class="col-md-1"></div>
+                        <div class="col-md-3" style="width: 220px;">
+                        <a href="/company/detail?cmpn_nm=${finance[1].CMPN_NM }"><button type="submit" style="background: white;">
+                           <div class="thumbnail href1" style="width: 200px; border: none;">
+                           <p><img src="${finance[1].LOGO }" width="150" height="100"><br/><br/></p><p>${finance[1].CMPN_NM } </p><br/>
+                           <p>${finance[1].FINANCE_SCORE } </p><br/>
+                           </div>
+                        </button></a>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3" style="width: 220px;">
+                        <a href="/company/detail?cmpn_nm=${finance[2].CMPN_NM }"><button type="submit" style="background: white;">
+                           <div class="thumbnail href1" style="width: 200px; border: none;">
+                           <p><img src="${finance[2].LOGO }" width="150" height="100"><br/><br/></p><p>${finance[2].CMPN_NM } </p><br/>
+                           <p>${finance[2].FINANCE_SCORE } </p><br/>
+                           </div>
+                        </button></a>
+                        </div>
+                       
                      </div>
                   </div>
  				</div>
@@ -140,6 +157,10 @@
 <br/>
 <br/>
 <br/>
+<div align="center">
+	<p>바로가기</p>
+	<br/>
+</div>
 
 <!--  여기서부터 바로가기  -->
 
@@ -171,4 +192,6 @@
   </div>
 </div>
 </div>
+
+
 
