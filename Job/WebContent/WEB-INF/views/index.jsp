@@ -165,36 +165,56 @@
 
 <!--  여기서부터 바로가기  -->
 
-<div class="col-md-12" align="center">
-<div class="container" align="center" style="width:1000px;">
-  <div class="row" align="center">
-  	
-     <div class="col-sm-2" style="width: 200px;" align="center" >
-        <button type="submit" width: 200px;><a href="/search/company"><img src="/picture/c.jpg" alt="search" width="200px" height="220"></a></button>
-        <p><strong>상세검색</strong></p>
+
+<div class="container" align="center" style="width:80%">
+  <div class="row">
+  	 <div class="col-md-1"></div>
+     <div class="col-md-2" style="border: none;" class="thumbnail">
+        <a href="/search/company"><button type="submit" style="width:200px;" ><img src="/picture/c.jpg">
+        	<div class="caption">
+        	search
+        	</div>
+        </button></a>
      </div>
-     <div class="col-sm-2" style="width: 200px;" align="center">
-        <button type="submit" width: 200px;><a href="/compare/form"><img src="/picture/c.jpg" alt="compare" width="200px" height="220"></a></button>
-        <p><strong>기업비교</strong></p>
+     <div class="col-md-2" style="border: none;" class="thumbnail">
+        <a href="/compare/form"><button type="submit" style="width: 200px;"><img src="/picture/c.jpg">
+        	<div class="caption">
+        	compare
+        	</div>
+        </button></a>
      </div>
-     <div class="col-sm-2" style="width: 200px;" align="center">
-        <button type="submit" width: 200px;><a href="/rank/form"><img src="/picture/c.jpg" alt="rank" width="200px" height="220"></a></button>
-        <p><strong>기업순위</strong></p>
+      <div class="col-md-2" style="border: none;" class="thumbnail">
+        <a href="/rank/form"><button type="submit" style="width: 200px;"><img src="/picture/c.jpg">
+        	<div class="caption">
+        	rank
+        	</div>
+        </button></a>
      </div>
-        <div class="col-sm-2" style="width: 200px;" align="center">
-        <button type="submit" width: 200px;><a href="/my/recommand"><img src="/picture/c.jpg" alt="hit" width="200px" height="220"></a></button>
-        <p><strong>추천기업</strong></p>
+     <div class="col-md-2" style="border: none;" class="thumbnail">
+        <a href="/my/recommand"><button type="submit" style="width: 200px;"><img src="/picture/c.jpg">
+        	<div class="caption">
+        	recommand
+        	</div>
+        </button></a>
      </div>
-     <div class="col-sm-2" style="width: 200px;" align="center">
-        <button type="submit" width: 200px;><a href="/my/applyInfo"><img src="/picture/c.jpg" alt="calendar" width="200px" height="220"></a></button>
-        <p><strong>공채달력</strong></p>
+     <div class="col-md-2" style="border: none;" class="thumbnail">
+        <a href="/my/applyInfo"><button type="submit" style="width: 200px;"><img src="/picture/c.jpg">
+        	<div class="caption">
+        	applyInfo
+        	</div>
+        </button></a>
      </div>
+     <div class="col-md-1"></div>
      
   </div>
 </div>
-</div>
+
 
 <hr/>
+
+
+
+
 
 
 

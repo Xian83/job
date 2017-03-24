@@ -2,11 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
-<script type="text/javascript"
-	src="https://www.gstatic.com/charts/loader.js"></script>   
-
+ 
 
 <div class="container" align="center" >
 
@@ -69,28 +65,7 @@
 	            </td>
 	            
 	            <td>
-	            	<script type="text/javascript">
-				      google.charts.load('current', {'packages':['bar']});
-				      google.charts.setOnLoadCallback(drawChart);
-				
-				      function drawChart() {
-				        var data = google.visualization.arrayToDataTable([
-				          ['Rank', 'avgsalary', 'rookiesalary', 'financescore', 'employeescore'],
-				          ['point', 200, 300, 200, 200]
-				         
-				        ]);
-				
-				        var options = {
-				        	width : 400,
-				        	height : 250,
-				        };
-				
-				        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-				
-				        chart.draw(data, options);
-				      }
-				    </script>
-				    <div id="columnchart_material_${i }" style="width: 400px; height: 200px; display: none;"></div>
+	            	
 	            </td>
 		      </tr>
 		    </c:forEach>
@@ -279,4 +254,4 @@
   </div>
 </div>
 
-           
+
