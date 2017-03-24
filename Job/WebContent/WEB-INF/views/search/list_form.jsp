@@ -153,7 +153,7 @@ body {
          <br />
          <div class="bot">
             <div class="inp">
-               <input name="search" type="text" id="search" value="기업명을 입력해 주세요"
+               <input name="search" type="text" id="search" placeholder="기업명을 입력해 주세요"
                   style="ime-mode: active; width: 800; height: 37"
                   onkeypress="if(event.keyCode==13){ EnterSearch();return false;}" />
                <!-- <a href="javascript:void(0);">
@@ -217,30 +217,8 @@ body {
 </div>  --%>
 
 
-<%-- <!-- 페이지 뷰 -->
-<div align="center">
-   <c:if test="${page ne 1 }">
-      <a href="/search/company?page=${page -1 }">이전</a>
-   </c:if>
-   <c:forEach var="p" begin="1" end="${size }" varStatus="vs">
-      <c:choose>
-         <c:when test="${p eq page }">
-            <b style="color: red;">${p }</b>
-         </c:when>
-         <c:otherwise>
-            <a href="/search/company?page=${p }">${p }</a>
-         </c:otherwise>
-      </c:choose>
-      <c:if test="${vs.last eq false }">|</c:if>
-   </c:forEach>
-   <c:if test="${page ne size }">
-      <a href="/search/company?page=${page +1 }">다음</a>
-      <br />
-   </c:if>
-   <br />
-</div>
 
- --%>
+
 
 <!-- 상세 조건 검색 - 체크박스 이벤트 처리  -->
 <div id="result" style="height: 300"></div>
@@ -268,30 +246,61 @@ $("#sc").on("click", function(){
    console.log(chkSize);
    
    $.ajax({
-      "url" : "/search/detail",
-      "method" : "post",
-      "data" : {
-         "search" : search,
-         "chkSido" : chkSido,
-         "chkJinhakCode" : chkJinhakCode,
-         "chkSize" : chkSize
-      }
-   }).done(function(aw){         
-	   var txt = "";
-      for(var i=0; i< aw.list.length; i++) {
-    	  txt +="회사이름 : "+aw.list[i].CMPN_NM+"<br/>";
-    	  txt +="로고 : "+aw.list[i].LOGO+"<br/>";
-    	  txt +="재무평가 : "+aw.list[i].FINANCE_SCORE+"<br/>";
-    	  txt +="재직자평판 : "+aw.list[i].EMPLOYEE_SCORE+"<br/>";
-    	  txt +="규모 : "+aw.list[i].SCALE+"<br/>";
-    	  txt +="분야 : "+aw.list[i].DIVISION+"<br/>";
-      }
-      $("#result").html(txt);
-   });
-});
+	      "url" : "/search/detail",
+	      "method" : "post",
+	      "data" : {
+	         "search" : search,
+	         "chkSido" : chkSido,
+	         "chkJinhakCode" : chkJinhakCode,
+	         "chkSize" : chkSize
+	      }
+	   }).done(function(aw){         
+	      $("#result").html(aw);
+	   });
+	});
 
+// 위에서 끝부분만 수정하면 <div> result 구역에 뿌려줌
+/* 	}).done(function(aw){         
+		   var txt = "";
+	   for(var i=0; i< aw.list.length; i++) {
+	 	  txt +="회사이름 : "+aw.list[i].CMPN_NM+"<br/>";
+	 	  txt +="로고 : "+aw.list[i].LOGO+"<br/>";
+	 	  txt +="재무평가 : "+aw.list[i].FINANCE_SCORE+"<br/>";
+	 	  txt +="재직자평판 : "+aw.list[i].EMPLOYEE_SCORE+"<br/>";
+	 	  txt +="규모 : "+aw.list[i].SCALE+"<br/>";
+	 	  txt +="분야 : "+aw.list[i].DIVISION+"<br/>";
+	   }
+	   $("#result").html(txt);
+	});
+	}); */
 
-/*<script type="text/javascript" charset="utf-8">
+</script>
+
+<%-- <!-- 페이지 뷰 --> 
+<div align="center">
+   <c:if test="${page ne 1 }">
+      <a href="/search/company?page=${page -1 }">이전</a>
+   </c:if>
+   <c:forEach var="p" begin="1" end="${size }" varStatus="vs">
+      <c:choose>
+         <c:when test="${p eq page }">
+            <b style="color: red;">${p }</b>
+         </c:when>
+         <c:otherwise>
+            <a href="/search/company?page=${p }">${p }</a>
+         </c:otherwise>
+      </c:choose>
+      <c:if test="${vs.last eq false }">|</c:if>
+   </c:forEach>
+   <c:if test="${page ne size }">
+      <a href="/search/company?page=${page +1 }">다음</a>
+      <br />
+   </c:if>
+   <br />
+</div>
+ --%>
+
+<!-- <script type="text/javascript" charset="utf-8">
 $("#sc").on("click",function(){
    var chkSido = [];
    
@@ -559,7 +568,7 @@ $("#sc").on("click",function(){
          });
       })
       
-   }
-     */
+   } -->
+     
 </script>
 
