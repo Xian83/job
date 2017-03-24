@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,13 +27,13 @@ public class SearchController {
 	// Search Page main
 	@RequestMapping("/company")
 	public ModelAndView searchHandler(HttpServletRequest request,
-			@RequestParam(name = "search", defaultValue = "") String CName) throws IOException {
+			@RequestParam(name = "search", defaultValue = "삼성") String CName) throws IOException {
 
 		// 기업명 기준 검색 결과 DB 가져오기
 		List list = sdao.getData(CName);
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t1");
+		mav.setViewName("search");
 		mav.addObject("main", "search/list_form");
 		mav.addObject("list", list);
 
@@ -90,11 +91,14 @@ public class SearchController {
 	
 	public boolean check(HttpServletRequest req){
 		boolean result = false;
+		
+		
 		String name = req.getParameter("search");
 		String[] area = req.getParameterValues("chkSido");
 		String[] industry = req.getParameterValues("chkJinhakCode");
 		String[] size = req.getParameterValues("chkSize");
 		String page = req.getParameter("page") == null ? "1" : req.getParameter("page");
+		
 		
 		if(area == null && industry == null && size == null){
 			
@@ -102,5 +106,4 @@ public class SearchController {
 		
 		return result;
 	}
-
 }
