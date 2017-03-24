@@ -32,38 +32,38 @@ public class RankController {
 	}
 
 	// ���� ���Կ���
-	@RequestMapping("/rookeysalary")
+	@RequestMapping("/rookie")
 	public ModelAndView InitHandler2() {
 		List list = rdao.rookiesalary(50);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
-		mav.addObject("main", "rank/rookeysalary");
+		mav.addObject("main", "rank/rookieSalary");
 		mav.addObject("list", list);
 		
 		return mav;
 	}
 
 	// 재무평가
-	@RequestMapping("/financescore")
+	@RequestMapping("/finance")
 	public ModelAndView InitHandler3() {
 		List list = rdao.financeScore(50);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
-		mav.addObject("main", "rank/financescore");
+		mav.addObject("main", "rank/financeScore");
 		mav.addObject("list", list);
 		return mav;
 	}
 
 	// 재직자 평가 점수
-	@RequestMapping("/slavescore")
+	@RequestMapping("/employee")
 	public ModelAndView InitHandler4() {
 		List list = rdao.employeeScore(50);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
-		mav.addObject("main", "rank/slavescore");
+		mav.addObject("main", "rank/employeeScore");
 		mav.addObject("list", list);
 		return mav;
 	}

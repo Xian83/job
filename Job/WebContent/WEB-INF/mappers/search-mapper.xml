@@ -8,11 +8,13 @@
 	</select>
 	<select id="pasing" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap">
-   <![CDATA[
-      select * from (
-              select rownum RNUM, sc.* from (
-                  select * from score where CMPN_NM like #{search} order by SLAVE_SCORE desc) sc)where RNUM>=${start} and RNUM<=${end}
-                  ]]>
+	<![CDATA[
+		select * from (
+			select rownum RNUM, sc.* from (
+				select * from score where CMPN_NM like #{search} order by EMPLOYEE_SCORE desc
+			)sc)
+		where RNUM>=${start} and RNUM<=${end}
+	]]>
 	</select>
 
 	<select id="pasinglist" parameterType="java.util.HashMap"
