@@ -54,13 +54,18 @@ public class DetailController {
 		// increase visit count to DB
 		ddao.insertVisit(companyname, email);
 		
-		// get similar industry company list (finance score desc)
+		// get same industry company list (finance score desc)
 		String div = (String) scorelist.get("DIVISION");
 		List samelist = ddao.same(div);
 		
 		// salary info
 		HashMap industry = sDao.getSalary(div);	//same industry
 		HashMap allCompany = sDao.getSalary("all");	//all company
+				
+		String CompID = "695091";	// DB에 쌓아야 한다.
+		// career catch site data
+		HashMap<String,List> info01 = ddao.getInfo01(CompID);
+		HashMap<String,List> info02 = ddao.getInfo01(CompID); 
 		
 		// data set for view
 		mav.addObject("score", scorelist);
@@ -69,6 +74,8 @@ public class DetailController {
 		mav.addObject("salary", salarylist);
 		mav.addObject("industry", industry);	// HashMap(avg, rookie)
 		mav.addObject("allCompany", allCompany);// HashMap(avg, rookie)
+		mav.addObject("info01", info01);// HashMap(rank, cmpn, score)
+		mav.addObject("info02", info02);// HashMap(rank, cmpn, score)
 				
 		// 쿠키생성
 		String u = origin+"#"+companyname;
