@@ -74,8 +74,8 @@ public class DetailController {
 		mav.addObject("salary", salarylist);
 		mav.addObject("industry", industry);	// HashMap(avg, rookie)
 		mav.addObject("allCompany", allCompany);// HashMap(avg, rookie)
-		mav.addObject("info01", info01);// HashMap(rank, cmpn, score)
-		mav.addObject("info02", info02);// HashMap(rank, cmpn, score)
+		mav.addObject("info01", info01);// HashMap<List>(rank8, employee, scale)
+		mav.addObject("info02", info02);// HashMap<List>(rank, cmpn, score)
 				
 		// 쿠키생성
 		String u = origin+"#"+companyname;
