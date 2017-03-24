@@ -32,7 +32,7 @@ public class MyInfoController {
 	@RequestMapping("/info")
 	public ModelAndView infoHandler(HttpSession session, @RequestParam Map data) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t1");
+		mav.setViewName("tt");
 
 		mav.addObject("main", "my/my_info");
 		
@@ -64,7 +64,7 @@ public class MyInfoController {
 	@RequestMapping("/result")
 	public ModelAndView resultHandler(HttpSession session, @RequestParam Map data) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t1");
+		mav.setViewName("tt");
 		mav.addObject("main", "/my/result");
 
 		String email = (String) session.getAttribute("email");
@@ -123,7 +123,7 @@ public class MyInfoController {
 	@RequestMapping("/leave_form")
 	public ModelAndView leave_formHandler(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t1");
+		mav.setViewName("tt");
 		mav.addObject("main", "/my/leave_form");
 		
 		return mav;
@@ -132,7 +132,7 @@ public class MyInfoController {
 	@RequestMapping("/leave_result")
 	public ModelAndView leave_resultHandler(HttpSession session, @RequestParam Map map ) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t1");
+		mav.setViewName("tt");
 		mav.addObject("main", "/my/leave_result");
 
 		String id = (String) session.getAttribute("email");

@@ -7,22 +7,47 @@ input[id=aaa] {
 	width: 95%;
 	padding: 10px 5px;
 }
-</style>
-<div class="container-fluid">
-	<div class="row content">
-		<div class="col-md-8">
+th{
+	background: #FEF1E9;
+}
 
-			
+</style>
+<div class="container-fluid" style="background: #F0FFF0; margin-left: 100px ; margin-right: 100px">
+	<div class="row content" >
+		<div class="col-md-8">
 			<div class="row content">
-				<div class="col-sm-3 sidenav">
+				<div class="col-sm-3 sidenav" align="center">
 					<img src="${score[0].LOGO }" class="img-circle" alt="LOGO"
 						width="200" height="200">
+					<form action="/company/interest">
+						<input type="hidden" name="cmpn_nm" value="${salary[0].CMPN_NM }">
+						<c:choose>
+							<c:when
+								test="${sessionScope.auth eq 'no' or sessionScope.auth eq null }">
+							</c:when>
+							<c:otherwise>
+								<c:choose>
+									<c:when test="${scrape eq 0 }">
+										<button class="btn btn-primary ">관심목록추가</button>
+									</c:when>
+									<c:otherwise>
+										<button class="btn btn-primary " style="background: red;">관심목록해제</button>
+									</c:otherwise>
+								</c:choose>
+							</c:otherwise>
+						</c:choose>
+
+					</form>
 				</div>
 				<div class="col-sm-9 sidenav">
-					<table class="table table-bordered" align="center" style="text-align: center;">
+					<table class="table table-bordered" align="center"
+						style="text-align: center;">
 						<thead>
 							<tr>
-								<th colspan="2" style="text-align: center;">${score[0].CMPN_NM }</th>
+								<th colspan="2" style="text-align: center;"><h3>${score[0].CMPN_NM }
+
+									</h3></th>
+
 							</tr>
 						</thead>
 						<tbody>
@@ -54,7 +79,7 @@ input[id=aaa] {
 		</div>
 		<div class="col-md-4">
 
-			
+
 			<table class="table table-bordered" style="text-align: center;">
 				<thead>
 					<tr>
@@ -68,39 +93,50 @@ input[id=aaa] {
 						<td>${salary[0].ROOKEY_SALARY }원</td>
 					</tr>
 			</table>
-			<div class="col-md-8">사원수 : 999999999명</div>
-			<div class="col-md-4">
-				<form action="/company/interest">
-					<input type="hidden" name="cmpn_nm" value="${salary[0].CMPN_NM }">
-					<c:choose>
-						<c:when
-							test="${sessionScope.auth eq 'no' or sessionScope.auth eq null }">
-							<button class="btn btn-primary disabled">관심목록추가</button>
-						</c:when>
-						<c:otherwise>
-							<c:choose>
-								<c:when test="${scrape eq 0 }">
-									<button class="btn btn-primary ">관심목록추가</button>
-								</c:when>
-								<c:otherwise>
-									<button class="btn btn-primary " style="background: red;">관심목록해제</button>
-								</c:otherwise>
-							</c:choose>
-						</c:otherwise>
-					</c:choose>
-
-				</form>
+			<div align="center">
+				사원수 : 999999999명 <br />
+				<div id="curve_chart" style="width: 500px; height: 150px"
+					align="center"></div>
 			</div>
+
 		</div>
+
+
+		<script type="text/javascript">
+			google.charts.load('current', {
+				'packages' : [ 'corechart' ]
+			});
+			google.charts.setOnLoadCallback(drawChart);
+
+			function drawChart() {
+				var data = google.visualization.arrayToDataTable([
+						[ 'Year', '${score[0].CMPN_NM }' ], [ '2013', 1000 ],
+						[ '2014', 1170 ], [ '2015', 2000 ] ]);
+
+				var options = {
+					title : '사원수 증가율',
+					curveType : 'function',
+					legend : {
+						position : 'bottom'
+					}
+				};
+
+				var chart = new google.visualization.LineChart(document
+						.getElementById('curve_chart'));
+
+				chart.draw(data, options);
+			}
+		</script>
+
 	</div>
-<hr/>
-	<div class="row content" align="center">
+	<hr />
+	<div class="row content" align="center" >
 		<p style="font-size: 20; line-height: 1.5; color: blue;">동종업계 인기
 			많은기업</p>
 		<c:forEach var="i" begin="0" end="5">
-			<div class="col-md-2">
-				<a href="/company/detail?cmpn_nm=${same[i].CMPN_NM }"> <img
-					src="${same[i].LOGO }" alt="Lights" style="width: 100%">
+			<div class="col-md-2" style="border-style: solid;">
+				<a href="/company/detail?cmpn_nm=${same[i].CMPN_NM }"> 
+				<img src="${same[i].LOGO }" alt="Lights" style="width: 100%"/>
 					<div class="caption">
 						<p>${same[i].CMPN_NM }</p>
 					</div>
@@ -108,10 +144,32 @@ input[id=aaa] {
 			</div>
 		</c:forEach>
 	</div>
-<hr/>
+	<hr />
+	<div class="row content" align="center">
+	<table class="table table-bordered">
+				
+				<thead>
+					<tr align="center" style="text-align: center; ">
+						<th colspan="1" rowspan="2" style="text-align: center; vertical-align: middle">소속산업명</th>
+						<th colspan="3" style="text-align: center;">산업순위</th>
+						<tr>
+						<th colspan="1" style="text-align: center;">2013</th>
+						<th colspan="1" style="text-align: center;">2014</th>
+						<th colspan="1" style="text-align: center;">2015</th>
+						</tr>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">소속산업</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">0</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">1</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">2</td>
+					</tr>
+			</table>
+	</div>
+	
 	<div class="row content">
-
-
 		<br />
 		<div class="panel panel-default">
 			<div class="panel-heading">리뷰</div>
@@ -136,8 +194,6 @@ input[id=aaa] {
 
 	<div class="row content" align="center">
 		<div class="col-md-6">
-			<script type="text/javascript"
-				src="https://www.gstatic.com/charts/loader.js"></script>
 			<script>
 				google.charts.load('current', {
 					packages : [ 'corechart' ]
@@ -160,8 +216,10 @@ input[id=aaa] {
 					bar : {
 						groupWidth : '60%'
 					}, // 그래프 너비 %
-					isStacked : false
+					isStacked : false,
 				// 그래프 쌓기(스택), 기본값은 false
+					backgroundColor: '#f1f8e9'
+					
 				};
 
 				function drawChart() {
@@ -169,8 +227,7 @@ input[id=aaa] {
 					// 차트 데이터
 					var data = new google.visualization.arrayToDataTable([
 							[ '년대', '회사이름', '업계평균', '전체평균', ],
-							[ '연봉', 2, 3, 4 ], [ '신입연봉', 6, 4, 3 ],
-							[ '매출', 5, 4, 3 ] ]);
+							[ '연봉', 2, 3, 4 ], [ '신입연봉', 6, 4, 3 ] ]);
 
 					var chart = new google.visualization.ColumnChart(document
 							.getElementById('chart_div'));
@@ -211,6 +268,7 @@ input[id=aaa] {
 						legend : {
 							position : "none"
 						},
+						backgroundColor: '#f1f8e9'
 					};
 					var chart = new google.visualization.BarChart(document
 							.getElementById("barchart_values"));
@@ -226,7 +284,7 @@ input[id=aaa] {
 			<p style="font-size: 20; line-height: 1.5; color: blue;">동종산업 기업
 				순위</p>
 			<hr />
-			<table class="table table-bordered" style="text-align: center; ">
+			<table class="table table-bordered" style="text-align: center;">
 				<thead>
 					<tr align="center" style="text-align: center;">
 						<th colspan="1" style="text-align: center;">구분</th>
@@ -235,23 +293,24 @@ input[id=aaa] {
 						<th colspan="1" style="text-align: center;">점수</th>
 					</tr>
 				</thead>
-				<tbody>		
-				<tr>
-						<td colspan="1" rowspan="8" style="vertical-align: middle;">동종산업 최상위</td>	
-						<tr>		
+				<tbody>
+					<tr>
+						<td colspan="1" rowspan="8" style="vertical-align: middle;">동종산업
+							최상위</td>
+					<tr>
 						<c:forEach begin="1" end="7">
 							<td>1</td>
 							<td colspan="2">삼성전자</td>
 							<td>89.9</td>
-						</tr>
-						</c:forEach>
+					</tr>
+					</c:forEach>
 					</tr>
 			</table>
 		</div>
 		<div class="col-md-6">
-		<p style="font-size: 20; line-height: 1.5; color: blue;">여기에 뭘넣을까</p>
-		<hr/>
-		<table class="table table-bordered" style="text-align: center; ">
+			<p style="font-size: 20; line-height: 1.5; color: blue;">여기에 뭘넣을까</p>
+			<hr />
+			<table class="table table-bordered" style="text-align: center;">
 				<thead>
 					<tr align="center" style="text-align: center;">
 						<th colspan="1" style="text-align: center;">구분</th>
@@ -260,28 +319,73 @@ input[id=aaa] {
 						<th colspan="1" style="text-align: center;">연봉</th>
 					</tr>
 				</thead>
-				<tbody>		
-				<tr>
-						<td colspan="1" rowspan="8" style="vertical-align: middle;">동종산업 연봉 순위</td>	
-						<tr>		
+				<tbody>
+					<tr>
+						<td colspan="1" rowspan="8" style="vertical-align: middle;">동종산업
+							연봉 순위</td>
+					<tr>
 						<c:forEach begin="1" end="7">
 							<td>1</td>
 							<td colspan="2">현대</td>
 							<td>9만9천원</td>
-						</tr>
-						</c:forEach>
+					</tr>
+					</c:forEach>
 					</tr>
 			</table>
-		<hr/>
+			<hr />
 		</div>
 	</div>
-
 	<div class="row content">
-		<p style="font-size: 20; line-height: 1.5; color: blue;">근무환경 및
-			복리후생</p>
+		<p style="font-size: 20; line-height: 1.5; color: blue;">사원수 증가율
+				</p>
 		<hr />
-		회사위치 / <br /> 회사제도 /<br /> 사내문화 /<br />
+		<div class="col-md-6">
+			<table class="table table-bordered">
+				
+				<thead>
+					<tr align="center" style="text-align: center;">
+						<th colspan="1" style="text-align: center;">구분</th>
+						<th colspan="1" style="text-align: center;">2013</th>
+						<th colspan="1" style="text-align: center;">2014</th>
+						<th colspan="1" style="text-align: center;">2015</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr style="height: 30px">
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${ salary[0].CMPN_NM }</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">0</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">1</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">2</td>
+					</tr>
+							<tr style="height: 30px">
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">평균</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">0</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">1</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">2</td>
+					</tr>
+							<tr style="height: 30px">
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">업계평균</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">0</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">1</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">2</td>
+					</tr>
+			</table>
+		</div>
+		<div class="col-md-6" id="pepole" style="height: 200"></div>
+			
+		
+</div>
+
+
+
+
+
+		<div class="row content">
+			<p style="font-size: 20; line-height: 1.5; color: blue;">근무환경 및
+				복리후생</p>
+			<hr />
+			회사위치 / <br /> 회사제도 /<br /> 사내문화 /<br />
+
+		</div>
 
 	</div>
-
-</div>

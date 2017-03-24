@@ -33,7 +33,7 @@ public class MyPageController2 {
 	public ModelAndView initHandler() {
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t1");
+		mav.setViewName("tt");
 		mav.addObject("main", "/my/index");
 		return mav;
 	}
@@ -52,7 +52,7 @@ public class MyPageController2 {
 		}
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t1");
+		mav.setViewName("tt");
 		mav.addObject("main", "/my/recommand");
 		mav.addObject("list", list);
 		return mav;
@@ -63,7 +63,7 @@ public class MyPageController2 {
 		List<HashMap> list = mypage.getVisitData((String) session.getAttribute("email"));
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t1");
+		mav.setViewName("tt");
 		mav.addObject("main", "/my/visit");
 		mav.addObject("list", list);
 		return mav;
@@ -74,7 +74,7 @@ public class MyPageController2 {
 		List<HashMap> list = mypage.getScrapData((String) session.getAttribute("email"));
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t1");
+		mav.setViewName("tt");
 		mav.addObject("main", "/my/interest");
 		mav.addObject("list", list);
 		return mav;
@@ -100,7 +100,7 @@ public class MyPageController2 {
 		List<HashMap> list = mypage.getCompareData((String) session.getAttribute("email"));
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t1");
+		mav.setViewName("tt");
 		mav.addObject("main", "/my/compare");
 		mav.addObject("list", list);
 		return mav;
@@ -110,7 +110,7 @@ public class MyPageController2 {
 	public ModelAndView applyHandler() {
 	
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t1");
+		mav.setViewName("tt");
 		mav.addObject("main", "/my/applyInfo");
 		return mav;
 	}
