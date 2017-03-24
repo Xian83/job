@@ -252,7 +252,7 @@ $("#sc").click(function(){
 	console.log(aw.list2[0]);
 	for(var i=0; i<aw.list2.length; i++) {
 		$("#result").append("회사이름 : "+aw.list2[i].CMPN_NM+"<br/>");  
-		 $("#result").append("로고 : "+aw.list2[i].LOGO+"<br/>");  
+		$("#result").append("로고 : "+"<img src="+aw.list2[i].LOGO+"/><br/>");  
 		$("#result").append("재무평가 : "+aw.list2[i].FINANCE_SCORE+"<br/>");  
 		$("#result").append("재직자평판 : "+aw.list2[i].EMPLOYEE_SCORE+"<br/>"); 
 		$("#result").append("규모 : "+aw.list2[i].SCALE+"<br/>"); 
