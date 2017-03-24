@@ -140,11 +140,11 @@
             <!-- Left and right controls -->
             <a class="left carousel-control" href="#myCarousel" role="button"
                data-slide="prev" style="background: white;"> <span
-               class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="color: black;"></span>
+               class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="color: red;"></span>
                <span class="sr-only">Previous</span>
             </a> <a class="right carousel-control" href="#myCarousel" role="button"
                data-slide="next" style="background: white;"> <span
-               class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: black;"></span>
+               class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: red;"></span>
                <span class="sr-only">Next</span>
             </a>
          </div>
@@ -158,8 +158,9 @@
 <br/>
 <br/>
 <div align="center">
-	<p>바로가기</p>
-	<br/>
+	<p>
+		<h5>↓ 바로가기 ↓</h5>
+	</p><hr/>
 </div>
 
 <!--  여기서부터 바로가기  -->
@@ -169,29 +170,32 @@
   <div class="row" align="center">
   	
      <div class="col-sm-2" style="width: 200px;" align="center" >
-        <button type="submit" width: 200px;><a href="/search/company"><img src="/picture/logo.jpg" alt="search" width="200px" height="220"></a></button>
+        <button type="submit" width: 200px;><a href="/search/company"><img src="/picture/c.jpg" alt="search" width="200px" height="220"></a></button>
         <p><strong>상세검색</strong></p>
      </div>
      <div class="col-sm-2" style="width: 200px;" align="center">
-        <button type="submit" width: 200px;><a href="/compare/form"><img src="/picture/logo.jpg" alt="compare" width="200px" height="220"></a></button>
+        <button type="submit" width: 200px;><a href="/compare/form"><img src="/picture/c.jpg" alt="compare" width="200px" height="220"></a></button>
         <p><strong>기업비교</strong></p>
      </div>
      <div class="col-sm-2" style="width: 200px;" align="center">
-        <button type="submit" width: 200px;><a href="/rank/form"><img src="/picture/logo.jpg" alt="rank" width="200px" height="220"></a></button>
+        <button type="submit" width: 200px;><a href="/rank/form"><img src="/picture/c.jpg" alt="rank" width="200px" height="220"></a></button>
         <p><strong>기업순위</strong></p>
      </div>
         <div class="col-sm-2" style="width: 200px;" align="center">
-        <button type="submit" width: 200px;><a href="/my/recommand"><img src="/picture/logo.jpg" alt="hit" width="200px" height="220"></a></button>
+        <button type="submit" width: 200px;><a href="/my/recommand"><img src="/picture/c.jpg" alt="hit" width="200px" height="220"></a></button>
         <p><strong>추천기업</strong></p>
      </div>
      <div class="col-sm-2" style="width: 200px;" align="center">
-        <button type="submit" width: 200px;><a href="/my/applyInfo"><img src="/picture/logo.jpg" alt="calendar" width="200px" height="220"></a></button>
+        <button type="submit" width: 200px;><a href="/my/applyInfo"><img src="/picture/c.jpg" alt="calendar" width="200px" height="220"></a></button>
         <p><strong>공채달력</strong></p>
      </div>
      
   </div>
 </div>
 </div>
+
+<hr/>
+
 
 
 
