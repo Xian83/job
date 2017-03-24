@@ -18,28 +18,28 @@ public class DetailDao {
 	@Autowired
 	SqlSessionFactory factory;
 
-	public List<HashedMap> score(String COMPANYNAME) {
+	public HashMap score(String COMPANYNAME) {
 		SqlSession session = factory.openSession();
-		List<HashedMap> list = new ArrayList<>();
+		HashMap map = new HashMap();
 		try {
-			list = session.selectList("mappers.career.detailscore", COMPANYNAME);
-			return list;
+			map = session.selectOne("mappers.career.detailscore", COMPANYNAME);
 
 		} finally {
 			session.close();
 		}
+		return map;
 	}
 
-	public List salary(String COMPANYNAME) {
+	public HashMap salary(String COMPANYNAME) {
 		SqlSession session = factory.openSession();
-		List<HashedMap> list = new ArrayList<>();
+		HashMap map = new HashMap();
 		try {
-			list = session.selectList("mappers.career.detailsalary", COMPANYNAME);
-			return list;
+			map = session.selectOne("mappers.career.detailsalary", COMPANYNAME);
 
 		} finally {
 			session.close();
 		}
+		return map;
 	}
 
 	public List same(String DIVISION) {
