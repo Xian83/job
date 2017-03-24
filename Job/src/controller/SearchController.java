@@ -67,6 +67,8 @@ public class SearchController {
 	@ResponseBody
 	public HashMap detailSearchHandler(HttpServletRequest req) {
 		HashMap data = new HashMap();
+	
+		// paging 처리
 		int cnt = sdao.getTotal(req);
 		int size = cnt % 20 == 0 ? cnt / 20 : cnt / 20 + 1;
 		String pStr = req.getParameter("page") == null ? "1" : req.getParameter("page");
@@ -74,7 +76,7 @@ public class SearchController {
 		int start = (Integer.parseInt(pStr) - 1) * 20 + 1;
 		int end = Integer.parseInt(pStr) * 20;
 
-		// get 기업명.
+		// get 기업명
 		List list = sdao.getData(req);
 		
 		// 페이지 분할 데이터
@@ -100,4 +102,5 @@ public class SearchController {
 		
 		return result;
 	}
+
 }
