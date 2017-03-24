@@ -1,54 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+	pageEncoding="EUC-KR"%>
 <style>
-th {
+	th {
 	width: 200px;
 	height: 100px;
 	text-align: center;
 }
 </style>
-<h1>ë§ˆì´íŽ˜ì´ì§€</h1>
-<hr />
-
-<div class="col-md-3">
-	<!-- íšŒì›ì •ë³´ê´€ë¦¬ -->
-
-	<div class="panel panel-default">
+<div class="panel panel-default ">
 		<div class="panel-heading " align="center" style="background: #f4511e">
-			í”„ë¡œí•„
+			ÇÁ·ÎÇÊ
 			<div class="btn-group " align="right">
 				<a class="btn dropdown-toggle" data-toggle="dropdown"> <i
 					class="fa fa-align-justify"></i> <span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu">
-					<li>ìžì£¼ ë³¸ ê¸°ì—…</li>
-					<li>ìµœê·¼ ë³¸ ê¸°ì—…</li>
-					<li>ê³µì±„ë‹¬ë ¥</li>
+					<li>ÀÚÁÖ º» ±â¾÷</li>
+					<li>ÃÖ±Ù º» ±â¾÷</li>
+					<li>°øÃ¤´Þ·Â</li>
 				</ul>
 			</div>
 		</div>
 
-		<div class="panel-body" align="center" >
+		<div class="panel-body" align="center" style="background: #ECF1EF">
 			
 			<form action="/my/update_pic" method="post"
 				enctype="multipart/form-data">
 				<b>PICTURE</b><br /> <img src="${url}" width="150" height="150" />
 				<hr/>
-				<input type="file" name="pic" " style="display: inline;"/>  
+				<input type="file" name="pic" style="display: inline;"/>  
 				<input type="hidden" name="email" value="${sessionScope.email}"/>
-				<button type="submit" class="btn">ì‚¬ì§„ë³€ê²½</button>
+				<button type="submit" class="btn">»çÁøº¯°æ</button>
 			</form>
 			<hr />	
 			<table>
 				<tr>
-					<th><a href="/my/info">íšŒì›ì •ë³´ê´€ë¦¬</a></th>
-					<th><a href="/my/recommand">ì¶”ì²œ ê¸°ì—… ì •ë³´</a></th>
-					<th><a href="/my/interest">ìŠ¤í¬ëž©í•œ ê¸°ì—… ì •ë³´</a></th>
+					<th><a href="/my/info">È¸¿øÁ¤º¸°ü¸®</a></th>
+					<th><a href="/my/recommand">ÃßÃµ ±â¾÷ Á¤º¸</a></th>
+					<th><a href="/my/interest">½ºÅ©·¦ÇÑ ±â¾÷ Á¤º¸</a></th>
 				</tr>
 			</table>
 		</div>
 
 	</div>
-
-</div>
-<div class="col=md-8"></div>

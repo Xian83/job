@@ -9,11 +9,23 @@
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
 	</definition>
 	
+	<definition name="default2" template="/WEB-INF/views/template/template2.jsp">
+		<put-attribute name="title" value="Job" />
+		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp" />
+		<put-attribute name="nav" value="/WEB-INF/views/template/nav.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
+		<put-attribute name="left" value="/WEB-INF/views/template/left.jsp" />
+	</definition>
+	
 	<definition name="root" extends="default">
 		<put-attribute name="main" value="/WEB-INF/views/index.jsp"/>
 	</definition>
 
 	<definition name="t1" extends="default">
+		<put-attribute name="main" expression="/WEB-INF/views/${main}.jsp"/>
+	</definition>
+	
+		<definition name="tt" extends="default2">
 		<put-attribute name="main" expression="/WEB-INF/views/${main}.jsp"/>
 	</definition>
 	

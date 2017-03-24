@@ -7,9 +7,13 @@ input[id=aaa] {
 	width: 95%;
 	padding: 10px 5px;
 }
+th{
+	background: #FEF1E9;
+}
+
 </style>
-<div class="container-fluid">
-	<div class="row content">
+<div class="container-fluid" style="background: #F0FFF0; margin-left: 100px ; margin-right: 100px">
+	<div class="row content" >
 		<div class="col-md-8">
 			<div class="row content">
 				<div class="col-sm-3 sidenav" align="center">
@@ -126,13 +130,13 @@ input[id=aaa] {
 
 	</div>
 	<hr />
-	<div class="row content" align="center">
+	<div class="row content" align="center" >
 		<p style="font-size: 20; line-height: 1.5; color: blue;">동종업계 인기
 			많은기업</p>
 		<c:forEach var="i" begin="0" end="5">
-			<div class="col-md-2">
-				<a href="/company/detail?cmpn_nm=${same[i].CMPN_NM }"> <img
-					src="${same[i].LOGO }" alt="Lights" style="width: 100%">
+			<div class="col-md-2" style="border-style: solid;">
+				<a href="/company/detail?cmpn_nm=${same[i].CMPN_NM }"> 
+				<img src="${same[i].LOGO }" alt="Lights" style="width: 100%"/>
 					<div class="caption">
 						<p>${same[i].CMPN_NM }</p>
 					</div>
@@ -141,9 +145,31 @@ input[id=aaa] {
 		</c:forEach>
 	</div>
 	<hr />
+	<div class="row content" align="center">
+	<table class="table table-bordered">
+				
+				<thead>
+					<tr align="center" style="text-align: center; ">
+						<th colspan="1" rowspan="2" style="text-align: center; vertical-align: middle">소속산업명</th>
+						<th colspan="3" style="text-align: center;">산업순위</th>
+						<tr>
+						<th colspan="1" style="text-align: center;">2013</th>
+						<th colspan="1" style="text-align: center;">2014</th>
+						<th colspan="1" style="text-align: center;">2015</th>
+						</tr>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">소속산업</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">0</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">1</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">2</td>
+					</tr>
+			</table>
+	</div>
+	
 	<div class="row content">
-
-
 		<br />
 		<div class="panel panel-default">
 			<div class="panel-heading">리뷰</div>
@@ -310,7 +336,8 @@ input[id=aaa] {
 		</div>
 	</div>
 	<div class="row content">
-		<h4>사원수 증가율</h4>
+		<p style="font-size: 20; line-height: 1.5; color: blue;">사원수 증가율
+				</p>
 		<hr />
 		<div class="col-md-6">
 			<table class="table table-bordered">
@@ -324,48 +351,28 @@ input[id=aaa] {
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td colspan="1" rowspan="1" style="vertical-align: middle">${ salary[0].CMPN_NM }</td>
-						<td colspan="1" rowspan="1" style="vertical-align: middle">0</td>
-						<td colspan="1" rowspan="1" style="vertical-align: middle">1</td>
-						<td colspan="1" rowspan="1" style="vertical-align: middle">2</td>
+					<tr style="height: 30px">
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${ salary[0].CMPN_NM }</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">0</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">1</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">2</td>
+					</tr>
+							<tr style="height: 30px">
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">평균</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">0</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">1</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">2</td>
+					</tr>
+							<tr style="height: 30px">
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">업계평균</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">0</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">1</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">2</td>
 					</tr>
 			</table>
 		</div>
-		<div class="col-md-6" id="pepole" ></div>
-				<script type="text/javascript">
-				google.charts.load('current', {packages: ['corechart', 'line']});
-				google.charts.setOnLoadCallback(drawBackgroundColor);
-
-				function drawBackgroundColor() {
-				      var data = new google.visualization.DataTable();
-				      data.addColumn('number', 'X');
-				      data.addColumn('number', '${score[0].CMPN_NM}');
-				      data.addColumn('number', '업계평균');
-				      data.addColumn('number', '평균');
-
-				      data.addRows([
-				        [0, 0,0,0],   [2013, 10,20,30],  [2014, 23,30,40], [2015, 23,40,60,10] 
-				      ]);
-
-				      var options = {
-				        hAxis: {
-				          title: 'Time'
-				        },
-				        vAxis: {
-				          title: 'Popularity'
-				        },
-				        backgroundColor: '#f1f8e9',
-				        width: 900,
-				        height: 200
-				     
-				      };
-
-				      var chart = new google.visualization.LineChart(document.getElementById('pepole'));
-				      chart.draw(data, options);
-				    }
-				
-				</script>
+		<div class="col-md-6" id="pepole" style="height: 200"></div>
+			
 		
 </div>
 
