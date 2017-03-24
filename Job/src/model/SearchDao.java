@@ -141,18 +141,24 @@ public class SearchDao {
 
 		// area condition add
 		if (area != null) {
-			for (int i = 0; i < area.length; i++)
-				condition += "&AreaSido=" + area[i];
+			if(!area[0].equals("전체")){
+				for (int i = 0; i < area.length; i++)
+					condition += "&AreaSido=" + area[i];
+			}
 		}
 		// industry condition add
 		if (industry != null) {
-			for (int i = 0; i < industry.length; i++)
-				condition += "&JCode=" + industry[i];
+			if(!industry[0].equals("전체")){
+				for (int i = 0; i < industry.length; i++)
+					condition += "&JCode=" + industry[i];
+			}
 		}
 		// company size condition add
 		if (size != null) {
-			for (int i = 0; i < size.length; i++)
-				condition += "&Size=" + size[i];
+			if(!size[0].equals("전체")){
+				for (int i = 0; i < size.length; i++)
+					condition += "&Size=" + size[i];
+			}
 		}
 
 		String url = "http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?flag=Search" + condition

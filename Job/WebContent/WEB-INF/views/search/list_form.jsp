@@ -36,6 +36,7 @@ body {
 	border-top: 10px;
 }
 </style>
+<br/>
 <div align="center">
 	<div class="corp_src well" align="center">
 		<form action="/search/detail" method="get">
@@ -101,7 +102,7 @@ body {
 								<li><input type="checkbox" name="chkJinhakCode"
 									id="chkJinhakCode전체" value="전체" /><label for="chkJinhakCode전체">전체</label></li>
 								<li><input type="checkbox" name="chkJinhakCode"
-									id="chkJinhakCode전체" value="J2" /><label for="chkJinhakCode전체">제조·화학</label></li>
+									id="chkJinhakCodeJ1" value="J1" /><label for="chkJinhakCode전체">제조·화학</label></li>
 								<li><input type="checkbox" name="chkJinhakCode"
 									id="chkJinhakCodeJ2" value="J2" /><label for="chkJinhakCodeJ2">은행·금융</label></li>
 								<li><input type="checkbox" name="chkJinhakCode"
@@ -244,22 +245,63 @@ body {
 <div id="result" style="height: 300"></div>
 <script type="text/javascript" charset="utf-8">
 
-$("#sc").click(function(){
+// $("#sc").click(function(){
 	
-	var aw = {"size":1,"list2":[{"CMPN_NM":"메디헬스","LOGO":"http://image.jinhak.com/job/site/tmp02.gif","FINANCE_SCORE":63.5,"EMPLOYEE_SCORE":100,"SCALE":"중소기업","DIVISION":"판매ㆍ유통"},
-		{"CMPN_NM":"메디헬스","LOGO":"http://image.jinhak.com/job/site/tmp02.gif","FINANCE_SCORE":63.5,"EMPLOYEE_SCORE":100,"SCALE":"중소기업","DIVISION":"판매ㆍ유통"},
-		{"CMPN_NM":"메디헬스","LOGO":"http://image.jinhak.com/job/site/tmp02.gif","FINANCE_SCORE":63.5,"EMPLOYEE_SCORE":100,"SCALE":"중소기업","DIVISION":"판매ㆍ유통"}],"page":"1"};
-	console.log(aw.list2[0]);
-	for(var i=0; i<aw.list2.length; i++) {
-		$("#result").append("회사이름 : "+aw.list2[i].CMPN_NM+"<br/>");  
-		 $("#result").append("로고 : "+aw.list2[i].LOGO+"<br/>");  
-		$("#result").append("재무평가 : "+aw.list2[i].FINANCE_SCORE+"<br/>");  
-		$("#result").append("재직자평판 : "+aw.list2[i].EMPLOYEE_SCORE+"<br/>"); 
-		$("#result").append("규모 : "+aw.list2[i].SCALE+"<br/>"); 
-		$("#result").append("분야 : "+aw.list2[i].DIVISION+"<br/>"); 
-	}
+// 	var aw = {"size":1,"list2":[{"CMPN_NM":"메디헬스","LOGO":"http://image.jinhak.com/job/site/tmp02.gif","FINANCE_SCORE":63.5,"EMPLOYEE_SCORE":100,"SCALE":"중소기업","DIVISION":"판매ㆍ유통"},
+// 		{"CMPN_NM":"메디헬스","LOGO":"http://image.jinhak.com/job/site/tmp02.gif","FINANCE_SCORE":63.5,"EMPLOYEE_SCORE":100,"SCALE":"중소기업","DIVISION":"판매ㆍ유통"},
+// 		{"CMPN_NM":"메디헬스","LOGO":"http://image.jinhak.com/job/site/tmp02.gif","FINANCE_SCORE":63.5,"EMPLOYEE_SCORE":100,"SCALE":"중소기업","DIVISION":"판매ㆍ유통"}],"page":"1"};
+// 	console.log(aw.list2[0]);
+// 	for(var i=0; i<aw.list2.length; i++) {
+// 		$("#result").append("회사이름 : "+aw.list2[i].CMPN_NM+"<br/>");  
+// 		 $("#result").append("로고 : "+aw.list2[i].LOGO+"<br/>");  
+// 		$("#result").append("재무평가 : "+aw.list2[i].FINANCE_SCORE+"<br/>");  
+// 		$("#result").append("재직자평판 : "+aw.list2[i].EMPLOYEE_SCORE+"<br/>"); 
+// 		$("#result").append("규모 : "+aw.list2[i].SCALE+"<br/>"); 
+// 		$("#result").append("분야 : "+aw.list2[i].DIVISION+"<br/>"); 
+// 	}
+// });
+
+$("#sc").on("click", function(){
+	var search = $("#search").val();
+	var chkSido = [];
+	var chkJinhakCode = [];
+	var chkSize = [];
+	
+	$("input[name='chkSido']:checked").each(function() {
+		chkSido.push($(this).val());
+	});
+	$("input[name='chkJinhakCode']:checked").each(function() {
+		chkJinhakCode.push($(this).val());
+	});
+	$("input[name='chkSize']:checked").each(function() {
+		chkSize.push($(this).val());
+	});
+	
+	console.log(search);
+	console.log(chkSido);
+	console.log(chkJinhakCode);
+	console.log(chkSize);
+	
+	$.ajax({
+		"url" : "/search/detail",
+		"method" : "post",
+		"data" : {
+			"search" : search,
+			"chkSido" : chkSido,
+			"chkJinhakCode" : chkJinhakCode,
+			"chkSize" : chkSize
+		}
+	}).done(function(aw){			
+		for(var i=0; i< aw.list.length; i++) {
+			$("#result").append("회사이름 : "+aw.list[i].CMPN_NM+"<br/>");  
+			 $("#result").append("로고 : "+aw.list[i].LOGO+"<br/>");  
+			$("#result").append("재무평가 : "+aw.list[i].FINANCE_SCORE+"<br/>");  
+			$("#result").append("재직자평판 : "+aw.list[i].EMPLOYEE_SCORE+"<br/>"); 
+			$("#result").append("규모 : "+aw.list[i].SCALE+"<br/>"); 
+			$("#result").append("분야 : "+aw.list[i].DIVISION+"<br/>"); 
+		}
+	});
 });
-	
 
 
 /*<script type="text/javascript" charset="utf-8">

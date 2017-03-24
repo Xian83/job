@@ -26,13 +26,13 @@ public class SearchController {
 	// Search Page main
 	@RequestMapping("/company")
 	public ModelAndView searchHandler(HttpServletRequest request,
-			@RequestParam(name = "search", defaultValue = "") String CName) throws IOException {
+			@RequestParam(name = "search", defaultValue = "삼성") String CName) throws IOException {
 
 		// 기업명 기준 검색 결과 DB 가져오기
 		List list = sdao.getData(CName);
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t1");
+		mav.setViewName("search");
 		mav.addObject("main", "search/list_form");
 		mav.addObject("list", list);
 
@@ -102,5 +102,4 @@ public class SearchController {
 		
 		return result;
 	}
-
 }
