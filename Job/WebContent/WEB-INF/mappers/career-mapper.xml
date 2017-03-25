@@ -52,5 +52,12 @@
 		insert into interest
 		values(#{CMPN_NM}, #{EMAIL}, 1)
 	</insert>
-
+	
+	<update id="updateCompID" parameterType="java.util.HashMap">
+		update score set COMPID=#{COMPID} where CMPN_NM=#{CMPN_NM}
+	</update>
+	<insert id="insertCompID" parameterType="java.util.HashMap">
+		insert into compid values(#{CMPN_NM}, #{COMPID})
+	</insert>
+	
 </mapper>

@@ -19,6 +19,7 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import model.CareerCatchDao;
 
@@ -93,7 +94,7 @@ public class CareerCatchController {
 		}
 	}
 
-	// 커리어캐치 기업 상세 페이지 
+	// 커리어캐치 기업 상세 페이지
 	@RequestMapping("/test02")
 	public void getData2Handler() {
 		List<HashMap> li1 = new ArrayList<>();
@@ -164,12 +165,17 @@ public class CareerCatchController {
 
 	// 커리어캐치 기업 상세 페이지(개요)
 	@RequestMapping("/test")
-	public void getData3Handler() {
+	public HashMap getData3Handler() {
+		HashMap map = new HashMap<>();
 		List<String> li1 = new ArrayList<>();
 
 		// DB에 이미 있다고 가정하고 작업 진행
 		// step 1 : get url by company name
 		String url = "http://www.careercatch.co.kr/Comp/CompSummary.aspx?CompID=695091";
+		// String url =
+		// "http://www.careercatch.co.kr/Comp/CompSummary.aspx?CompID=126321";
+		// String url =
+		// "http://www.careercatch.co.kr/Comp/CompSummary.aspx?CompID=C38916";
 
 		try {
 			Document doc = Jsoup.connect(url).get();
@@ -182,12 +188,63 @@ public class CareerCatchController {
 			li1.add(ar[8]);
 			li1.add(ar[10]);
 			System.out.println(ar[6] + " : " + ar[10]);
-			
-			//회사 위치, 회사 제도, 사내문화 / 분위기
+			map.put("summary", li1);
 
+			// 회사 위치
+			Elements e2 = doc.select("h4 .fw_normal");
+			String[] ar2 = e2.text().trim().split("\\s+", 2);
+			System.out.println("address : " + ar2[1]);
+			map.put("address", ar2[1]);
+
+			// 회사 제도, 사내문화 / 분위기
+			int cnt = 0;
+			Elements e3 = doc.select(".list_slash");
+			if (e3 != null) {
+				for (Element m : e3) {
+					String key = cnt == 0 ? "system" : "culture";
+					map.put(key, m.text());
+					System.out.println(key + " : " + m.text());
+					cnt++;
+				}
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return map;
+	}
 
+	// 회사별 CompID 가져오기
+	@RequestMapping("/test99")
+	public String getCompID(@RequestParam(name = "type") String CName) {
+		CName ="삼성전자";
+		
+		String url = "http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?flag=Search"
+				+ "&intCurrentPage=1&intPageSize=20&CName=" + CName;
+
+		int start = 0;
+		int end = 0;
+		String CompID = "";
+		try {
+			Document doc = Jsoup.connect(url).get();
+			Elements e = doc.select(".company_info a");
+			for (Element t : e) {
+				if (t.text().equals(CName)) {
+					CompID = t.attr("href");
+
+					if (CompID.startsWith("/Comp/CompInfo.aspx?CompID=") && CompID.endsWith("&flag=Search")
+							&& t.text().length() != 0) {
+
+						start = CompID.indexOf("=");
+						end = CompID.indexOf("&");
+						CompID = CompID.substring(start + 1, end);
+
+						System.out.println("회사코드 : " + CompID);
+					}
+				}
+			}
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		return CompID;
 	}
 }

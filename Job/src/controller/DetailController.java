@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import model.DetailDao;
 import model.SalaryDao;
+import model.SearchDao;
 
 @Controller
 @RequestMapping("/company")
@@ -28,6 +29,9 @@ public class DetailController {
    
    @Autowired
    SalaryDao sDao;
+   
+   @Autowired
+   SearchDao search;
 
    @RequestMapping("/detail")
    public ModelAndView detailHandler(@RequestParam(name="cmpn_nm") String companyname, HttpServletResponse response, HttpSession session, 
@@ -62,10 +66,10 @@ public class DetailController {
 		HashMap industry = sDao.getSalary(div);	//same industry
 		HashMap allCompany = sDao.getSalary("all");	//all company
 				
-		String CompID = "695091";	// DB에 쌓아야 한다.
+		String CompID = search.getCompID(companyname);
 		// career catch site data
 		HashMap<String,List> info01 = ddao.getInfo01(CompID);
-		HashMap<String,List> info02 = ddao.getInfo01(CompID); 
+		HashMap<String, Object> info02 = ddao.getInfo02(CompID); 
 		
 		// data set for view
 		mav.addObject("score", scorelist);
@@ -75,7 +79,7 @@ public class DetailController {
 		mav.addObject("industry", industry);	// HashMap(avg, rookie)
 		mav.addObject("allCompany", allCompany);// HashMap(avg, rookie)
 		mav.addObject("info01", info01);// HashMap<List>(rank8, employee, scale)
-		mav.addObject("info02", info02);// HashMap<List>(rank, cmpn, score)
+		mav.addObject("info02", info02);// HashMap (summary, address, system, culture) 
 				
 		// 쿠키생성
 		String u = origin+"#"+companyname;

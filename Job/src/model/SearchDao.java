@@ -17,6 +17,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 public class SearchDao {
@@ -61,11 +63,11 @@ public class SearchDao {
 	}
 
 	// get Search Result by detail condition
-	public List getData(HttpServletRequest req){
+	public List getData(HttpServletRequest req) {
 		List list = new ArrayList();
-		try{
+		try {
 			String url = getURL(req);
-			
+
 			// connect
 			Document doc = Jsoup.connect(url).get();
 			System.out.println("URL : " + url);
@@ -141,21 +143,21 @@ public class SearchDao {
 
 		// area condition add
 		if (area != null) {
-			if(!area[0].equals("전체")){
+			if (!area[0].equals("전체")) {
 				for (int i = 0; i < area.length; i++)
 					condition += "&AreaSido=" + area[i];
 			}
 		}
 		// industry condition add
 		if (industry != null) {
-			if(!industry[0].equals("전체")){
+			if (!industry[0].equals("전체")) {
 				for (int i = 0; i < industry.length; i++)
 					condition += "&JCode=" + industry[i];
 			}
 		}
 		// company size condition add
 		if (size != null) {
-			if(!size[0].equals("전체")){
+			if (!size[0].equals("전체")) {
 				for (int i = 0; i < size.length; i++)
 					condition += "&Size=" + size[i];
 			}
@@ -165,5 +167,37 @@ public class SearchDao {
 				+ "&intCurrentPage=1&intPageSize=20";
 
 		return url + "&CurrentPage=" + page;
+	}
+
+	// 회사별 CompID 가져오기
+	public String getCompID(String CName) {
+		String url = "http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?flag=Search"
+				+ "&intCurrentPage=1&intPageSize=20&CName=" + CName;
+
+		int start = 0;
+		int end = 0;
+		String CompID = "";
+		try {
+			Document doc = Jsoup.connect(url).get();
+			Elements e = doc.select(".company_info a");
+			for (Element t : e) {
+				if (t.text().equals(CName)) {
+					CompID = t.attr("href");
+
+					if (CompID.startsWith("/Comp/CompInfo.aspx?CompID=") && CompID.endsWith("&flag=Search")
+							&& t.text().length() != 0) {
+
+						start = CompID.indexOf("=");
+						end = CompID.indexOf("&");
+						CompID = CompID.substring(start + 1, end);
+
+						System.out.println("회사코드 : " + CompID);
+					}
+				}
+			}
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		return CompID;
 	}
 }

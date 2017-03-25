@@ -20,9 +20,9 @@ public class SalaryDao {
 		try {
 			sql = factory.openSession();
 			if(type.equals("all"))
-				map = sql.selectOne("mappers.company.getSalaryAll");
+				map = sql.selectOne("mappers.salary.getSalaryAll");
 			else
-				map = sql.selectOne("mappers.company.getSalaryIndustry", type);
+				map = sql.selectOne("mappers.salary.getSalaryIndustry", type);
 
 		} catch (Exception e) {
 			e.printStackTrace();

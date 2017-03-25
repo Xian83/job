@@ -13,6 +13,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -173,10 +174,11 @@ public class DetailDao {
 			// industry scale rank
 			Elements e3 = doc.select("td:not(.bdr1, .al1 nowrap, .al3)");
 			String[] arr = e3.text().trim().split("\\s+");
-			System.out.println("e3 : " + e3.text());
 			for (String str : arr) {
-				if (str.endsWith("위"))
+				if (str.endsWith("위")){
 					li3.add(str);
+					System.out.println(str);
+				}
 			}
 			data.put("scale", li3);
 
@@ -188,26 +190,42 @@ public class DetailDao {
 	}
 
 	// 작업 미완성
-	public HashMap<String, List> getInfo02(String CompID) {
-		HashMap<String, List> data = new HashMap<>();
+	public HashMap getInfo02(String CompID) {
+		HashMap data = new HashMap<>();
 		List<String> li1 = new ArrayList<>();
 
 		String url = "http://www.careercatch.co.kr/Comp/CompSummary.aspx?CompID=" + CompID;
 
 		try {
 			Document doc = Jsoup.connect(url).get();
-			
-			// 매출액, 영억이익, 당기손익, 사원수 
+
+			// 매출액, 영억이익, 당기손익, 사원수
 			Elements e1 = doc.select(".table1 td");
 			String[] ar = e1.text().trim().split("\\s+");
 			li1.add(ar[6]);
 			li1.add(ar[7]);
 			li1.add(ar[8]);
 			li1.add(ar[10]);
-			System.out.println(ar[6] + " : " + ar[10]);
-			
-			// 회사 위치, 회사 제도, 사내문화 / 분위기
+			System.out.println("summary : " + li1.toString());
+			data.put("summary", li1);
 
+			// 회사 위치
+			Elements e2 = doc.select("h4 .fw_normal");
+			String[] ar2 = e2.text().trim().split("\\s+", 2);
+			System.out.println("address : " + ar2[1]);
+			data.put("address", ar2[1]);
+
+			// 회사 제도, 사내문화 / 분위기
+			int cnt = 0;
+			Elements e3 = doc.select(".list_slash");
+			if (e3 != null) {
+				for (Element m : e3) {
+					String key = cnt == 0 ? "system" : "culture";
+					data.put(key, m.text());
+					System.out.println(key + " : " + m.text());
+					cnt++;
+				}
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
