@@ -163,7 +163,7 @@ body {
             onfocus="this.value=&#39;&#39;;" style="ime-mode: active; width:800; height:37"
             onkeypress="if(event.keyCode==13){ EnterSearch();return false;}" />
    <a href="javascript:void(0);"> -->
-=======
+
 	<div class="corp_src well" align="center">
 		<form action="/search/detail" method="get">
 			<div class="row" align="center">
@@ -288,7 +288,7 @@ body {
 				onfocus="this.value=&#39;&#39;;" style="ime-mode: active; width:800; height:37"
 				onkeypress="if(event.keyCode==13){ EnterSearch();return false;}" />
 	<a href="javascript:void(0);"> -->
->>>>>>> branch 'master' of https://github.com/Xian83/job
+
 
                <!--    <img
             src="http://image.jinhak.com/job/corp/btn_search.gif" alt="검색"
@@ -351,7 +351,7 @@ body {
 <div id="result" style="height: 300"></div>
 <script type="text/javascript" charset="utf-8">
 
-<<<<<<< HEAD
+
 $("#sc").on("click", function(){
    var search = $("#search").val();
    var chkSido = [];
@@ -385,7 +385,7 @@ $("#sc").on("click", function(){
 	   }).done(function(aw){         
 	      $("#result").html(aw);
 	   });
-=======
+
 // $("#sc").click(function(){
 	
 // 	var aw = {"size":1,"list2":[{"CMPN_NM":"메디헬스","LOGO":"http://image.jinhak.com/job/site/tmp02.gif","FINANCE_SCORE":63.5,"EMPLOYEE_SCORE":100,"SCALE":"중소기업","DIVISION":"판매ㆍ유통"},
