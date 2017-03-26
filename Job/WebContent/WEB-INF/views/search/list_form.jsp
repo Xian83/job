@@ -187,15 +187,11 @@ body {
 
 
 <!-- 상세 조건 검색 - 체크박스 이벤트 처리  -->
-
-
-
-
 <div id="result" style="height: 300">
 
-<%-- <div class="container">
+ <div class="container">
    <table class="table table-bordered">
-      <c:forEach var="i" items="${list}" varStatus="vs">
+      <c:forEach var="i" items="${list2}" varStatus="vs">
          <c:if test="${vs.count %2 == 1 }">
             <tr>
          </c:if>
@@ -223,8 +219,31 @@ body {
          </c:if>
       </c:forEach>
    </table>
-</div>  --%>
+</div> 
 
+ <!-- 페이지 뷰 --> 
+<div align="center">
+   <c:if test="${page ne 1 }">
+      <a href="/search/company?page=${page -1 }">이전</a>
+   </c:if>
+   <c:forEach var="p" begin="1" end="${size }" varStatus="vs">
+      <c:choose>
+         <c:when test="${p eq page }">
+            <b style="color: red;">${p }</b>
+         </c:when>
+         <c:otherwise>
+            <a href="/search/company?page=${p }">${p }</a>
+         </c:otherwise>
+      </c:choose>
+      <c:if test="${vs.last eq false }">|</c:if>
+   </c:forEach>
+   <c:if test="${page ne size }">
+      <a href="/search/company?page=${page +1 }">다음</a>
+      <br />
+   </c:if>
+   <br />
+</div>
+</div>
 
 <script type="text/javascript" charset="utf-8">
 
@@ -274,7 +293,6 @@ body {
    }
 
    
-
    // 검색버튼 작동
    $("#sc").on("click", function() {
       var search = $("#search").val();
@@ -310,300 +328,4 @@ body {
          $("#result").html(aw);
       })
    });
-</script>
-
- <!-- 페이지 뷰 --> 
-<div align="center">
-   <c:if test="${page ne 1 }">
-      <a href="/search/company?page=${page -1 }">이전</a>
-   </c:if>
-   <c:forEach var="p" begin="1" end="${size }" varStatus="vs">
-      <c:choose>
-         <c:when test="${p eq page }">
-            <b style="color: red;">${p }</b>
-         </c:when>
-         <c:otherwise>
-            <a href="/search/company?page=${p }">${p }</a>
-         </c:otherwise>
-      </c:choose>
-      <c:if test="${vs.last eq false }">|</c:if>
-   </c:forEach>
-   <c:if test="${page ne size }">
-      <a href="/search/company?page=${page +1 }">다음</a>
-      <br />
-   </c:if>
-   <br />
-</div>
-
-
-<!-- <script type="text/javascript" charset="utf-8">
-$("#sc").on("click",function(){
-   var chkSido = [];
-   
-   $("input[name='chkSido']:checked").each(function() {
-      chkSido.push($(this).val());
-   });
-   
-   console.log(chkSido);
-   
-   $.ajax({
-      "url" : "/search/detail",
-      "method" : "get"
-       "data" :  
-   }).done(function(){
-      
-   });
-   
-});
-   
-   $(function() {
-
-      //검색, 검색조건 저장 클릭 시
-      $("#sc").on("click", function() {
-         //alert($("select[name=ddlScale] option:selected").val());
-         //alert($('input:checkbox[name=chkSido]:checked').map(function() {return this.value;}).get().join(','));
-         //return;
-
-         EnterSearch();
-      });
-
-      // 지역별 전체 체크
-      $("input:checkbox[name=chkSido]").on("change", function() {
-         //alert($(this).val());
-         CheckBox_onchange($(this), $(this).val(), 'chkSido');
-         //            var checkedVal = $(this).val();
-         //            var numberOfChecked = $('input:checkbox[name=chkSido]:checked').length;
-         //            if (checkedVal == "전체" && numberOfChecked > 1)
-         //               $('input:checkbox[name=chkSido]:checked:not("#chkSido전체")').prop("checked",false);
-         //            else if (checkedVal != "전체")
-         //               $("#chkSido전체").prop("checked",false);
-      });
-
-      // 산업별 전체 체크
-      $("input:checkbox[name=chkJinhakCode]").on("change", function() {
-         CheckBox_onchange($(this), $(this).val(), 'chkJinhakCode');
-      });
-
-      // 규모별 전체 체크
-      $("input:checkbox[name=chkSize]").on("change", function() {
-         CheckBox_onchange($(this), $(this).val(), 'chkSize');
-      });
-
-
-      // 디폴트 전체
-      //$("input:checkbox[value='전체']").prop("checked", true);
-      $("input:checkbox[value='전체']")
-            .each(
-                  function(index, item) {
-                     var GroupName = $(item).prop('name');
-                     //alert(GroupName);
-                     // 전체를 제외한 체크 없으면 전체 체크
-                     //alert($('input:checkbox[name=' + GroupName + ']:checked:not("#' + GroupName + '전체")').length);
-                     if ($('input:checkbox[name=' + GroupName
-                           + ']:checked:not("#' + GroupName + '전체")').length == 0)
-                        $('#' + GroupName + '전체').prop("checked", true);
-                  });
-
-      // 맨처음 : 추천대학은 EnterSearch 다른경우는 디폴트
-      // ifrmList src 는 항상 공란이므로 매번 리퀘스트를 다시 만들어준다.
-      // /Comp/Controls/ifrmCompList.aspx?flag=IPO&ThemeName=&Sort=a.TotJum desc&IsRecom=IPO
-      //alert($("#txtReq").val());
-      //alert($("#ifrmList")[0].src);
-      if ($("#txtReq").val() == '') {
-         if ("IPO" == "Recom")
-            EnterSearch();
-         else
-            $("#txtReq")
-                  .val(
-                        "/Comp/Controls/ifrmCompList.aspx?flag=IPO&ThemeName=&Sort=a.TotJum desc&IsRecom=IPO");
-      }
-      if ($("#ifrmList")[0].src == '')
-         $("#ifrmList")[0].src = $("#txtReq").val();
-
-      $(document)
-            .mousedown(
-                  function(e) {
-                     // 부모html에서 자식iframe 접근, 제어  // jQuery
-                     //$('#iframe').contents().find('#foo').text('안녕하세요');
-                     $('#ifrmList')
-                           .contents()
-                           .find('.msgDetail')
-                           .each(
-                                 function() {
-                                    if ($(this).css('display') == 'block') {
-                                       var l_position = $(this)
-                                             .offset();
-                                       l_position.right = parseInt(l_position.left)
-                                             + ($(this).width());
-                                       l_position.bottom = parseInt(l_position.top)
-                                             + parseInt($(this)
-                                                   .height());
-
-                                       if ((l_position.left <= e.pageX && e.pageX <= l_position.right)
-                                             && (l_position.top <= e.pageY && e.pageY <= l_position.bottom)) {
-                                          //alert('popup in click');
-                                       } else {
-                                          //alert('popup out click');
-                                          $(this).hide("fast");
-                                       }
-                                    }
-                                 });
-
-                     $('.msgDetail')
-                           .each(
-                                 function() {
-                                    if ($(this).css('display') == 'block') {
-                                       var l_position = $(this)
-                                             .offset();
-                                       l_position.right = parseInt(l_position.left)
-                                             + ($(this).width());
-                                       l_position.bottom = parseInt(l_position.top)
-                                             + parseInt($(this)
-                                                   .height());
-
-                                       if ((l_position.left <= e.pageX && e.pageX <= l_position.right)
-                                             && (l_position.top <= e.pageY && e.pageY <= l_position.bottom)) {
-                                          //alert( 'popup in click' );
-                                       } else {
-                                          //alert( 'popup out click' );
-                                          $(this).hide("fast");
-                                          //$(this).hide();
-                                       }
-                                    }
-                                 });
-                  });
-
-   });
-
-   // 체크박스 전체 선택하면 나머지 해제 / 나머지 선택하면 전체 해제
-   function CheckBox_onchange(obj, checkedVal, chkName) {
-      //alert(checkedVal + ' // ' + chkName);
-      //alert(obj.attr("chkJinhakCodeSub"));
-      if (checkedVal == 'J1' && chkName == 'chkJinhakCode') {
-         if ($('#chkJinhakCodeJ1').is(':checked'))
-            $('#chkJinhakCodeJ1전체').prop("checked", true);
-         else {
-            $('#chkJinhakCodeJ1전체').prop("checked", true);
-            $('input:checkbox[chkJinhakCodeSub=2]:checked').prop("checked",
-                  false);
-         }
-         //return;
-      } else if (obj.attr("chkJinhakCodeSub") == '1') {
-         $('#chkJinhakCodeJ1전체').prop("checked", true);
-         $('input:checkbox[chkJinhakCodeSub=2]:checked').prop("checked",
-               false);
-         return;
-      } else if (obj.attr("chkJinhakCodeSub") == '2') {
-         if ($('#chkJinhakCodeJ1전체').is(':checked')) {
-            $('#chkJinhakCodeJ1전체').prop("checked", false);
-         }
-         return;
-      }
-
-      var numberOfChecked = $('input:checkbox[name=' + chkName + ']:checked').length;
-      if (checkedVal == "전체" && numberOfChecked > 1)
-         $(
-               'input:checkbox[name=' + chkName + ']:checked:not("#'
-                     + chkName + '전체")').prop("checked", false);
-      else if (checkedVal != "전체")
-         $('#' + chkName + '전체').prop("checked", false);
-   }
-   String.prototype.endsWith = function(pattern) {
-      var d = this.length - pattern.length;
-      return d >= 0 && this.lastIndexOf(pattern) === d;
-   };
-   // 기업명 입력후 엔터적용
-   function EnterSearch() {
-      // 전체외 모두체크 ==> 전체 로 ...
-      var Sido = $('input:checkbox[name=chkSido]:checked').map(function() {
-         return this.value;
-      }).get().join(',');
-      if (($('input:checkbox[name=chkSido]').length - 1) == $('input:checkbox[name=chkSido]:checked:not("#chkSido전체")').length)
-         Sido = "전체";
-
-      var JinhakCode = $('input:checkbox[name=chkJinhakCode]:checked').map(
-            function() {
-               return this.value;
-            }).get().join(',');
-      if (($('input:checkbox[name=chkJinhakCode]').length - 1) == $('input:checkbox[name=chkJinhakCode]:checked:not("#chkJinhakCode전체")').length)
-         JinhakCode = "전체";
-
-      // J1,J1전체 예외
-      //alert((',' + JinhakCode + ',').indexOf(',J1,'));
-      if ((',' + JinhakCode + ',').indexOf(',J1,') > -1)
-         JinhakCode = (',' + JinhakCode + ',').replace(',J1,', '');
-      if (JinhakCode.substr(0, 1) == ',')
-         JinhakCode = JinhakCode.substr(1);
-      if (JinhakCode.endsWith(','))
-         JinhakCode = JinhakCode.substr(0, JinhakCode.length - 1);
-      //alert(JinhakCode);
-
-      var Size = $('input:checkbox[name=chkSize]:checked').map(function() {
-         return this.value;
-      }).get().join(',');
-      if (($('input:checkbox[name=chkSize]').length - 1) == $('input:checkbox[name=chkSize]:checked:not("#chkSize전체")').length)
-         Size = "전체";
-
-      var CName = $('#search').length == 0 ? "" : $(
-            '#search').val().trim();
-      if (CName == "기업명을 입력해 주세요")
-         CName = "";
-
-      // 유저셋팅 여부는 모든항목 25% 아니면...
-      var UserSetting = 'N';
-      var TypeJum = 0, StableJum = 0, GrowJum = 0, ProfitJum = 0;
-
-      //alert($("select[name=ddlScale] option:selected").val());
-
-      var SortVal = $('#ifrmList').get(0).contentWindow.SortVal;
-      //alert('SortVal='+SortVal);
-      if (SortVal == null)
-         SortVal = $('#txtSortVal').val();
-
-      var params = "&chkSido=" + encodeURIComponent(Sido) //지역 시도
-            + "&JCode=" + encodeURIComponent(JinhakCode) //산업(업종)
-            + "&Size=" + encodeURIComponent(Size) //규모
-            + "&search=" + encodeURIComponent(CName) //기업명
-      ;
-      
-
-      // alert("params : " + params);
-      $("#ifrmList")[0].src = "/Comp/Controls/ifrmCompList.aspx?" + params;
-      
-      // 내가 함 - 검색 버튼 누르면 파람값 넘기기 
-      var chkSido = document.getElementById("chkSido").value;
-      var chkJinhakCode = document.getElementById("chkJinhakCode").value;
-      var chkSize = document.getElementById("chkSize").value;
-      var search = document.getElementById("search").value;
-      
-      var params2 = "&chkSido=" + chkSido //지역 시도
-      + "&JCode=" + chkJinhakCode //산업(업종)
-      + "&Size=" + chkSize //규모
-      + "&search=" + search //기업명
-   ;
-
-      System.out.println("param2 = " +params2);
-      console.log("param2 = " +params2);
-      $("#sc").onclick(function(){
-         
-         {"size":1,"list2":[{"CMPN_NM":"메디헬스","LOGO":"http://image.jinhak.com/job/site/tmp02.gif","FINANCE_SCORE":63.5,"EMPLOYEE_SCORE":100,"SCALE":"중소기업","DIVISION":"판매ㆍ유통"},
-            {"CMPN_NM":"메디헬스","LOGO":"http://image.jinhak.com/job/site/tmp02.gif","FINANCE_SCORE":63.5,"EMPLOYEE_SCORE":100,"SCALE":"중소기업","DIVISION":"판매ㆍ유통"},
-            {"CMPN_NM":"메디헬스","LOGO":"http://image.jinhak.com/job/site/tmp02.gif","FINANCE_SCORE":63.5,"EMPLOYEE_SCORE":100,"SCALE":"중소기업","DIVISION":"판매ㆍ유통"}],"page":"1"}
-         }
-         $.ajax({
-            "url" : "/search/detail?"+params2 // 일단 ajax로 파라미터 q를 넘김  => ajax에서 파라미터 받고, 보낼 값 형식 지정해야 함
-         }).done(function(a){                        // 파라미터 값이 하나 있으니 아무 변수이름(상관x) 하나 지정해서 값 받음
-            console.log(a);
-            $("#result").append("회사이름 : "+a[0]+" / "+a[1]+"<br/>");  
-         
-            $("#result").append("로고 : "+a.LOGO+"<br/>");  
-            $("#result").append("재무평가 : "+a.FINANCE_SCORE+"<br/>");  
-            $("#result").append("재직자평판 : "+a.EMPLOYEE_SCORE+"<br/>"); 
-            $("#result").append("규모 : "+a.SCALE+"<br/>"); 
-            $("#result").append("분야 : "+a.DIVISION+"<br/>"); 
-         });
-      })
-      
-   } -->
-     
 </script>
