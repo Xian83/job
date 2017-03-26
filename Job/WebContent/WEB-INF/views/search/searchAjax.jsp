@@ -64,8 +64,31 @@ body {
                </div>
             </div>
          </td>
-         <c:if test="${vs.count %2 == 0 }">
-         </c:if>
-      </c:forEach>
-   </table>
-</div> 
+         </c:forEach>
+         </table>
+         
+ <!-- 페이지 뷰 --> 
+<div align="center">
+<!-- 이렇게 하면 CurrentPage는 올라가는데, 어떻게 검색한 조건으로 2번째 페이지를 불러올 수 있는지 확인하기 -->
+   <c:if test="${page ne 1 }">
+      <a href="/search/detail?page=${page -1 }">이전</a>
+   </c:if>
+   <c:forEach var="p" begin="1" end="${size }" varStatus="vs">
+      <c:choose>
+         <c:when test="${p eq page }">
+            <b style="color: red;">${p }</b>
+         </c:when>
+         <c:otherwise>
+            <a href="/search/detail?page=${p }">${p }</a>
+         </c:otherwise>
+      </c:choose>
+      <c:if test="${vs.last eq false }">|</c:if>
+   </c:forEach>
+   <c:if test="${page ne size }">
+      <a href="/search/detail?page=${page +1 }">다음</a>
+      <br />
+   </c:if>
+   <br />
+</div>
+
+ 

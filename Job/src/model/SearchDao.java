@@ -25,6 +25,51 @@ public class SearchDao {
 
 	@Autowired
 	SqlSessionFactory factory;
+	
+	// 효정 - 시도중
+	public String getURL_2(HttpServletRequest req) {
+		String name = req.getParameter("search");
+		String[] area = req.getParameterValues("chkSido");
+		String[] industry = req.getParameterValues("chkJinhakCode");
+		String[] size = req.getParameterValues("chkSize");
+		String page = req.getParameter("page") == null ? "1" : req.getParameter("page");
+
+		String condition = "";
+		// Search Condition Setting
+		// company name condition add
+		if (name != null)
+			condition += "&CName=" + name;
+
+		// area condition add
+		if (area != null) {
+			if (!area[0].equals("�쟾泥�")) {
+				for (int i = 0; i < area.length; i++)
+					condition += "&AreaSido=" + area[i];
+			}
+		}
+		// industry condition add
+		if (industry != null) {
+			if (!industry[0].equals("�쟾泥�")) {
+				for (int i = 0; i < industry.length; i++)
+					condition += "&JCode=" + industry[i];
+			}
+		}
+		// company size condition add
+		if (size != null) {
+			if (!size[0].equals("�쟾泥�")) {
+				for (int i = 0; i < size.length; i++)
+					condition += "&Size=" + size[i];
+			}
+		}
+
+		String url = "http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?flag=Search" + condition
+				+ "&intCurrentPage=1&intPageSize=20";
+
+		System.out.println("URL = " + url);
+		return url + "&CurrentPage=" + page;
+	}
+	
+
 
 	// get Search Result by Company Name
 	public List getData(String CName) throws IOException {
@@ -43,7 +88,7 @@ public class SearchDao {
 		return list;
 	}
 
-	// �Ϻκ��� �����͸� ����Ʈȭ �����ִ� �޼���
+	// 占싹부븝옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쏙옙占쏙옙트화 占쏙옙占쏙옙占쌍댐옙 占쌨쇽옙占쏙옙
 	public List<HashMap> pasing(int start, int end, String search) {
 		List<HashMap> SomeCompanies = new ArrayList<>();
 		SqlSession sql = factory.openSession();
@@ -143,21 +188,21 @@ public class SearchDao {
 
 		// area condition add
 		if (area != null) {
-			if (!area[0].equals("전체")) {
+			if (!area[0].equals("�쟾泥�")) {
 				for (int i = 0; i < area.length; i++)
 					condition += "&AreaSido=" + area[i];
 			}
 		}
 		// industry condition add
 		if (industry != null) {
-			if (!industry[0].equals("전체")) {
+			if (!industry[0].equals("�쟾泥�")) {
 				for (int i = 0; i < industry.length; i++)
 					condition += "&JCode=" + industry[i];
 			}
 		}
 		// company size condition add
 		if (size != null) {
-			if (!size[0].equals("전체")) {
+			if (!size[0].equals("�쟾泥�")) {
 				for (int i = 0; i < size.length; i++)
 					condition += "&Size=" + size[i];
 			}
@@ -166,10 +211,11 @@ public class SearchDao {
 		String url = "http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?flag=Search" + condition
 				+ "&intCurrentPage=1&intPageSize=20";
 
+		System.out.println("URL = " + url);
 		return url + "&CurrentPage=" + page;
 	}
 
-	// 회사별 CompID 가져오기
+	// �쉶�궗蹂� CompID 媛��졇�삤湲�
 	public String getCompID(String CName) {
 		String url = "http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?flag=Search"
 				+ "&intCurrentPage=1&intPageSize=20&CName=" + CName;
@@ -191,7 +237,7 @@ public class SearchDao {
 						end = CompID.indexOf("&");
 						CompID = CompID.substring(start + 1, end);
 
-						System.out.println("회사코드 : " + CompID);
+						System.out.println("�쉶�궗肄붾뱶 : " + CompID);
 					}
 				}
 			}
