@@ -38,7 +38,7 @@ body {
 </style>
 <br/>
 <div align="center">
-<<<<<<< HEAD
+
    <div class="corp_src well" align="center">
       <form action="/search/detail" method="get">
          <div class="row" align="center">
