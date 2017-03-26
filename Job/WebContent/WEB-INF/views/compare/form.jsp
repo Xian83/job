@@ -4,26 +4,35 @@
 
 <style>
 input[id=aaa] {
-	width: 95%;
+	width: 80%;
 	padding: 10px 5px;
 }
 </style>
 
-<h2>비교 페이지 (최근 본 목록 10개까지만)</h2>
 <!-- 처음뿌려지는 쿠키리스트가 가장 먼저본 기업 -->
 
-<hr />
+
+<div align="center">
+<div class="well" align="center" style="width: 80%;">
 	<form action="/compare/result">
-		회사1<input type="text" width="600" id="cm1" name="cm1" readonly>
-		회사2<input type="text" width="600" id="cm2" name="cm2" readonly>
-		<button type="submit">비교</button>
+		<input type="text" width="600" id="cm1" name="cm1" readonly placeholder="기업1"> <b style="font-size: 20px;"> vs </b>
+		<input type="text" width="600" id="cm2" name="cm2" readonly placeholder="기업2"> <br/>
+		<p><button type="submit">비교</button></p>
 	</form>
-<hr />
+</div>
+</div>
 
 
-<c:forEach var="i" begin="0" end="${csize-1 }">
-	<input type="checkbox" value="${clist[i] }" id="check_${i}" class="chk"> ${clist[i] }<br/>
-</c:forEach>
+<div class="container">
+
+	<div class="well">
+	
+	<c:forEach var="i" begin="0" end="${csize-1 }">
+		<input type="checkbox" value="${clist[i] }" id="check_${i}" class="chk"> ${clist[i] } 
+	</c:forEach>
+	
+	</div>
+</div>
 
 <script>
 
