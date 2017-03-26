@@ -7,27 +7,25 @@
 <%@page import="com.fasterxml.jackson.databind.ObjectMapper"%>
 
 
-<div class="container">
-<div id="wrap">
+<div class="container" align="center">
+<div id="wrap" class="well" style="width: 80%;">
     <section id="container">
        
-        <section class="content helpSecCont">
-            <h1>개인회원 <span class="tahoma">FAQ</span></h1>
+        <section class="content helpSecCont" align="left">
+            <h2>개인회원 <span class="tahoma">FAQ</span></h2>
             
-    <ul class="tabType tabType_05">
+    <ol class="tabType tabType_05">
         <li class="on"><a href="/contact/form">회원가입∙정보</a></li>
         <li class=""><a href="/contact/form_etc">기타</a></li>
-    </ul>
-
-            <form action="/help/faq/user" method="get">
-                <input type="hidden" name="tab" value="1" />
-                <div class="tabSearchArea">
-                    <div class="tabSearchAreaLeft">
-                        <span>총</span> <strong class="tahoma">31</strong><span>건</span>
-                    </div>
+    </ol>
+    
+    <div class="tabSearchArea">
+    	<div class="tabSearchAreaLeft">
+    		<span>총</span> <strong class="tahoma">31</strong><span>건</span>
+    	</div>
                   
-                </div>
-            </form>
+    </div>
+       
                 <div class="tabSearchList">
                     <ul>
                             <li data-no="335">
