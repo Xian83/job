@@ -13,7 +13,7 @@ public class MemberDao {
 	@Autowired
 	SqlSessionFactory factory;
 
-	// 濡쒓렇�씤�떆 email怨� pass 留ㅼ묶 �뿬遺� 泥댄겕
+	// email & pass check
 	public boolean existCheck(Map data) {
 
 		SqlSession sql = null;
@@ -34,7 +34,7 @@ public class MemberDao {
 		}
 	}
 
-	// �빐�떦 email�쓽 �젙蹂대�� 媛��졇�삤�뒗 寃�
+	// get member basic info data
 	public HashMap<String, Object> getData(String email) {
 		HashMap<String, Object> data = new HashMap<>();
 
@@ -51,7 +51,7 @@ public class MemberDao {
 		return data;
 	}
 
-	// �빐�떦 email�쓽 �젙蹂대�� 媛��졇�삤�뒗 寃�
+	// get member additional info data
 	public HashMap<String, Object> getInfo(String email) {
 		HashMap<String, Object> data = new HashMap<>();
 
@@ -116,7 +116,7 @@ public class MemberDao {
 		}
 	}
 
-	// �쉶�썝媛��엯�떆 email 以묐났 泥댄겕
+	// check exist by email
 	public boolean existCheck(String email) {
 		SqlSession sql = null;
 		try {
