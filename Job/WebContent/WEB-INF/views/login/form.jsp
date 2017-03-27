@@ -94,11 +94,12 @@
 						if (rst) {
 							$("#status").append(" 로그인 성공<br/>");
 						} else {
-							location.replace("/");
+							location.replace("/join/step03F");
 						}
 					});
 			});
 		}
+
 	</script>
 <div align="center">
 	<img src="/500.jpg" class="w3-block" alt="forest" style="width: 50%" height="50%">
