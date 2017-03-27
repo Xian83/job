@@ -42,6 +42,28 @@
 
 </div>
 
+<div class="container" align="center">
+	<div class="row" align="center">
+	
+		<div class="col-md-5">
+			<c:forEach var="cm1" items="${list1 }">
+				${cm1.DIVISION }
+			</c:forEach>
+		</div>
+		<div class="col-md-2">
+			분야
+		</div>
+		<div class="col-md-5">
+			<c:forEach var="cm2" items="${list2 }">
+				${cm2.DIVISION }
+			</c:forEach>
+		</div>
+		</tr>
+	
+	</div>
+</div>
+	
+
 </div>
 
 

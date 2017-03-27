@@ -41,7 +41,15 @@
                         <a href="/company/detail?cmpn_nm=${avg[0].CMPN_NM }"><button type="submit" style="background: white;">
                            <div class="thumbnail href1" style="width: 200px; border: none;">
                            <p><img src="${avg[0].LOGO }" width="150" height="100"><br/><br/></p><p>${avg[0].CMPN_NM } </p><br/>
-                           <p><fmt:formatNumber value="${avg[0].AVG_SALARY }" groupingUsed="true"/>원 </p><br/>
+                           <p>
+                           <c:choose>
+                           	   <c:when test="${avg[0].AVG_SALARY / 10000 gt 4} ">
+                           	   	<fmt:formatNumber value="${avg[0].AVG_SALARY / 10000 +1}" groupingUsed="true"/>(만원)</p><br/>
+                           	   </c:when>
+                           	   <c:otherwise>
+                           	   	<fmt:formatNumber value="${avg[0].AVG_SALARY / 10000 }" groupingUsed="true"/>(만원)</p><br/>
+                           	   </c:otherwise>
+                           </c:choose>
                            </div>
                         </button></a>
                         </div>
