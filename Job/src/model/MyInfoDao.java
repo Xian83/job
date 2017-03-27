@@ -44,7 +44,7 @@ public class MyInfoDao {
 
 		SqlSession sql = null;
 		try {
-			System.out.println("getlocations 占쌔븝옙");
+			System.out.println("getlocations");
 			sql = factory.openSession();
 			data = sql.selectList("mappers.my.location");
 		} catch (Exception e) {
@@ -62,7 +62,7 @@ public class MyInfoDao {
 
 		SqlSession sql = null;
 		try {
-			System.out.println("getIndustries 占쌔븝옙");
+			System.out.println("getIndustries");
 			sql = factory.openSession();
 			data = sql.selectList("mappers.my.industry");
 			System.out.println("DAO industry =" + data);
@@ -132,8 +132,6 @@ public class MyInfoDao {
 		return data == null ? "null" : (String) data.get("URL");	
 	}
 
-
-
 	public int updatePass(Map m) {
 		int r = 0;
 
@@ -152,7 +150,6 @@ public class MyInfoDao {
 		}
 		return r;
 	}
-
 
 	public int updateBirth(Map b) {
 		int r = 0;

@@ -81,25 +81,22 @@
 		// 이 호출은 statusChangeCallback()에서 이루어진다. 
 		function login() {
 			FB.api('/me?fields=id,name,email,first_name,last_name,birthday',
-					function(response) {
-						$.ajax({
-							"url" : "/login/fbLogin",
-							"method" : "post",
-							"data" : {
-								"info" : JSON.stringify(response)
-							}
-						}).done(
-								function(rst) {
-									if (rst) {
-										$("#status").append(
-												rst.name + " 로그인 성공<br/>");
-									} else {
-										$("#status").append(
-												rst.name + " 추가정보 입력 필요 "
-														+ rst.exist + "<br/>");
-									}
-								});
+			function(response) {
+				$.ajax({
+					"url" : "/login/fbLogin",
+					"method" : "post",
+					"data" : {
+						"info" : JSON.stringify(response)
+					}
+				}).done(
+					function(rst) {
+						if (rst) {
+							$("#status").append(" 로그인 성공<br/>");
+						} else {
+							location.replace("/");
+						}
 					});
+			});
 		}
 	</script>
 <div align="center">
