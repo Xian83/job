@@ -61,11 +61,14 @@ public class DetailController {
 		// get same industry company list (finance score desc)
 		String div = (String) scorelist.get("DIVISION");
 		List samelist = ddao.same(div);
+		System.out.println("산업군 : " + div);
 		
 		// salary info
 		HashMap industry = sDao.getSalary(div);	//same industry
 		HashMap allCompany = sDao.getSalary("all");	//all company
-				
+		System.out.println(industry.get("avg") + "" + industry.get("rookie"));
+		
+		
 		String CompID = search.getCompID(companyname);
 		// career catch site data
 		HashMap<String,List> info01 = ddao.getInfo01(CompID);

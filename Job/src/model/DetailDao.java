@@ -189,7 +189,7 @@ public class DetailDao {
 		return data;
 	}
 
-	// 작업 미완성
+	// 기업 개요 페이지 정보
 	public HashMap getInfo02(String CompID) {
 		HashMap data = new HashMap<>();
 		List<String> li1 = new ArrayList<>();
@@ -201,13 +201,23 @@ public class DetailDao {
 
 			// 매출액, 영억이익, 당기손익, 사원수
 			Elements e1 = doc.select(".table1 td");
-			String[] ar = e1.text().trim().split("\\s+");
-			li1.add(ar[6]);
-			li1.add(ar[7]);
-			li1.add(ar[8]);
-			li1.add(ar[10]);
-			System.out.println("summary : " + li1.toString());
-			data.put("summary", li1);
+			
+			int flag = 1;
+			for(Element t : e1){
+				if(flag == 5)
+					data.put("num01", t.text());
+				if(flag == 6)
+					data.put("num02", t.text());
+				if(flag == 7)
+					data.put("num03", t.text());
+				if(flag == 9)
+					data.put("num04", t.text());
+				flag++;
+			}
+			System.out.println("매출액 : " + data.get("num01"));
+			System.out.println("영업이익 : " + data.get("num02"));
+			System.out.println("당기손익 : " + data.get("num03"));
+			System.out.println("사원수 : " + data.get("num04"));
 
 			// 회사 위치
 			Elements e2 = doc.select("h4 .fw_normal");

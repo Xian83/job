@@ -89,12 +89,12 @@ th{
 				</thead>
 				<tbody>
 					<tr>
-						<td>${salary[0].AVG_SALARY }원</td>
-						<td>${salary[0].ROOKEY_SALARY }원</td>
+						<td>${salary.AVG_SALARY }원</td>
+						<td>${salary.ROOKIE_SALARY }원</td>
 					</tr>
 			</table>
 			<div align="center">
-				사원수 : 999999999명 <br />
+				사원수 : ${info02.num04} <br />
 				<div id="curve_chart" style="width: 500px; height: 150px"
 					align="center"></div>
 			</div>
@@ -110,8 +110,11 @@ th{
 
 			function drawChart() {
 				var data = google.visualization.arrayToDataTable([
-						[ 'Year', '${score[0].CMPN_NM }' ], [ '2013', 1000 ],
-						[ '2014', 1170 ], [ '2015', 2000 ] ]);
+						[ 'Year', '${score[0].CMPN_NM }' ],
+						[ '2013', 1000 ],
+						[ '2014', 1170 ],
+						[ '2015', 2000 ] 
+				]);
 
 				var options = {
 					title : '사원수 증가율',
@@ -162,9 +165,9 @@ th{
 				<tbody>
 					<tr>
 						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">소속산업</td>
-						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">0</td>
-						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">1</td>
-						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">2</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${info01.scale[0] }</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${info01.scale[1] }</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${info01.scale[2] }</td>
 					</tr>
 			</table>
 	</div>
@@ -203,7 +206,6 @@ th{
 			<div id="chart_div"></div>
 
 
-
 			<script type="text/javascript">
 				// 로딩 완료시 함수 실행하여 차트 생성
 				google.charts.setOnLoadCallback(drawChart);
@@ -226,8 +228,11 @@ th{
 
 					// 차트 데이터
 					var data = new google.visualization.arrayToDataTable([
-							[ '년대', '회사이름', '업계평균', '전체평균', ],
-							[ '연봉', 2, 3, 4 ], [ '신입연봉', 6, 4, 3 ] ]);
+							[ '구분', '회사이름', '업계평균', '전체평균', ],
+							[ '평균연봉', ${salary.AVG_SALARY}, ${industry.AVG}, ${allCompany.AVG} ],
+							[ '신입연봉', ${salary.ROOKIE_SALARY}, ${industry.ROOKIE}, ${allCompany.ROOKIE} ]
+							
+					]);
 
 					var chart = new google.visualization.ColumnChart(document
 							.getElementById('chart_div'));
@@ -235,6 +240,7 @@ th{
 				}
 			</script>
 		</div>
+		
 		<div class="col-md-6">
 			<script type="text/javascript">
 				google.charts.load("current", {
@@ -295,16 +301,17 @@ th{
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="1" rowspan="8" style="vertical-align: middle;">동종산업
-							최상위</td>
+						<td colspan="1" rowspan="9" style="vertical-align: middle;">동종산업
+							최상위
+						</td>
+					</tr>
+					<c:forEach var="i" items="${info01.rank8}">
 					<tr>
-						<c:forEach begin="1" end="7">
-							<td>1</td>
-							<td colspan="2">삼성전자</td>
-							<td>89.9</td>
+							<td>${i.rank }</td>
+							<td colspan="2">${i.cmpn }</td>
+							<td>${i.score }</td>
 					</tr>
 					</c:forEach>
-					</tr>
 			</table>
 		</div>
 		<div class="col-md-6">
@@ -323,14 +330,14 @@ th{
 					<tr>
 						<td colspan="1" rowspan="8" style="vertical-align: middle;">동종산업
 							연봉 순위</td>
+					</tr>
+					<c:forEach begin="1" end="7">
 					<tr>
-						<c:forEach begin="1" end="7">
 							<td>1</td>
 							<td colspan="2">현대</td>
 							<td>9만9천원</td>
 					</tr>
 					</c:forEach>
-					</tr>
 			</table>
 			<hr />
 		</div>
@@ -353,21 +360,21 @@ th{
 				<tbody>
 					<tr style="height: 30px">
 						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${ salary[0].CMPN_NM }</td>
-						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">0</td>
-						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">1</td>
-						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">2</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${info01.employee[0]}</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${info01.employee[1]}</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${info01.employee[2]}</td>
 					</tr>
 							<tr style="height: 30px">
 						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">평균</td>
-						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">0</td>
-						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">1</td>
-						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">2</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${info01.employee[3]}</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${info01.employee[4]}</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${info01.employee[5]}</td>
 					</tr>
 							<tr style="height: 30px">
 						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">업계평균</td>
-						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">0</td>
-						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">1</td>
-						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">2</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${info01.employee[6]}</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${info01.employee[7]}</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${info01.employee[8]}</td>
 					</tr>
 			</table>
 		</div>
@@ -376,16 +383,23 @@ th{
 		
 </div>
 
-
-
-
-
 		<div class="row content">
 			<p style="font-size: 20; line-height: 1.5; color: blue;">근무환경 및
 				복리후생</p>
 			<hr />
-			회사위치 / <br /> 회사제도 /<br /> 사내문화 /<br />
-
+			<b>[회사위치]</b>  ${info02.address }<br /> 
+			<b>[회사제도]</b><br/>
+			${info02.system }<br /> 
+			<b>[사내문화]</b><br/>
+			${info02.culture }<br />
 		</div>
 
-	</div>
+</div>
+
+<!-- 상세 데이터 테스트용 영역 -->
+<hr/>
+<div>
+	<!-- 매출액, 영업이익, 당기손익은 단위 표기가 붙어서 찍힘-->
+	<!-- 차트 표기하려면 수정작업 필요 --> 
+	매출액 : ${info02.num01} / 영업이익 : ${info02.num02 } / 당기손익 : ${info02.num03 }
+</div>
