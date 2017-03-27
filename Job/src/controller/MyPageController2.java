@@ -69,13 +69,13 @@ public class MyPageController2 {
 		return mav;
 	}
 
-	@RequestMapping("/interest")
+	@RequestMapping("/scrap")
 	public ModelAndView interestHandler(HttpSession session) {
 		List<HashMap> list = mypage.getScrapData((String) session.getAttribute("email"));
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("tt");
-		mav.addObject("main", "/my/interest");
+		mav.addObject("main", "/my/scrap");
 		mav.addObject("list", list);
 		return mav;
 	}

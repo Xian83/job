@@ -34,7 +34,7 @@ th {
 				enctype="multipart/form-data">
 				<b>PICTURE</b><br /> <img src="${url}" width="150" height="150" />
 				<hr/>
-				<input type="file" name="pic" " style="display: inline;"/>  
+				 <input type="file" name="pic" style="display: inline;"/>
 				<input type="hidden" name="email" value="${sessionScope.email}"/>
 				<button type="submit" class="btn">사진변경</button>
 			</form>

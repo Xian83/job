@@ -74,7 +74,7 @@ public class MyInfoController {
 		String pass1 = (String) session.getAttribute("pass");
 		String pass = (String) data.get("passcheck");
 		System.out.println("pass1 = " + pass1 + "/ pass = " + pass);
-		if(pass1 != pass) {
+		if(pass != null && pass1 != pass) {
 		Map m = new HashMap<>();
 			m.put("pass", pass);
 			m.put("email", email);

@@ -79,7 +79,7 @@ body {
             <b style="color: red;">${p }</b>
          </c:when>
          <c:otherwise>
-            <a href="/search/detail?page=${p }">${p }</a>
+            <a href="/search/detail?page=${p }" id="p">${p }</a>
          </c:otherwise>
       </c:choose>
       <c:if test="${vs.last eq false }">|</c:if>
@@ -91,4 +91,21 @@ body {
    <br />
 </div>
 
+<!-- <script>
+// 일단 보류
+$("#p").on("click", function() {
+	var p = $("#p").val();
+
+  $.ajax({
+     "url" : "/search/detailPage",
+     "method" : "post",
+     "data" : {
+        "page" : p
+     }
+  }).done(function(aw) {
+     $("#result").html(aw);
+  })
+}); 
+
+</script> -->
  
