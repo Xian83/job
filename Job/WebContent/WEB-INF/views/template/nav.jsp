@@ -71,9 +71,9 @@
 					</c:when>
 				</c:choose>
 				<li><form action="/search/company" >
-					<input type="text" name="search" class="w3-bar-item w3-input w3-white w3-mobile"
-						placeholder="회사명" style="display: inline-block; width: 120px; height: 50%">
-					<button class="w3-bar-item w3-button w3-green " type="submit" style="display: inline-block;">Go</button>
+					<input type="text" name="search" class="w3-bar-item form-control"
+						placeholder="회사명" style="display: inline-block; width: 150px; height: 50%; margin-top: 10px; ">
+					<button class="btn btn-default " type="submit" ><i class="glyphicon glyphicon-search"></i></button>
 				</form>
 				</li>
 			</ul>
