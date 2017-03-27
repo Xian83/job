@@ -41,7 +41,7 @@ public class DetailController {
 			HttpSession session, @CookieValue(name = "cmpn_nm", defaultValue = "") String origin) {
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t1");
+		mav.setViewName("ttt");
 		mav.addObject("main", "company/detail_form");
 
 		// get data by Company name
