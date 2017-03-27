@@ -26,50 +26,7 @@ public class SearchDao {
 	@Autowired
 	SqlSessionFactory factory;
 	
-	// 효정 - 시도중
-	public String getURL_2(HttpServletRequest req) {
-		String name = req.getParameter("search");
-		String[] area = req.getParameterValues("chkSido");
-		String[] industry = req.getParameterValues("chkJinhakCode");
-		String[] size = req.getParameterValues("chkSize");
-		String page = req.getParameter("page") == null ? "1" : req.getParameter("page");
-
-		String condition = "";
-		// Search Condition Setting
-		// company name condition add
-		if (name != null)
-			condition += "&CName=" + name;
-
-		// area condition add
-		if (area != null) {
-			if (!area[0].equals("�쟾泥�")) {
-				for (int i = 0; i < area.length; i++)
-					condition += "&AreaSido=" + area[i];
-			}
-		}
-		// industry condition add
-		if (industry != null) {
-			if (!industry[0].equals("�쟾泥�")) {
-				for (int i = 0; i < industry.length; i++)
-					condition += "&JCode=" + industry[i];
-			}
-		}
-		// company size condition add
-		if (size != null) {
-			if (!size[0].equals("�쟾泥�")) {
-				for (int i = 0; i < size.length; i++)
-					condition += "&Size=" + size[i];
-			}
-		}
-
-		String url = "http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?flag=Search" + condition
-				+ "&intCurrentPage=1&intPageSize=20";
-
-		System.out.println("URL = " + url);
-		return url + "&CurrentPage=" + page;
-	}
 	
-
 
 	// get Search Result by Company Name
 	public List getData(String CName) throws IOException {

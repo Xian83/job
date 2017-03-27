@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import model.MemberDao;
+import model.MyInfoDao;
 import model.MyPageDao;
 import model.RecommandDao;
 
@@ -28,6 +29,9 @@ public class MyPageController2 {
 
 	@Autowired
 	MyPageDao mypage;
+	
+	@Autowired
+	MyInfoDao mydao;
 
 	@RequestMapping("/index")
 	public ModelAndView initHandler() {
@@ -38,6 +42,22 @@ public class MyPageController2 {
 		return mav;
 	}
 
+	@RequestMapping("/lately")
+	public ModelAndView latelyHandler(HttpSession session) {
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("tt");
+		mav.addObject("main", "/my/lately");
+
+		String email = (String) session.getAttribute("email");
+		// 사진 추가
+		String picURL = mydao.getLastetImageURL(email);
+		if (picURL == null || picURL.equals("null"))
+			picURL = "/picture/default.jpg";
+		
+		return mav;
+	}
+	
 	@RequestMapping("/recommand")
 	public ModelAndView recommandHandler(HttpSession session) {
 		String email = (String) session.getAttribute("email");
@@ -55,6 +75,12 @@ public class MyPageController2 {
 		mav.setViewName("tt");
 		mav.addObject("main", "/my/recommand");
 		mav.addObject("list", list);
+		
+		// 사진 추가
+		String picURL = mydao.getLastetImageURL(email);
+		if (picURL == null || picURL.equals("null"))
+			picURL = "/picture/default.jpg";
+		
 		return mav;
 	}
 
@@ -66,6 +92,13 @@ public class MyPageController2 {
 		mav.setViewName("tt");
 		mav.addObject("main", "/my/visit");
 		mav.addObject("list", list);
+		
+		String email = (String) session.getAttribute("email");
+		// 사진 추가
+		String picURL = mydao.getLastetImageURL(email);
+		if (picURL == null || picURL.equals("null"))
+			picURL = "/picture/default.jpg";
+		
 		return mav;
 	}
 
@@ -77,6 +110,13 @@ public class MyPageController2 {
 		mav.setViewName("tt");
 		mav.addObject("main", "/my/interest");
 		mav.addObject("list", list);
+		
+		String email = (String) session.getAttribute("email");
+		// 사진 추가
+		String picURL = mydao.getLastetImageURL(email);
+		if (picURL == null || picURL.equals("null"))
+			picURL = "/picture/default.jpg";
+	
 		return mav;
 	}
 
@@ -95,6 +135,23 @@ public class MyPageController2 {
 		return result;
 	}
 	
+	@RequestMapping("/scrap")
+	public ModelAndView scrapHandler(HttpSession session) {
+		List<HashMap> list = mypage.getCompareData((String) session.getAttribute("email"));
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("tt");
+		mav.addObject("main", "/my/scrap");
+		mav.addObject("list", list);
+		
+		String email = (String) session.getAttribute("email");
+		// 사진 추가
+		String picURL = mydao.getLastetImageURL(email);
+		if (picURL == null || picURL.equals("null"))
+			picURL = "/picture/default.jpg";
+		return mav;
+	}
+	
 	@RequestMapping("/compare")
 	public ModelAndView compareHandler(HttpSession session) {
 		List<HashMap> list = mypage.getCompareData((String) session.getAttribute("email"));
@@ -103,15 +160,15 @@ public class MyPageController2 {
 		mav.setViewName("tt");
 		mav.addObject("main", "/my/compare");
 		mav.addObject("list", list);
+		
+		String email = (String) session.getAttribute("email");
+		// 사진 추가
+		String picURL = mydao.getLastetImageURL(email);
+		if (picURL == null || picURL.equals("null"))
+			picURL = "/picture/default.jpg";
+
 		return mav;
 	}
 	
-	@RequestMapping("/applyInfo")
-	public ModelAndView applyHandler() {
-	
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("tt");
-		mav.addObject("main", "/my/applyInfo");
-		return mav;
-	}
+
 }
