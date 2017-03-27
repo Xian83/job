@@ -52,4 +52,50 @@ public class DummyDataGeneratorDao {
 		}
 		return res;
 	}
+	
+	// score2 : 방사형 그래프용 
+	public boolean insert2(List<HashMap> score){
+		boolean res = false;
+		
+		// 랜덤 데이터 생성
+		List<HashMap> list = new ArrayList<>();
+		for(HashMap map : score) {
+			HashMap data = new HashMap();
+			data.put("CMPN_NM", map.get("CMPN_NM"));
+			data.put("LABEL01", (int) (Math.random() * 75) + 25);
+			data.put("LABEL02", (int) (Math.random() * 75) + 25);
+			data.put("LABEL03", (int) (Math.random() * 75) + 25);
+			data.put("LABEL04", (int) (Math.random() * 75) + 25);
+			data.put("LABEL05", (int) (Math.random() * 75) + 25);
+			data.put("LABEL06", (int) (Math.random() * 75) + 25);
+			data.put("LABEL07", (int) (Math.random() * 75) + 25);
+			data.put("LABEL08", (int) (Math.random() * 75) + 25);
+			data.put("LABEL09", (int) (Math.random() * 75) + 25);
+			
+			list.add(data);
+		}
+		System.out.println("랜덤 데이터 생성 : " + list.size() + "개");
+		
+		SqlSession sql = null;
+		try {
+			sql = factory.openSession();
+
+			int cnt = 0;
+			for(HashMap map : list){
+				cnt = sql.insert("mappers.company.inputE", map);				
+				if (cnt == 1) {
+					sql.commit();
+					res = true;
+				}				
+			}
+
+		} catch (Exception e) {
+			res = false;
+			e.printStackTrace();
+		} finally {
+			System.out.println("랜덤 데이터 입력 완료");
+			sql.close();
+		}
+		return res;
+	}
 }
