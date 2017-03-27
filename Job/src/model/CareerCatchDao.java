@@ -1,6 +1,7 @@
 package model;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,8 +10,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class CareerCatchDao {
@@ -78,5 +77,49 @@ public class CareerCatchDao {
 		
 	}
 	
+	public boolean updateCompID(List<HashMap> list){
+		int res = 0;
+		SqlSession sql = null;
+		try {
+			sql = factory.openSession();
+			
+			for(HashMap map : list){
+				res = sql.update("mappers.career.updateCompID", map);
+				sql.commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			sql.close();
+		}
+		
+		if(res == 1)
+			return true;
+		else
+			return false;
+	}
 	
+	public boolean insertCompID(List<HashMap> list){
+		int res = 0;
+		SqlSession sql = null;
+		try {
+			sql = factory.openSession();
+			
+			for(HashMap map : list){
+				res = sql.insert("mappers.career.insertCompID", map);
+				sql.commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			sql.close();
+		}
+		
+		if(res == 1)
+			return true;
+		else
+			return false;
+	}
 }
