@@ -3,8 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-
-<h2>비교 처리 페이지</h2>
 <hr/>
 
 <div class="container-fluid" align="center" style="width: 80%;">
@@ -42,10 +40,10 @@
 
 </div>
 
-<div class="container" align="center">
+<div class="container-fluid" align="center">
 	<div class="row" align="center">
-	
-		<div class="col-md-5">
+		<div class="col-md-1"></div>	
+		<div class="col-md-4">
 			<c:forEach var="cm1" items="${list1 }">
 				${cm1.DIVISION }
 			</c:forEach>
@@ -53,18 +51,20 @@
 		<div class="col-md-2">
 			분야
 		</div>
-		<div class="col-md-5">
+		<div class="col-md-4">
 			<c:forEach var="cm2" items="${list2 }">
 				${cm2.DIVISION }
 			</c:forEach>
 		</div>
-		</tr>
+		<div class="col-md-1"></div>
 	
 	</div>
 </div>
 	
 
 </div>
+
+
 
 
 

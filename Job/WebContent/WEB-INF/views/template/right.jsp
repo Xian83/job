@@ -11,8 +11,8 @@
 
 hr[id='hh'] {
 	border: none;
-	color: #CDB79E;
-	background-color: #CDB79E;
+	color: red;
+	background-color: red;
 	height: 2px;
 	width: 100%;
 }
@@ -23,7 +23,7 @@ hr[id='hh'] {
 
 
 <div>
-	<div class="well" align="center">
+	<div class="well" align="center" style="background: white;">
 
 		<input type="text" id="cm1" name="cm1" readonly placeholder="기업1">
 		<b style="font-size: 20px;"> vs </b> <input type="text" id="cm2"

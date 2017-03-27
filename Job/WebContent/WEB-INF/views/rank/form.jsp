@@ -82,7 +82,15 @@
 						0	 
 			  	</c:when>
 	            	<c:otherwise>
-            			<b><fmt:formatNumber value="${avg[i].AVG_SALARY }" groupingUsed="true"/>원<b/>
+            			<b>
+            				<c:choose>
+                           	   <c:when test="${avg[i].AVG_SALARY / 10000 gt 4} ">
+                           	   	<fmt:formatNumber value="${avg[i].AVG_SALARY / 10000 +1}" groupingUsed="true"/>(만원)</p><br/>
+                           	   </c:when>
+                           	   <c:otherwise>
+                           	   	<fmt:formatNumber value="${avg[i].AVG_SALARY / 10000 }" groupingUsed="true"/>(만원)</p><br/>
+                           	   </c:otherwise>
+                           </c:choose>
             	    </c:otherwise>
 	            </c:choose>
 	            </td>
@@ -165,7 +173,15 @@
 						0	 
 			  	</c:when>
 	            	<c:otherwise>
-            			<b><fmt:formatNumber value="${rookie[i].ROOKIE_SALARY }" groupingUsed="true"/>원<b/>
+            			<b>
+            				<c:choose>
+                           	   <c:when test="${rookie[i].AVG_SALARY / 10000 gt 4} ">
+                           	   	<fmt:formatNumber value="${rookie[i].ROOKIE_SALARY / 10000 +1}" groupingUsed="true"/>(만원)</p><br/>
+                           	   </c:when>
+                           	   <c:otherwise>
+                           	   	<fmt:formatNumber value="${rookie[i].ROOKIE_SALARY / 10000 }" groupingUsed="true"/>(만원)</p><br/>
+                           	   </c:otherwise>
+                           </c:choose>
             	    </c:otherwise>
 	            </c:choose>
 	            </td>
