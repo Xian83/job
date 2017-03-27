@@ -31,14 +31,14 @@ public class MyInfoController {
 	FileUploadDao fdao;
 
 	@RequestMapping("/info")
-	public ModelAndView infoHandler(HttpSession session, @RequestParam Map data) {
+	public ModelAndView infoHandler(HttpSession session, @RequestParam Map data, @RequestParam(name="pic") MultipartFile file) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("tt");
 
 		mav.addObject("main", "my/my_info");
 		
 		String email = (String) session.getAttribute("email");
-		// DB�뿉�꽌 �봽濡쒗븘 �궗吏� 媛��졇���꽌 泥섎━
+		// 사진 추가
 		String picURL = mydao.getLastetImageURL(email);
 		if (picURL == null || picURL.equals("null"))
 			picURL = "/picture/default.jpg";
@@ -106,8 +106,7 @@ public class MyInfoController {
 			Map map = fdao.execute(file);
 			System.out.println("map = " + map);
 
-			// DB �뾽濡쒕뱶
-//			String email = (String) session.getAttribute("eamil");
+			// DB 사진 추가
 			String email = req.getParameter("email");
 			String url = (String) map.get("filelink");
 			
