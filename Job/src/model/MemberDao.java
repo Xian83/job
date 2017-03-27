@@ -67,31 +67,8 @@ public class MemberDao {
 
 		return data;
 	}
-	
 
-
-	// �쉶�썝�젙蹂댁닔�젙
-	// public boolean update(Map data){
-	//
-	// SqlSession sql = null;
-	// try {
-	// sql = factory.openSession();
-	// int cnt = sql.update("mappers.member.update", data);
-	//
-	// if(cnt == 1){
-	// sql.commit();
-	// return true;
-	// } else
-	// return false;
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// return false;
-	// } finally{
-	// sql.close();
-	// }
-	// }
-
-	// �쉶�썝�깉�눜
+	// 회원 탈퇴
 	public boolean delete(String id, String pass) {
 		HashMap<String, Object> data = new HashMap<>();
 		data.put("id", id);
@@ -136,7 +113,7 @@ public class MemberDao {
 		}
 	}
 
-	// �쉶�썝媛��엯 : �떊洹쒗쉶�썝 湲곕낯�젙蹂댁엯�젰
+	// 회원가입 : 기본 정보 입력
 	public boolean insert(Map data) {
 		SqlSession sql = null;
 		try {
@@ -156,7 +133,7 @@ public class MemberDao {
 		}
 	}
 
-	// �쉶�썝媛��엯 : �떊洹쒗쉶�썝 異붽��젙蹂댁엯�젰
+	// 회원가입 : 추가정보 입력
 	public boolean insertInfo(Map data) {
 		SqlSession sql = null;
 		try {
@@ -175,4 +152,5 @@ public class MemberDao {
 			sql.close();
 		}
 	}
+
 }

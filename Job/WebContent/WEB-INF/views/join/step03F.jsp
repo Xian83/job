@@ -5,7 +5,7 @@
 	<h3>추가정보 입력</h3>
 </div>
 <div class="well">
-	<form action="/join/result" method="post">
+	<form action="/join/result02" method="post">
 		<input type="hidden" name="email" value="${sessionScope.email }" />
 		<p>
 			<label for="comment">관심지역</label><br /> <select class="form-control"
