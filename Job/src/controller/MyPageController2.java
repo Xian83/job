@@ -11,8 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import model.FileUploadDao;
 import model.MemberDao;
 import model.MyInfoDao;
 import model.MyPageDao;
@@ -29,79 +32,115 @@ public class MyPageController2 {
 
 	@Autowired
 	MyPageDao mypage;
-	
+
 	@Autowired
 	MyInfoDao mydao;
 
-	@RequestMapping("/index")
-	public ModelAndView initHandler() {
+	@Autowired
+	FileUploadDao fdao;
+
+	@RequestMapping("/company")
+	public ModelAndView my_companyHandler(@RequestParam(name="pic") MultipartFile file, 
+					HttpSession session, MultipartHttpServletRequest req) throws Exception {
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("tt");
-		mav.addObject("main", "/my/index");
-		return mav;
-	}
-
-	@RequestMapping("/lately")
-	public ModelAndView latelyHandler(HttpSession session) {
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("tt");
-		mav.addObject("main", "/my/lately");
+		mav.setViewName("t1");
+		mav.addObject("main", "/my/company");
 
 		String email = (String) session.getAttribute("email");
-		// 사진 추가
-		String picURL = mydao.getLastetImageURL(email);
-		if (picURL == null || picURL.equals("null"))
-			picURL = "/picture/default.jpg";
+
+		// 최근 본 기업(lately) : 별다른 추가 정보 없음
 		
-		return mav;
-	}
-	
-	@RequestMapping("/recommand")
-	public ModelAndView recommandHandler(HttpSession session) {
-		String email = (String) session.getAttribute("email");
+		
+		// 추천 기업(recommand) - 데이터 안 넘오옴(DB 삭제됨)
 		Map data = mDao.getInfo(email);
-		System.out.println("info : " + data.toString());// 확인용
-
-		List list = rDao.getData(data); //
-		for (Object map : list) {
+		List list_r = rDao.getData(data); //
+		for (Object map : list_r) {
 			if (((Map) map).get("LOGO") == null) {
 				((Map) map).put("LOGO", "http://image.jinhak.com/job/site/tmp02.gif");
 			}
 		}
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("tt");
-		mav.addObject("main", "/my/recommand");
-		mav.addObject("list", list);
+		mav.addObject("list_r", list_r);
+		System.out.println("추천 = " + list_r);
 		
-		// 사진 추가
-		String picURL = mydao.getLastetImageURL(email);
-		if (picURL == null || picURL.equals("null"))
-			picURL = "/picture/default.jpg";
+		// 자주 본 기업(visit) - 데이터 잘 안 넘어 옴
+		List<HashMap> list_v = mypage.getVisitData(email);
+		mav.addObject("list_v", list_v);
+		System.out.println("자주 본 기업 visit= " + list_v);
+		
+		// 스크랩한 기업(scrap)
+		List<HashMap> list_s = mypage.getScrapData(email);
+		mav.addObject("list_s", list_s);
+		System.out.println("스크랩 = " + list_s);
+		System.out.println("email = "+email);
+		
+		// 비교한 기업(compare)
+		List<HashMap> list_c = mypage.getCompareData(email);
+		mav.addObject("list_c", list_c);
+		System.out.println("비교 compare = " + list_c);
+
+		// 사진 등록
+		String ct = file.getContentType();
+		if (ct.startsWith("image")) {
+			// �뙆�씪 �뾽濡쒕뱶
+			Map map = fdao.execute(file);
+			System.out.println("map = " + map);
+			
+			// DB 사진 추가
+			email = req.getParameter("email");
+			String url = (String) map.get("filelink");
+			mav.addObject("url", url);
+			System.out.println("url = " + url);
+			boolean res = fdao.insert(email, url);
+			if (res)
+				mav.addObject("msg", "프로필 사진이 변경되었습니다");
+			else 
+				mav.addObject("msg", "프로필 사진 등록에 실패하였습니다");
+		} else {
+			mav.addObject("msg", "Not Image File");
+		}
+		
+		mav.addObject("url2", "/my/company");
+		mav.setViewName("util/alert");
+		
 		
 		return mav;
 	}
 
-	@RequestMapping("/visit")
-	public ModelAndView visitHandler(HttpSession session) {
-		List<HashMap> list = mypage.getVisitData((String) session.getAttribute("email"));
-
+	/*@RequestMapping("/update_pic")
+	public ModelAndView update_pic()
+			throws Exception {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("tt");
-		mav.addObject("main", "/my/visit");
-		mav.addObject("list", list);
 		
-		String email = (String) session.getAttribute("email");
-		// 사진 추가
-		String picURL = mydao.getLastetImageURL(email);
-		if (picURL == null || picURL.equals("null"))
-			picURL = "/picture/default.jpg";
+		System.out.println("여기 넘어옴?");
+		// �궗吏� ���엯�씤 寃쎌슦留� �뾽濡쒕뱶 吏꾪뻾
+		String ct = file.getContentType();
+		if (ct.startsWith("image")) {
+			// �뙆�씪 �뾽濡쒕뱶
+			Map map = fdao.execute(file);
+			System.out.println("map = " + map);
+			
+			// DB 사진 추가
+			String email = req.getParameter("email");
+			String url = (String) map.get("filelink");
+			mav.addObject("url", url);
+			System.out.println("url = " + url);
+			boolean res = fdao.insert(email, url);
+			if (res)
+				mav.addObject("msg", "프로필 사진이 변경되었습니다");
+			else 
+				mav.addObject("msg", "프로필 사진 등록에 실패하였습니다");
+		} else {
+			mav.addObject("msg", "Not Image File");
+		}
 		
+		mav.addObject("url2", "/my/company");
+		mav.setViewName("util/alert");
 		return mav;
-	}
 
+	}
+	*/
+	
 	@RequestMapping("/interest")
 	public ModelAndView interestHandler(HttpSession session) {
 		List<HashMap> list = mypage.getScrapData((String) session.getAttribute("email"));
@@ -110,13 +149,13 @@ public class MyPageController2 {
 		mav.setViewName("tt");
 		mav.addObject("main", "/my/interest");
 		mav.addObject("list", list);
-		
+
 		String email = (String) session.getAttribute("email");
 		// 사진 추가
 		String picURL = mydao.getLastetImageURL(email);
 		if (picURL == null || picURL.equals("null"))
 			picURL = "/picture/default.jpg";
-	
+
 		return mav;
 	}
 
@@ -130,45 +169,9 @@ public class MyPageController2 {
 			System.out.println(">>> name's value : " + value);
 			i++;
 		}
-		
+
 		Map result = new HashMap();
 		return result;
 	}
-	
-	@RequestMapping("/scrap")
-	public ModelAndView scrapHandler(HttpSession session) {
-		List<HashMap> list = mypage.getCompareData((String) session.getAttribute("email"));
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("tt");
-		mav.addObject("main", "/my/scrap");
-		mav.addObject("list", list);
-		
-		String email = (String) session.getAttribute("email");
-		// 사진 추가
-		String picURL = mydao.getLastetImageURL(email);
-		if (picURL == null || picURL.equals("null"))
-			picURL = "/picture/default.jpg";
-		return mav;
-	}
-	
-	@RequestMapping("/compare")
-	public ModelAndView compareHandler(HttpSession session) {
-		List<HashMap> list = mypage.getCompareData((String) session.getAttribute("email"));
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("tt");
-		mav.addObject("main", "/my/compare");
-		mav.addObject("list", list);
-		
-		String email = (String) session.getAttribute("email");
-		// 사진 추가
-		String picURL = mydao.getLastetImageURL(email);
-		if (picURL == null || picURL.equals("null"))
-			picURL = "/picture/default.jpg";
-
-		return mav;
-	}
-	
 
 }

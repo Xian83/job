@@ -20,7 +20,7 @@ public class RecommandDao {
 
 		try {
 			sql = factory.openSession();
-			list = sql.selectList("mappers.mypage.recommand", data);
+			//list = sql.selectList("mappers.mypage.recommand", data);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

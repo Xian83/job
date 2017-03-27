@@ -95,34 +95,6 @@ public class MyInfoController {
 		return mav;
 	}
 
-	@RequestMapping("/update_pic")
-	public ModelAndView update_pic(@RequestParam(name="pic") MultipartFile file, HttpSession session, MultipartHttpServletRequest req)
-			throws Exception {
-		ModelAndView mav = new ModelAndView();
-		// �궗吏� ���엯�씤 寃쎌슦留� �뾽濡쒕뱶 吏꾪뻾
-		String ct = file.getContentType();
-		if (ct.startsWith("image")) {
-			// �뙆�씪 �뾽濡쒕뱶
-			Map map = fdao.execute(file);
-			System.out.println("map = " + map);
-
-			// DB 사진 추가
-			String email = req.getParameter("email");
-			String url = (String) map.get("filelink");
-			
-			boolean res = fdao.insert(email, url);
-			if (res)
-				mav.addObject("msg", "파일 등록됨");
-			else 
-				mav.addObject("msg", "파일 등록실패");
-		} else {
-			mav.addObject("msg", "Not Image File");
-		}
-		mav.addObject("url","/my/info");
-		mav.setViewName("util/alert");
-		return mav;
-
-	}
 	
 	
 	@RequestMapping("/leave_form")
