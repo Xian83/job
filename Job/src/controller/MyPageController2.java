@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import model.DetailDao;
 import model.MemberDao;
 import model.MyInfoDao;
 import model.MyPageDao;
-import model.RecommandDao;
 
 @Controller
 @RequestMapping("/my")
@@ -25,13 +25,13 @@ public class MyPageController2 {
 	MemberDao mDao;
 
 	@Autowired
-	RecommandDao rDao;
-
-	@Autowired
 	MyPageDao mypage;
 	
 	@Autowired
 	MyInfoDao mydao;
+	
+	@Autowired
+	DetailDao detail;
 
 	@RequestMapping("/index")
 	public ModelAndView initHandler() {
@@ -61,10 +61,14 @@ public class MyPageController2 {
 	@RequestMapping("/recommand")
 	public ModelAndView recommandHandler(HttpSession session) {
 		String email = (String) session.getAttribute("email");
-		Map data = mDao.getInfo(email);
+		HashMap data = mDao.getInfo(email); //(WKP_ADRS, STNDD_BIG_GB, SALARY_MIN, SALARY_MAX)
 		System.out.println("info : " + data.toString());// 확인용
 
-		List list = rDao.getData(data); //
+		//추천기업 정보 가져오기 
+		List reco = mypage.getRecommand(data); // CMPN_NM, Salary 정보 가져옴
+		// score db에서 cmpn_nm 기준으로 데이터 가져오기
+		List list = detail.getScoreData(reco);
+		
 		for (Object map : list) {
 			if (((Map) map).get("LOGO") == null) {
 				((Map) map).put("LOGO", "http://image.jinhak.com/job/site/tmp02.gif");

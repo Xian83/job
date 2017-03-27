@@ -27,7 +27,11 @@ public class ChatController {
 	@ResponseBody
 	public String chatHandler(@RequestParam(name="msg") String msg, HttpSession session, HttpServletRequest req) {
 		Map map = new HashMap();
-			map.put("id", session.getAttribute("name"));
+		String name =(String)session.getAttribute("name");
+		if(name==null){
+			name="손님"+(int)(Math.random()*1000)+1;
+		}
+			map.put("id", name);
 			map.put("msg", msg);
 			
 		li.add(map);
