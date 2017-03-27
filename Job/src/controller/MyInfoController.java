@@ -147,9 +147,10 @@ public class MyInfoController {
 		data.put("pass", pass);
 		boolean res = mdao.existCheck(data);
 		
-		// increase password error count up
-		if(!res)
-			session.setAttribute("leave_try", cnt++);
+		if(res)
+			mdao.delete(email, pass);	// delete member data
+		else
+			session.setAttribute("leave_try", cnt++);	// increase password error count up
 		
 		return res;
 	}
