@@ -1,9 +1,9 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import model.MemberDao;
+import model.MyInfoDao;
 
 
 @Controller
@@ -21,6 +22,9 @@ import model.MemberDao;
 public class JoinController {
 	@Autowired
 	MemberDao mDao;
+	
+	@Autowired
+	MyInfoDao mydao;
 
 	// �쉶�썝媛��엯 - �빟愿��룞�쓽
 	@RequestMapping("/step01")
@@ -43,32 +47,13 @@ public class JoinController {
 	// �쉶�썝媛��엯 - 異붽��젙蹂� �엯�젰
 	@RequestMapping("/step03")
 	public ModelAndView join03Handler(@RequestParam Map data){
-		ArrayList list = new ArrayList(); 
-		list.add("�냽�뾽, �엫�뾽 諛� �뼱�뾽");
-		list.add("愿묒뾽");
-		list.add("�젣議곗뾽");
-		list.add("�쟾湲�,媛��뒪,利앷린 諛� �닔�룄�궗�뾽");
-		list.add("�븯�닔�룓湲곕Ъ泥섎━, �썝猷뚯옱�깮 諛� �솚寃쎈났�썝�뾽");
-		list.add("嫄댁꽕�뾽");
-		list.add("�룄留� 諛� �냼留ㅼ뾽");
-		list.add("�슫�닔�뾽");
-		list.add("�닕諛� 諛� �쓬�떇�젏�뾽");
-		
-		ArrayList area = new ArrayList(); 
-		area.add("�꽌�슱�듅蹂꾩떆");
-		area.add("遺��궛愿묒뿭�떆");
-		area.add("��援ш킅�뿭�떆");
-		area.add("�씤泥쒓킅�뿭�떆");
-		area.add("愿묒＜愿묒뿭�떆");
-		area.add("���쟾愿묒뿭�떆");
-		area.add("�슱�궛愿묒뿭�떆");
-		area.add("�꽭醫낇듅蹂꾩옄移섏떆");
-		area.add("寃쎄린�룄");
+		List area = mydao.getlocations(); // 관심지역
+		List industry = mydao.getIndustries();// 산업군
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
 		mav.addObject("main", "/join/step03");
-		mav.addObject("list", list);
+		mav.addObject("list", industry);
 		mav.addObject("area", area);
 		mav.addObject("data", data);
 		return mav;
@@ -110,5 +95,20 @@ public class JoinController {
 			res = mDao.existCheck(chk);
 		
 		return String.valueOf(res);
+	}
+	
+	// facebook 회원전용 추가 정보 입력창
+	@RequestMapping("/step03F")
+	public ModelAndView join03FHandler(){
+		
+		List location = mydao.getlocations(); // 관심지역
+		List industry = mydao.getIndustries();// 산업군
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("t1");
+		mav.addObject("main", "/join/step03F");
+		mav.addObject("industry", industry);
+		mav.addObject("location", location);
+		return mav;
 	}
 }

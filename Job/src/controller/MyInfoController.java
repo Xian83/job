@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -134,25 +135,27 @@ public class MyInfoController {
 		return mav;
 	}
 	
+	// return result by ajax
+	@ResponseBody
 	@RequestMapping("/leave_result")
-	public ModelAndView leave_resultHandler(HttpSession session, @RequestParam Map map ) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("tt");
-		mav.addObject("main", "/my/leave_result");
-
-		String id = (String) session.getAttribute("email");
-		String pass1 = (String) session.getAttribute("pass");
-		String pass = (String) map.get("pass");
+	public boolean leave_resultHandler(HttpSession session, @RequestParam(name="pass") String pass ) {
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("tt");
+//		mav.addObject("main", "/my/leave_result");
 		
-		// 탈퇴 시도하다 멈췄어요!!
-		/*System.out.println("탈퇴 pass1 = " + pass1 + " / pass =" + pass);
-		if(pass1 == pass) {
-			System.out.println("비번 확인 함?");
-			boolean rst = mdao.delete(id, pass);
-			System.out.println("boolean b   = " + rst );
-			
-		}*/
+		String email = (String) session.getAttribute("email");
+		int cnt = (int) session.getAttribute("leave_try");
 		
-		return mav;
+		// email, pass check 
+		HashMap data = new HashMap<>();
+		data.put("email", email);
+		data.put("pass", pass);
+		boolean res = mdao.existCheck(data);
+		
+		// increase password error count up
+		if(!res)
+			session.setAttribute("leave_try", cnt++);
+		
+		return res;
 	}
 }

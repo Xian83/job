@@ -25,7 +25,7 @@
 			<label for="comment">관심지역</label><br/>
 			<select class="form-control" name="area">
 				<c:forEach var="i" items="${area }">
-					<option value="${i}">${i }</option>
+					<option value="${i.LOCATION}">${i.LOCATION }</option>
 				</c:forEach>
 			</select>
 		</p>
@@ -33,7 +33,7 @@
 			<label for="comment">산업군</label><br/>
 			<select class="form-control" name="STNDD_BIG_GB">
 				<c:forEach var="i" items="${list }">
-					<option value="${i}">${i }</option>
+					<option value="${i.INDUSTRY}">${i.INDUSTRY }</option>
 				</c:forEach>
 			</select>
 		</p>
