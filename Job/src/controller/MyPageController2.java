@@ -38,6 +38,16 @@ public class MyPageController2 {
 		return mav;
 	}
 
+	@RequestMapping("/lately")
+	public ModelAndView latelyHandler() {
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("tt");
+		mav.addObject("main", "/my/lately");
+		return mav;
+	}
+
+	
 	@RequestMapping("/recommand")
 	public ModelAndView recommandHandler(HttpSession session) {
 		String email = (String) session.getAttribute("email");
@@ -69,13 +79,13 @@ public class MyPageController2 {
 		return mav;
 	}
 
-	@RequestMapping("/scrap")
+	@RequestMapping("/interest")
 	public ModelAndView interestHandler(HttpSession session) {
 		List<HashMap> list = mypage.getScrapData((String) session.getAttribute("email"));
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("tt");
-		mav.addObject("main", "/my/scrap");
+		mav.addObject("main", "/my/interest");
 		mav.addObject("list", list);
 		return mav;
 	}
@@ -95,13 +105,24 @@ public class MyPageController2 {
 		return result;
 	}
 	
+	@RequestMapping("/scrap")
+	public ModelAndView scrapHandler(HttpSession session) {
+		List<HashMap> list = mypage.getCompareData((String) session.getAttribute("email"));
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("tt");
+		mav.addObject("main", "/my/scrap");
+		mav.addObject("list", list);
+		return mav;
+	}
+	
 	@RequestMapping("/compare")
 	public ModelAndView compareHandler(HttpSession session) {
 		List<HashMap> list = mypage.getCompareData((String) session.getAttribute("email"));
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("tt");
-		mav.addObject("main", "/my/compare");
+		mav.addObject("main", "/my/scrap");
 		mav.addObject("list", list);
 		return mav;
 	}

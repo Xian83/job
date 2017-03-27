@@ -23,13 +23,12 @@ th {
 				<ul class="dropdown-menu">
 					<li>자주 본 기업</li>
 					<li>최근 본 기업</li>
-					<li>공채달력</li>
+					<li>공채 달력</li>
 				</ul>
 			</div>
 		</div>
 
 		<div class="panel-body" align="center" >
-			
 			<form action="/my/update_pic" method="post"
 				enctype="multipart/form-data">
 				<b>PICTURE</b><br /> <img src="${url}" width="150" height="150" />
@@ -43,7 +42,7 @@ th {
 				<tr>
 					<th><a href="/my/info">회원정보관리</a></th>
 					<th><a href="/my/recommand">추천 기업 정보</a></th>
-					<th><a href="/my/interest">스크랩한 기업 정보</a></th>
+					<th><a href="/my/scrap">스크랩한 기업 정보</a></th>
 				</tr>
 			</table>
 		</div>

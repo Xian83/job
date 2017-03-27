@@ -101,6 +101,7 @@ public class MyInfoController {
 		if (ct.startsWith("image")) {
 			// �뙆�씪 �뾽濡쒕뱶
 			Map map = fdao.execute(file);
+			System.out.println("file = " + file);
 
 			// DB �뾽濡쒕뱶
 //			String email = (String) session.getAttribute("eamil");

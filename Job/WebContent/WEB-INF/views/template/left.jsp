@@ -15,8 +15,6 @@ hr[id='hh']{
     width: 100%;
 }
 
-출처: http://nine01223.tistory.com/192 [스프링연구소(spring-lab)]
-
 </style>
 <div class="panel panel-default ">
 		<div class="panel-heading " align="center" style="background: #f4511e; height: 90px">
@@ -30,21 +28,33 @@ hr[id='hh']{
 				enctype="multipart/form-data">
 				<b>PICTURE</b><br /> <img src="${url}" width="150" height="150" />
 				<hr/>
-				<input type="file" name="pic" style="display: inline;"/>  
+				<input type="file" id="f" name="pic" style="display: none;"/>  
 				<input type="hidden" name="email" value="${sessionScope.email}"/>
-				<button type="submit" class="btn">사진변경</button>
+				<button type="submit" class="btn" id="add">사진변경</button>
 			</form>
 			<hr id="hh"/>	
 			<table>
 				<tr>
-					<th><a href="/my/info"><i class="fa fa-address-card" style="font-size:36px"></i><br/>자기정보관리</a></th>
+					<th><a href="/my/info"><i class="fa fa-address-card" style="font-size:36px"></i><br/>개인 정보 관리</a></th>
 					<th><a href="/my/recommand"><i class="fa fa-thumbs-o-up" style="font-size:36px"></i><br/>추천 기업 정보</a></th>
-					<th><a href="/my/compare"><i class="fa fa-files-o" style="font-size:36px;"></i><br/>스크랩한 기업 정보</a></th>
+					<th><a href="/my/scrap"><i class="fa fa-files-o" style="font-size:36px;"></i><br/>스크랩한 기업 정보</a></th>
 				</tr>
 					<th><a href="/my/visit"><i class="fa fa-eye" style="font-size:36px"></i><br/>자주 본 기업</a></th>
 					<th><a href="/my/lately"><i class="fa fa-spinner" style="font-size:36px;"></i><br/>최근 본 기업</a></th>
-					<th><a href="/my/applyInfo"><i class="fa fa-columns" style="font-size:36px;"></i><br/>공채달력</a></th>
+					<th><a href="/my/compare"><i class="fa fa-refresh" style="font-size:36px;"></i><br/>비교한 기업 정보</a></th>
 			</table>
 		</div>
 
 	</div>
+	
+	<script>
+	$("#add").on("click", function(){ 
+		$("#f").trigger("click");    
+		console.log($("#f"));
+	});
+	$("#f").on("change", function(){
+		window.alert($("#f").val());
+		$("#fname").html($("#f").val());
+		
+	});
+</script>
