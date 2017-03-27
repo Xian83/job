@@ -175,7 +175,7 @@ public class DetailDao {
 			Elements e3 = doc.select("td:not(.bdr1, .al1 nowrap, .al3)");
 			String[] arr = e3.text().trim().split("\\s+");
 			for (String str : arr) {
-				if (str.endsWith("위")){
+				if (str.endsWith("위")) {
 					li3.add(str);
 					System.out.println(str);
 				}
@@ -201,16 +201,16 @@ public class DetailDao {
 
 			// 매출액, 영억이익, 당기손익, 사원수
 			Elements e1 = doc.select(".table1 td");
-			
+
 			int flag = 1;
-			for(Element t : e1){
-				if(flag == 5)
+			for (Element t : e1) {
+				if (flag == 5)
 					data.put("num01", t.text());
-				if(flag == 6)
+				if (flag == 6)
 					data.put("num02", t.text());
-				if(flag == 7)
+				if (flag == 7)
 					data.put("num03", t.text());
-				if(flag == 9)
+				if (flag == 9)
 					data.put("num04", t.text());
 				flag++;
 			}
@@ -240,5 +240,17 @@ public class DetailDao {
 			e.printStackTrace();
 		}
 		return data;
+	}
+
+	public HashMap getScore02(String COMPANYNAME) {
+		SqlSession session = factory.openSession();
+		HashMap map = new HashMap();
+		try {
+			map = session.selectOne("mappers.company.getScore02", COMPANYNAME);
+
+		} finally {
+			session.close();
+		}
+		return map;
 	}
 }
