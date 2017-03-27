@@ -5,8 +5,6 @@
 <%@ page import="java.io.*"%>
 <%@ page import="java.util.*"%>    
 <%@page import="com.fasterxml.jackson.databind.ObjectMapper"%>
-
-
 <div class="container" align="center">
 <div id="wrap" class="well" style="width: 80%;">
     <section id="container">
@@ -164,10 +162,23 @@
 
 
 <br/>
-
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdpNCYLer2YLqWD5YoIBaBqmD8SJm8b9k&callback=initMap"
+	async defer></script>
 <div align="center">
 	<b>[ 위치 ] </b> <br/><br/>
-	
-	<img src="/mapdummy.jpg" width="500" height="300">
-
+	<div id="map" style="width: 500; height: 500"></div>
 </div>
+<script>
+	function initMap() {
+		// Create a map object and specify the DOM element for display.
+		var map = new google.maps.Map(document.getElementById('map'), {
+			center : {
+				lat : ${json.results[0].geometry.location.lat},
+				lng : ${json.results[0].geometry.location.lng}
+			},
+			scrollwheel : true,
+			zoom : 15
+		});
+	}
+</script>

@@ -387,7 +387,8 @@ th{
 			<p style="font-size: 20; line-height: 1.5; color: blue;">근무환경 및
 				복리후생</p>
 			<hr />
-			<b>[회사위치]</b>  ${info02.address }<br /> 
+			<b>[회사위치]</b>  ${info02.address }<br />
+			<div id="map" style="width: 500; height: 500"></div>
 			<b>[회사제도]</b><br/>
 			${info02.system }<br /> 
 			<b>[사내문화]</b><br/>
@@ -395,7 +396,22 @@ th{
 		</div>
 
 </div>
-
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdpNCYLer2YLqWD5YoIBaBqmD8SJm8b9k&callback=initMap"
+	async defer></script>
+<script>
+	function initMap() {
+		// Create a map object and specify the DOM element for display.
+		var map = new google.maps.Map(document.getElementById('map'), {
+			center : {
+				lat : ${json.results[0].geometry.location.lat},
+				lng : ${json.results[0].geometry.location.lng}
+			},
+			scrollwheel : true,
+			zoom : 15
+		});
+	}
+</script>
 <!-- 상세 데이터 테스트용 영역 -->
 <hr/>
 <div>
