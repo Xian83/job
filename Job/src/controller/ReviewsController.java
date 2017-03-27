@@ -36,7 +36,7 @@ public class ReviewsController {
 				
 		List<HashMap> review = rdao.review(start, end);	// get reviews
 		review = rdao.getPicture(review); 				// add picURL
-		
+		System.out.println("=====================================? "+review);
 		List<HashMap> rank = rdao.rank();				// ?? 				
 		
 		ModelAndView mav = new ModelAndView();

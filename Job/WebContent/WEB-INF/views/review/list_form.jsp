@@ -86,9 +86,7 @@ input[id=msg] {
 				
 				var html = "";
 				for (var i = 0; i < obj.length; i++) {
-					if(obj[i].id==null){
-						obj[i].id="¼Õ´Ô";
-					}
+			
 					html += "<b>[" + obj[i].id + "]</b> ";
 					html += obj[i].msg + "<br>";
 				}
