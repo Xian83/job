@@ -29,6 +29,7 @@ public class ChatController {
 		Map map = new HashMap();
 			map.put("id", session.getAttribute("name"));
 			map.put("msg", msg);
+			
 		li.add(map);
 		return "true";
 	}
@@ -36,6 +37,7 @@ public class ChatController {
 	@RequestMapping("/logAjax")
 	@ResponseBody
 	public List logHandler() {
+		
 		return li;
 	}
 }
