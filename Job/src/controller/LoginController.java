@@ -73,7 +73,7 @@ public class LoginController {
 	// �럹�씠�뒪遺� �뿰�룞�븯湲�
 	@ResponseBody
 	@RequestMapping("/fbLogin")
-	public Map fbSignInHandler(@RequestParam Map map, HttpSession session, HttpServletResponse resp){
+	public boolean fbSignInHandler(@RequestParam Map map, HttpSession session, HttpServletResponse resp){
 		ObjectMapper om = new ObjectMapper();
 		boolean rst = false;
 		boolean res = false;
@@ -101,7 +101,7 @@ public class LoginController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return info;
+		return rst;
 	}
 	
 	public void login(Map map, HttpSession session, HttpServletResponse resp){

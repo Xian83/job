@@ -30,6 +30,7 @@
 		insert into member_info values( #{email}, 
 		#{gender}, #{area}, #{STNDD_BIG_GB}, #{salary_min}, #{salary_max})
 	</insert>
+	
 	<update id="update" parameterType="java.util.HashMap">
 		update member set
 		pass=#{pass}, name=#{name}, age=#{age}, gender=#{gender} where email=#{email}
