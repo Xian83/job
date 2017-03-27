@@ -44,16 +44,16 @@
 	<div class="row" align="center">
 		<div class="col-md-1"></div>	
 		<div class="col-md-4">
-			<c:forEach var="cm1" items="${list1 }">
-				${cm1.DIVISION }
+			<c:forEach var="cm1_1" items="${list1 }">
+				${cm1_1.DIVISION }
 			</c:forEach>
 		</div>
 		<div class="col-md-2">
 			분야
 		</div>
 		<div class="col-md-4">
-			<c:forEach var="cm2" items="${list2 }">
-				${cm2.DIVISION }
+			<c:forEach var="cm2_2" items="${list2 }">
+				${cm2_2.DIVISION }
 			</c:forEach>
 		</div>
 		<div class="col-md-1"></div>
@@ -65,10 +65,8 @@
 </div>
 
 
-
-
-
-
+${score01 }<br/>
+${score02 }
 
 
 
