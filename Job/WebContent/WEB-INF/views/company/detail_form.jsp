@@ -17,10 +17,10 @@ th{
 		<div class="col-md-8">
 			<div class="row content">
 				<div class="col-sm-3 sidenav" align="center">
-					<img src="${score[0].LOGO }" class="img-circle" alt="LOGO"
+					<img src="${score.LOGO }" class="img-circle" alt="LOGO"
 						width="200" height="200">
 					<form action="/company/interest">
-						<input type="hidden" name="cmpn_nm" value="${salary[0].CMPN_NM }">
+						<input type="hidden" name="cmpn_nm" value="${salary.CMPN_NM }">
 						<c:choose>
 							<c:when
 								test="${sessionScope.auth eq 'no' or sessionScope.auth eq null }">
@@ -44,7 +44,7 @@ th{
 						style="text-align: center;">
 						<thead>
 							<tr>
-								<th colspan="2" style="text-align: center;"><h3>${score[0].CMPN_NM }
+								<th colspan="2" style="text-align: center;"><h3>${score.CMPN_NM }
 
 									</h3></th>
 
@@ -52,13 +52,13 @@ th{
 						</thead>
 						<tbody>
 							<tr>
-								<td>산업군 : ${score[0].DIVISION }</td>
-								<td>기업구분 : ${score[0].SCALE }</td>
+								<td>산업군 : ${score.DIVISION }</td>
+								<td>기업구분 : ${score.SCALE }</td>
 							</tr>
 					</table>
 					<p>
-						재무점수 : ${score[0].FINANCE_SCORE }
-						<c:forEach var="i" begin="0" end="${score[0].FINANCE_SCORE/20 }">
+						재무점수 : ${score.FINANCE_SCORE }
+						<c:forEach var="i" begin="0" end="${score.FINANCE_SCORE/20 }">
 							<img
 								src="http://cfile24.uf.tistory.com/image/2419AD4652FC36A7345270"
 								class="img-circle" alt="Cinque Terre" width="50" height="50">
@@ -66,8 +66,8 @@ th{
 					</p>
 					<br />
 					<p>
-						재직자점수 : ${score[0].SLAVE_SCORE }
-						<c:forEach var="i" begin="0" end="${score[0].SLAVE_SCORE/20}">
+						재직자점수 : ${score.SLAVE_SCORE }
+						<c:forEach var="i" begin="0" end="${score.SLAVE_SCORE/20}">
 							<img
 								src="http://cfile24.uf.tistory.com/image/2419AD4652FC36A7345270"
 								class="img-circle" alt="Cinque Terre" width="50" height="50">
@@ -164,7 +164,7 @@ th{
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">소속산업</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${score.DIVISION }</td>
 						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${info01.scale[0] }</td>
 						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${info01.scale[1] }</td>
 						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${info01.scale[2] }</td>
@@ -181,7 +181,7 @@ th{
 			</c:forEach>
 		</div>
 		<form role="form" action="/review/push">
-			<input type="hidden" name="cmpn_nm" value="${salary[0].CMPN_NM }">
+			<input type="hidden" name="cmpn_nm" value="${score.CMPN_NM }">
 			<input type="text" id="aaa" name="content" placeholder="contents">
 			<c:choose>
 				<c:when
