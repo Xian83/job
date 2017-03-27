@@ -37,16 +37,18 @@ public class MyInfoController {
 		mav.addObject("main", "my/my_info");
 		
 		String email = (String) session.getAttribute("email");
+		// DB�뿉�꽌 �봽濡쒗븘 �궗吏� 媛��졇���꽌 泥섎━
+		String picURL = mydao.getLastetImageURL(email);
+		if (picURL == null || picURL.equals("null"))
+			picURL = "/picture/default.jpg";
+
+		
 		Map map = mdao.getData(email); // 湲곕낯�젙蹂�
 		Map map2 = mydao.getdata(email); // 異붽��젙蹂�
 		List list = mydao.getlocations(); // 愿��떖吏��뿭
 		List list2 = mydao.getIndustries(); // 愿��떖�궛�뾽援�
 		
 		
-		// DB�뿉�꽌 �봽濡쒗븘 �궗吏� 媛��졇���꽌 泥섎━
-		String picURL = mydao.getLastetImageURL(email);
-		if (picURL == null || picURL.equals("null"))
-			picURL = "/picture/default.jpg";
 
 		mav.addObject("url", picURL);
 		mav.addObject("location", list);
@@ -101,7 +103,7 @@ public class MyInfoController {
 		if (ct.startsWith("image")) {
 			// �뙆�씪 �뾽濡쒕뱶
 			Map map = fdao.execute(file);
-			System.out.println("file = " + file);
+			System.out.println("map = " + map);
 
 			// DB �뾽濡쒕뱶
 //			String email = (String) session.getAttribute("eamil");
@@ -109,13 +111,15 @@ public class MyInfoController {
 			String url = (String) map.get("filelink");
 			
 			boolean res = fdao.insert(email, url);
-			if (!res)
-				mav.addObject("msg", "�궗吏� �뾽濡쒕뱶 �떎�뙣");
+			if (res)
+				mav.addObject("msg", "파일 등록됨");
+			else 
+				mav.addObject("msg", "파일 등록실패");
 		} else {
 			mav.addObject("msg", "Not Image File");
 		}
-		
-		mav.setViewName("redirect:/my/info");
+		mav.addObject("url","/my/info");
+		mav.setViewName("util/alert");
 		return mav;
 
 	}

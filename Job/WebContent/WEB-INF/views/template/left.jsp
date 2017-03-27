@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">	
+	
 <style>
 	th {
 	width: 200px;
@@ -30,7 +35,8 @@ hr[id='hh']{
 				<hr/>
 				<input type="file" id="f" name="pic" style="display: none;"/>  
 				<input type="hidden" name="email" value="${sessionScope.email}"/>
-				<button type="submit" class="btn" id="add">사진변경</button>
+				<button type="button" class="btn" id="add">사진 변경</button><span id="fname"></span>
+				<button type="submit" class="btn" id="pic" style="display: none;">등록</button>
 			</form>
 			<hr id="hh"/>	
 			<table>
@@ -53,8 +59,6 @@ hr[id='hh']{
 		console.log($("#f"));
 	});
 	$("#f").on("change", function(){
-		window.alert($("#f").val());
-		$("#fname").html($("#f").val());
-		
+		$("#pic").trigger("click");  
 	});
 </script>
