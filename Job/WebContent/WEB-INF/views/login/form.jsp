@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <html>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 
 <head>
 <style>
@@ -94,11 +93,12 @@
 						if (rst) {
 							$("#status").append(" 로그인 성공<br/>");
 						} else {
-							location.replace("/");
+							location.replace("/join/step03F");
 						}
 					});
 			});
 		}
+
 	</script>
 <div align="center">
 	<img src="/500.jpg" class="w3-block" alt="forest" style="width: 50%" height="50%">

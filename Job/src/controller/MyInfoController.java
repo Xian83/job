@@ -31,23 +31,25 @@ public class MyInfoController {
 	FileUploadDao fdao;
 
 	@RequestMapping("/info")
-	public ModelAndView infoHandler(HttpSession session, @RequestParam Map data) {
+	public ModelAndView infoHandler(HttpSession session, @RequestParam Map data, @RequestParam(name="pic") MultipartFile file) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("tt");
 
 		mav.addObject("main", "my/my_info");
 		
 		String email = (String) session.getAttribute("email");
+		// 사진 추가
+		String picURL = mydao.getLastetImageURL(email);
+		if (picURL == null || picURL.equals("null"))
+			picURL = "/picture/default.jpg";
+
+		
 		Map map = mdao.getData(email); // 湲곕낯�젙蹂�
 		Map map2 = mydao.getdata(email); // 異붽��젙蹂�
 		List list = mydao.getlocations(); // 愿��떖吏��뿭
 		List list2 = mydao.getIndustries(); // 愿��떖�궛�뾽援�
 		
 		
-		// DB�뿉�꽌 �봽濡쒗븘 �궗吏� 媛��졇���꽌 泥섎━
-		String picURL = mydao.getLastetImageURL(email);
-		if (picURL == null || picURL.equals("null"))
-			picURL = "/picture/default.jpg";
 
 		mav.addObject("url", picURL);
 		mav.addObject("location", list);
@@ -75,7 +77,7 @@ public class MyInfoController {
 		String pass1 = (String) session.getAttribute("pass");
 		String pass = (String) data.get("passcheck");
 		System.out.println("pass1 = " + pass1 + "/ pass = " + pass);
-		if(pass1 != pass) {
+		if(pass != null && pass1 != pass) {
 		Map m = new HashMap<>();
 			m.put("pass", pass);
 			m.put("email", email);
@@ -102,20 +104,22 @@ public class MyInfoController {
 		if (ct.startsWith("image")) {
 			// �뙆�씪 �뾽濡쒕뱶
 			Map map = fdao.execute(file);
+			System.out.println("map = " + map);
 
-			// DB �뾽濡쒕뱶
-//			String email = (String) session.getAttribute("eamil");
+			// DB 사진 추가
 			String email = req.getParameter("email");
 			String url = (String) map.get("filelink");
 			
 			boolean res = fdao.insert(email, url);
-			if (!res)
-				mav.addObject("msg", "�궗吏� �뾽濡쒕뱶 �떎�뙣");
+			if (res)
+				mav.addObject("msg", "파일 등록됨");
+			else 
+				mav.addObject("msg", "파일 등록실패");
 		} else {
 			mav.addObject("msg", "Not Image File");
 		}
-		
-		mav.setViewName("redirect:/my/info");
+		mav.addObject("url","/my/info");
+		mav.setViewName("util/alert");
 		return mav;
 
 	}

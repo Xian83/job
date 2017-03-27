@@ -24,6 +24,30 @@ public class SearchController {
    @Autowired
    SearchDao sdao;
 
+   // 효정 - 시도중 - 보류
+   @RequestMapping("/detailPage")
+   public ModelAndView detailPageSearchHandler(HttpServletRequest req2, HashMap data) {
+   
+     System.out.println("페이지 넘어 옴");
+   
+     ModelAndView mav = new ModelAndView();
+     mav.setViewName("search2");
+     mav.addObject("main", "/search/searchAjax");
+     mav.addObject("list2", data);
+     mav.addObject("page", data.get("pStr"));
+     mav.addObject("size", data.get("size"));
+     
+     
+     System.out.println("여기서의 data = " + data);
+     
+     System.out.println("req p2 = " + req2.getAttribute("page"));
+  
+     
+      return mav;
+   }
+   
+   
+   
    // Search Page main
    @RequestMapping("/company")
    public ModelAndView searchHandler(HttpServletRequest request,
@@ -94,7 +118,8 @@ public class SearchController {
          mav.addObject("size", size);
          System.out.println("data ==== " + data);
          
-        
+         mav = detailPageSearchHandler(req, data);
+         
          return mav;
       }
    
