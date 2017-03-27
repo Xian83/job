@@ -49,7 +49,8 @@ public class DetailController {
 		HashMap scorelist = ddao.score(companyname);
 		HashMap salarylist = ddao.salary(companyname);
 		List reviewList = ddao.review(companyname);
-
+		String chartURL = makeChart(ddao.getScore02(companyname));// graph
+		
 		// member check & 관심기업 여부 확인
 		String email = (String) session.getAttribute("email");
 		if (email == null) {
@@ -87,7 +88,8 @@ public class DetailController {
 		mav.addObject("info01", info01);// HashMap<List>(rank8, employee, scale)
 		mav.addObject("info02", info02);// HashMap (summary, address, system, culture)
 		mav.addObject("json", google.map((String) info02.get("address")));
-
+		mav.addObject("chartURL", chartURL);	//방사형 그래프 주소
+		
 		// 쿠키생성
 		String u = origin + "#" + companyname;
 			if (companyname.equals(origin)) {
@@ -128,5 +130,20 @@ public class DetailController {
 		mav.setViewName("redirect:/company/detail?cmpn_nm=" + URLEncoder.encode(companyname, "UTF-8"));
 		return mav;
 	}
-
+		
+	
+	public String makeChart(HashMap data1){
+		int size = 500;
+		String img = "https://chart.googleapis.com/chart?cht=r&chs=" + size+ "x" +size;
+		
+		img += "&chd=t:";
+		img += data1.get("LABEL01") + "," + data1.get("LABEL02") + "," +data1.get("LABEL03") + ",";
+		img += data1.get("LABEL04") + "," + data1.get("LABEL05") + "," +data1.get("LABEL06") + ",";
+		img += data1.get("LABEL07") + "," + data1.get("LABEL08") + "," +data1.get("LABEL09") + "," +  data1.get("LABEL01");
+//		img += "&chco=#FF0000";					// 선 색깔
+		img += 	"&chls=2.0,4.0,0.0&chxt=x";
+		img += "&chxl=0:|규모·형태|안정성|성장성|수익성|조직문화·분위기|급여·복리후생|근무시간·휴가|성장·경력|경영진·경영";
+		img += "&chxr=0,0.0,360.0";
+		return img;
+	}
 }
