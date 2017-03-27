@@ -31,7 +31,7 @@ public class MyInfoController {
 	FileUploadDao fdao;
 
 	@RequestMapping("/info")
-	public ModelAndView infoHandler(HttpSession session, @RequestParam Map data, @RequestParam(name="pic") MultipartFile file) {
+	public ModelAndView infoHandler(HttpSession session, @RequestParam Map data) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("tt");
 
@@ -151,10 +151,9 @@ public class MyInfoController {
 		data.put("pass", pass);
 		boolean res = mdao.existCheck(data);
 		
-		if(res)
-			mdao.delete(email, pass);	// delete member data
-		else
-			session.setAttribute("leave_try", cnt++);	// increase password error count up
+		// increase password error count up
+		if(!res)
+			session.setAttribute("leave_try", cnt++);
 		
 		return res;
 	}
