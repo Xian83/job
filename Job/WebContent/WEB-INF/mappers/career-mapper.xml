@@ -41,16 +41,16 @@
 	</select>
 	
 	<update id="plus" parameterType="java.util.HashMap">
-		update interest set LOVE=1 where CMPN_NM=#{CMPN_NM} and EMAIL=#{EMAIL}
+		update interest set LOVE=1, SDATE=sysdate where CMPN_NM=#{CMPN_NM} and EMAIL=#{EMAIL}
 	</update>
 	
 	<update id="minus" parameterType="java.util.HashMap">
-		update interest set LOVE=0 where CMPN_NM=#{CMPN_NM} and EMAIL=#{EMAIL}
+		update interest set LOVE=0, SDATE=sysdate where CMPN_NM=#{CMPN_NM} and EMAIL=#{EMAIL}
 	</update>
 	
 	<insert id="push" parameterType="java.util.HashMap">
 		insert into interest
-		values(#{CMPN_NM}, #{EMAIL}, 1)
+		values(#{CMPN_NM}, #{EMAIL}, 1, sysdate)
 	</insert>
 	
 	<update id="updateCompID" parameterType="java.util.HashMap">

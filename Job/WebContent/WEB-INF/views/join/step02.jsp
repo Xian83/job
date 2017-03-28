@@ -6,7 +6,7 @@
 <div class="well">
 	<form action="/join/step03" method="post">
 		<p>
-			<label for="comment"><b>Email</b> <span id="checkEmail"></span></label><br /> 
+			<label for="comment"><b>Email</b>&nbsp; &nbsp; <span id="checkEmail" style="font-size:13;"></span></label><br /> 
 			<input type="email"
 				id="email" name="email" class="form-control" placeholder="이메일 입력" required>
 		</p>
@@ -16,7 +16,7 @@
 				class="form-control" placeholder="비밀번호 입력" required>
 		</p>
 		<p>
-			<label for="comment"><b>Password Confirm</b> <span id="cmpResult" style="color: red"></span></label><br />
+			<label for="comment"><b>Password Confirm</b>&nbsp; &nbsp; <span id="cmpResult" style="color: red; font-size:13;"></span></label><br />
 			<input type="password" name="passcheck" id="pw2" class="form-control"
 				placeholder="비밀번호 재입력" required>
 		</p>
@@ -49,10 +49,14 @@
 	}
 	
 	// ID 체크
-	document.getElementById("email").onblur = function(){
+	document.getElementById("email").onkeyup = function(){
 		chk = this;
-		result = document.getElementById("checkEmail");		
-		if(this.value.length <4 && this.value.length >0) {
+		result = document.getElementById("checkEmail");
+		if(this.value.length >=4 && (!this.value.includes('@') || this.value.startsWith('@') || this.value.endsWith('@'))){
+			result.innerHTML = "이메일 형태로 입력하세요";
+			result.style.color = 'red';
+			flag1=false;
+		} else if(this.value.length <4 && this.value.length >=0) {
 			result.innerHTML = "4자 이상 입력";
 			result.style.color = 'red';
 			flag1=false;

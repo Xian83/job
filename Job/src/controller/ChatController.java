@@ -21,6 +21,7 @@ public class ChatController {
 	@PostConstruct
 	public void init() {
 		li = new ArrayList<>();
+	
 	}
 	
 	@RequestMapping("/chatAjax")
@@ -28,11 +29,20 @@ public class ChatController {
 	public String chatHandler(@RequestParam(name="msg") String msg, HttpSession session, HttpServletRequest req) {
 		Map map = new HashMap();
 		String name =(String)session.getAttribute("name");
+		
 		if(name==null){
-			name="손님"+(int)(Math.random()*1000)+1;
+			name = "손님"+(int)(Math.random()*10000)+1;
+			session.setAttribute("name", name);
 		}
+		
+			
+		if(msg.equals("join1234555")){
+			map.put("id", "서버");
+			map.put("msg", name+"님이 들어오셨습니다");
+		}else {
 			map.put("id", name);
 			map.put("msg", msg);
+		}
 			
 		li.add(map);
 		return "true";
@@ -44,4 +54,6 @@ public class ChatController {
 		
 		return li;
 	}
+	
+	
 }

@@ -77,7 +77,7 @@ public class DetailController {
 		// career catch site data
 		HashMap<String, List> info01 = ddao.getInfo01(CompID);
 		HashMap<String, Object> info02 = ddao.getInfo02(CompID);
-
+		
 		// data set for view
 		mav.addObject("score", scorelist);
 		mav.addObject("same", samelist);
