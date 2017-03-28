@@ -4,48 +4,75 @@
 <tiles-definitions>
 	<definition name="default" template="/WEB-INF/views/template/template.jsp">
 		<put-attribute name="title" value="Job" />
-		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp" />
-		<put-attribute name="nav" value="/WEB-INF/views/template/nav.jsp"/>
+		<put-attribute name="header"
+			value="/WEB-INF/views/template/header2.jsp" />
+		<put-attribute name="nav" value="/WEB-INF/views/template/nav.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
 	</definition>
-	
+
 	<definition name="default2" template="/WEB-INF/views/template/template2.jsp">
 		<put-attribute name="title" value="Job" />
 		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp" />
-		<put-attribute name="nav" value="/WEB-INF/views/template/nav.jsp"/>
+		<put-attribute name="nav" value="/WEB-INF/views/template/nav.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
 		<put-attribute name="left" value="/WEB-INF/views/template/left.jsp" />
 	</definition>
-	
-	<definition name="root" extends="default">
-		<put-attribute name="main" value="/WEB-INF/views/index.jsp"/>
+
+	<definition name="default3" template="/WEB-INF/views/template/template3.jsp">
+		<put-attribute name="title" value="Job" />
+		<put-attribute name="header" value="/WEB-INF/views/template/header2.jsp" />
+		<put-attribute name="nav" value="/WEB-INF/views/template/nav.jsp" />
+		<put-attribute name="right" value="/WEB-INF/views/template/right.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
+	</definition>
+
+	<definition name="index" template="/WEB-INF/views/template/templateIndex.jsp">
+		<put-attribute name="title" value="Job" />
+		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp" />
+		<put-attribute name="nav" value="/WEB-INF/views/template/navIndex.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
+	</definition>
+
+
+	<definition name="root" extends="index">
+		<put-attribute name="main" value="/WEB-INF/views/index.jsp" />
 	</definition>
 
 	<definition name="t1" extends="default">
-		<put-attribute name="main" expression="/WEB-INF/views/${main}.jsp"/>
+		<put-attribute name="main" expression="/WEB-INF/views/${main}.jsp" />
 	</definition>
-	
-		<definition name="tt" extends="default">
+<!-- 
+		<definition name="t" extends="default">
 		<put-attribute name="main" expression="/WEB-INF/views/${main}.jsp"/>
+ -->
+	<definition name="tt" extends="default2">
+		<put-attribute name="main" expression="/WEB-INF/views/${main}.jsp" />
+
 	</definition>
-	
+
+	<definition name="ttt" extends="default3">
+		<put-attribute name="main" expression="/WEB-INF/views/${main}.jsp" />
+	</definition>
+
 	<definition name="t2_*/*" extends="default">
-		<put-attribute name="main" expression="/WEB-INF/views/{1}/{2}.jsp"/>
+		<put-attribute name="main" expression="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>
-	
+
+
 	<definition name="search" template="/WEB-INF/views/template/search.jsp">
 		<put-attribute name="title" value="Job" />
-		<put-attribute name="nav" value="/WEB-INF/views/template/nav.jsp"/>
-		<put-attribute name="main" expression="/WEB-INF/views/${main}.jsp"/>
+		<put-attribute name="nav" value="/WEB-INF/views/template/navIndex.jsp" />
+		<put-attribute name="main" expression="/WEB-INF/views/${main}.jsp" />
 
-		 <put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" /> 
+		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
 	</definition>
-	
+
 	<definition name="search2" template="/WEB-INF/views/template/search2.jsp">
 		<put-attribute name="title" value="Job" />
-		<put-attribute name="nav" value="/WEB-INF/views/template/nav.jsp"/>
-		<put-attribute name="main" expression="/WEB-INF/views/search/searchAjax.jsp"/>
-		 <put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" /> 
+		<put-attribute name="nav" value="/WEB-INF/views/template/navIndex.jsp" />
+		<put-attribute name="main"
+			expression="/WEB-INF/views/search/searchAjax.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
 
 	</definition>
 </tiles-definitions>

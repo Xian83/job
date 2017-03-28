@@ -22,8 +22,8 @@
 
 	<select id="rank" resultType="java.util.HashMap">
 		select reviews.CMPN_NM,
-		RANK.STNDD_BIG_GB, RANK.WKP_ADRS from RANK, REVIEWS where
-		RANK.CMPN_NM=REVIEWS.CMPN_NM
+		SCORE.DIVISION, SCORE.SCALE from SCORE, REVIEWS where
+		SCORE.CMPN_NM=REVIEWS.CMPN_NM
 		order by REVIEWS.WDATE desc
 	</select>
 

@@ -3,6 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <!--  carousel -->
 <style>
 .carousel-inner>.item>.container, .carousel-inner>.item>a>img {
@@ -160,7 +163,7 @@
 <br/>
 <div align="center">
 	<p>
-		<h5>↓ 바로가기 ↓</h5>
+		<i class="fa fa-hand-o-down" style="font-size:24px"></i> 바로가기 <i class="fa fa-hand-o-down" style="font-size:24px"></i>
 	</p><hr/>
 </div>
 
@@ -171,37 +174,37 @@
   <div class="row">
   	 <div class="col-md-1"></div>
      <div class="col-md-2" style="border: none;" class="thumbnail">
-        <a href="/search/company"><button type="submit" style="width:200px;" ><img src="/picture/c.jpg">
+        <a href="/search/company"><i class="fa fa-search" style="font-size:36px"></i>
         	<div class="caption">
         	검색
         	</div>
         </button></a>
      </div>
      <div class="col-md-2" style="border: none;" class="thumbnail">
-        <a href="/compare/form"><button type="submit" style="width: 200px;"><img src="/picture/c.jpg">
+        <a href="/review/list_form"><i class="fa fa-commenting-o" style="font-size:36px"></i>
         	<div class="caption">
-        	비교
+        	리뷰
         	</div>
         </button></a>
      </div>
       <div class="col-md-2" style="border: none;" class="thumbnail">
-        <a href="/rank/form"><button type="submit" style="width: 200px;"><img src="/picture/c.jpg">
+        <a href="/rank/form"><i class="fa fa-bar-chart" style="font-size:36px"></i>
         	<div class="caption">
         	순위
         	</div>
         </button></a>
      </div>
      <div class="col-md-2" style="border: none;" class="thumbnail">
-        <a href="/my/recommand"><button type="submit" style="width: 200px;"><img src="/picture/c.jpg">
-        	<div class="caption">
-        	추천기업
-        	</div>
-        </button></a>
-     </div>
-     <div class="col-md-2" style="border: none;" class="thumbnail">
-        <a href="/my/applyInfo"><button type="submit" style="width: 200px;"><img src="/picture/c.jpg">
+        <a href="/my/applyInfo"><i class="fa fa-calendar" style="font-size:36px"></i>
         	<div class="caption">
         	공채달력
+        	</div>
+        </a>
+     </div>
+     <div class="col-md-2" style="border: none;" class="thumbnail">
+        <a href="/contact/form"><i class="material-icons" style="font-size:36px">contacts</i>
+        	<div class="caption">
+        	고객센터
         	</div>
         </button></a>
      </div>

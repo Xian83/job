@@ -4,21 +4,36 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mappers.company">
 	<insert id="inputA" parameterType="java.util.HashMap">
-		insert into salary values(#{PK_NM}, #{CMPN_NM}, #{AVG_SALARY_YY}, #{ROOKEY_SALARY_YY})
+		insert into salary
+		values(#{PK_NM}, #{CMPN_NM}, #{AVG_SALARY_YY}, #{ROOKEY_SALARY_YY})
 	</insert>
 	<insert id="inputB" parameterType="java.util.HashMap">
-		insert into salary values(#{PK_NM}, #{CMPN_NM}, #{AVG_SALARY_FSS}, #{ROOKEY_SALARY_FSS})
+		insert into salary
+		values(#{PK_NM}, #{CMPN_NM}, #{AVG_SALARY_FSS}, #{ROOKEY_SALARY_FSS})
 	</insert>
 	<insert id="inputC" parameterType="java.util.HashMap">
-		insert into rank values(#{PK_NM}, #{CMPN_NM}, #{WKP_ADRS}, #{STNDD_BIG_GB}, #{SALARY})
+		insert into rank
+		values(#{PK_NM}, #{CMPN_NM}, #{WKP_ADRS}, #{STNDD_BIG_GB}, #{SALARY})
 	</insert>
 	<insert id="inputD" parameterType="java.util.HashMap">
-		insert into salary values(#{PK_NM}, #{CMPN_NM}, #{AVG_SALARY}, #{ROOKIE_SALARY})
+		insert into salary
+		values(#{PK_NM}, #{CMPN_NM}, #{AVG_SALARY}, #{ROOKIE_SALARY})
 	</insert>
-	<select id="getScore" parameterType="java.lang.String" resultType="java.util.HashMap" >
+	<select id="getScore" parameterType="java.lang.String"
+		resultType="java.util.HashMap">
 		select * from score
 	</select>
-	<select id="getSalary" parameterType="java.lang.String" resultType="java.util.HashMap" >
+	<select id="getSalary" parameterType="java.lang.String"
+		resultType="java.util.HashMap">
 		select * from salary
+	</select>
+	<insert id="inputE" parameterType="java.util.HashMap">
+		insert into score2
+		values(#{CMPN_NM}, #{LABEL01}, #{LABEL02}, #{LABEL03}, #{LABEL04},
+		#{LABEL05}, #{LABEL06},#{LABEL07}, #{LABEL08}, #{LABEL09})
+	</insert>
+	<select id="getScore02" parameterType="java.lang.String"
+		resultType="java.util.HashMap">
+		select * from score2 where CMPN_NM=#{CMPN_NM}
 	</select>
 </mapper>

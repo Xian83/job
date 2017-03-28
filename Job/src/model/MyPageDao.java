@@ -102,4 +102,19 @@ public class MyPageDao {
 		
 		return list;
 	}
+	
+	public List getRecommand(Map data) {
+		List list = new ArrayList();
+		SqlSession sql = null;
+
+		try {
+			sql = factory.openSession();
+			list = sql.selectList("mappers.mypage.recommand", data);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sql.close();
+		}
+		return list;
+	}
 }

@@ -131,30 +131,47 @@ public class InputData {
 		return mav;
 	}
 
-	// dummy data input to salary 
+	// dummy data input to salary
 	@RequestMapping("/input_result05")
 	public ModelAndView inputDataHandler6() {
 		boolean result = false;
-		
-		List<HashMap> li1 = cDao.getScore();		// score data
-		List<HashMap> li2 = cDao.getSalary();	// salary data
-		
+
+		List<HashMap> li1 = cDao.getScore(); // score data
+		List<HashMap> li2 = cDao.getSalary(); // salary data
+
 		List<String> score = new ArrayList<>();
 		List<String> salary = new ArrayList<>();
-		for(HashMap map : li1){
-			score.add((String)map.get("CMPN_NM"));
+		for (HashMap map : li1) {
+			score.add((String) map.get("CMPN_NM"));
 		}
-		for(HashMap map : li2){
-			salary.add((String)map.get("CMPN_NM"));
+		for (HashMap map : li2) {
+			salary.add((String) map.get("CMPN_NM"));
 		}
-		
+
 		// duplicated company name removed
 		System.out.println("중복 제거 전 : " + score.size());
 		score.removeAll(salary);
 		System.out.println("중복 제거 후 : " + score.size());
-		
+
 		// generate dummy data
 		result = generate.insert(score);
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("t1");
+		mav.addObject("main", "data/input_result");
+		mav.addObject("result", result);
+		return mav;
+	}
+
+	// dummy data input to score2 table : 방사형 그래프용
+	@RequestMapping("/input_result06")
+	public ModelAndView inputDataHandler7() {
+		boolean result = false;
+
+		List<HashMap> list = cDao.getScore(); // score data
+
+		// generate dummy data
+		result = generate.insert2(list);
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");

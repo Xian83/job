@@ -12,13 +12,13 @@ th{
 }
 
 </style>
-<div class="container-fluid" style="background: #F0FFF0; margin-left: 100px ; margin-right: 100px">
+<div class="container-fluid" style="background: white-space; margin-left: 100px ; margin-right: 100px">
 	<div class="row content" >
 		<div class="col-md-8">
 			<div class="row content">
 				<div class="col-sm-3 sidenav" align="center">
 					<img src="${score.LOGO }" class="img-circle" alt="LOGO"
-						width="200" height="200">
+						width="150" height="150">
 					<form action="/company/interest">
 						<input type="hidden" name="cmpn_nm" value="${salary.CMPN_NM }">
 						<c:choose>
@@ -89,14 +89,14 @@ th{
 				</thead>
 				<tbody>
 					<tr>
-						<td>${salary.AVG_SALARY }원</td>
-						<td>${salary.ROOKIE_SALARY }원</td>
+						<td><fmt:formatNumber value="${salary.AVG_SALARY }" groupingUsed="true"/>원</td>
+						<td><fmt:formatNumber value="${salary.ROOKIE_SALARY }" groupingUsed="true"/>원</td>
 					</tr>
 			</table>
 			<div align="center">
-				사원수 : ${info02.num04} <br />
+				<b>사원수 : ${info02.num04} </b><br />
 				<div id="curve_chart" style="width: 500px; height: 150px"
-					align="center"></div>
+					align="left"></div>
 			</div>
 
 		</div>
@@ -110,7 +110,7 @@ th{
 
 			function drawChart() {
 				var data = google.visualization.arrayToDataTable([
-						[ 'Year', '${score[0].CMPN_NM }' ],
+						[ 'Year', '${score.CMPN_NM }' ],
 						[ '2013', 1000 ],
 						[ '2014', 1170 ],
 						[ '2015', 2000 ] 
@@ -119,6 +119,7 @@ th{
 				var options = {
 					title : '사원수 증가율',
 					curveType : 'function',
+					width : 400,				
 					legend : {
 						position : 'bottom'
 					}
@@ -139,7 +140,7 @@ th{
 		<c:forEach var="i" begin="0" end="5">
 			<div class="col-md-2" style="border-style: solid;">
 				<a href="/company/detail?cmpn_nm=${same[i].CMPN_NM }"> 
-				<img src="${same[i].LOGO }" alt="Lights" style="width: 100%"/>
+				<img src="${same[i].LOGO }" alt="Lights" style="width: 50%"/>
 					<div class="caption">
 						<p>${same[i].CMPN_NM }</p>
 					</div>
@@ -182,7 +183,7 @@ th{
 		</div>
 		<form role="form" action="/review/push">
 			<input type="hidden" name="cmpn_nm" value="${score.CMPN_NM }">
-			<input type="text" id="aaa" name="content" placeholder="contents">
+			<input type="text" id="aaa" name="content" placeholder="contents" style="width: 93%">
 			<c:choose>
 				<c:when
 					test="${sessionScope.auth eq 'no' or sessionScope.auth eq null }">
@@ -203,7 +204,7 @@ th{
 				});
 			</script>
 
-			<div id="chart_div"></div>
+			<div id="chart_div" align="left"></div>
 
 
 			<script type="text/javascript">
@@ -212,7 +213,7 @@ th{
 
 				var chart_options = {
 					title : '연봉비교',
-					width : 1000,
+					width : 600,
 					height : 400,
 					colors : [ 'red', 'blue', 'green' ], // 항목 갯수에 맞게 컬러 설정
 					bar : {
@@ -266,7 +267,7 @@ th{
 
 					var options = {
 						title : "회사 ㅇㅇ , 단위(만원)",
-						width : 600,
+						width : 500,
 						height : 400,
 						bar : {
 							groupWidth : "70%"
@@ -281,7 +282,7 @@ th{
 					chart.draw(view, options);
 				}
 			</script>
-			<div id="barchart_values" style="width: 900px; height: 300px;"></div>
+			<div id="barchart_values" style="width: 500px; height: 300px;" align="left"></div>
 		</div>
 	</div>
 
@@ -314,39 +315,34 @@ th{
 					</c:forEach>
 			</table>
 		</div>
-		<div class="col-md-6">
-			<p style="font-size: 20; line-height: 1.5; color: blue;">여기에 뭘넣을까</p>
+		<div class="col-md-6" align="center">
+			<p style="font-size: 20; line-height: 1.5; color: blue;">수익</p>
 			<hr />
 			<table class="table table-bordered" style="text-align: center;">
 				<thead>
 					<tr align="center" style="text-align: center;">
 						<th colspan="1" style="text-align: center;">구분</th>
-						<th colspan="1" style="text-align: center;">순위</th>
-						<th colspan="2" style="text-align: center;">기업명</th>
-						<th colspan="1" style="text-align: center;">연봉</th>
+						<th colspan="1" style="text-align: center;">매출액</th>
+						<th colspan="1" style="text-align: center;">영업이익</th>
+						<th colspan="1" style="text-align: center;">당기손익</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="1" rowspan="8" style="vertical-align: middle;">동종산업
-							연봉 순위</td>
+						<td colspan="1" rowspan="8" style="vertical-align: middle;">수익비교</td>
 					</tr>
-					<c:forEach begin="1" end="7">
-					<tr>
-							<td>1</td>
-							<td colspan="2">현대</td>
-							<td>9만9천원</td>
-					</tr>
-					</c:forEach>
+					
+							<td>${info02.num01}</td>
+							<td colspan="1">${info02.num02}</td>
+							<td>${info02.num03}</td>
+				
 			</table>
 			<hr />
-		</div>
-	</div>
-	<div class="row content">
+			<div class="row content" align="center">
 		<p style="font-size: 20; line-height: 1.5; color: blue;">사원수 증가율
 				</p>
 		<hr />
-		<div class="col-md-6">
+		<div class="col-md-12">
 			<table class="table table-bordered">
 				
 				<thead>
@@ -359,7 +355,7 @@ th{
 				</thead>
 				<tbody>
 					<tr style="height: 30px">
-						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${ salary[0].CMPN_NM }</td>
+						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${ salary.CMPN_NM }</td>
 						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${info01.employee[0]}</td>
 						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${info01.employee[1]}</td>
 						<td colspan="1" rowspan="1" style="vertical-align: middle; text-align: center">${info01.employee[2]}</td>
@@ -378,15 +374,15 @@ th{
 					</tr>
 			</table>
 		</div>
-		<div class="col-md-6" id="pepole" style="height: 200"></div>
-			
+		</div>
+	</div>
+	</div>
 		
-</div>
-
+<hr/>
 		<div class="row content">
 			<p style="font-size: 20; line-height: 1.5; color: blue;">근무환경 및
 				복리후생</p>
-			<hr />
+		
 			<b>[회사위치]</b>  ${info02.address }<br />
 			<div id="map" style="width: 500; height: 500"></div>
 			<b>[회사제도]</b><br/>
@@ -417,5 +413,9 @@ th{
 <div>
 	<!-- 매출액, 영업이익, 당기손익은 단위 표기가 붙어서 찍힘-->
 	<!-- 차트 표기하려면 수정작업 필요 --> 
-	매출액 : ${info02.num01} / 영업이익 : ${info02.num02 } / 당기손익 : ${info02.num03 }
+	매출액 : ${info02.num01} / 영업이익 : ${info02.num02 } / 당기손익 : ${info02.num03 }<br/>
+	
+	<!-- 방사형 그래프 -->
+	<img src="${chartURL}">
+	
 </div>

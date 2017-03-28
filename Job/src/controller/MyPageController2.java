@@ -15,11 +15,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import model.FileUploadDao;
+
+import model.DetailDao;
 import model.MemberDao;
 import model.MyInfoDao;
 import model.MyPageDao;
-import model.RecommandDao;
 
 @Controller
 @RequestMapping("/my")
@@ -28,20 +30,19 @@ public class MyPageController2 {
 	MemberDao mDao;
 
 	@Autowired
-	RecommandDao rDao;
-
-	@Autowired
 	MyPageDao mypage;
 
 	@Autowired
 	MyInfoDao mydao;
+	
+	@Autowired
+	DetailDao detail;
 
 	@Autowired
 	FileUploadDao fdao;
 
 	@RequestMapping("/company")
-	public ModelAndView my_companyHandler(@RequestParam(name="pic") MultipartFile file, 
-					HttpSession session, MultipartHttpServletRequest req) throws Exception {
+	public ModelAndView my_companyHandler(HttpSession session) throws Exception {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
@@ -51,10 +52,16 @@ public class MyPageController2 {
 
 		// 최근 본 기업(lately) : 별다른 추가 정보 없음
 		
+
 		
-		// 추천 기업(recommand) - 데이터 안 넘오옴(DB 삭제됨)
-		Map data = mDao.getInfo(email);
-		List list_r = rDao.getData(data); //
+		// 추천 기업(recommand)
+		HashMap data = mDao.getInfo(email); //(WKP_ADRS, STNDD_BIG_GB, SALARY_MIN, SALARY_MAX)
+		System.out.println("info : " + data.toString());// 확인용
+		//추천기업 정보 가져오기 
+		List reco = mypage.getRecommand(data); // CMPN_NM, Salary 정보 가져옴
+		// score db에서 cmpn_nm 기준으로 데이터 가져오기
+		List list_r = detail.getScoreData(reco);
+		
 		for (Object map : list_r) {
 			if (((Map) map).get("LOGO") == null) {
 				((Map) map).put("LOGO", "http://image.jinhak.com/job/site/tmp02.gif");
@@ -80,7 +87,7 @@ public class MyPageController2 {
 		System.out.println("비교 compare = " + list_c);
 
 		// 사진 등록
-		String ct = file.getContentType();
+		/*String ct = file.getContentType();
 		if (ct.startsWith("image")) {
 			// �뙆�씪 �뾽濡쒕뱶
 			Map map = fdao.execute(file);
@@ -102,13 +109,14 @@ public class MyPageController2 {
 		
 		mav.addObject("url2", "/my/company");
 		mav.setViewName("util/alert");
-		
+		*/
 		
 		return mav;
 	}
 
-	/*@RequestMapping("/update_pic")
-	public ModelAndView update_pic()
+@RequestMapping("/update_pic")
+	public ModelAndView update_pic(@RequestParam(name="pic") MultipartFile file, 
+			HttpSession session, MultipartHttpServletRequest req)
 			throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
@@ -139,7 +147,7 @@ public class MyPageController2 {
 		return mav;
 
 	}
-	*/
+	
 	
 	@RequestMapping("/interest")
 	public ModelAndView interestHandler(HttpSession session) {

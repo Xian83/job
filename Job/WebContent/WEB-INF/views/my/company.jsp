@@ -64,8 +64,8 @@ div.col-sm-9 div {
 					data-offset-top="205">
 
 					<div class="panel-body">
-						<form action="/my/company" method="post"
-							enctype="multipart/form-data">
+					 <form action="/my/update_pic" method="post"
+							enctype="multipart/form-data"> 
 							?${url}?
 							<b>PICTURE</b><br /> <img src="${url}" width="200" height="200" />
 							<hr />
@@ -74,7 +74,7 @@ div.col-sm-9 div {
 							<button type="button" class="btn" id="add">사진 변경</button>
 							<span id="fname"></span>
 							<button type="submit" class="btn" id="pic" style="display: none;">등록</button>
-						</form>
+					</form> 
 						<hr id="hh" />
 					</div>
 
@@ -114,7 +114,7 @@ div.col-sm-9 div {
 				<div id="section2">
 					<div class="container">
 		<h2>스크랩한 기업 목록</h2>
-		<div class="table-responsive">
+	 <div class="table-responsive">
 			<table class="table">
 				<thead>
 					<tr>
@@ -133,7 +133,7 @@ div.col-sm-9 div {
 					</c:forEach>
 				</tbody>
 			</table>
-		</div>
+		</div> 
 	</div>
 	
 				<div id="section3">
