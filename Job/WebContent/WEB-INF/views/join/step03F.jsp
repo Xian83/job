@@ -23,24 +23,47 @@
 				</c:forEach>
 			</select>
 		</p>
-		<p>
-			<label for="comment">희망연봉</label><br /> 최소 <select name="salary_min">
-				<c:forEach var="i" begin="2000" end="100000" step="100">
-					<option value="${i*10000}">${i }만원</option>
-				</c:forEach>
-			</select> ~ 최대 <select class="form" name="salary_max">
-				<c:forEach var="i" begin="2000" end="100000" step="100">
-					<option value="${i*10000}">${i }만원</option>
-				</c:forEach>
-			</select>
-		</p>
-		<p>
-			<label for="comment">GENDER</label><br /> <input type="radio"
-				name="gender" value="male" checked>남 <input type="radio"
+		<div class="form-group">
+			<label>희망연봉</label><br /> <label for="salary_min"
+				class="col-sm-2 control-label">최소</label>
+			<div class="col-sm-4">
+				<select name="salary_min" class="form-control" id="min">
+					<c:forEach var="i" begin="2000" end="100000" step="100">
+						<option value="${i*10000}">${i }만원</option>
+					</c:forEach>
+				</select>
+			</div>
+			<label for="salary_max" class="col-sm-2 control-label">최대</label>
+			<div class="col-sm-4">
+				<select name="salary_max" class="form-control" id="max">
+					<c:forEach var="i" begin="2000" end="100000" step="100">
+						<option value="${i*10000}" ${i eq 3500 ? 'selected' : '' }>${i }만원</option>
+					</c:forEach>
+				</select>
+			</div>
+		</div>
+		<br />
+		
+		<div>
+			<label for="comment">GENDER</label><br />
+			&nbsp; <input type="radio"	name="gender" value="male" checked>남&nbsp; &nbsp; <input type="radio"
 				name="gender" value="female">여
-		</p>
-		<p>
-			<button type="submit" class="btn btn-info btn-block" id="btn">입력</button>
-		</p>
+		</div>
+		<br/>
+		<button type="submit" class="btn btn-info btn-block" id="btn">입력</button>
 	</form>
 </div>
+<script>
+	function enableBtn() {
+		var num1 = $("#min").val();
+		var num2 = $("#max").val();
+		if (num1 >= num2)
+			$("#btn").prop("disabled", true);
+		else
+			$("#btn").prop("disabled", false);
+	}
+
+	$('#min').change(enableBtn);
+	$('#max').change(enableBtn);
+
+</script>
