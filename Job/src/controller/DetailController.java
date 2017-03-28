@@ -62,7 +62,7 @@ public class DetailController {
 
 		// increase visit count to DB
 		ddao.insertVisit(companyname, email);
-
+		HashMap rate = ddao.manWomanrate(companyname);
 		// get same industry company list (finance score desc)
 		String div = (String) scorelist.get("DIVISION");
 		List samelist = ddao.same(div);
@@ -89,7 +89,7 @@ public class DetailController {
 		mav.addObject("info02", info02);// HashMap (summary, address, system, culture)
 		mav.addObject("json", google.map((String) info02.get("address")));
 		mav.addObject("chartURL", chartURL);	//방사형 그래프 주소
-		
+		mav.addObject("rate",rate);  //상세페이지를 클리간 남녀비율  hashmap(man, woman, visi)
 		// 쿠키생성
 		String u = origin + "#" + companyname;
 			if (companyname.equals(origin)) {

@@ -193,7 +193,6 @@ public class DetailDao {
 	public HashMap getInfo02(String CompID) {
 		HashMap data = new HashMap<>();
 		List<String> li1 = new ArrayList<>();
-		
 
 		String url = "http://www.careercatch.co.kr/Comp/CompSummary.aspx?CompID=" + CompID;
 
@@ -206,14 +205,14 @@ public class DetailDao {
 			int flag = 1;
 			for (Element t : e1) {
 				if (flag == 5)
-			
-				data.put("num01", t.text());
+
+					data.put("num01", t.text());
 				if (flag == 6)
-				
-				data.put("num02", t.text());
+
+					data.put("num02", t.text());
 				if (flag == 7)
-					
-				data.put("num03", t.text());
+
+					data.put("num03", t.text());
 				if (flag == 9)
 					data.put("num04", t.text());
 				flag++;
@@ -222,7 +221,7 @@ public class DetailDao {
 			System.out.println("영업이익 : " + data.get("num02"));
 			System.out.println("당기손익 : " + data.get("num03"));
 			System.out.println("사원수 : " + data.get("num04"));
-		
+
 			// 회사 위치
 			Elements e2 = doc.select("h4 .fw_normal");
 			String[] ar2 = e2.text().trim().split("\\s+", 2);
@@ -257,8 +256,8 @@ public class DetailDao {
 		}
 		return map;
 	}
-	
-	public List<HashMap> getScoreData(List data){
+
+	public List<HashMap> getScoreData(List data) {
 		List<HashMap> list = new ArrayList<>();
 		HashMap map = new HashMap();
 		
@@ -273,6 +272,21 @@ public class DetailDao {
 		
 		
 		return list;
+	}
+
+	public HashMap<String, Integer> manWomanrate(String COMPANYNAME) {
+		SqlSession session = factory.openSession();
+		List<HashedMap> list = new ArrayList<>();
+		HashMap<String, Integer> data = new HashMap<>();
+		try {
+
+			data.put("man", session.selectList("mappers.career.man", COMPANYNAME).size());		
+			data.put("woman", session.selectList("mappers.career.woman", COMPANYNAME).size());	
+			data.put("visi", session.selectList("mappers.career.visi", COMPANYNAME).size());
+		} finally {
+			session.close();
+		}
+		return data;
 	}
 
 }
