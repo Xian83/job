@@ -60,7 +60,7 @@ hr[id='hh']{
 					</c:when>	
 					<c:otherwise>
 						<c:forEach var="i" begin="0" end="0">
-							<span style="font-size: 12px;">기업추가</span><br/> 
+							<span style="font-size: 12px;">비교할 기업을 선택해주세요</span><br/> 
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
@@ -125,8 +125,7 @@ hr[id='hh']{
 	});
 	
 	
-		
-	
+
 	
 		
 		
