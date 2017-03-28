@@ -67,7 +67,7 @@ th {
 
 							<c:choose>
 					<c:when test="${score.FINANCE_SCORE ==null}">
-						<p>재무점수 : ${score.FINANCE_SCORE=0 }점</p>
+						<p>재무점수 : ${score.FINANCE_SCORE=0 }점(해당회사의 정보가 입력되지 않았습니다.)</p>
 					</c:when>
 					<c:otherwise>
 					<p>재무점수 : ${score.FINANCE_SCORE }점</p>
@@ -161,7 +161,7 @@ th {
 </div>
 <hr />
 <div class="row content w3-myfont" align="center">
-	<p style="font-family:">동종업계 인기 많은기업</p>
+	<h2 style="font-family: monospace; color: #595959">동종업계 인기 많은기업</h2>
 	<c:forEach var="i" begin="0" end="5">
 		<div class="col-md-2" style="border-style: none;">
 			<a href="/company/detail?cmpn_nm=${same[i].CMPN_NM }"> <img
@@ -274,7 +274,7 @@ th {
 	</div>
 
 	<div class="col-md-6">
-		<script type="text/javascript">
+<!-- 		<script type="text/javascript">
 				google.charts.load("current", {
 					packages : [ "corechart" ]
 				});
@@ -315,13 +315,12 @@ th {
 			</script>
 		<div id="barchart_values" style="width: 500px; height: 300px;"
 			align="left"></div>
-	</div>
+	</div> -->
 </div>
-
+</div>
 <div class="row content">
 	<div class="col-md-6">
-		<p style="font-size: 20; line-height: 1.5; color: blue;">동종산업 기업
-			순위</p>
+		<h2 style="font-family: monospace; color: #595959">동종산업 기업순위</h2>
 		<hr />
 		<table class="table table-bordered" style="text-align: center;">
 			<thead>
@@ -347,7 +346,7 @@ th {
 		</table>
 	</div>
 	<div class="col-md-6" align="center">
-		<p style="font-size: 20; line-height: 1.5; color: blue;">수익</p>
+		<h2 style="font-family: monospace; color: #595959">수익</h2>
 		<hr />
 		<table class="table table-bordered" style="text-align: center;">
 			<thead>
@@ -369,8 +368,7 @@ th {
 		</table>
 		<hr />
 		<div class="row content" align="center">
-			<p style="font-size: 20; line-height: 1.5; color: blue;">사원수 증가율
-			</p>
+			<h2 style="font-family: monospace; color: #595959">사원수 증가율</h2>
 			<hr />
 			<div class="col-md-12">
 				<table class="table table-bordered">
@@ -423,8 +421,7 @@ th {
 <hr />
 <div class="row content">
 
-	<p style="font-size: 20; line-height: 1.5; color: blue;">근무환경 및
-		복리후생</p>
+	<h2 style="font-family: monospace; color: #595959">근무 환경 및 복리후생</h2>
 	<div class="col-md-6">
 		<b>[회사위치]</b> ${info02.address }<br />
 
