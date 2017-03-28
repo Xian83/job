@@ -177,7 +177,7 @@ public class DetailDao {
 			for (String str : arr) {
 				if (str.endsWith("위")) {
 					li3.add(str);
-					System.out.println(str);
+//					System.out.println(str);
 				}
 			}
 			data.put("scale", li3);
@@ -205,27 +205,24 @@ public class DetailDao {
 			int flag = 1;
 			for (Element t : e1) {
 				if (flag == 5)
-
 					data.put("num01", t.text());
 				if (flag == 6)
-
 					data.put("num02", t.text());
 				if (flag == 7)
-
 					data.put("num03", t.text());
 				if (flag == 9)
 					data.put("num04", t.text());
 				flag++;
 			}
-			System.out.println("매출액 : " + data.get("num01"));
-			System.out.println("영업이익 : " + data.get("num02"));
-			System.out.println("당기손익 : " + data.get("num03"));
-			System.out.println("사원수 : " + data.get("num04"));
+//			System.out.println("매출액 : " + data.get("num01"));
+//			System.out.println("영업이익 : " + data.get("num02"));
+//			System.out.println("당기손익 : " + data.get("num03"));
+//			System.out.println("사원수 : " + data.get("num04"));
 
 			// 회사 위치
 			Elements e2 = doc.select("h4 .fw_normal");
 			String[] ar2 = e2.text().trim().split("\\s+", 2);
-			System.out.println("address : " + ar2[1]);
+//			System.out.println("address : " + ar2[1]);
 			data.put("address", ar2[1]);
 
 			// 회사 제도, 사내문화 / 분위기
@@ -235,7 +232,7 @@ public class DetailDao {
 				for (Element m : e3) {
 					String key = cnt == 0 ? "system" : "culture";
 					data.put(key, m.text());
-					System.out.println(key + " : " + m.text());
+//					System.out.println(key + " : " + m.text());
 					cnt++;
 				}
 			}
