@@ -25,6 +25,10 @@
 		<put-attribute name="right" value="/WEB-INF/views/template/right.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
 	</definition>
+	
+	<definition name="default4" template="/WEB-INF/views/template/template4.jsp">
+		<put-attribute name="title" value="Job" />
+	</definition>
 
 	<definition name="index" template="/WEB-INF/views/template/templateIndex.jsp">
 		<put-attribute name="title" value="Job" />
@@ -51,6 +55,10 @@
 	</definition>
 	
 	<definition name="ttt" extends="default3">
+		<put-attribute name="main" expression="/WEB-INF/views/${main}.jsp" />
+	</definition>
+	
+	<definition name="tttt" extends="default4">
 		<put-attribute name="main" expression="/WEB-INF/views/${main}.jsp" />
 	</definition>
 
