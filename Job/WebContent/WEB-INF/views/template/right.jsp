@@ -40,7 +40,7 @@ hr[id='hh']{
 
 
 <div class="container">
-	<!-- 최근 본 리스트 : 최근 본 순서대로 내림차순 -->
+	<!-- 최근 본 리스트 : 최근 본 순서대로 내림차순10개 -->
 	<div style="text-align: left;"><legend style="font-size: 12px; text-align: left; width: 80%;">최근본리스트</legend>
 		<c:choose>
 			<c:when test="${csize gt 10 }">
@@ -125,10 +125,7 @@ hr[id='hh']{
 	});
 	
 	
-
 	
-		
-		
 	
 </script>
 

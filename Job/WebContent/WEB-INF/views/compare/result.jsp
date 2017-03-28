@@ -13,9 +13,9 @@
 
 
 	<div class="compare_fixname">
-		<div class="name left" style="font-size: 25px;"><b>${score01.CMPN_NM }</b><br/> </div><hr/>
+		<div class="name left"><span class="label label-danger" style="font-size: 25px;"><b>${score01.CMPN_NM }</b></span><br/> </div><hr/>
 	</div>
-		<img src="${score01.LOGO }" class="img-circle" style="width: 40%;"><br/>
+		<img src="${score01.LOGO }" class="img-circle" style="width: 30%;"><br/>
 
 </div>
 
@@ -23,9 +23,9 @@
 <div class="col-md-6" align="center">
 
 <div class="compare_fixname">
-		<div class="name right" style="font-size: 25px;"><b>${score02.CMPN_NM }</b><br/></div><hr/>
+		<div class="name right"><span class="label label-primary" style="font-size: 25px;"><b>${score02.CMPN_NM }</b></span><br/></div><hr/>
 	</div>
-		<img src="${score02.LOGO }" class="img-circle" style="width: 40%;"><br/>
+		<img src="${score02.LOGO }" class="img-circle" style="width: 30%;"><br/>
 
 </div>
 
@@ -44,41 +44,76 @@
 	<table class="table" align="center" style="width: 100%;">
 		<tr style="height: 100px; text-align: center;">
 			<td>
-				<p style="font-size: 20px;">${score01.DIVISION }</p>
+				<p style="font-size: 16px;"><br/>${score01.DIVISION }</p>
 			</td>
-			<td><p style="font-size: 20px;">분야</p></td>
+			<td><br/><span class="label label-success" style="font-size: 20px; size: 60px;">분야</span></td>
 			<td>
-				<p style="font-size: 20px;">${score02.DIVISION }</p>
+				<p style="font-size: 16px;"><br/>${score02.DIVISION }</p>
 			</td>
 		</tr>
 		<tr tr style="height: 100px; text-align: center;">
 			<td>
-				<p style="font-size: 20px;">${score01.SCALE }</p>
+				<p style="font-size: 16px;"><br/>${score01.SCALE }</p>
 			</td>
-			<td><p style="font-size: 20px;">규모</p></td>
+			<td><br/><span class="label label-success" style="font-size: 20px; size: 60px;">규모</span></td>
 			<td>
-				<p style="font-size: 20px;">${score02.SCALE }</p>
+				<p style="font-size: 16px;"><br/>${score02.SCALE }</p>
 			</td>
 		</tr>
 		<tr tr style="height: 100px; text-align: center;">
 			<td>
-				<p style="font-size: 20px;">${score01.FINANCE_SCORE }</p>
+				<p style="font-size: 16px;"><br/>${score01.FINANCE_SCORE }</p>
 			</td>
-			<td><p style="font-size: 20px;">재무평가</p></td>
+			<td><br/><span class="label label-success" style="font-size: 20px; size: 60px;">재무평가</span></td>
 			<td>
-				<p style="font-size: 20px;">${score02.FINANCE_SCORE }</p>
+				<p style="font-size: 16px;"><br/>${score02.FINANCE_SCORE }</p>
 			</td>
 		</tr>
 		<tr tr style="height: 100px; text-align: center;">
 			<td>
-				<p style="font-size: 20px;">${score01.EMPLOYEE_SCORE }</p>
+				<p style="font-size: 16px;"><br/>${score01.EMPLOYEE_SCORE }</p>
 			</td>
-			<td><p style="font-size: 20px;">재직자평가</p></td>
+			<td><br/><span class="label label-success" style="font-size: 20px; size: 60px;">재직자평가</span></td>
 			<td>
-				<p style="font-size: 20px;">${score02.EMPLOYEE_SCORE }</p>
+				<p style="font-size: 16px;"><br/>${score02.EMPLOYEE_SCORE }</p>
 			</td>
 		</tr>
-			
+		<tr style="height: 100px; text-align: center;">
+			<td>
+				<p style="font-size: 16px;"><br/>${info01.num01 }</p>
+			</td>
+			<td><br/><span class="label label-success" style="font-size: 20px; size: 60px;">매출액</span></td>
+			<td>
+				<p style="font-size: 16px;"><br/>${info02.num01 }</p>
+			</td>
+		</tr>
+		<tr style="height: 100px; text-align: center;">
+			<td>
+				<p style="font-size: 16px;"><br/>${info01.num02 }</p>
+			</td>
+			<td><br/><span class="label label-success" style="font-size: 20px; size: 60px;">영업이익</span></td>
+			<td>
+				<p style="font-size: 16px;"><br/>${info02.num02 }</p>
+			</td>
+		</tr>
+		<tr style="height: 100px; text-align: center;">
+			<td>
+				<p style="font-size: 16px;"><br/>${info01.num03 }</p>
+			</td>
+			<td><br/><span class="label label-success" style="font-size: 20px; size: 60px;">당기손익</span></td>
+			<td>
+				<p style="font-size: 16px;"><br/>${info02.num03 }</p>
+			</td>
+		</tr>
+		<tr style="height: 100px; text-align: center;">
+			<td>
+				<p style="font-size: 16px;"><br/>${info01.num04 }</p>
+			</td>
+			<td><br/><span class="label label-success" style="font-size: 20px; size: 60px;">사원수</span></td>
+			<td>
+				<p style="font-size: 16px;"><br/>${info02.num04 }</p>
+			</td>
+		</tr>	
 
 	</table>
 </div>
