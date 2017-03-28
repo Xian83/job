@@ -88,7 +88,7 @@ public class ReviewsDao {
 //			email = (String) obj.get("EMAIL");
 //			picURL = myDao.getLastetImageURL(email);
 //			if (picURL == null || picURL.equals("null"))
-//				picURL = "/picture/default.jpg";
+//				picURL = "/image/default.jpg";
 //			obj.put("pictURL", picURL);
 //		}
 //

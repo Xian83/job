@@ -41,7 +41,7 @@ public class MyInfoController {
 		// 사진 추가
 		String picURL = mydao.getLastetImageURL(email);
 		if (picURL == null || picURL.equals("null"))
-			picURL = "/picture/default.jpg";
+			picURL = "/image/default.jpg";
 
 		
 		Map map = mdao.getData(email); // 湲곕낯�젙蹂�
