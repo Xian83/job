@@ -40,8 +40,6 @@ public class InitController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("root");
-		/*mav.setViewName("ttt");
-		mav.addObject("main", "/index");*/
 		mav.addObject("avg", list1);		// avg salary top3
 		mav.addObject("rookie", list2);		// rookie salary top3
 		mav.addObject("finance", list3);	// finance score top3

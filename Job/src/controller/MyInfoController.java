@@ -31,7 +31,7 @@ public class MyInfoController {
 	FileUploadDao fdao;
 
 	@RequestMapping("/info")
-	public ModelAndView infoHandler(HttpSession session, @RequestParam Map data) {
+	public ModelAndView infoHandler(HttpSession session, @RequestParam Map data, @RequestParam(name="pic") MultipartFile file) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("tt");
 
@@ -95,6 +95,34 @@ public class MyInfoController {
 		return mav;
 	}
 
+	@RequestMapping("/update_pic")
+	public ModelAndView update_pic(@RequestParam(name="pic") MultipartFile file, HttpSession session, MultipartHttpServletRequest req)
+			throws Exception {
+		ModelAndView mav = new ModelAndView();
+		// �궗吏� ���엯�씤 寃쎌슦留� �뾽濡쒕뱶 吏꾪뻾
+		String ct = file.getContentType();
+		if (ct.startsWith("image")) {
+			// �뙆�씪 �뾽濡쒕뱶
+			Map map = fdao.execute(file);
+			System.out.println("map = " + map);
+
+			// DB 사진 추가
+			String email = req.getParameter("email");
+			String url = (String) map.get("filelink");
+			
+			boolean res = fdao.insert(email, url);
+			if (res)
+				mav.addObject("msg", "파일 등록됨");
+			else 
+				mav.addObject("msg", "파일 등록실패");
+		} else {
+			mav.addObject("msg", "Not Image File");
+		}
+		mav.addObject("url","/my/info");
+		mav.setViewName("util/alert");
+		return mav;
+
+	}
 	
 	
 	@RequestMapping("/leave_form")
@@ -123,9 +151,10 @@ public class MyInfoController {
 		data.put("pass", pass);
 		boolean res = mdao.existCheck(data);
 		
-		// increase password error count up
-		if(!res)
-			session.setAttribute("leave_try", cnt++);
+		if(res)
+			mdao.delete(email, pass);	// delete member data
+		else
+			session.setAttribute("leave_try", cnt++);	// increase password error count up
 		
 		return res;
 	}

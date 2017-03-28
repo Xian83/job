@@ -66,8 +66,7 @@
 						<li><a href="/login/form" class="w3-bar-item w3-button w3-mobile">Login</a></li>
 					</c:when>
 					<c:when test="${auth eq 'yes'}">
-						<li><a href="/my/company" class="w3-bar-item w3-button w3-mobile">My Page</a></li>
-
+						<li><a href="/my/info" class="w3-bar-item w3-button w3-mobile">My Page</a></li>
 						<li><a href="/login/logout" class="w3-bar-item w3-button w3-mobile">Logout</a></li>
 					</c:when>
 				</c:choose>
