@@ -58,6 +58,7 @@ public class MyPageDao {
 		try {
 			sql = factory.openSession();
 			list = sql.selectList("mappers.mypage.getVisited", email);
+			System.out.println("visit list =" + list );
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -74,6 +75,7 @@ public class MyPageDao {
 		try {
 			sql = factory.openSession();
 			list = sql.selectList("mappers.mypage.getScarpData", email);
+			System.out.println("scrap list =" + list );
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -91,12 +93,28 @@ public class MyPageDao {
 		try {
 			sql = factory.openSession();
 			list = sql.selectList("mappers.mypage.getCompareData", email);
+			System.out.println("compare list =" + list );
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			sql.close();
 		}
 		
+		return list;
+	}
+	
+	public List getRecommand(Map data) {
+		List list = new ArrayList();
+		SqlSession sql = null;
+
+		try {
+			sql = factory.openSession();
+			list = sql.selectList("mappers.mypage.recommand", data);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sql.close();
+		}
 		return list;
 	}
 }

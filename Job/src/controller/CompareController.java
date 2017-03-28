@@ -76,7 +76,7 @@ public class CompareController {
 			// 회사명, 점수(재무평가,재직자평가), 방사형 그래프, 숫자(매출액, 영업이익, 당기 손익, 사원수)			
 			String chartURL = makeChart(ddao.getScore02(cm1), ddao.getScore02(cm2));// graph
 			
-			mav.setViewName("t1");
+			mav.setViewName("tttt");
 			mav.addObject("main", "compare/result");
 			mav.addObject("score01", ddao.score(cm1));	// FINANCE_SCORE, EMPLOYEE_SCORE
 			mav.addObject("score02", ddao.score(cm2));
@@ -93,9 +93,9 @@ public class CompareController {
 	}
 
 	public String makeChart(HashMap data1, HashMap data2) {
-		int size = 300;
+		int size = 520;
 		String img = "https://chart.googleapis.com/chart?cht=r&chs=" + size + "x" + size;
-		img += "chd=t:";
+		img += "&chd=t:";
 		img += data1.get("LABEL01") + "," + data1.get("LABEL02") + "," + data1.get("LABEL03") + ",";
 		img += data1.get("LABEL04") + "," + data1.get("LABEL05") + "," + data1.get("LABEL06") + ",";
 		img += data1.get("LABEL07") + "," + data1.get("LABEL08") + "," + data1.get("LABEL09") + ","+ data1.get("LABEL01")+  "|";
