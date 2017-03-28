@@ -12,16 +12,18 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 body {
-	position: relative;
+	 position: relative; 
+	
 }
 
 .affix {
 	top: 20px;
+
 }
 
 div.col-sm-9 div {
 	height: auto;
-	font-size: 28px;
+	font-size: 20px;
 }
 
 /* #section1 {
@@ -51,12 +53,13 @@ div.col-sm-9 div {
 @media screen and (max-width: 810px) {
 	#section1, #section2, #section3, #section41, #section42 {
 		margin-left: 150px;
+		margin-top: 300px;
 	}
 }
 </style>
 
 
-<body data-spy="scroll" data-target="#myScrollspy" data-offset="15">
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="150">
 	<div class="container">
 		<div class="row">
 			<nav class="col-sm-3" id="myScrollspy">
@@ -64,16 +67,14 @@ div.col-sm-9 div {
 					data-offset-top="205">
 
 					<div class="panel-body">
-				 <form action="/my/update_pic" method="post"
-							enctype="multipart/form-data"> 
-							<b>PROFILE PHOTO</b><br /> <img src="${url}" width="200" height="200" />
+				 
+							<b>PROFILE PHOTO</b><br /> <img src="${picURL}" width="200" height="200" />
 							<hr/>
 							<input type="file" id="f" name="pic" style="display: none;" /> <input
 								type="hidden" name="email" value="${sessionScope.email}" />
-	
-							<button type="button" class="btn" id="add">사진 변경</button>
-							<button type="submit" class="btn" id="pic" style="display: none;">등록</button>
-				 	</form> 
+							<a href="/my/edit"><button type="button" class="btn" id="edit">개인정보 변경</button></a>
+
+				
 						<hr id="hh" />
 					</div>
 
@@ -136,7 +137,7 @@ div.col-sm-9 div {
 	
 				<div id="section3">
 					
-					<h2>자주 방문한 기업</h2>
+					<h2>자주 본 기업</h2>
 					<div id="donutchart" style="width: 900px; height: 500px;"></div>
 					<script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
@@ -174,6 +175,7 @@ div.col-sm-9 div {
 						종민이가 해줘야 함
 						데이터는 넘어옴
 				</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -181,15 +183,6 @@ div.col-sm-9 div {
 
 
 	<script>
-	
-	// 사진 등록 버튼
-	$("#add").on("click", function(){ 
-		$("#f").trigger("click");    
-		console.log($("#f"));
-	});
-	$("#f").on("change", function(){
-		$("#pic").trigger("click");  
-	});
 	
 	// 스크랩 체크 박스 - 아직 다 안 됐음
 	 $(function() {

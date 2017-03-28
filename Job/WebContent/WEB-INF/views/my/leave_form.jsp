@@ -4,8 +4,8 @@
 	<h3>회원탈퇴</h3>
 </div>
 <div class="well">
-	※ 탈퇴를 진행하시겠습니까?
-	   비밀번호를 다시 입력바랍니다.
+	※ 탈퇴를 진행하시겠습니까? <br/>
+	   비밀번호를 다시 입력바랍니다. 비밀번호 3회 오류시, 자동 로그아웃 됩니다
 	<form action="/my/leave_result" method="post">
 		<p>
 			<b>PASS</b><br/>

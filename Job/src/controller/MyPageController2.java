@@ -40,7 +40,111 @@ public class MyPageController2 {
 
 	@Autowired
 	FileUploadDao fdao;
+	
+	@Autowired
+	MemberDao mdao;
+	
+	@RequestMapping("/result")
+	public ModelAndView resultHandler(HttpSession session, @RequestParam Map data) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("t1");
+		mav.addObject("main", "/my/result");
 
+		String email = (String) session.getAttribute("email");
+		data.put("email", email);
+		int rst = mydao.update(data);	
+		
+		String pass1 = (String) session.getAttribute("pass");
+		String pass = (String) data.get("passcheck");
+		System.out.println("pass1 = " + pass1 + "/ pass = " + pass);
+		if(pass != null && pass1 != pass) {
+		Map m = new HashMap<>();
+			m.put("pass", pass);
+			m.put("email", email);
+		int rst2 = mydao.updatePass(m);
+		}
+		
+		String birth = (String) data.get("birth");
+		Map b = new HashMap<>();
+			b.put("birth", birth);
+			b.put("email", email);
+			System.out.println("map b = " + b );
+		int rst3 = mydao.updateBirth(b);
+		System.out.println("rst3  = " + rst3 );
+
+		return mav;
+	}
+
+	
+	
+	@RequestMapping("/leave_form")
+	public ModelAndView leave_formHandler(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("t1");
+		mav.addObject("main", "/my/leave_form");
+		
+		return mav;
+	}
+	
+	// return result by ajax - 탈퇴 처리 / 비밀번호 3회 오류시, 자동로그아웃 기능 추가 필요
+	   @ResponseBody
+	   @RequestMapping("/leave_result")
+	   public boolean leave_resultHandler(HttpSession session, @RequestParam(name="pass") String pass ) {
+//	      ModelAndView mav = new ModelAndView();
+//	      mav.setViewName("tt");
+//	      mav.addObject("main", "/my/leave_result");
+	      
+	      String email = (String) session.getAttribute("email");
+	      int cnt = (int) session.getAttribute("leave_try");
+	      
+	      // email, pass check 
+	      HashMap data = new HashMap<>();
+	      data.put("email", email);
+	      data.put("pass", pass);
+	      boolean res = mdao.existCheck(data);
+	      
+	      // increase password error count up
+	      if(!res)
+	         session.setAttribute("leave_try", cnt++);
+	    	  
+	      return res;
+	   }
+
+	@RequestMapping("/edit")
+	public ModelAndView my_editHandler(HttpSession session) throws Exception {
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("t1");
+		mav.addObject("main", "/my/edit");
+
+		String email = (String) session.getAttribute("email");
+		
+		// 사진 불러오기
+		String picURL = mydao.getLastetImageURL(email);
+		if (picURL == null || picURL.equals("null"))
+			picURL = "/picture/default.jpg";
+		mav.addObject("picURL", picURL);
+		
+		// 개인정보 변경
+		Map map = mdao.getData(email); // 湲곕낯�젙蹂�
+		Map map2 = mydao.getdata(email); // 異붽��젙蹂�
+		List list = mydao.getlocations(); // 愿��떖吏��뿭
+		List list2 = mydao.getIndustries(); // 愿��떖�궛�뾽援�
+		
+		mav.addObject("picURL", picURL);
+		mav.addObject("location", list);
+		mav.addObject("industry", list2);
+		mav.addObject("infos", map);
+		mav.addObject("likeinfos", map2);
+		
+		/*System.out.println("FACEBOOK = " + map.get("FACEBOOK"));
+		System.out.println("FACEBOOK map = " + map);*/
+		
+		
+		return mav;
+	}
+	
+	
 	@RequestMapping("/company")
 	public ModelAndView my_companyHandler(HttpSession session) throws Exception {
 
@@ -73,46 +177,26 @@ public class MyPageController2 {
 		// 자주 본 기업(visit) - 데이터 잘 안 넘어 옴
 		List<HashMap> list_v = mypage.getVisitData(email);
 		mav.addObject("list_v", list_v);
-		System.out.println("자주 본 기업 visit= " + list_v);
+		//System.out.println("자주 본 기업 visit= " + list_v);
 		
 		// 스크랩한 기업(scrap)
 		List<HashMap> list_s = mypage.getScrapData(email);
 		mav.addObject("list_s", list_s);
-		System.out.println("스크랩 = " + list_s);
-		System.out.println("email = "+email);
+		//System.out.println("스크랩 = " + list_s);
+		//System.out.println("email = "+email);
 		
 		// 비교한 기업(compare)
 		List<HashMap> list_c = mypage.getCompareData(email);
 		mav.addObject("list_c", list_c);
-		System.out.println("비교 compare = " + list_c);
+		//System.out.println("비교 compare = " + list_c);
 
-		// 사진 등록
-		String url = (String) session.getAttribute("url");
-		System.out.println("사진 url =" + url);
-		/*String ct = file.getContentType();
-		if (ct.startsWith("image")) {
-			// �뙆�씪 �뾽濡쒕뱶
-			Map map = fdao.execute(file);
-			System.out.println("map = " + map);
-			
-			// DB 사진 추가
-			email = req.getParameter("email");
-			String url = (String) map.get("filelink");
-			mav.addObject("url", url);
-			System.out.println("url = " + url);
-			boolean res = fdao.insert(email, url);
-			if (res)
-				mav.addObject("msg", "프로필 사진이 변경되었습니다");
-			else 
-				mav.addObject("msg", "프로필 사진 등록에 실패하였습니다");
-		} else {
-			mav.addObject("msg", "Not Image File");
-		}
-		
-		mav.addObject("url2", "/my/company");
-		mav.setViewName("util/alert");
-		*/
-		
+		// 사진 불러오기
+		String picURL = mydao.getLastetImageURL(email);
+		if (picURL == null || picURL.equals("null"))
+			picURL = "/picture/default.jpg";
+		//System.out.println("picURL = " + picURL);
+		mav.addObject("picURL", picURL);
+	
 		return mav;
 	}
 
@@ -128,14 +212,13 @@ public class MyPageController2 {
 		if (ct.startsWith("image")) {
 			// �뙆�씪 �뾽濡쒕뱶
 			Map map = fdao.execute(file);
-			System.out.println("map = " + map);
 			
 			// DB 사진 추가
 			String email = req.getParameter("email");
 			String url = (String) map.get("filelink");
 			mav.addObject("url", url);
-			System.out.println("url = " + url);
-			session.setAttribute("url", url);
+
+
 			boolean res = fdao.insert(email, url);
 			if (res)
 				mav.addObject("msg", "프로필 사진이 변경되었습니다");
@@ -145,7 +228,7 @@ public class MyPageController2 {
 			mav.addObject("msg", "Not Image File");
 		}
 		
-		mav.addObject("url2", "/my/company");
+		mav.addObject("url2", "/my/edit");
 		mav.setViewName("util/alert");
 		return mav;
 
