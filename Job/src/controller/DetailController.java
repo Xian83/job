@@ -95,18 +95,21 @@ public class DetailController {
 		String[] arr = origin.split("#") ;	// 봤던 쿠키 목록
 		// 이 배열에 companyname 이 값이 있냐 없냐..
 		// 배열에 없는 회사명일때만 origin+"#"+companyname 이걸로 쿠키를 전송을 시켜
-		
+		System.out.println("origin 1 : "+origin);
+		System.out.println(companyname);
 		for(String cc : arr) {
 			if(!cc.equals(companyname)) {
-				Cookie c = new Cookie("cmpn_nm", origin+"#"+companyname);
+				Cookie c = new Cookie("cmpn_nm", companyname+"#"+origin);
 				c.setPath("/");
 				response.addCookie(c);
+				
 			} else {
 				Cookie c = new Cookie("cmpn_nm", origin);
 				c.setPath("/");
 				response.addCookie(c);
 			}
-		}
+		}		
+		System.out.println("origin 2 : "+origin);
 		
 
 		//쿠키처리
