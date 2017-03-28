@@ -53,12 +53,4 @@ hr[id='hh']{
 
 	</div>
 	
-	<script>
-	$("#add").on("click", function(){ 
-		$("#f").trigger("click");    
-		console.log($("#f"));
-	});
-	$("#f").on("change", function(){
-		$("#pic").trigger("click");  
-	});
-</script>
+
