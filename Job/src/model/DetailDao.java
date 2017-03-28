@@ -193,6 +193,7 @@ public class DetailDao {
 	public HashMap getInfo02(String CompID) {
 		HashMap data = new HashMap<>();
 		List<String> li1 = new ArrayList<>();
+		String trans = null;
 
 		String url = "http://www.careercatch.co.kr/Comp/CompSummary.aspx?CompID=" + CompID;
 
@@ -205,11 +206,14 @@ public class DetailDao {
 			int flag = 1;
 			for (Element t : e1) {
 				if (flag == 5)
-					data.put("num01", t.text());
+			
+				data.put("num01", t.text());
 				if (flag == 6)
-					data.put("num02", t.text());
+				
+				data.put("num02", t.text());
 				if (flag == 7)
-					data.put("num03", t.text());
+					
+				data.put("num03", t.text());
 				if (flag == 9)
 					data.put("num04", t.text());
 				flag++;
