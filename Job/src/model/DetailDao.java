@@ -260,8 +260,17 @@ public class DetailDao {
 	
 	public List<HashMap> getScoreData(List data){
 		List<HashMap> list = new ArrayList<>();
+		HashMap map = new HashMap();
 		
 		// 기업명 기준으로 넘기고, 추천 기업 가져오기
+		SqlSession session = factory.openSession();
+		try {
+			map = session.selectOne("mappers.company.getScore03", data);
+
+		} finally {
+			session.close();
+		}
+		
 		
 		return list;
 	}
