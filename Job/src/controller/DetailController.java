@@ -2,6 +2,7 @@ package controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -91,10 +92,31 @@ public class DetailController {
 		
 		// 쿠키생성
 		String u = origin + "#" + companyname;
-		Cookie c = new Cookie("cmpn_nm", u);
-		c.setPath("/");
+			if (companyname.equals(origin)) {
+				Cookie c = new Cookie("cmpn_nm", origin + "#");
+				c.setPath("/");
+				response.addCookie(c);
+			} else {
+				Cookie c = new Cookie("cmpn_nm", u);
+				c.setPath("/");
+				response.addCookie(c);
+			}
 		// c.setMaxAge(60 * 60 * 12);
-		response.addCookie(c);
+
+		//쿠키처리
+		List<String> cookielist = new ArrayList<>();
+		if(!origin.equals("")) {
+			String[] ar = origin.split("#");
+			for(String a : ar) {
+				if(a.equals(""))
+					continue;
+				cookielist.add(a);
+			}
+		}
+		int csize = cookielist.size();
+	
+		mav.addObject("clist", cookielist);
+		mav.addObject("csize", csize);
 
 		return mav;
 	}
