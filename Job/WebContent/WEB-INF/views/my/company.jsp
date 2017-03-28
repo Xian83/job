@@ -20,7 +20,7 @@ body {
 }
 
 div.col-sm-9 div {
-	height: 250px;
+	height: auto;
 	font-size: 28px;
 }
 
@@ -64,28 +64,26 @@ div.col-sm-9 div {
 					data-offset-top="205">
 
 					<div class="panel-body">
-					 <form action="/my/update_pic" method="post"
+				 <form action="/my/update_pic" method="post"
 							enctype="multipart/form-data"> 
-							?${url}?
-							<b>PICTURE</b><br /> <img src="${url}" width="200" height="200" />
-							<hr />
+							<b>PROFILE PHOTO</b><br /> <img src="${url}" width="200" height="200" />
+							<hr/>
 							<input type="file" id="f" name="pic" style="display: none;" /> <input
 								type="hidden" name="email" value="${sessionScope.email}" />
+	
 							<button type="button" class="btn" id="add">사진 변경</button>
-							<span id="fname"></span>
 							<button type="submit" class="btn" id="pic" style="display: none;">등록</button>
-					</form> 
+				 	</form> 
 						<hr id="hh" />
 					</div>
 
 
-					<li><a href="#section1">추천 기업 정보</a></li>
-					<li><a href="#section2">스크랩한 기업 정보</a></li>
-					<li><a href="#section3">자주 본 기업</a></li>
-					<li><a href="#section4">최근 본 기업</a></li>
-					<li><a href="#section5">비교한 기업 정보</a></li>
+					<li><a href="#section1"><i class="fa fa-thumbs-o-up" style="font-size:36px"></i><b>  추천 기업 정보</b></a></li>
+					<li><a href="#section2"><i class="fa fa-files-o" style="font-size:36px"></i><b>  스크랩한 기업 정보</b></a></li>
+					<li><a href="#section3"><i class="fa fa-eye" style="font-size:36px"></i><b>  자주 본 기업 정보</b></a></li>
+					<li><a href="#section4"><i class="fa fa-spinner" style="font-size:36px"></i><b>  최근 본 기업 정보</b></a></li>
+					<li><a href="#section5"><i class="fa fa-refresh" style="font-size:36px"></i><b>  비교한 기업 정보</b></a></li>
 				</ul>
-
 			</nav>
 
 			<div class="col-sm-9">
@@ -194,8 +192,7 @@ div.col-sm-9 div {
 	});
 	
 	// 스크랩 체크 박스 - 아직 다 안 됐음
-	
-	$(function() {
+	 $(function() {
   	$("#change").on("click", function() {
   		// 1개이상 체크하도록 한다.
 	    if ( $(".chkclass :checked").size() < 1 ) {
@@ -224,6 +221,6 @@ div.col-sm-9 div {
 	     	}
     	});
       }
-  });
-});}
+  }); 
+});
 </script>

@@ -55,7 +55,7 @@ public class MyPageController2 {
 
 		
 		// 추천 기업(recommand)
-		HashMap data = mDao.getInfo(email); //(WKP_ADRS, STNDD_BIG_GB, SALARY_MIN, SALARY_MAX)
+		/*HashMap data = mDao.getInfo(email); //(WKP_ADRS, STNDD_BIG_GB, SALARY_MIN, SALARY_MAX)
 		System.out.println("info : " + data.toString());// 확인용
 		//추천기업 정보 가져오기 
 		List reco = mypage.getRecommand(data); // CMPN_NM, Salary 정보 가져옴
@@ -68,7 +68,7 @@ public class MyPageController2 {
 			}
 		}
 		mav.addObject("list_r", list_r);
-		System.out.println("추천 = " + list_r);
+		System.out.println("추천 = " + list_r);*/
 		
 		// 자주 본 기업(visit) - 데이터 잘 안 넘어 옴
 		List<HashMap> list_v = mypage.getVisitData(email);
@@ -87,6 +87,8 @@ public class MyPageController2 {
 		System.out.println("비교 compare = " + list_c);
 
 		// 사진 등록
+		String url = (String) session.getAttribute("url");
+		System.out.println("사진 url =" + url);
 		/*String ct = file.getContentType();
 		if (ct.startsWith("image")) {
 			// �뙆�씪 �뾽濡쒕뱶
@@ -133,6 +135,7 @@ public class MyPageController2 {
 			String url = (String) map.get("filelink");
 			mav.addObject("url", url);
 			System.out.println("url = " + url);
+			session.setAttribute("url", url);
 			boolean res = fdao.insert(email, url);
 			if (res)
 				mav.addObject("msg", "프로필 사진이 변경되었습니다");
