@@ -80,20 +80,20 @@ public class ReviewsDao {
 		return a;
 	}
 
-	public List<HashMap> getPicture(List<HashMap> list) {
-		String email = "";
-		String picURL = "";
-
-		for (HashMap obj : list) {
-			email = (String) obj.get("EMAIL");
-			picURL = myDao.getLastetImageURL(email);
-			if (picURL == null || picURL.equals("null"))
-				picURL = "/picture/default.jpg";
-			obj.put("pictURL", picURL);
-		}
-
-		return list;
-	}
+//	public List<HashMap> getPicture(List<HashMap> list) {
+//		String email = "";
+//		String picURL = "";
+//
+//		for (HashMap obj : list) {
+//			email = (String) obj.get("EMAIL");
+//			picURL = myDao.getLastetImageURL(email);
+//			if (picURL == null || picURL.equals("null"))
+//				picURL = "/picture/default.jpg";
+//			obj.put("pictURL", picURL);
+//		}
+//
+//		return list;
+//	}
 
 	//
 	// public List<HashedMap> salary() {
