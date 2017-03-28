@@ -37,7 +37,7 @@
 	<div style="min-height: 5%;">
 		<tiles:insertAttribute name="nav" />
 	</div>
-	<div style="min-height: 20%;">
+	<div style="min-height: 5%;">
 		<tiles:insertAttribute name="header" />
 	</div>
 	<div style="min-height: 60%; margin-left: 10px; margin-right: 10px;">
