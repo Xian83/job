@@ -3,23 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
-	.cm1 cm2 {
-	width: 150px;
+.cm1 cm2 legend {
+	width: 100px;
 	height: 100px;
 	text-align: center;
 }
-hr[id='hh']{
-    border: none;
-   
-    color: #CDB79E;
-    background-color: #CDB79E;
-    height: 2px;
-    width: 100%;
+
+hr[id='hh'] {
+	border: none;
+	color: red;
+	background-color: red;
+	height: 2px;
+	width: 100%;
 }
-
-
 </style>
-
 
 
 <!-- 처음뿌려지는 쿠키리스트가 가장 먼저본 기업 -->

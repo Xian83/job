@@ -44,14 +44,10 @@
 		<put-attribute name="main" expression="/WEB-INF/views/${main}.jsp" />
 	</definition>
 
-<!-- 
-		<definition name="tt" extends="default">
-		<put-attribute name="main" expression="/WEB-INF/views/${main}.jsp"/>
- -->
 	<definition name="tt" extends="default2">
-		<put-attribute name="main" expression="/WEB-INF/views/${main}.jsp" />	
+		<put-attribute name="main" expression="/WEB-INF/views/${main}.jsp" />
 	</definition>
-	
+
 	<definition name="ttt" extends="default3">
 		<put-attribute name="main" expression="/WEB-INF/views/${main}.jsp" />
 	</definition>
