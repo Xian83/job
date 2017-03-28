@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import model.FileUploadDao;
 
 import model.DetailDao;
@@ -36,7 +35,7 @@ public class MyPageController2 {
 
 	@Autowired
 	MyInfoDao mydao;
-	
+
 	@Autowired
 	DetailDao detail;
 
@@ -159,35 +158,40 @@ public class MyPageController2 {
 		String email = (String) session.getAttribute("email");
 
 		// 최근 본 기업(lately) : 별다른 추가 정보 없음
-		
 
-		
 		// 추천 기업(recommand)
-		/*HashMap data = mDao.getInfo(email); //(WKP_ADRS, STNDD_BIG_GB, SALARY_MIN, SALARY_MAX)
+		/*// member_Info(WKP_ADRS, STNDD_BIG_GB, SALARY_MIN, SALARY_MAX)
+		HashMap data = mDao.getInfo(email);
 		System.out.println("info : " + data.toString());// 확인용
-		//추천기업 정보 가져오기 
+
+		// 추천기업 정보 가져오기
 		List reco = mypage.getRecommand(data); // CMPN_NM, Salary 정보 가져옴
 		// score db에서 cmpn_nm 기준으로 데이터 가져오기
 		List list_r = detail.getScoreData(reco);
-		
+
 		for (Object map : list_r) {
 			if (((Map) map).get("LOGO") == null) {
-				((Map) map).put("LOGO", "http://image.jinhak.com/job/site/tmp02.gif");
+				((Map) map).put("LOGO", "/image/default_logo.png");
 			}
 		}
 		mav.addObject("list_r", list_r);
+
 		System.out.println("추천 = " + list_r);*/
-		
-		
+
+
+
 		// 자주 본 기업(visit) - 데이터 잘 안 넘어 옴
 		List<HashMap> list_v = mypage.getVisitData(email);
 		mav.addObject("list_v", list_v);
-		//System.out.println("자주 본 기업 visit= " + list_v);
-		
+
+		System.out.println("자주 본 기업 visit= " + list_v);
+
+
 		// 스크랩한 기업(scrap)
 		List<HashMap> list_s = mypage.getScrapData(email);
 		mav.addObject("list_s", list_s);
 		System.out.println("스크랩 = " + list_s);
+
 		//System.out.println("email = "+email);
 		
 		String email2 = (String) map.get("email");
@@ -196,8 +200,7 @@ public class MyPageController2 {
 		if (rst)
 			response.sendRedirect("/my/company");
 		
-		
-		
+
 		// 비교한 기업(compare)
 		List<HashMap> list_c = mypage.getCompareData(email);
 		mav.addObject("list_c", list_c);
@@ -210,22 +213,40 @@ public class MyPageController2 {
 		//System.out.println("picURL = " + picURL);
 		mav.addObject("picURL", picURL);
 	
+
+		// 사진 등록
+		String url = (String) session.getAttribute("url");
+		System.out.println("사진 url =" + url);
+		/*
+		 * String ct = file.getContentType(); if (ct.startsWith("image")) { //
+		 * �뙆�씪 �뾽濡쒕뱶 Map map = fdao.execute(file); System.out.println("map = "
+		 * + map);
+		 * 
+		 * // DB 사진 추가 email = req.getParameter("email"); String url = (String)
+		 * map.get("filelink"); mav.addObject("url", url);
+		 * System.out.println("url = " + url); boolean res = fdao.insert(email,
+		 * url); if (res) mav.addObject("msg", "프로필 사진이 변경되었습니다"); else
+		 * mav.addObject("msg", "프로필 사진 등록에 실패하였습니다"); } else {
+		 * mav.addObject("msg", "Not Image File"); }
+		 * 
+		 * mav.addObject("url2", "/my/company"); mav.setViewName("util/alert");
+		 */
+
 		return mav;
 	}
 
-@RequestMapping("/update_pic")
-	public ModelAndView update_pic(@RequestParam(name="pic") MultipartFile file, 
-			HttpSession session, MultipartHttpServletRequest req)
-			throws Exception {
+	@RequestMapping("/update_pic")
+	public ModelAndView update_pic(@RequestParam(name = "pic") MultipartFile file, HttpSession session,
+			MultipartHttpServletRequest req) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		
+
 		System.out.println("여기 넘어옴?");
 		// �궗吏� ���엯�씤 寃쎌슦留� �뾽濡쒕뱶 吏꾪뻾
 		String ct = file.getContentType();
 		if (ct.startsWith("image")) {
 			// �뙆�씪 �뾽濡쒕뱶
 			Map map = fdao.execute(file);
-			
+
 			// 사진 불러오기
 			String email = req.getParameter("email");
 			String picURL = mydao.getLastetImageURL(email);
@@ -234,6 +255,8 @@ public class MyPageController2 {
 			mav.addObject("picURL", picURL);
 			System.out.println("업데이트 picURL = " + picURL);
 			
+			System.out.println("map = " + map);
+
 			// DB 사진 추가
 			String url = (String) map.get("filelink");
 			mav.addObject("url", url);
@@ -242,19 +265,18 @@ public class MyPageController2 {
 			boolean res = fdao.insert(email, url);
 			if (res)
 				mav.addObject("msg", "프로필 사진이 변경되었습니다");
-			else 
+			else
 				mav.addObject("msg", "프로필 사진 등록에 실패하였습니다");
 		} else {
 			mav.addObject("msg", "Not Image File");
-		}
-		
+		}	
 		mav.addObject("url2", "/my/edit");
+		mav.addObject("url2", "/my/company");
 		mav.setViewName("util/alert");
 		return mav;
 
 	}
-	
-	
+
 	@RequestMapping("/interest")
 	public ModelAndView interestHandler(HttpSession session) {
 		List<HashMap> list = mypage.getScrapData((String) session.getAttribute("email"));
@@ -288,4 +310,32 @@ public class MyPageController2 {
 		return result;
 	}
 
+	@RequestMapping("/reco")
+	public void testHandler(HttpSession session) {
+		String email = (String) session.getAttribute("email");
+		
+		// 추천 기업(recommand)
+		// member_Info(WKP_ADRS, STNDD_BIG_GB, SALARY_MIN, SALARY_MAX)
+		HashMap data = mDao.getInfo(email);
+		System.out.println("info : " + data.toString());// 확인용
+
+		// 추천기업 정보 가져오기
+		List reco = mypage.getRecommand(data);
+		
+		// score db에서 cmpn_nm 기준으로 데이터 가져오기
+		List list_r = detail.getScoreData(reco);
+
+		for (Object map : list_r) {
+			if (((Map) map).get("LOGO") == null) {
+				((Map) map).put("LOGO", "/image/default_logo.png");
+			}
+		}
+		System.out.println("추천 = " + list_r);
+		
+		// 최종
+		// 관심지역, 산업군, 연봉 정보
+		// 기업명, 연봉, 로고
+		
+
+	}
 }

@@ -62,7 +62,7 @@ public class DetailController {
 
 		// increase visit count to DB
 		ddao.insertVisit(companyname, email);
-
+		HashMap rate = ddao.manWomanrate(companyname);
 		// get same industry company list (finance score desc)
 		String div = (String) scorelist.get("DIVISION");
 		List samelist = ddao.same(div);
@@ -89,19 +89,31 @@ public class DetailController {
 		mav.addObject("info02", info02);// HashMap (summary, address, system, culture)
 		mav.addObject("json", google.map((String) info02.get("address")));
 		mav.addObject("chartURL", chartURL);	//방사형 그래프 주소
+
 		
+		
+
+		mav.addObject("rate",rate);  //상세페이지를 클리간 남녀비율  hashmap(man, woman, visi)
+
 		// 쿠키생성
-		String u = origin + "#" + companyname;
-			if (companyname.equals(origin)) {
-				Cookie c = new Cookie("cmpn_nm", origin + "#");
-				c.setPath("/");
-				response.addCookie(c);
-			} else {
-				Cookie c = new Cookie("cmpn_nm", u);
-				c.setPath("/");
-				response.addCookie(c);
+		String[] arr = origin.split("#") ;	// 봤던 쿠키 목록
+		// 이 배열에 companyname 이 값이 있냐 없냐..
+		// 배열에 없는 회사명일때만 origin+"#"+companyname 이걸로 쿠키를 전송을 시켜
+
+		boolean rst = false;
+		for(String cc: arr) {
+			if(cc.equals(companyname)){
+				rst=true;
+				break;
 			}
-		// c.setMaxAge(60 * 60 * 12);
+		}
+		if(rst==false) {
+			Cookie c = new Cookie("cmpn_nm", companyname+"#"+origin);
+			c.setPath("/");
+			response.addCookie(c);
+		}
+		
+		
 
 		//쿠키처리
 		List<String> cookielist = new ArrayList<>();

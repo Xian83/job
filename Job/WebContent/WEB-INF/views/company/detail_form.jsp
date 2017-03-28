@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib  prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Lobster">
@@ -22,6 +22,8 @@ th {
 </style>
 <div class="container-fluid"
 	style="background: white-space; margin-left: 100px; margin-right: 100px">
+	<%-- <c:set var="check" value="${fn:split(info02.num01, '억||만원||조')}"></c:set>${check[0]}  매출액,영업이익,당기손익 숫자로 변환--%>
+
 	<div class="row content">
 		<div class="col-md-8">
 			<div class="row content">
@@ -347,7 +349,34 @@ th {
 		</div>
 	</div>
 	<div class="row content">
-		<div class="col-md-6"></div>
+		<div class="col-md-6" align="center"><h2 style="font-family: monospace; color: #595959">관심도</h2>
+		
+			<b>이 회사를 클릭 한 횟수 : ${rate.visi}</b>
+		<div id="boygirl" style="width: 700px; height: 500px;"></div>
+		<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+		function drawChart() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Pizza');
+      data.addColumn('number', 'Populartiy');
+      data.addRows([
+        ['남자', ${rate.man }],
+        ['여자', ${rate.woman }],
+
+      ]);
+
+      var options = {
+        title: '남/여 비율',
+        sliceVisibilityThreshold: .2
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('boygirl'));
+      chart.draw(data, options);
+    }
+		</script>
+		</div>
 		<div class="col-md-6" align="center">
 			<h2 style="font-family: monospace; color: #595959">수익</h2>
 			<hr />

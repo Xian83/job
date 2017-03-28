@@ -22,14 +22,15 @@ hr[id='hh']{
 
 
 
+
 <div>
 	<div class="well" align="center" style="background: white;">
 
-		<input type="text" id="cm1" name="cm1" readonly placeholder="기업1">
+		<input type="text" id="cm1" name="cm1" readonly placeholder="기업1" class="form-control">
 		<b style="font-size: 20px;"> vs </b> <input type="text" id="cm2"
-			name="cm2" readonly placeholder="기업2"> <br />
+			name="cm2" readonly placeholder="기업2" class="form-control"> <br />
 		<p>
-			<button type="button" id="compare">비교</button>
+			<button type="button" id="compare" class="btn">비교</button>
 		</p>
 	</div>
 </div>
@@ -39,20 +40,31 @@ hr[id='hh']{
 
 
 <div class="container">
-	<!-- 최근 본 리스트 : 최근 본 순서대로 내림차순 -->
+	<!-- 최근 본 리스트 : 최근 본 순서대로 내림차순10개 -->
 	<div style="text-align: left;"><legend style="font-size: 12px; text-align: left; width: 80%;">최근본리스트</legend>
 		<c:choose>
 			<c:when test="${csize gt 10 }">
-				<c:forEach var="i" begin="${csize-10 }" end="${csize-1 }">
+				<c:forEach var="i" begin="0" end="9">
+					
 					<input type="checkbox" value="${clist[i] }" id="check_${i}"
 						class="chk" style="width: 100px; text-align: left;"> <span style="font-size: 12px;">${clist[i] }</span><br/> 
 				</c:forEach>
 			</c:when>
 			<c:otherwise>
-				<c:forEach var="i" begin="0" end="${csize-1 }">
-					<input type="checkbox" value="${clist[i] }" id="check_${i}"
-						class="chk" style="width: 100px; text-align: left;"> <span style="font-size: 12px;">${clist[i] }</span><br/> 
-				</c:forEach>
+				<c:choose>
+					<c:when test="${csize gt 1 }">
+						<c:forEach var="i" begin="0" end="${csize-1 }">
+							<input type="checkbox" value="${clist[i] }" id="check_${i}"
+							class="chk" style="width: 100px; text-align: left;"> <span style="font-size: 12px;">${clist[i] }</span><br/> 
+						</c:forEach>
+					</c:when>	
+					<c:otherwise>
+						<c:forEach var="i" begin="0" end="0">
+							<span style="font-size: 12px;">비교할 기업을 선택해주세요</span><br/> 
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+				
 			</c:otherwise>
 		</c:choose>
 	</div>
@@ -63,7 +75,13 @@ hr[id='hh']{
 </div>
 
 
+
 <script>
+
+
+	$('#compare').attr('disabled',true);
+
+
 	$(".chk").on("change", function() {
 		//console.log($(this).val());
 		var val = $(this).val();
@@ -83,13 +101,19 @@ hr[id='hh']{
 				$("#cm2").val("");
 			}
 		}
+		
+		
+		if($("#cm1").val() == "" || $("#cm2").val() == ""){
+			$('#compare').attr('disabled',true);
+		}else {
+			$('#compare').attr('disabled',false);
+		}
+		
 	});
 	
-	$("#bt_${i }").on("click", function() {
-		$("#check_${i}").prop("checked", true);
-		$("#comparelist").html("asdf");
-
-	});
+	
+	
+	
 	
 	$("#compare").on("click", function(){
 		var cm1 = $("#cm1").val();
@@ -99,6 +123,9 @@ hr[id='hh']{
 		var popOption = "width=1000, height=800, resizable=no, status=no, menubar=no, left=300;"; //팝업창 옵션(optoin)
 		window.open(popUrl, "", popOption);
 	});
+	
+	
+	
 	
 </script>
 

@@ -10,7 +10,7 @@
     <li class="active"><a data-toggle="tab" href="#home">평균연봉순</a></li>
     <li><a data-toggle="tab" href="#menu1">신입연봉순</a></li>
     <li><a data-toggle="tab" href="#menu2">재무평가점수순</a></li>
-    <li><a data-toggle="tab" href="#menu3">재직자평가점수순</a></li>
+   <!--  <li><a data-toggle="tab" href="#menu3">재직자평가점수순</a></li> -->
   </ul>
 <br/>
   <div class="tab-content" style="width: 80%;">
@@ -272,7 +272,8 @@
 		  </table>
   		</div>
     </div>
-    <div id="menu3" class="tab-pane fade">
+    <!-- 삭제한 재직자평가부분 내용 -->
+    <%-- <div id="menu3" class="tab-pane fade">
       <div class="table-responsive">          
 		  <table class="table" text-align="center" style="width: 100%;">
 		    <thead>
@@ -350,7 +351,7 @@
 		    </tbody>
 		  </table>
   		</div>
-    </div>
+    </div> --%>
   </div>
 </div>
 
