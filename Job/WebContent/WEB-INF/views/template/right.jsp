@@ -21,65 +21,6 @@ hr[id='hh']{
 </style>
 
 
-<!-- 처음뿌려지는 쿠키리스트가 가장 먼저본 기업 -->
-
-
-<div>
-<div class="well" align="center">
-	<form action="/compare/result">
-		<input type="text" id="cm1" name="cm1" readonly placeholder="기업1"> <b style="font-size: 20px;"> vs </b>
-		<input type="text" id="cm2" name="cm2" readonly placeholder="기업2"> <br/>
-		<p><button type="submit">비교</button></p>
-	</form>
-</div>
-</div>
-
-<hr id="hh"/>
-<div class="container">
-
-	<div style="width: 150px;">
-	
-	<c:forEach var="i" begin="0" end="${csize }">
-		<input type="checkbox" value="${clist[i] }" id="check_${i}" class="chk" style="width: 150px;"> ${clist[i] } 
-	</c:forEach>
-	
-	</div>
-</div>
-
-<script>
-
-$(".chk").on("change", function(){
-	//console.log($(this).val());
-	var val = $(this).val();
-	if($(this).prop("checked")) {
-		if($("#cm1").val()==""){
-			$("#cm1").val(val);
-		}else if($("#cm2").val()=="") {
-			$("#cm2").val(val);
-		}else {
-			window.alert("최대2개까지만 선택가능합니다.");
-			$(this).prop("checked", false);
-		}
-	} else {
-		if($("#cm1").val()==val){
-			$("#cm1").val("");
-		}else if($("#cm2").val()==val) {
-			$("#cm2").val("");
-		}		
-	}
-});
-	$("#bt_${i }").on("click", function() {
-		$("#check_${i}").prop("checked", true);
-		$("#comparelist").html("asdf");
-
-	});
-	
-
-</script>
-
-
-<!-- 처음뿌려지는 쿠키리스트가 가장 먼저본 기업 -->
-
 
 <div>
 	<div class="well" align="center" style="background: white;">
@@ -94,8 +35,11 @@ $(".chk").on("change", function(){
 </div>
 
 <hr id="hh" />
+
+
+
 <div class="container">
-	<!-- 최근 본 리스트 -->
+	<!-- 최근 본 리스트 : 최근 본 순서대로 내림차순 -->
 	<div style="text-align: left;"><legend style="font-size: 12px; text-align: left; width: 80%;">최근본리스트</legend>
 		<c:choose>
 			<c:when test="${csize gt 10 }">
@@ -118,7 +62,7 @@ $(".chk").on("change", function(){
 	
 </div>
 
-<div></div>
+
 <script>
 	$(".chk").on("change", function() {
 		//console.log($(this).val());

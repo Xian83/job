@@ -63,7 +63,7 @@ div.col-sm-9 div {
 				<ul class="nav nav-pills nav-stacked" data-spy="affix"
 					data-offset-top="205">
 
-					<div class="panel-body">
+					<div class="panel-body" align="center">
 				 <form action="/my/update_pic" method="post"
 							enctype="multipart/form-data"> 
 							<b>PROFILE PHOTO</b><br /> <img src="${picURL}" width="200" height="200" />
@@ -80,8 +80,7 @@ div.col-sm-9 div {
 					<li><a href="/my/company?#section1"><i class="fa fa-thumbs-o-up" style="font-size:36px"></i><b>  추천 기업 정보</b></a></li>
 					<li><a href="/my/company?#section2"><i class="fa fa-files-o" style="font-size:36px"></i><b>  스크랩한 기업 정보</b></a></li>
 					<li><a href="/my/company?#section3"><i class="fa fa-eye" style="font-size:36px"></i><b>  자주 본 기업 정보</b></a></li>
-					<li><a href="/my/company?#section4"><i class="fa fa-spinner" style="font-size:36px"></i><b>  최근 본 기업 정보</b></a></li>
-					<li><a href="/my/company?#section5"><i class="fa fa-refresh" style="font-size:36px"></i><b>  비교한 기업 정보</b></a></li>
+					<li><a href="/my/company?#section4"><i class="fa fa-refresh" style="font-size:36px"></i><b>  비교한 기업 정보</b></a></li>
 				</ul>
 			</nav>
 	<div class="col-sm-9">

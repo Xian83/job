@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -83,6 +84,32 @@ public class MyPageDao {
 		}
 		
 		return list;
+	}
+	
+	// 스크랩한 기업 삭제
+	public boolean deleteScrap(String email, String company, Date sdate ) {
+		HashMap<String, Object> data = new HashMap<>();
+		data.put("email", email);
+		data.put("company", company);
+		data.put("sdate", sdate);
+
+		SqlSession sql = null;
+		try {
+			sql = factory.openSession();
+			int cnt = sql.delete("mappers.mypage.deleteScrap", data);
+
+			if (cnt == 1) {
+				sql.commit();
+				System.out.println("스크랩 목록 삭제");
+				return true;
+			} else
+				return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			sql.close();
+		}
 	}
 	
 	public List<HashMap> getCompareData(String email) {

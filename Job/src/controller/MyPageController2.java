@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +44,8 @@ public class MyPageController2 {
 	
 	@Autowired
 	MemberDao mdao;
+	
+
 	
 	@RequestMapping("/result")
 	public ModelAndView resultHandler(HttpSession session, @RequestParam Map data) {
@@ -122,7 +125,7 @@ public class MyPageController2 {
 		// 사진 불러오기
 		String picURL = mydao.getLastetImageURL(email);
 		if (picURL == null || picURL.equals("null"))
-			picURL = "/picture/default.jpg";
+			picURL = "/image/default.jpg";
 		mav.addObject("picURL", picURL);
 		
 		// 개인정보 변경
@@ -174,6 +177,7 @@ public class MyPageController2 {
 		mav.addObject("list_r", list_r);
 		System.out.println("추천 = " + list_r);*/
 		
+		
 		// 자주 본 기업(visit) - 데이터 잘 안 넘어 옴
 		List<HashMap> list_v = mypage.getVisitData(email);
 		mav.addObject("list_v", list_v);
@@ -182,18 +186,21 @@ public class MyPageController2 {
 		// 스크랩한 기업(scrap)
 		List<HashMap> list_s = mypage.getScrapData(email);
 		mav.addObject("list_s", list_s);
-		//System.out.println("스크랩 = " + list_s);
+		System.out.println("스크랩 = " + list_s);
 		//System.out.println("email = "+email);
+		
+		//mypage.deleteScrap(email, company, sdate);
+		
 		
 		// 비교한 기업(compare)
 		List<HashMap> list_c = mypage.getCompareData(email);
 		mav.addObject("list_c", list_c);
-		//System.out.println("비교 compare = " + list_c);
+		System.out.println("비교 compare = " + list_c);
 
 		// 사진 불러오기
 		String picURL = mydao.getLastetImageURL(email);
 		if (picURL == null || picURL.equals("null"))
-			picURL = "/picture/default.jpg";
+			picURL = "/image/default.jpg";
 		//System.out.println("picURL = " + picURL);
 		mav.addObject("picURL", picURL);
 	
@@ -213,8 +220,15 @@ public class MyPageController2 {
 			// �뙆�씪 �뾽濡쒕뱶
 			Map map = fdao.execute(file);
 			
-			// DB 사진 추가
+			// 사진 불러오기
 			String email = req.getParameter("email");
+			String picURL = mydao.getLastetImageURL(email);
+			if (picURL == null || picURL.equals("null"))
+				picURL = "/image/default.jpg";
+			mav.addObject("picURL", picURL);
+			System.out.println("업데이트 picURL = " + picURL);
+			
+			// DB 사진 추가
 			String url = (String) map.get("filelink");
 			mav.addObject("url", url);
 
@@ -248,7 +262,7 @@ public class MyPageController2 {
 		// 사진 추가
 		String picURL = mydao.getLastetImageURL(email);
 		if (picURL == null || picURL.equals("null"))
-			picURL = "/picture/default.jpg";
+			picURL = "/image/default.jpg";
 
 		return mav;
 	}

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import model.MyInfoDao;
 import model.ReviewsDao;
 
 @Controller
@@ -22,6 +23,9 @@ public class ReviewsController {
 
 	@Autowired
 	ReviewsDao rdao;
+	
+	@Autowired
+	MyInfoDao myDao;
 	
 	@RequestMapping("/list_form")
 	public ModelAndView reviewsHandler(@RequestParam(name="page", defaultValue="1")String page){
@@ -35,7 +39,7 @@ public class ReviewsController {
 		int end = Integer.parseInt(page) * div;
 				
 		List<HashMap> review = rdao.review(start, end);	// get reviews
-		review = rdao.getPicture(review); 				// add picURL
+		review = addPicture(review); 				// add picURL
 		System.out.println("=====================================? "+review);
 		List<HashMap> rank = rdao.rank();				// ?? 				
 		
@@ -63,6 +67,20 @@ public class ReviewsController {
 		mav.setViewName("redirect:/company/detail?cmpn_nm="+URLEncoder.encode(company,"UTF-8"));
 	
 		return mav;
+	}
+	
+	public List addPicture(List<HashMap> review){
+		String email = "";
+		String picURL = "";
+
+		for (HashMap obj : review) {
+			email = (String) obj.get("EMAIL");
+			picURL = myDao.getLastetImageURL(email);
+			if (picURL == null || picURL.equals("null"))
+				picURL = "/image/default.jpg";
+			obj.put("picURL", picURL);
+		}
+		return review;
 	}
 }
 

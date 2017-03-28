@@ -101,7 +101,7 @@
                         <div class="col-md-3" style="width: 220px;">
                         <a href="/company/detail?cmpn_nm=${rookie[0].CMPN_NM }"><button type="submit" style="background: white;">
                            <div class="thumbnail href1" style="width: 200px; border: none;">
-                           <p><img src="${rookie[0].LOGO }" width="150" height="100"><br/><br/></p><p>${rookie[0].CMPN_NM } </p><br/>
+                           <p><img src="${rookie[0].LOGO }" style="width: 100%;"><br/><br/></p><p>${rookie[0].CMPN_NM } </p><br/>
                            <p>
                            <c:choose>
                            	   <c:when test="${rookie[0].AVG_SALARY / 10000 gt 4} ">

@@ -28,9 +28,12 @@
 	</select>
 	
 	<select id="getScarpData" parameterType="java.lang.String" resultType="java.util.HashMap">
-		select * from SCRAP where EMAIL=#{email}
+		select * from (select * from INTEREST where EMAIL=#{email} order by INTEREST.SDATE desc) where LOVE=1
 	</select>
 	<select id="getCompareData" parameterType="java.lang.String" resultType="java.util.HashMap">
-		select * from COMPARE where EMAIL=#{email}
+		select * from COMPARE where EMAIL=#{email} order by COMPAREDATE DESC
 	</select>
+		<delete id="deleteScrap" parameterType="java.util.HashMap" >
+		delete * from INTEREST where EMAIL=#{email} and CMPN_NM=#{company} and SDATE=#{sdate} and LOVE=1
+	</delete>
 </mapper>
