@@ -22,14 +22,16 @@
 	<select id="detailsame" parameterType="java.lang.String"
 		resultType="java.util.HashMap">
 		select CMPN_NM, LOGO from score where
-		DIVISION=#{DIVISION} order by FINANCE_SCORE DESC
+		DIVISION=#{DIVISION}
+		order by FINANCE_SCORE DESC
 	</select>
 
 	<select id="review" resultType="java.util.HashMap">
-		select * from reviews where CMPN_NM=#{COMPANYNAME} order by
+		select * from reviews where
+		CMPN_NM=#{COMPANYNAME} order by
 		WDATE desc
 	</select>
-	
+
 	<insert id="visit" parameterType="java.util.HashMap">
 		insert into visit
 		values(#{EMAIL}, #{CMPN_NM}, SYSDATE)
@@ -37,27 +39,44 @@
 
 	<select id="interest" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap">
-		select * from interest where CMPN_NM=#{CMPN_NM} and EMAIL=#{EMAIL}
+		select * from interest where CMPN_NM=#{CMPN_NM} and
+		EMAIL=#{EMAIL}
 	</select>
-	
+
 	<update id="plus" parameterType="java.util.HashMap">
-		update interest set LOVE=1, SDATE=sysdate where CMPN_NM=#{CMPN_NM} and EMAIL=#{EMAIL}
+		update interest set LOVE=1,
+		SDATE=sysdate where CMPN_NM=#{CMPN_NM} and EMAIL=#{EMAIL}
 	</update>
-	
+
 	<update id="minus" parameterType="java.util.HashMap">
-		update interest set LOVE=0, SDATE=sysdate where CMPN_NM=#{CMPN_NM} and EMAIL=#{EMAIL}
+		update interest set LOVE=0,
+		SDATE=sysdate where CMPN_NM=#{CMPN_NM} and EMAIL=#{EMAIL}
 	</update>
-	
+
 	<insert id="push" parameterType="java.util.HashMap">
 		insert into interest
 		values(#{CMPN_NM}, #{EMAIL}, 1, sysdate)
 	</insert>
-	
+
 	<update id="updateCompID" parameterType="java.util.HashMap">
-		update score set COMPID=#{COMPID} where CMPN_NM=#{CMPN_NM}
+		update score set
+		COMPID=#{COMPID} where CMPN_NM=#{CMPN_NM}
 	</update>
 	<insert id="insertCompID" parameterType="java.util.HashMap">
-		insert into compid values(#{CMPN_NM}, #{COMPID})
+		insert into compid
+		values(#{CMPN_NM}, #{COMPID})
 	</insert>
-	
+
+	<select id="man" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from MEMBER_INFO, VISIT where VISIT.CMPN_NM=#{COMPANYNAME} and
+		MEMBER_INFO.GENDER='male'
+	</select>
+	<select id="woman" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from MEMBER_INFO, VISIT where VISIT.CMPN_NM=#{COMPANYNAME} and
+		MEMBER_INFO.GENDER='female'
+	</select>
+	<select id="visi" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from MEMBER_INFO, VISIT where VISIT.CMPN_NM=#{COMPANYNAME}
+	</select>
+
 </mapper>
