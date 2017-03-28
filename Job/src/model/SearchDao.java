@@ -26,8 +26,6 @@ public class SearchDao {
 	@Autowired
 	SqlSessionFactory factory;
 	
-	
-
 	// get Search Result by Company Name
 	public List getData(String CName) throws IOException {
 		SqlSession sql = null;
@@ -45,7 +43,7 @@ public class SearchDao {
 		return list;
 	}
 
-	// 占싹부븝옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쏙옙占쏙옙트화 占쏙옙占쏙옙占쌍댐옙 占쌨쇽옙占쏙옙
+	// page 처리
 	public List<HashMap> pasing(int start, int end, String search) {
 		List<HashMap> SomeCompanies = new ArrayList<>();
 		SqlSession sql = factory.openSession();
@@ -172,7 +170,7 @@ public class SearchDao {
 		return url + "&CurrentPage=" + page;
 	}
 
-	// �쉶�궗蹂� CompID 媛��졇�삤湲�
+	// 회사별 CompID 가져오기
 	public String getCompID(String CName) {
 		String url = "http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?flag=Search"
 				+ "&intCurrentPage=1&intPageSize=20&CName=" + CName;
@@ -194,7 +192,7 @@ public class SearchDao {
 						end = CompID.indexOf("&");
 						CompID = CompID.substring(start + 1, end);
 
-						System.out.println("�쉶�궗肄붾뱶 : " + CompID);
+						System.out.println("회사코드 : " + CompID);
 					}
 				}
 			}
