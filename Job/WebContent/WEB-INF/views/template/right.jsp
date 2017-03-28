@@ -59,7 +59,7 @@ hr[id='hh'] {
 	
 </div>
 
-<div></div>
+
 <script>
 	$(".chk").on("change", function() {
 		//console.log($(this).val());
