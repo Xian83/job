@@ -22,6 +22,7 @@ hr[id='hh']{
 
 
 
+
 <div>
 	<div class="well" align="center" style="background: white;">
 
@@ -29,7 +30,7 @@ hr[id='hh']{
 		<b style="font-size: 20px;"> vs </b> <input type="text" id="cm2"
 			name="cm2" readonly placeholder="기업2"> <br />
 		<p>
-			<button type="button" id="compare">비교</button>
+			<button type="button" id="compare" disabled="true">비교</button>
 		</p>
 	</div>
 </div>
@@ -44,6 +45,7 @@ hr[id='hh']{
 		<c:choose>
 			<c:when test="${csize gt 10 }">
 				<c:forEach var="i" begin="${csize-10 }" end="${csize-1 }">
+
 					<input type="checkbox" value="${clist[i] }" id="check_${i}"
 						class="chk" style="width: 100px; text-align: left;"> <span style="font-size: 12px;">${clist[i] }</span><br/> 
 				</c:forEach>
@@ -61,6 +63,7 @@ hr[id='hh']{
 	
 	
 </div>
+
 
 
 <script>
@@ -91,6 +94,7 @@ hr[id='hh']{
 
 	});
 	
+	
 	$("#compare").on("click", function(){
 		var cm1 = $("#cm1").val();
 		var cm2 = $("#cm2").val();
@@ -99,6 +103,16 @@ hr[id='hh']{
 		var popOption = "width=1000, height=800, resizable=no, status=no, menubar=no, left=300;"; //팝업창 옵션(optoin)
 		window.open(popUrl, "", popOption);
 	});
+	
+	
+	var c1 = $("#cm1").prop("checked");
+	var c2 = $("#cm2").prop("checked");
+		
+		console.log(c1);
+		
+		$("#compare").disabled=false;	
+	
+	
 	
 </script>
 

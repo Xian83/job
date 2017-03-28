@@ -90,18 +90,24 @@ public class DetailController {
 		mav.addObject("json", google.map((String) info02.get("address")));
 		mav.addObject("chartURL", chartURL);	//방사형 그래프 주소
 		
+		
 		// 쿠키생성
-		String u = origin + "#" + companyname;
-			if (companyname.equals(origin)) {
-				Cookie c = new Cookie("cmpn_nm", origin + "#");
+		String[] arr = origin.split("#") ;	// 봤던 쿠키 목록
+		// 이 배열에 companyname 이 값이 있냐 없냐..
+		// 배열에 없는 회사명일때만 origin+"#"+companyname 이걸로 쿠키를 전송을 시켜
+		
+		for(String cc : arr) {
+			if(!cc.equals(companyname)) {
+				Cookie c = new Cookie("cmpn_nm", origin+"#"+companyname);
 				c.setPath("/");
 				response.addCookie(c);
 			} else {
-				Cookie c = new Cookie("cmpn_nm", u);
+				Cookie c = new Cookie("cmpn_nm", origin);
 				c.setPath("/");
 				response.addCookie(c);
 			}
-		// c.setMaxAge(60 * 60 * 12);
+		}
+		
 
 		//쿠키처리
 		List<String> cookielist = new ArrayList<>();

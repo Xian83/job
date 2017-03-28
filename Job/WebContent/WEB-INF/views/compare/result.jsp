@@ -5,6 +5,94 @@
 
 <hr/>
 
+
+<div class="container-fluid" align="center" style="width: 80%;">
+
+<div class="col-md-6" align="center">
+
+
+
+	<div class="compare_fixname">
+		<div class="name left" style="font-size: 25px;"><b>${score01.CMPN_NM }</b><br/> </div><hr/>
+	</div>
+		<img src="${score01.LOGO }" class="img-circle" style="width: 60%;"><br/>
+
+</div>
+
+
+<div class="col-md-6" align="center">
+
+<div class="compare_fixname">
+		<div class="name right" style="font-size: 25px;"><b>${score02.CMPN_NM }</b><br/></div><hr/>
+	</div>
+		<img src="${score02.LOGO }" class="img-circle" style="width: 60%;"><br/>
+
+</div>
+
+</div>
+
+<hr/>
+
+
+<div class="container-fluid" align="center">
+	<img src="${chartURL }">
+</div>
+
+<hr/>
+
+<div class="container-fluid" align="center">
+	<div class="row" align="center">
+		<div class="col-md-1"></div>	
+		<div class="col-md-4">
+			${score01.DIVISION }
+		</div>
+		<div class="col-md-2">
+			분야
+		</div>
+		<div class="col-md-4">
+			${score02.DIVISION }
+		</div>
+		<div class="col-md-1"></div>
+	
+	</div>
+</div>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <%-- <div class="container-fluid" align="center" style="width: 80%;">
 
 <div class="col-md-6" align="center">
@@ -62,14 +150,3 @@
  --%>
 
 
-<div>
-	${score01 }
-</div>
-
-<div>
-	${chartURL }
-</div>
-
-<div>
-	<img src="${chartURL }">
-</div>

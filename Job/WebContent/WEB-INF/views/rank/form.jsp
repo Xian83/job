@@ -272,6 +272,7 @@
 		  </table>
   		</div>
     </div>
+    <!-- 삭제한 재직자평가부분 내용 -->
     <%-- <div id="menu3" class="tab-pane fade">
       <div class="table-responsive">          
 		  <table class="table" text-align="center" style="width: 100%;">
