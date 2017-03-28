@@ -30,7 +30,7 @@ hr[id='hh']{
 		<b style="font-size: 20px;"> vs </b> <input type="text" id="cm2"
 			name="cm2" readonly placeholder="기업2"> <br />
 		<p>
-			<button type="button" id="compare" disabled="true">비교</button>
+			<button type="button" id="compare" >비교</button>
 		</p>
 	</div>
 </div>
@@ -51,7 +51,7 @@ hr[id='hh']{
 				</c:forEach>
 			</c:when>
 			<c:otherwise>
-				<c:forEach var="i" begin="0" end="${csize-1 }">
+				<c:forEach var="i" begin="0" end="${csize }">
 					<input type="checkbox" value="${clist[i] }" id="check_${i}"
 						class="chk" style="width: 100px; text-align: left;"> <span style="font-size: 12px;">${clist[i] }</span><br/> 
 				</c:forEach>
@@ -86,12 +86,6 @@ hr[id='hh']{
 				$("#cm2").val("");
 			}
 		}
-	});
-	
-	$("#bt_${i }").on("click", function() {
-		$("#check_${i}").prop("checked", true);
-		$("#comparelist").html("asdf");
-
 	});
 	
 	
