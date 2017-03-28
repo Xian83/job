@@ -76,7 +76,7 @@ public class CompareController {
 			// 회사명, 점수(재무평가,재직자평가), 방사형 그래프, 숫자(매출액, 영업이익, 당기 손익, 사원수)			
 			String chartURL = makeChart(ddao.getScore02(cm1), ddao.getScore02(cm2));// graph
 			
-			mav.setViewName("tttt");
+			mav.setViewName("t1");
 			mav.addObject("main", "compare/result");
 			mav.addObject("score01", ddao.score(cm1));	// FINANCE_SCORE, EMPLOYEE_SCORE
 			mav.addObject("score02", ddao.score(cm2));
