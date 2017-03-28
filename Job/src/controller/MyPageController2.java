@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,7 +150,7 @@ public class MyPageController2 {
 	
 	
 	@RequestMapping("/company")
-	public ModelAndView my_companyHandler(HttpSession session) throws Exception {
+	public ModelAndView my_companyHandler(HttpServletResponse response, HttpSession session, @RequestParam Map map) throws Exception {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
@@ -189,7 +190,12 @@ public class MyPageController2 {
 		System.out.println("스크랩 = " + list_s);
 		//System.out.println("email = "+email);
 		
-		//mypage.deleteScrap(email, company, sdate);
+		String email2 = (String) map.get("email");
+		String company = (String) map.get("company");
+		boolean rst = mypage.deleteScrap(email, company);
+		if (rst)
+			response.sendRedirect("/my/company");
+		
 		
 		
 		// 비교한 기업(compare)

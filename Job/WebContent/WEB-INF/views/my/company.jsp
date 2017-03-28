@@ -131,20 +131,21 @@ div.col-sm-9 div {
 									<th>#</th>
 									<th>Company Name</th>
 									<th>Scrap Date</th>
-									<th>button</th>
+									<th>Cancel</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="i" items="${list_s }" varStatus="vs">
+							
+								<c:forEach var="i" items="${list_s }" varStatus="vs">				
 									<tr>
-										<td>${vs.count }</td>
+										<td >${vs.count }</td>
 										<td>${i.CMPN_NM }</td>
-										<td><fmt:formatDate value="${i.SDATE }" pattern="yyyy-MM-dd"/></td>
+										<td><fmt:formatDate value="${i.SDATE }" pattern="yyyy-MM-dd" /></td>
 										<td>
-											<form action="">
-												<button type="submit" class="btn">삭제</button>
-											</form>
+											<a href="/my/company?email=${i.EMAIL }&company=${i.CMPN_NM }"><button type="submit" class="btn" id="deleteScrap">삭제</button></a>
+											
 										</td>
+							
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -199,7 +200,7 @@ div.col-sm-9 div {
 									<th>#</th>
 									<th>Company Name A</th>
 									<th>Company Name B</th>
-									<th>button</th>
+									<th>Compare</th>
 								</tr>
 							</thead>
 							<tbody>
