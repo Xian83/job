@@ -93,9 +93,9 @@ public class CompareController {
 	}
 
 	public String makeChart(HashMap data1, HashMap data2) {
-		int size = 300;
+		int size = 520;
 		String img = "https://chart.googleapis.com/chart?cht=r&chs=" + size + "x" + size;
-		img += "chd=t:";
+		img += "&chd=t:";
 		img += data1.get("LABEL01") + "," + data1.get("LABEL02") + "," + data1.get("LABEL03") + ",";
 		img += data1.get("LABEL04") + "," + data1.get("LABEL05") + "," + data1.get("LABEL06") + ",";
 		img += data1.get("LABEL07") + "," + data1.get("LABEL08") + "," + data1.get("LABEL09") + ","+ data1.get("LABEL01")+  "|";
