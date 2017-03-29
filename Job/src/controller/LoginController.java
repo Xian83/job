@@ -42,6 +42,8 @@ public class LoginController {
 	public ModelAndView loginResultHandle(@RequestParam Map map, HttpSession session, HttpServletResponse resp){
 		
 		String url = (String)map.get("url");//로그인을 시도한 페이지 주소
+		String cpmn_nm = (String)map.get("cname");
+		System.out.println("=================================test"+cpmn_nm);
 		boolean rst = mDao.existCheck(map);
 		if(rst){
 			login(map, session, resp);
@@ -51,7 +53,13 @@ public class LoginController {
 		mav.setViewName("t1");
 		mav.addObject("main", "/login/result");
 		mav.addObject("rst", rst);
-		mav.addObject("url", url);
+		
+		if(cpmn_nm==null){
+			mav.addObject("url", url);
+		}else{
+			mav.addObject("url", url+"?cpmn_nm="+cpmn_nm);
+		}
+		
 		return mav;
 	}
 	

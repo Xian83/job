@@ -15,12 +15,6 @@
 	height: 20px;
 }
 
-.modal-header, h4, .close {
-	background-color: #5cb85c;
-	color: white !important;
-	text-align: center;
-	font-size: 30px;
-}
 
 .modal-footer {
 	background-color: #f9f9f9;
@@ -117,6 +111,7 @@
 		<form action="/login/result" method="post">
 			<div class="w3-section" style="margin: 10%">
 			<input type="hidden" name="url" value="${requestScope['javax.servlet.forward.servlet_path']}">
+			
 				<label><b>email</b></label> <input
 					class="w3-input w3-border w3-margin-bottom" type="text"
 					placeholder="Enter Useremail" name="email" id="flag1" required>

@@ -19,12 +19,7 @@
 	color: #fff !important;
 }
 
-.modal-header, h4, .close {
-	background-color: #5cb85c;
-	color: white !important;
-	text-align: center;
-	font-size: 30px;
-}
+
 
 .modal-footer {
 	background-color: #f9f9f9;
