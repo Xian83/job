@@ -139,7 +139,7 @@ div.col-sm-9 div {
 								<c:forEach var="i" items="${list_s }" varStatus="vs">				
 									<tr>
 										<td >${vs.count }</td>
-										<td>${i.CMPN_NM }</td>
+										 <td><a href="/company/detail?cmpn_nm=${i.CMPN_NM }">${i.CMPN_NM }</a></td>
 										<td><fmt:formatDate value="${i.SDATE }" pattern="yyyy-MM-dd" /></td>
 										<td>
 											<a href="/my/company?email=${i.EMAIL }&company=${i.CMPN_NM }"><button type="submit" class="btn" id="deleteScrap">삭제</button></a>
@@ -208,8 +208,8 @@ div.col-sm-9 div {
 									varStatus="vs">
 									<tr>
 										<td>${vs.count }</td>
-										<td>${i.CM1 }</td>
-										<td>${i.CM2 }</td>
+										 <td><a href="/company/detail?cmpn_nm=${i.CM1 }">${i.CM1 }</a></td>
+										<td><a href="/company/detail?cmpn_nm=${i.CM2 }">${i.CM2 }</a></td>
 										<td>
 											<form action="/compare/result">
 												<button type="submit" class="btn">비교</button>
@@ -232,16 +232,11 @@ div.col-sm-9 div {
 
 
 <script>
-	
-	// 스크랩 체크 박스 - 아직 다 안 됐음
-	 $(function() {
-  	$("#change").on("click", function() {
-  		// 1개이상 체크하도록 한다.
-	    if ( $(".chkclass :checked").size() < 1 ) {
-		   alert("1개 이상의 기업을 선택하세요");
-		   return;
-	    } else {
-	    	
+	// 스크랩한 기업 삭제할 때 alert 뜸
+  	$("#deleteScrap").on("click", function() {
+  		window.alert("스크랩 기업이 삭제되었습니다");
+    });
+
 	    //param 만들기
 	   	var param = "";
 	    $(".chkclass :checked").each(function() {
@@ -262,7 +257,6 @@ div.col-sm-9 div {
         		console.log('error');
 	     	}
     	});
-      }
-  }); 
-});
+  
+
 </script>

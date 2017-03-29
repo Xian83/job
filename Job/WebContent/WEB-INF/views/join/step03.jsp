@@ -38,7 +38,6 @@
 				</c:forEach>
 			</select>
 		</p>
-
 		<div class="form-group">
 			<label>희망연봉</label><br /> <label for="salary_min"
 				class="col-sm-2 control-label">최소</label>
