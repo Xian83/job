@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -29,6 +30,7 @@ public class LoginController {
 	// 濡쒓렇�씤 �솕硫�
 	@RequestMapping("/form")
 	public ModelAndView loginFormHandler(){
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
 		mav.addObject("main", "/login/form");
@@ -39,6 +41,7 @@ public class LoginController {
 	@RequestMapping("/result")
 	public ModelAndView loginResultHandle(@RequestParam Map map, HttpSession session, HttpServletResponse resp){
 		
+		String url = (String)map.get("url");//로그인을 시도한 페이지 주소
 		boolean rst = mDao.existCheck(map);
 		if(rst){
 			login(map, session, resp);
@@ -48,6 +51,7 @@ public class LoginController {
 		mav.setViewName("t1");
 		mav.addObject("main", "/login/result");
 		mav.addObject("rst", rst);
+		mav.addObject("url", url);
 		return mav;
 	}
 	
