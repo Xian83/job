@@ -100,15 +100,12 @@
 		}
 
 	</script>
-<div align="center">
-	<img src="/500.jpg" class="w3-block" alt="forest" style="width: 50%" height="50%">
-	<br/>
-</div>
+
 	<div align="center" class="w3-container " >
 
 		<button
 			onclick="document.getElementById('id01').style.display='block'"
-			class="w3-button w3-black w3-large">Login</button>
+			style="background: none; border-style: none;">Login</button>
 
 		<div id="id01" class="w3-modal">
 			<div class="w3-modal-content w3-card-4 w3-animate-zoom"
@@ -140,7 +137,7 @@
 					<!-- facebook 로그인 버튼 -->
 					<fb:login-button scope="public_profile,email,user_birthday"
 						onlogin="checkLoginState();" data-auto-logout-link="true"></fb:login-button>
-					<!-- 			<div class="fb-login-button" data-max-rows="4" data-size="pinterest" data-show-faces="false" data-auto-logout-link="true"></div> -->
+							<!-- 	<div class="fb-login-button" data-max-rows="4" data-size="pinterest" data-show-faces="false" data-auto-logout-link="true"></div> -->
 					<div id="status"></div>
 				</form>
 
