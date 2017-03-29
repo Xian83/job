@@ -261,10 +261,12 @@
   </div>
 </div>
 
-
-<hr/>
-
-
+<script>
+	$(document).ready(function() {
+		if(joinResult != null)
+			alert('회원 가입 ' + '${joinResult ? '성공!' : '실패'}');
+	});
+</script>
 
 
 
