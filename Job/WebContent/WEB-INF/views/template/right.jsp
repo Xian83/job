@@ -41,7 +41,7 @@ hr[id='hh']{
 
 <div class="container">
 	<!-- 최근 본 리스트 : 최근 본 순서대로 내림차순10개 -->
-	<div style="text-align: left;"><legend style="font-size: 12px; text-align: left; width: 80%;">최근본리스트</legend>
+	<div style="text-align: left;"><legend style="font-size: 12px; text-align: left; width: 80%;">최근본기업 (최대10개까지)</legend>
 		<c:choose>
 			<c:when test="${csize gt 10 }">
 				<c:forEach var="i" begin="0" end="9">
@@ -52,15 +52,15 @@ hr[id='hh']{
 			</c:when>
 			<c:otherwise>
 				<c:choose>
-					<c:when test="${csize gt 1 }">
-						<c:forEach var="i" begin="0" end="${csize-1 }">
-							<input type="checkbox" value="${clist[i] }" id="check_${i}"
-							class="chk" style="width: 100px; text-align: left;"> <span style="font-size: 12px;">${clist[i] }</span><br/> 
+					<c:when test="${csize eq 0 }">
+						<c:forEach var="i" begin="0" end="0">
+							<span style="font-size: 12px;">비교할 기업을 선택해주세요</span><br/> 
 						</c:forEach>
 					</c:when>	
 					<c:otherwise>
-						<c:forEach var="i" begin="0" end="0">
-							<span style="font-size: 12px;">비교할 기업을 선택해주세요</span><br/> 
+						<c:forEach var="i" begin="0" end="${csize-1 }">
+							<input type="checkbox" value="${clist[i] }" id="check_${i}"
+							class="chk" style="width: 100px; text-align: left;"> <span style="font-size: 12px;">${clist[i] }</span><br/> 
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
@@ -71,7 +71,22 @@ hr[id='hh']{
 	
 	<!-- 추천 리스트  -->
 	
-	
+	<div style="text-align: left;"><legend style="font-size: 12px; text-align: left; width: 80%;">추천기업</legend>
+		<c:choose>
+			<c:when test="${list_r eq null}">
+				<c:forEach var="i" begin="0" end="0">
+					<span style="font-size: 12px;">로그인을 해야 볼 수 있습니다</span>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<c:forEach var="i" begin="0" end="${list_r.size()-1 }">
+					<input type="checkbox" value="${list_r[i].CMPN_NM }" id="check_${i}"
+						class="chk" style="width: 100px; text-align: left;"><span style="font-size: 12px;"> ${list_r[i].CMPN_NM } </span><br/>			
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
+		
+	</div>
 </div>
 
 

@@ -1,6 +1,5 @@
 package controller;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,9 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import model.FileUploadDao;
-
 import model.DetailDao;
+import model.FileUploadDao;
 import model.MemberDao;
 import model.MyInfoDao;
 import model.MyPageDao;
@@ -43,19 +41,22 @@ public class MyPageController2 {
 	FileUploadDao fdao;
 
 	@RequestMapping("/result")
-	public ModelAndView resultHandler(HttpSession session, @RequestParam Map data) {
+	public ModelAndView resultHandler(HttpServletResponse response, HttpSession session, @RequestParam Map data) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
 		mav.addObject("main", "/my/result");
 
 		String email = (String) session.getAttribute("email");
 		data.put("email", email);
-		int rst = mydao.update(data);
-
-		String pass1 = (String) session.getAttribute("pass");
+		int rst = mydao.update(data);	
+		
+		// Changing New Password 
+		Map map = mDao.getData(email);
+		String pass1 = (String) map.get("PASS");
 		String pass = (String) data.get("passcheck");
-		System.out.println("pass1 = " + pass1 + "/ pass = " + pass);
-		if (pass != null && pass1 != pass) {
+		if(pass == "") {
+			pass = pass1;
+		} if (pass != null && pass1 != pass) {
 			Map m = new HashMap<>();
 			m.put("pass", pass);
 			m.put("email", email);
@@ -64,11 +65,13 @@ public class MyPageController2 {
 
 		String birth = (String) data.get("birth");
 		Map b = new HashMap<>();
-		b.put("birth", birth);
-		b.put("email", email);
-		System.out.println("map b = " + b);
+			b.put("birth", birth);
+			b.put("email", email);
 		int rst3 = mydao.updateBirth(b);
-		System.out.println("rst3  = " + rst3);
+
+		mav.addObject("msg", "개인정보가 변경되었습니다");	
+		mav.addObject("url2", "/my/edit");
+		mav.setViewName("util/alert");
 
 		return mav;
 	}
@@ -82,6 +85,7 @@ public class MyPageController2 {
 		return mav;
 	}
 
+//	@RequestMapping(name="/leave_result", produces="application/text; charset=utf8")
 	// return result by ajax - 탈퇴 처리 / 비밀번호 3회 오류시, 자동로그아웃 기능 추가 필요
 	@ResponseBody
 	@RequestMapping("/leave_result")
@@ -99,10 +103,16 @@ public class MyPageController2 {
 		data.put("pass", pass);
 		boolean res = mDao.existCheck(data);
 
-		// increase password error count up
-		if (!res)
+		String result = "";
+		
+		if(res){
+			// 탈퇴처리
+			mDao.delete(data);
+			result = "redirect:/login/logout";	// 로그아웃 화면 이동			
+		} else {
+			// increase password error count up
 			session.setAttribute("leave_try", cnt++);
-
+		}
 		return res;
 	}
 
@@ -133,11 +143,6 @@ public class MyPageController2 {
 		mav.addObject("infos", map);
 		mav.addObject("likeinfos", map2);
 
-		/*
-		 * System.out.println("FACEBOOK = " + map.get("FACEBOOK"));
-		 * System.out.println("FACEBOOK map = " + map);
-		 */
-
 		return mav;
 	}
 
@@ -154,11 +159,13 @@ public class MyPageController2 {
 		// 최근 본 기업(lately) : 별다른 추가 정보 없음
 
 		// 추천 기업(recommand)
-		HashMap data = mDao.getInfo(email); 		// get data from member_Info table
-		List reco = mypage.getRecommand(data); 		// get data from mongoDB(company)
-		List list_r = mypage.getRecommand02(reco);	// get data from score & salary table
-		
-		mav.addObject("member", data);	// 관심지역(AREA),산업군(STNDD_BIG_GB), 연봉min/max 
+		HashMap data = mDao.getInfo(email); // get data from member_Info table
+		List reco = mypage.getRecommand(data); // get data from mongoDB(company)
+		List list_r = mypage.getRecommand02(reco); // get data from score &
+													// salary table
+
+		mav.addObject("member", data); // 관심지역(AREA),산업군(STNDD_BIG_GB),
+										// 연봉min/max
 		mav.addObject("list_r", list_r);
 		System.out.println("추천 = " + list_r);
 
@@ -219,7 +226,6 @@ public class MyPageController2 {
 			MultipartHttpServletRequest req) throws Exception {
 		ModelAndView mav = new ModelAndView();
 
-		System.out.println("여기 넘어옴?");
 		// �궗吏� ���엯�씤 寃쎌슦留� �뾽濡쒕뱶 吏꾪뻾
 		String ct = file.getContentType();
 		if (ct.startsWith("image")) {
@@ -249,7 +255,6 @@ public class MyPageController2 {
 			mav.addObject("msg", "Not Image File");
 		}
 		mav.addObject("url2", "/my/edit");
-		mav.addObject("url2", "/my/company");
 		mav.setViewName("util/alert");
 		return mav;
 

@@ -54,9 +54,6 @@ div.col-sm-9 div {
 	}
 }
 </style>
-
-
-
 	<div class="container">
 		<div class="row">
 			<nav class="col-sm-3" id="myScrollspy">
@@ -145,19 +142,20 @@ div.col-sm-9 div {
 		<p>
 		<b>SALARY</b>
 					<br />
-				<select class="form-control" name="salary_min"> 
+				<select class="form-control" name="salary_min" id="min"> 
 					<c:forEach var="i" begin="1500" end="10000" step="500">
 						<option value="${i}" ${i eq likeinfos.SALARY_MIN? 'selected' : ' '  }>최소 ${i} 이상</option>			
 					</c:forEach>
 					</select>
-					<select class="form-control" name="salary_max"> 
-					<c:forEach var="i" begin="1500" end="10000" step="500">
-						<option value="${i}" ${i eq likeinfos.SALARY_MAX? 'selected' : ' '  }>최대 ${i} 이하</option>			
+					<select class="form-control" name="salary_max" id="max"> 
+					<c:forEach var="i2" begin="1500" end="10000" step="500">
+						<option value="${i2}" ${i2 le likeinfos.SALARY_MIN ? 'disabled' : '' } 
+						 ${i2 eq likeinfos.SALARY_MAX? 'selected' : ' '  }>최대 ${i2} 이하</option>			
 					</c:forEach>
 				</select>
 		</p>
 			<p>
-				<button type="submit" class="btn" id="btn">변경</button>
+				<button type="submit" class="btn" id="btn_update">변경</button>
 				 <c:if test="${infos.FACEBOOK eq 'N' }">
 				<a href="/my/leave_form"><button type="button" class="btn"
 								style="font-size: 11pt; color: gray; background-color: pink;">탈퇴</button></a>
@@ -171,92 +169,95 @@ div.col-sm-9 div {
 
 
 <script>
+	// Salary combobox Select
+	$("#min").on("change",function(){
+		var cu = $(this).val();
+		var opt ="";
+		for(var i = Number(cu); i<=10000 ; i += 500 ) {
+			opt += "<option value='"+i+"'>최대 "+i +"이하</option>";
+		}
+		$("#max").html(opt);
+	});
 
 	//버튼 활성화
-	var flag1 = false;
-	var flag2 = false;
+	var flag = false;
 
-	
 	function sbtChange() {
-		if(flag1 && flag2 ) {
-			document.getElementById("btn").disabled = false;
-		}else {
-			document.getElementById("btn").disabled = false;
+		if (flag) {
+			document.getElementById("btn_update").disabled = false;
+		} else {
+			document.getElementById("btn_update").disabled = true;
 		}
 	}
-	
-	document.getElementById("pw1").onkeyup = function(){
+
+	// New PAssWord = pw1 / Password Confirm = pw2
+	document.getElementById("pw1").onkeyup = function() {
 		compare();
 		sbtChange();
 	}
-	document.getElementById("pw2").onkeyup = function(){
+	document.getElementById("pw2").onkeyup = function() {
 		compare();
 		sbtChange();
 	}
-	
-	
+
 	// 비밀번호 체크
-	function compare(){
+	function compare() {
 		var pw1 = document.getElementById("pw1").value;
 		var pw2 = document.getElementById("pw2").value;
-		
-		if(pw2.length == 0 ){
+
+		if (pw2.length == 0) {
 			document.getElementById("cmpResult").innerHTML = "";
-		} else if(pw1 == pw2 && pw2.length > 0){
+		} else if (pw1 == pw2 && pw2.length > 0) {
 			document.getElementById("cmpResult").style.color = 'green';
-			document.getElementById("cmpResult").innerHTML = " 비밀번호 일치";	
-			flag2 = true;
+			document.getElementById("cmpResult").innerHTML = " 비밀번호 일치";
+			flag = true;
 		} else {
 			document.getElementById("cmpResult").style.color = 'red';
 			document.getElementById("cmpResult").innerHTML = " <i>비밀번호가 일치하지 않습니다.</i>";
-			flag2 = false;
+			flag = false;
 		}
 		sbtChange();
-	}	
-	
+	}
 
-
-	
 	// 사진 등록 버튼
-	$("#add").on("click", function(){ 
-		$("#f").trigger("click");    
+	$("#add").on("click", function() {
+		$("#f").trigger("click");
 		console.log($("#f"));
 	});
-	$("#f").on("change", function(){
-		$("#pic").trigger("click");  
+	$("#f").on("change", function() {
+		$("#pic").trigger("click");
 	});
-	
-	
+
 	// 스크랩 체크 박스 - 아직 다 안 됐음
-	 $(function() {
-  	$("#change").on("click", function() {
-  		// 1개이상 체크하도록 한다.
-	    if ( $(".chkclass :checked").size() < 1 ) {
-		   alert("1개 이상의 기업을 선택하세요");
-		   return;
-	    } else {
-	    	
-	    //param 만들기
-	   	var param = "";
-	    $(".chkclass :checked").each(function() {
-	    	if($(this.prop("cheked"))){
-	        	param += "&name="+$(this).val();	    		
-	    	}
-	        console.log('param : ' + param);
-	    });
-	           
-	    $.ajax({
-	        url : '/my/interestAjax',
-	        type : 'post',
-	        data : param,
-	        success : function(data) {
-	        	console.log('return string : ' + data);
-	    	},
-        	error : function() { 
-        		console.log('error');
-	     	}
-    	});
-      }
-  }); 
-});
+	$(function() {
+		$("#change").on("click", function() {
+			// 1개이상 체크하도록 한다.
+			if ($(".chkclass :checked").size() < 1) {
+				alert("1개 이상의 기업을 선택하세요");
+				return;
+			} else {
+
+				//param 만들기
+				var param = "";
+				$(".chkclass :checked").each(function() {
+					if ($(this.prop("cheked"))) {
+						param += "&name=" + $(this).val();
+					}
+					console.log('param : ' + param);
+				});
+
+				$.ajax({
+					url : '/my/interestAjax',
+					type : 'post',
+					data : param,
+					success : function(data) {
+						console.log('return string : ' + data);
+					},
+					error : function() {
+						console.log('error');
+					}
+				});
+			}
+		});
+	});
 </script>

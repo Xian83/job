@@ -69,19 +69,16 @@ public class MemberDao {
 	}
 
 	// 회원 탈퇴
-	public boolean delete(String id, String pass) {
-		HashMap<String, Object> data = new HashMap<>();
-		data.put("id", id);
-		data.put("pass", pass);
+	public boolean delete(HashMap data) {
 
 		SqlSession sql = null;
 		try {
 			sql = factory.openSession();
 			int cnt = sql.delete("mappers.member.delete", data);
+			cnt = sql.delete("mappers.member.deleteInfo", data);
 
 			if (cnt == 1) {
 				sql.commit();
-				System.out.println("탈퇴 했을 거임");
 				return true;
 			} else
 				return false;

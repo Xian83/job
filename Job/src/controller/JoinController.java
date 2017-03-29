@@ -3,6 +3,10 @@ package controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +26,7 @@ public class JoinController {
 	@Autowired
 	MyInfoDao mydao;
 
-	// �쉶�썝媛��엯 - �빟愿��룞�쓽
+	// 회원가입 - 약관동의
 	@RequestMapping("/step01")
 	public ModelAndView join01Handler() {
 		ModelAndView mav = new ModelAndView();
@@ -31,7 +35,7 @@ public class JoinController {
 		return mav;
 	}
 
-	// �쉶�썝媛��엯 - 湲곕낯�젙蹂� �엯�젰
+	// 회원가입 - 기본정보 입력
 	@RequestMapping("/step02")
 	public ModelAndView join02Handler() {
 		ModelAndView mav = new ModelAndView();
@@ -40,7 +44,7 @@ public class JoinController {
 		return mav;
 	}
 
-	// �쉶�썝媛��엯 - 異붽��젙蹂� �엯�젰
+	// 회원가입 - 추가정보 입력
 	@RequestMapping("/step03")
 	public ModelAndView join03Handler(@RequestParam Map data) {
 		List area = mydao.getlocations(); // 관심지역
@@ -55,29 +59,25 @@ public class JoinController {
 		return mav;
 	}
 
-	// �쉶�썝媛��엯 - 寃곌낵 異쒕젰
+	// 회원가입 - 결과
 	@RequestMapping("/result")
-	public ModelAndView join03(@RequestParam Map map) {
-		// �럹�씠�뒪遺� �쑀�� �븘�떂
+	public ModelAndView join03(@RequestParam Map map, HttpSession session, HttpServletResponse resp) {
+		// 페이스북 유저 아님
 		map.put("facebook", "N");
+		System.out.println(map.toString()); //확인용
 
-		// �솗�씤�슜
-		System.out.println(map.toString());
-
+		boolean res = mDao.insert(map);	// 기본정보 입력
+		res = mDao.insertInfo(map);		// 추가정보 입력
+		System.out.println("회원가입 결과 : " + res);
+		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t1");
-		mav.addObject("main", "/join/result");
-
-		boolean res = mDao.insert(map);
-		res = mDao.insertInfo(map);
-
-		System.out.println("�쉶�썝媛��엯 寃곌낵 : " + res);
-		if (res) {
-			mav.addObject("msg", "媛��엯�꽦怨�!!");
-		} else {
-			mav.addObject("msg", "媛��엯�떎�뙣!!");
-		}
-
+		mav.setViewName("redirect:/index");
+		mav.addObject("joinResult", res);
+		
+		// 회원가입 성공시, 자동로그인 처리
+		if(res)
+			login(map, session, resp);
+		
 		return mav;
 	}
 
@@ -118,5 +118,27 @@ public class JoinController {
 		mav.addObject("res", res);
 		
 		return mav;
+	}
+	
+	public void login(Map map, HttpSession session, HttpServletResponse resp) {
+		System.out.println((String) map.get("email"));
+		Map userData = mDao.getData((String) map.get("email"));
+
+		String email = (String) userData.get("EMAIL");
+		String name = (String) userData.get("NAME");
+		String pass = (String) userData.get("PASS");
+
+		session.setAttribute("auth", "yes");
+		session.setAttribute("leave_try", 1);
+		session.setAttribute("email", email);
+		session.setAttribute("name", name);
+		session.setAttribute("pass", pass);
+
+		if (map.get("keep") != null) {
+			Cookie c = new Cookie("login", email + "#" + name);
+			c.setMaxAge(60 * 60 * 24);
+			c.setPath("/");
+			resp.addCookie(c);
+		}
 	}
 }
