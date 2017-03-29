@@ -37,9 +37,9 @@
                   <div class="container" align="center">
                      <div class="row" align="center">
                       	
-                        <div class="col-md-3" style="width: 220px;">
+                        <div class="col-md-3" style="width: 200px;">
                         <a href="/company/detail?cmpn_nm=${avg[0].CMPN_NM }"><button class="btn btn-default" type="submit" style="background: white;">
-                           <div class="thumbnail href1" style="width: 200px; border: none;">
+                           <div class="thumbnail href1" style="width: 180px; border: none;">
                            <p><img src="${avg[0].LOGO }" style="width: 50%;"><br/><br/></p><p>${avg[0].CMPN_NM } </p><br/>
                            <p>
                            <c:choose>
@@ -55,9 +55,9 @@
                         </div>
                        
                      	<div class="col-md-1"></div>
-                        <div class="col-md-3" style="width: 220px;">
+                        <div class="col-md-3" style="width: 200px;">
                         <a href="/company/detail?cmpn_nm=${avg[1].CMPN_NM }"><button class="btn btn-default" type="submit" style="background: white;">
-                           <div class="thumbnail href2" style="width: 200px; border: none;">
+                           <div class="thumbnail href2" style="width: 180px; border: none;">
                            <p><img src="${avg[1].LOGO }" style="width: 50%;"><br/><br/></p><p>${avg[1].CMPN_NM } </p><br/>
                            <p>
                            <c:choose>
@@ -72,9 +72,9 @@
                         </button></a>
                         </div>
                    		<div class="col-md-1"></div>
-                        <div class="col-md-3" style="width: 220px;">
+                        <div class="col-md-3" style="width: 200px;">
                         <a href="/company/detail?cmpn_nm=${avg[2].CMPN_NM }"><button class="btn btn-default" type="submit" style="background: white;">
-                           <div class="thumbnail href3" style="width: 200px; border: none;">
+                           <div class="thumbnail href3" style="width: 180px; border: none;">
                            <p><img src="${avg[2].LOGO }" style="width: 50%;"><br/><br/></p><p>${avg[2].CMPN_NM } </p><br/>
                            <p>
                            <c:choose>
@@ -98,9 +98,9 @@
                   <div class="container" align="center">
                      <div class="row" align="center">
                       	
-                        <div class="col-md-3" style="width: 220px;">
+                        <div class="col-md-3" style="width: 200px;">
                         <a href="/company/detail?cmpn_nm=${rookie[0].CMPN_NM }"><button class="btn btn-default" type="submit" style="background: white;">
-                           <div class="thumbnail href1" style="width: 200px; border: none;">
+                           <div class="thumbnail href1" style="width: 180px; border: none;">
                            <p><img src="${rookie[0].LOGO }" style="width: 50%;"><br/><br/></p><p>${rookie[0].CMPN_NM } </p><br/>
                            <p>
                            <c:choose>
@@ -115,9 +115,9 @@
                         </button></a>
                         </div>
                         <div class="col-md-1"></div>
-                        <div class="col-md-3" style="width: 220px;">
+                        <div class="col-md-3" style="width: 200px;">
                         <a href="/company/detail?cmpn_nm=${rookie[1].CMPN_NM }"><button class="btn btn-default" type="submit" style="background: white;">
-                           <div class="thumbnail href1" style="width: 200px; border: none;">
+                           <div class="thumbnail href1" style="width: 180px; border: none;">
                            <p><img src="${rookie[1].LOGO }" style="width: 50%;"><br/><br/></p><p>${rookie[1].CMPN_NM } </p><br/>
                            <p>
                            <c:choose>
@@ -132,9 +132,9 @@
                         </button></a>
                         </div>
                         <div class="col-md-1"></div>
-                        <div class="col-md-3" style="width: 220px;">
+                        <div class="col-md-3" style="width: 200px;">
                         <a href="/company/detail?cmpn_nm=${rookie[2].CMPN_NM }"><button class="btn btn-default" type="submit" style="background: white;">
-                           <div class="thumbnail href1" style="width: 200px; border: none;">
+                           <div class="thumbnail href1" style="width: 180px; border: none;">
                            <p><img src="${rookie[2].LOGO }" style="width: 50%;"><br/><br/></p><p>${rookie[2].CMPN_NM } </p><br/>
                            <p>
                            <c:choose>
@@ -157,27 +157,27 @@
                   <div class="container" align="center">
                      <div class="row" align="center">
                       	
-                        <div class="col-md-3" style="width: 220px;">
+                        <div class="col-md-3" style="width: 200px;">
                         <a href="/company/detail?cmpn_nm=${finance[0].CMPN_NM }"><button class="btn btn-default" type="submit" style="background: white;">
-                           <div class="thumbnail href1" style="width: 200px; border: none;">
+                           <div class="thumbnail href1" style="width: 180px; border: none;">
                            <p><img src="${finance[0].LOGO }" style="width: 50%;"><br/><br/></p><p>${finance[0].CMPN_NM } </p><br/>
                            <p><fmt:formatNumber value="${finance[0].FINANCE_SCORE }" groupingUsed="true"/>점</p><br/>
                            </div>
                         </button></a>
                         </div>
                         <div class="col-md-1"></div>
-                        <div class="col-md-3" style="width: 220px;">
+                        <div class="col-md-3" style="width: 200px;">
                         <a href="/company/detail?cmpn_nm=${finance[1].CMPN_NM }"><button class="btn btn-default" type="submit" style="background: white;">
-                           <div class="thumbnail href1" style="width: 200px; border: none;">
+                           <div class="thumbnail href1" style="width: 180px; border: none;">
                            <p><img src="${finance[1].LOGO }" style="width: 50%;"><br/><br/></p><p>${finance[1].CMPN_NM } </p><br/>
                            <p><fmt:formatNumber value="${finance[1].FINANCE_SCORE }" groupingUsed="true"/>점</p><br/>
                            </div>
                         </button></a>
                         </div>
                         <div class="col-md-1"></div>
-                        <div class="col-md-3" style="width: 220px;">
+                        <div class="col-md-3" style="width: 200px;">
                         <a href="/company/detail?cmpn_nm=${finance[2].CMPN_NM }"><button class="btn btn-default" type="submit" style="background: white;">
-                           <div class="thumbnail href1" style="width: 200px; border: none;">
+                           <div class="thumbnail href1" style="width: 180px; border: none;">
                            <p><img src="${finance[2].LOGO }" style="width: 50%;"><br/><br/></p><p>${finance[2].CMPN_NM } </p><br/>
                            <p><fmt:formatNumber value="${finance[2].FINANCE_SCORE }" groupingUsed="true"/>점</p><br/>
                            </div>
@@ -222,35 +222,35 @@
   <div class="row">
   	 <div class="col-md-1"></div>
      <div class="col-md-2" style="border: none;" class="thumbnail">
-        <a href="/search/company"><i class="fa fa-search" style="font-size:36px"></i>
+        <a href="/search/company"><i class="fa fa-search" style="font-size:36px; color: orange;"></i>
         	<div class="caption">
         	검색
         	</div>
         </button></a>
      </div>
      <div class="col-md-2" style="border: none;" class="thumbnail">
-        <a href="/review/list_form"><i class="fa fa-commenting-o" style="font-size:36px"></i>
+        <a href="/review/list_form"><i class="fa fa-commenting-o" style="font-size:36px; color: orange;"></i>
         	<div class="caption">
         	리뷰
         	</div>
         </button></a>
      </div>
       <div class="col-md-2" style="border: none;" class="thumbnail">
-        <a href="/rank/form"><i class="fa fa-bar-chart" style="font-size:36px"></i>
+        <a href="/rank/form"><i class="fa fa-bar-chart" style="font-size:36px; color: orange;"></i>
         	<div class="caption">
         	순위
         	</div>
         </button></a>
      </div>
      <div class="col-md-2" style="border: none;" class="thumbnail">
-        <a href="/my/applyInfo"><i class="fa fa-calendar" style="font-size:36px"></i>
+        <a href="/my/applyInfo"><i class="fa fa-calendar" style="font-size:36px; color: orange;"></i>
         	<div class="caption">
         	공채달력
         	</div>
         </a>
      </div>
      <div class="col-md-2" style="border: none;" class="thumbnail">
-        <a href="/contact/form"><i class="material-icons" style="font-size:36px">contacts</i>
+        <a href="/contact/form"><i class="material-icons" style="font-size:36px; color: orange;">contacts</i>
         	<div class="caption">
         	고객센터
         	</div>

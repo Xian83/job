@@ -7,9 +7,9 @@
 <div class="container" align="center" >
 
   <ul class="nav nav-tabs" style="width: 80%;">
-    <li class="active"><a data-toggle="tab" href="#home">평균연봉순</a></li>
-    <li><a data-toggle="tab" href="#menu1">신입연봉순</a></li>
-    <li><a data-toggle="tab" href="#menu2">재무평가점수순</a></li>
+    <li class="active"><a data-toggle="tab" href="#home" style="font-size: large;"><b>평균연봉순</b></a></li>
+    <li><a data-toggle="tab" href="#menu1" style="font-size: large;"><b>신입연봉순</b></a></li>
+    <li><a data-toggle="tab" href="#menu2" style="font-size: large;"><b>재무평가점수순</b></a></li>
    <!--  <li><a data-toggle="tab" href="#menu3">재직자평가점수순</a></li> -->
   </ul>
 <br/>
