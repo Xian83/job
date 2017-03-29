@@ -48,7 +48,7 @@ public class MyPageController2 {
 
 	
 	@RequestMapping("/result")
-	public ModelAndView resultHandler(HttpSession session, @RequestParam Map data) {
+	public ModelAndView resultHandler(HttpServletResponse response, HttpSession session, @RequestParam Map data) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
 		mav.addObject("main", "/my/result");
@@ -57,24 +57,36 @@ public class MyPageController2 {
 		data.put("email", email);
 		int rst = mydao.update(data);	
 		
-		String pass1 = (String) session.getAttribute("pass");
+		// Changing New Password 
+		Map map = mdao.getData(email);
+		String pass1 = (String) map.get("PASS");
 		String pass = (String) data.get("passcheck");
-		System.out.println("pass1 = " + pass1 + "/ pass = " + pass);
-		if(pass != null && pass1 != pass) {
+		if(pass == "") {
+			pass = pass1;
+		} if (pass != null && pass1 != pass) {
 		Map m = new HashMap<>();
 			m.put("pass", pass);
 			m.put("email", email);
 		int rst2 = mydao.updatePass(m);
 		}
 		
+		
 		String birth = (String) data.get("birth");
 		Map b = new HashMap<>();
 			b.put("birth", birth);
 			b.put("email", email);
-			System.out.println("map b = " + b );
 		int rst3 = mydao.updateBirth(b);
-		System.out.println("rst3  = " + rst3 );
 
+		mav.addObject("msg", "개인정보가 변경되었습니다");
+
+		
+	mav.addObject("url2", "/my/edit");
+	mav.setViewName("util/alert");
+
+		
+		
+		
+		//response.sendRedirect("/my/edit");
 		return mav;
 	}
 
@@ -139,11 +151,7 @@ public class MyPageController2 {
 		mav.addObject("industry", list2);
 		mav.addObject("infos", map);
 		mav.addObject("likeinfos", map2);
-		
-		/*System.out.println("FACEBOOK = " + map.get("FACEBOOK"));
-		System.out.println("FACEBOOK map = " + map);*/
-		
-		
+
 		return mav;
 	}
 	
@@ -240,7 +248,6 @@ public class MyPageController2 {
 			MultipartHttpServletRequest req) throws Exception {
 		ModelAndView mav = new ModelAndView();
 
-		System.out.println("여기 넘어옴?");
 		// �궗吏� ���엯�씤 寃쎌슦留� �뾽濡쒕뱶 吏꾪뻾
 		String ct = file.getContentType();
 		if (ct.startsWith("image")) {
@@ -271,7 +278,6 @@ public class MyPageController2 {
 			mav.addObject("msg", "Not Image File");
 		}	
 		mav.addObject("url2", "/my/edit");
-		mav.addObject("url2", "/my/company");
 		mav.setViewName("util/alert");
 		return mav;
 

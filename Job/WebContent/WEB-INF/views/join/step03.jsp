@@ -43,17 +43,18 @@
 			<label>희망연봉</label><br /> <label for="salary_min"
 				class="col-sm-2 control-label">최소</label>
 			<div class="col-sm-4">
-				<select name="salary_min" class="form-control" id="min">
-					<c:forEach var="i" begin="2000" end="100000" step="100">
-						<option value="${i*10000}">${i }만원</option>
+				<select class="form-control" name="salary_min" id="min"> 
+					<c:forEach var="i" begin="1500" end="10000" step="500">
+						<option value="${i}" ${i eq likeinfos.SALARY_MIN? 'selected' : ' '  }>최소 ${i} 이상</option>			
 					</c:forEach>
-				</select>
+					</select>
 			</div>
 			<label for="salary_max" class="col-sm-2 control-label">최대</label>
 			<div class="col-sm-4">
-				<select name="salary_max" class="form-control" id="max">
-					<c:forEach var="i" begin="2000" end="100000" step="100">
-						<option value="${i*10000}" ${i eq 3500 ? 'selected' : '' }>${i }만원</option>
+				<select class="form-control" name="salary_max" id="max"> 
+					<c:forEach var="i2" begin="1500" end="10000" step="500">
+						<option value="${i2}" ${i2 le likeinfos.SALARY_MIN ? 'disabled' : '' } 
+						 ${i2 eq likeinfos.SALARY_MAX? 'selected' : ' '  }>최대 ${i2} 이하</option>			
 					</c:forEach>
 				</select>
 			</div>
@@ -71,6 +72,18 @@
 	</form>
 </div>
 <script>
+
+
+	//Salary combobox Select
+	$("#min").on("change", function() {
+		var cu = $(this).val();
+		var opt = "";
+		for (var i = Number(cu); i <= 10000; i += 500) {
+			opt += "<option value='"+i+"'>최대 " + i + "이하</option>";
+		}
+		$("#max").html(opt);
+	});
+
 	function enableBtn() {
 		var t1 = document.getElementById("t1").value;
 
@@ -88,5 +101,4 @@
 
 	$('#min').change(enableBtn);
 	$('#max').change(enableBtn);
-
 </script>
