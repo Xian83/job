@@ -1,6 +1,5 @@
 package controller;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,9 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import model.FileUploadDao;
-
 import model.DetailDao;
+import model.FileUploadDao;
 import model.MemberDao;
 import model.MyInfoDao;
 import model.MyPageDao;
@@ -82,6 +80,7 @@ public class MyPageController2 {
 		return mav;
 	}
 
+//	@RequestMapping(name="/leave_result", produces="application/text; charset=utf8")
 	// return result by ajax - 탈퇴 처리 / 비밀번호 3회 오류시, 자동로그아웃 기능 추가 필요
 	@ResponseBody
 	@RequestMapping("/leave_result")
@@ -99,10 +98,16 @@ public class MyPageController2 {
 		data.put("pass", pass);
 		boolean res = mDao.existCheck(data);
 
-		// increase password error count up
-		if (!res)
+		String result = "";
+		
+		if(res){
+			// 탈퇴처리
+			mDao.delete(data);
+			result = "redirect:/login/logout";	// 로그아웃 화면 이동			
+		} else {
+			// increase password error count up
 			session.setAttribute("leave_try", cnt++);
-
+		}
 		return res;
 	}
 
@@ -154,11 +159,13 @@ public class MyPageController2 {
 		// 최근 본 기업(lately) : 별다른 추가 정보 없음
 
 		// 추천 기업(recommand)
-		HashMap data = mDao.getInfo(email); 		// get data from member_Info table
-		List reco = mypage.getRecommand(data); 		// get data from mongoDB(company)
-		List list_r = mypage.getRecommand02(reco);	// get data from score & salary table
-		
-		mav.addObject("member", data);	// 관심지역(AREA),산업군(STNDD_BIG_GB), 연봉min/max 
+		HashMap data = mDao.getInfo(email); // get data from member_Info table
+		List reco = mypage.getRecommand(data); // get data from mongoDB(company)
+		List list_r = mypage.getRecommand02(reco); // get data from score &
+													// salary table
+
+		mav.addObject("member", data); // 관심지역(AREA),산업군(STNDD_BIG_GB),
+										// 연봉min/max
 		mav.addObject("list_r", list_r);
 		System.out.println("추천 = " + list_r);
 
