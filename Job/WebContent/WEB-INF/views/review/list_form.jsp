@@ -1,10 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <head>
 <style>
 input[id=msg] {
 	width: 30%;
+}
+
+hr {
+	border: none;
+	color: gray;
+	background-color: gray;
+	height: 2px;
+	width: 100%;
 }
 </style>
 </head>
@@ -13,26 +22,37 @@ input[id=msg] {
 		<div class="col-md-10">
 
 			<c:forEach var="i" begin="0" end="${size-1 }">
-				<div class="media"
-					style="background: #FFE4E1; border-style: solid; border-color: #C1CDC1">
-					<div class="media-left media-middle" align="center">
+				<div class="media" style="background: white;">
+					<div class="media-left media-heading" align="center">
 						<%-- 				
 					자기 컴퓨터(서버)에서 업로드한 프로필 사진이라면, 보일 겁니다.
 					<img src="${review[i].picURL }" class="media-object img-circle" style="width:120px; "> 
 --%>
-						<img src="${review[i].picURL }" class="media-object img-circle"
-							style="width: 120px;">
-						<p align="center">${review[i].EMAIL }</p>
+						<img src="${review[i].picURL }" class="media-object "
+							style="width: 60;" align="left">
+
 					</div>
-					<div class="media-body">
-						<h4 class="media-heading">
+					<div class="media-body row content">
+						<h5 class="media-heading" style="display: inline-block;">
 							<a href="/company/detail?cmpn_nm=${review[i].CMPN_NM }">${page *6-5+i}.
-								${review[i].CMPN_NM }
-						</h4>
-						</a>
-						<p>${ review[i].CONTENTS}</p>
+								${review[i].CMPN_NM } 
+						</h5>
+						</a> <b style="font-size: x-small;">${review[i].WDATE }</b><br />
+						<div
+							style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/spare.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
+							<p
+								style="WIDTH: 100%; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;">
+							</p>
+
+						</div>
+						<br />
+						<p>
+							<c:set var="email" value="${fn:split(review[i].EMAIL, '@')}"></c:set>
+							${email[0]} : ${ review[i].CONTENTS}
+						</p>
 					</div>
 				</div>
+				<hr />
 			</c:forEach>
 
 			<div align="center" class="well">
@@ -54,6 +74,7 @@ input[id=msg] {
 					<a href="/review/list_form?page=${page +1 }">다음</a>
 				</c:if>
 			</div>
+			<br />
 		</div>
 
 

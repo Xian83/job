@@ -42,7 +42,7 @@ public class LoginController {
 	public ModelAndView loginResultHandle(@RequestParam Map map, HttpSession session, HttpServletResponse resp){
 		
 		String url = (String)map.get("url");//로그인을 시도한 페이지 주소
-		String cpmn_nm = (String)map.get("cname");
+		String cpmn_nm = (String)map.get("cname");//기업상세페이지에서 로그인 할시 cmpn-nm값 가지고 오기
 		System.out.println("=================================test"+cpmn_nm);
 		boolean rst = mDao.existCheck(map);
 		if(rst){

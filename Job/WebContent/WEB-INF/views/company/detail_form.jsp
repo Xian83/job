@@ -15,9 +15,7 @@ th {
 	background: #FEF1E9;
 }
 
-.w3-myfont {
-	font-family: "Comic Sans MS", cursive, sans-serif;
-}
+
 }
 </style>
 <div class="container-fluid"
@@ -169,9 +167,9 @@ th {
 		<c:forEach var="i" begin="0" end="5">
 			<div class="col-md-2" style="border-style: none;">
 				<a href="/company/detail?cmpn_nm=${same[i].CMPN_NM }"> <img
-					src="${same[i].LOGO }" alt="Lights" style="width: 50%" />
+					src="${same[i].LOGO }" alt="Lights" style="width: 82" height="82" />
 					<div class="caption">
-						<p>${same[i].CMPN_NM }</p>
+						<p style="font-family: sans-serif;">${same[i].CMPN_NM }</p>
 					</div>
 				</a>
 			</div>
