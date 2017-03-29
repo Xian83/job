@@ -48,6 +48,23 @@
 		sbtChange();
 	}
 	
+	document.getElementById("email").onblur = function(){
+		chk = this;
+		result = document.getElementById("checkEmail");
+		if(this.value.length >=4 && (!this.value.includes('@') || this.value.startsWith('@') || this.value.endsWith('@'))){
+			result.innerHTML = "이메일 형태로 입력하세요";
+			result.style.color = 'red';
+			flag1=false;
+		} else if(this.value.length <4 && this.value.length >=0) {
+			result.innerHTML = "4자 이상 입력";
+			result.style.color = 'red';
+			flag1=false;
+		} else {
+			checkEmail();			
+		}
+		sbtChange();
+	};
+	
 	// ID 체크
 	document.getElementById("email").onkeyup = function(){
 		chk = this;

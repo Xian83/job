@@ -38,9 +38,11 @@
 	</select>
 	<select id="getScore03" parameterType="java.lang.String"
 		resultType="java.util.HashMap">
-		select * from score where CMPN_NM in 
-		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
-			#{item.CMPN_NM}
-		</foreach>
+			select s.CMPN_NM, s.AVG_SALARY, sc.LOGO from SALARY s, score sc 
+			where s.CMPN_NM=sc.CMPN_NM and s.CMPN_NM in
+			<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+				#{item.CMPN_NM}
+			</foreach>
+			order by s.AVG_SALARY desc
 	</select>
 </mapper>

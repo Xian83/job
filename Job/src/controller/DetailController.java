@@ -1,5 +1,6 @@
 package controller;
 
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import model.DetailDao;
 import model.GoogleMap;
+import model.MemberDao;
+import model.MyPageDao;
 import model.SalaryDao;
 import model.SearchDao;
 
@@ -36,6 +39,12 @@ public class DetailController {
 
 	@Autowired
 	GoogleMap google;
+	
+	@Autowired
+	MemberDao mDao;
+
+	@Autowired
+	MyPageDao mypage;
 
 	@RequestMapping("/detail")
 	public ModelAndView detailHandler(@RequestParam(name = "cmpn_nm") String companyname, HttpServletResponse response,
@@ -66,12 +75,12 @@ public class DetailController {
 		// get same industry company list (finance score desc)
 		String div = (String) scorelist.get("DIVISION");
 		List samelist = ddao.same(div);
-		System.out.println("산업군 : " + div);
+//		System.out.println("산업군 : " + div);	//확인용
 
 		// salary info
 		HashMap industry = sDao.getSalary(div); // same industry
 		HashMap allCompany = sDao.getSalary("all"); // all company
-		System.out.println(industry.get("avg") + "" + industry.get("rookie"));
+//		System.out.println(industry.get("AVG") + " vs " + industry.get("ROOKIE"));	// 확인용
 
 		String CompID = search.getCompID(companyname);
 		// career catch site data
@@ -95,11 +104,12 @@ public class DetailController {
 
 		mav.addObject("rate",rate);  //상세페이지를 클리간 남녀비율  hashmap(man, woman, visi)
 
+	
 		// 쿠키생성
 		String[] arr = origin.split("#") ;	// 봤던 쿠키 목록
 		// 이 배열에 companyname 이 값이 있냐 없냐..
 		// 배열에 없는 회사명일때만 origin+"#"+companyname 이걸로 쿠키를 전송을 시켜
-
+		//System.out.println("origin="+origin); 
 		boolean rst = false;
 		for(String cc: arr) {
 			if(cc.equals(companyname)){
@@ -108,13 +118,13 @@ public class DetailController {
 			}
 		}
 		if(rst==false) {
-			Cookie c = new Cookie("cmpn_nm", companyname+"#"+origin);
+			origin = companyname+"#"+origin;
+			Cookie c = new Cookie("cmpn_nm", origin);
 			c.setPath("/");
 			response.addCookie(c);
+			//System.out.println("coo="+origin);
 		}
 		
-		
-
 		//쿠키처리
 		List<String> cookielist = new ArrayList<>();
 		if(!origin.equals("")) {
@@ -126,10 +136,24 @@ public class DetailController {
 			}
 		}
 		int csize = cookielist.size();
-	
+		/*System.out.println("clist="+cookielist);
+		System.out.println("csize="+csize);*/
 		mav.addObject("clist", cookielist);
 		mav.addObject("csize", csize);
 
+		// 로그인했을때 추천리스트추가
+		String auth = (String) session.getAttribute("auth");
+		
+		if (auth.equals("yes")) {
+			HashMap data = mDao.getInfo(email); 		// get data from member_Info table
+			List reco = mypage.getRecommand(data); 		// get data from mongoDB(company)
+			List list_r = mypage.getRecommand02(reco);	// get data from score & salary table
+			
+			mav.addObject("member", data);	// 관심지역(AREA),산업군(STNDD_BIG_GB), 연봉min/max 
+			mav.addObject("list_r", list_r);
+			System.out.println("추천 = " + list_r);
+		}
+		
 		return mav;
 	}
 

@@ -39,5 +39,7 @@
 		delete from member where
 		email=#{email} and pass=#{pass}
 	</delete>
-	
+	<delete id="deleteInfo" parameterType="java.util.HashMap">
+		delete from member_info where email=#{email}
+	</delete>
 </mapper>

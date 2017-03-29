@@ -158,9 +158,6 @@ public class MyPageDao {
 		int min = Integer.parseInt(String.valueOf(data.get("SALARY_MIN")));
 		int max = Integer.parseInt(String.valueOf(data.get("SALARY_MAX")));
 
-		System.out.println(area + " : " + industry);
-		System.out.println(min + " : " + max);
-
 		Criteria c = new Criteria().andOperator(
 				Criteria.where("WKP_ADRS").regex("^" + area),
 				Criteria.where("STNDD_BIG_GB").regex(industry)
@@ -170,16 +167,28 @@ public class MyPageDao {
 
 //		Sort sort = new Sort(Sort.Direction.DESC, "SALARY");
 //		query.with(sort);
-		query.limit(10);
-		System.out.println(query.toString());
+		query.limit(50);
 		
 		List<HashMap> list = template.find(query, HashMap.class, "company");
-		System.out.println("사이즈 : " + list.size());
+		System.out.println("mongoDB에서 불러온 데이터 : " + list.size());
 		
-		for (HashMap map : list) {
-			System.out.println(map.toString());
-		}
-
 		return list;
+	}
+	
+	public List<HashMap> getRecommand02(List data) {
+		List<HashMap> result = new ArrayList<>();
+		
+		// 기업명 기준으로 넘기고, 추천 기업 가져오기
+		SqlSession session = factory.openSession();
+		try {
+			result = session.selectList("mappers.company.getScore03", data);
+		} catch(Exception e){
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}	
+		
+		System.out.println("최종 추천 목록 개수 : " + result.size());
+		return result;
 	}
 }
