@@ -1,5 +1,9 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//WebContent/WEB-INF/views/contact/test.jsp=UTF-8
+=======
+encoding//WebContent/WEB-INF/views/my/company.jsp=UTF-8
+>>>>>>> branch 'master' of https://github.com/Xian83/job
 encoding//WebContent/WEB-INF/views/search/list_form.jsp=UTF-8
 encoding//src/controller/JoinController.java=UTF-8
 encoding//src/controller/LoginController.java=UTF-8
