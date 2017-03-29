@@ -133,10 +133,14 @@ hr[id='hh']{
 	$("#compare").on("click", function(){
 		var cm1 = $("#cm1").val();
 		var cm2 = $("#cm2").val();
-		
-		var popUrl = "/compare/result?cm1="+cm1+"&cm2="+cm2; //팝업창에 출력될 페이지 URL
-		var popOption = "width=1000, height=800, resizable=no, status=no, menubar=no, left=300;"; //팝업창 옵션(optoin)
-		window.open(popUrl, "", popOption);
+		if(${auth == 'yes'}) {
+			
+			var popUrl = "/compare/result?cm1="+cm1+"&cm2="+cm2; //팝업창에 출력될 페이지 URL
+			var popOption = "width=1000, height=800, resizable=no, status=no, menubar=no, left=300;"; //팝업창 옵션(optoin)
+			window.open(popUrl, "", popOption);
+		} else {
+			window.alert("로그인을 해주세요");
+		} 
 	});
 	
 	
