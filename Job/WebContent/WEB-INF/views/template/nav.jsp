@@ -111,6 +111,7 @@
 		<form action="/login/result" method="post">
 			<div class="w3-section" style="margin: 10%">
 			<input type="hidden" name="url" value="${requestScope['javax.servlet.forward.servlet_path']}">
+			<input type="hidden" name="cname" value="${requestScope['javax.servlet.forward.query_string']}">
 			
 				<label><b>email</b></label> <input
 					class="w3-input w3-border w3-margin-bottom" type="text"

@@ -57,7 +57,7 @@ public class LoginController {
 		if(cpmn_nm==null){
 			mav.addObject("url", url);
 		}else{
-			mav.addObject("url", url+"?cpmn_nm="+cpmn_nm);
+			mav.addObject("url", url+"?"+cpmn_nm);
 		}
 		
 		return mav;
