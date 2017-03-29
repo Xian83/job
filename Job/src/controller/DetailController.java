@@ -144,7 +144,7 @@ public class DetailController {
 		// 로그인했을때 추천리스트추가
 		String auth = (String) session.getAttribute("auth");
 		
-		if (auth.equals("yes")) {
+		if (auth!=null && auth.equals("yes")) {
 			HashMap data = mDao.getInfo(email); 		// get data from member_Info table
 			List reco = mypage.getRecommand(data); 		// get data from mongoDB(company)
 			List list_r = mypage.getRecommand02(reco);	// get data from score & salary table

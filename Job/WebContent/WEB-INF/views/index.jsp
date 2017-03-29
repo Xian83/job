@@ -40,7 +40,7 @@
                         <div class="col-md-3" style="width: 220px;">
                         <a href="/company/detail?cmpn_nm=${avg[0].CMPN_NM }"><button class="btn btn-default" type="submit" style="background: white;">
                            <div class="thumbnail href1" style="width: 200px; border: none;">
-                           <p><img src="${avg[0].LOGO }" style="width: 75%;"><br/><br/></p><p>${avg[0].CMPN_NM } </p><br/>
+                           <p><img src="${avg[0].LOGO }" style="width: 50%;"><br/><br/></p><p>${avg[0].CMPN_NM } </p><br/>
                            <p>
                            <c:choose>
                            	   <c:when test="${avg[0].AVG_SALARY / 10000 gt 4} ">
@@ -58,7 +58,7 @@
                         <div class="col-md-3" style="width: 220px;">
                         <a href="/company/detail?cmpn_nm=${avg[1].CMPN_NM }"><button class="btn btn-default" type="submit" style="background: white;">
                            <div class="thumbnail href2" style="width: 200px; border: none;">
-                           <p><img src="${avg[1].LOGO }" style="width: 75%;"><br/><br/></p><p>${avg[1].CMPN_NM } </p><br/>
+                           <p><img src="${avg[1].LOGO }" style="width: 50%;"><br/><br/></p><p>${avg[1].CMPN_NM } </p><br/>
                            <p>
                            <c:choose>
                            	   <c:when test="${avg[0].AVG_SALARY / 10000 gt 4} ">
@@ -75,7 +75,7 @@
                         <div class="col-md-3" style="width: 220px;">
                         <a href="/company/detail?cmpn_nm=${avg[2].CMPN_NM }"><button class="btn btn-default" type="submit" style="background: white;">
                            <div class="thumbnail href3" style="width: 200px; border: none;">
-                           <p><img src="${avg[2].LOGO }" style="width: 75%;"><br/><br/></p><p>${avg[2].CMPN_NM } </p><br/>
+                           <p><img src="${avg[2].LOGO }" style="width: 50%;"><br/><br/></p><p>${avg[2].CMPN_NM } </p><br/>
                            <p>
                            <c:choose>
                            	   <c:when test="${avg[0].AVG_SALARY / 10000 gt 4} ">
@@ -101,7 +101,7 @@
                         <div class="col-md-3" style="width: 220px;">
                         <a href="/company/detail?cmpn_nm=${rookie[0].CMPN_NM }"><button class="btn btn-default" type="submit" style="background: white;">
                            <div class="thumbnail href1" style="width: 200px; border: none;">
-                           <p><img src="${rookie[0].LOGO }" style="width: 75%;"><br/><br/></p><p>${rookie[0].CMPN_NM } </p><br/>
+                           <p><img src="${rookie[0].LOGO }" style="width: 50%;"><br/><br/></p><p>${rookie[0].CMPN_NM } </p><br/>
                            <p>
                            <c:choose>
                            	   <c:when test="${rookie[0].AVG_SALARY / 10000 gt 4} ">
@@ -118,7 +118,7 @@
                         <div class="col-md-3" style="width: 220px;">
                         <a href="/company/detail?cmpn_nm=${rookie[1].CMPN_NM }"><button class="btn btn-default" type="submit" style="background: white;">
                            <div class="thumbnail href1" style="width: 200px; border: none;">
-                           <p><img src="${rookie[1].LOGO }" style="width: 75%;"><br/><br/></p><p>${rookie[1].CMPN_NM } </p><br/>
+                           <p><img src="${rookie[1].LOGO }" style="width: 50%;"><br/><br/></p><p>${rookie[1].CMPN_NM } </p><br/>
                            <p>
                            <c:choose>
                            	   <c:when test="${rookie[1].AVG_SALARY / 10000 gt 4} ">
@@ -135,7 +135,7 @@
                         <div class="col-md-3" style="width: 220px;">
                         <a href="/company/detail?cmpn_nm=${rookie[2].CMPN_NM }"><button class="btn btn-default" type="submit" style="background: white;">
                            <div class="thumbnail href1" style="width: 200px; border: none;">
-                           <p><img src="${rookie[2].LOGO }" style="width: 75%;"><br/><br/></p><p>${rookie[2].CMPN_NM } </p><br/>
+                           <p><img src="${rookie[2].LOGO }" style="width: 50%;"><br/><br/></p><p>${rookie[2].CMPN_NM } </p><br/>
                            <p>
                            <c:choose>
                            	   <c:when test="${rookie[2].AVG_SALARY / 10000 gt 4} ">
@@ -160,7 +160,7 @@
                         <div class="col-md-3" style="width: 220px;">
                         <a href="/company/detail?cmpn_nm=${finance[0].CMPN_NM }"><button class="btn btn-default" type="submit" style="background: white;">
                            <div class="thumbnail href1" style="width: 200px; border: none;">
-                           <p><img src="${finance[0].LOGO }" style="width: 75%;"><br/><br/></p><p>${finance[0].CMPN_NM } </p><br/>
+                           <p><img src="${finance[0].LOGO }" style="width: 50%;"><br/><br/></p><p>${finance[0].CMPN_NM } </p><br/>
                            <p><fmt:formatNumber value="${finance[0].FINANCE_SCORE }" groupingUsed="true"/>점</p><br/>
                            </div>
                         </button></a>
@@ -169,7 +169,7 @@
                         <div class="col-md-3" style="width: 220px;">
                         <a href="/company/detail?cmpn_nm=${finance[1].CMPN_NM }"><button class="btn btn-default" type="submit" style="background: white;">
                            <div class="thumbnail href1" style="width: 200px; border: none;">
-                           <p><img src="${finance[1].LOGO }" style="width: 75%;"><br/><br/></p><p>${finance[1].CMPN_NM } </p><br/>
+                           <p><img src="${finance[1].LOGO }" style="width: 50%;"><br/><br/></p><p>${finance[1].CMPN_NM } </p><br/>
                            <p><fmt:formatNumber value="${finance[1].FINANCE_SCORE }" groupingUsed="true"/>점</p><br/>
                            </div>
                         </button></a>
@@ -178,7 +178,7 @@
                         <div class="col-md-3" style="width: 220px;">
                         <a href="/company/detail?cmpn_nm=${finance[2].CMPN_NM }"><button class="btn btn-default" type="submit" style="background: white;">
                            <div class="thumbnail href1" style="width: 200px; border: none;">
-                           <p><img src="${finance[2].LOGO }" style="width: 75%;"><br/><br/></p><p>${finance[2].CMPN_NM } </p><br/>
+                           <p><img src="${finance[2].LOGO }" style="width: 50%;"><br/><br/></p><p>${finance[2].CMPN_NM } </p><br/>
                            <p><fmt:formatNumber value="${finance[2].FINANCE_SCORE }" groupingUsed="true"/>점</p><br/>
                            </div>
                         </button></a>
