@@ -442,11 +442,14 @@
 <script
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdpNCYLer2YLqWD5YoIBaBqmD8SJm8b9k&callback=initMap"
 	async defer></script>
+
 <div align="center">
-	<b>[ 위치 ] </b> <br />
-	<br />
-	<div id="map" style="width: 500; height: 500"></div>
+   <b>[ 위치 ] </b> <br />
+   <br />
+   <div id="map" style="width: 500; height: 500"></div>
 </div>
+
+
 <script>
 	function initMap() {
 		// Create a map object and specify the DOM element for display.
