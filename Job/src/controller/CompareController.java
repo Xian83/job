@@ -84,10 +84,6 @@ public class CompareController {
 			mav.addObject("info02", ddao.getInfo02(search.getCompID(cm2)));
 			mav.addObject("chartURL", chartURL);
 			
-		} else {
-			System.out.println("비회원이라서 비교불가");
-			mav.setViewName("t1");
-			mav.addObject("main", "index");
 		}
 		return mav;
 	}
