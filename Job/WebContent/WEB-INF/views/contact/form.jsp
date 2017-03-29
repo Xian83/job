@@ -302,7 +302,8 @@
                 </div>
             </div>
         </div>
-         <div class="panel panel-default">
+        <div class="faqHeader">연봉정보</div>
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">
@@ -313,6 +314,62 @@
             <div id="collapseEleven" class="panel-collapse collapse">
                 <div class="panel-body">
                     해당회사의 국민연금 납부액 또는 고용보험 납부액과 납부인원수를 역산하여 계산합니다.
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwelve">
+                    	연봉데이터는 얼마나 정확한가요?
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwelve" class="panel-collapse collapse">
+                <div class="panel-body">
+                    상장사, 공공기관 등은 신고된 자료를 바탕으로 하므로 거의 정확하다고 보시면 됩니다. 단, 소규모 사업장 중에서 고연봉 군은 고용보험으로 정확도를 높였으나 아직까지 대부분의 소규모 사업장은 국민연금 정보만을 사용하므로 조금 부정확할 수 있습니다.
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThirteen">
+                    	입사자 평균 연봉이 다른 경우는 어떤 경우인가요?
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThirteen" class="panel-collapse collapse">
+                <div class="panel-body">
+                    올해 입사자 연봉은 퇴사인원 없이 입사자만 존재할 때 계산 가능합니다. 그렇지 않을 경우에는 유사한 업종/규모 인원 등을 참조하여 통계적으로 계산합니다. 따라서 전체 평균연봉보다는 정확하지 않을 수 있습니다.
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFourteen">
+                    	국민연금 상한액은 뭔가요?
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseFourteen" class="panel-collapse collapse">
+                <div class="panel-body">
+                    국민연금 상한액이란, 월급여가 일정 수준 이상인 근로자에게는 급여의 수준에 관계없이 동일한 연금을 납부하도록 하는 개념입니다. 월급이 434만원('16년 7월 개정)이상이라면 1,000만 원이든, 1억이든 월 19만원 정도를 납부하게 됩니다. 따라서 고용보험이 매칭되지 않은 회사들의 연봉은 상한액인 5,400만 원 정도로 연봉이 나타납니다.
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFifteen">
+                    	국민연금과 고용보험의 평균 연봉은 어떻게 다른가요?
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseFifteen" class="panel-collapse collapse">
+                <div class="panel-body">
+                    국민연금은 월 납부액의 따른 상한액이 있습니다. 고용보험은 상한액 없이 회사가 납부한 금액과 인원으로 추정하기 때문에 구글코리아 같이 연봉이 높을 것이라 기대한 회사의 급여가 정확하게 나올 수 있습니다.
                 </div>
             </div>
         </div>

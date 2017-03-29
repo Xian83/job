@@ -40,8 +40,8 @@
 
 
 
-<div class="container-fluid" align="center">
-	<table class="table" align="center" style="width: 100%;">
+<div class="container-fluid" align="center" style="width: 90%;">
+	<table class="table" align="center" style="width: 90%;">
 		<tr style="height: 100px; text-align: center;">
 			<td>
 				<p style="font-size: 16px;"><br/>${score01.DIVISION }</p>
