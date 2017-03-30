@@ -35,6 +35,11 @@ body {
 .table-bordered {
 	border-top: 10px;
 }
+
+a.disabled {
+   pointer-events: none;
+   cursor: default;
+}
 </style>
 <br />
 <div align="center">
@@ -159,23 +164,21 @@ body {
 		</div>
 	</div>
 </div>
-<br />
 
-<!-- <div align="right"> -->
+<div>
 <!-- 	<button type="button" class="btn btn-default btn btn-sm">재무평가순 -->
 <!-- 	</button> -->
 <!-- 	<button type="button" class="btn btn-default btn btn-sm">가나다순</button> -->
 <!-- 	<br /> -->
-<!-- </div> -->
-
-
+</div>
 
 <!-- 상세 조건 검색 - 체크박스 이벤트 처리  -->
 <div id="result">
-
+	<b>검색결과 ${cnt}개</b>
+	<!-- 검색 결과 리스트 출력되는 곳 -->
 	<div class="container">
 		<table class="table table-bordered">
-			<c:forEach var="i" items="${list2}" varStatus="vs">
+			<c:forEach var="i" items="${list}" varStatus="vs">
 				<c:if test="${vs.count %2 == 1 }">
 					<tr>
 				</c:if>
@@ -189,8 +192,7 @@ body {
 						<div class="media-body">
 							<a href="/company/detail?cmpn_nm=${i.CMPN_NM }"><h5>
 									<b>${i.CMPN_NM }</b>
-								</h5></a>
-							${i.DIVISION }|${i.SCALE }<br/>
+								</h5></a> ${i.DIVISION }|${i.SCALE }<br />
 							<button type="button" class="btn btn-default">재무평가
 								${i.FINANCE_SCORE }점</button>
 							<button type="button" class="btn btn-default">재직자 평판
@@ -205,26 +207,26 @@ body {
 	</div>
 
 	<!-- 페이지 뷰 -->
-	<div align="center">
-		<c:if test="${page ne 1 }">
-			<a href="/search/company?page=${page -1 }">이전</a>
-		</c:if>
-		<c:forEach var="p" begin="1" end="${size }" varStatus="vs">
-			<c:choose>
-				<c:when test="${p eq page }">
-					<b style="color: red;">${p }</b>
-				</c:when>
-				<c:otherwise>
-					<a href="javascript:void(0);" id="ptn${p}">${p }</a>
-				</c:otherwise>
-			</c:choose>
-			<c:if test="${vs.last eq false }">|</c:if>
-		</c:forEach>
-		<c:if test="${page ne size }">
-			<a href="/search/company?page=${page +1 }">다음</a>
-			<br />
-		</c:if>
-		<br />
+	<div class="container" align="center">
+		<ul class="pagination">
+			<c:if test="${page ne 1 }">
+				<li><a href="CName=${CName }&page=${p-1 }" class="pagelinks">이전</a></li>
+			</c:if>
+			<c:forEach var="p" begin="1" end="${size > 10 ? 10 : size }" varStatus="vs">
+				<c:choose>
+					<c:when test="${p eq page }">
+						<li class="active"><a href="#CName=${CName }&page=${p}" class="pagelinks disabled">${p }</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="CName=${CName }&page=${p}" class="pagelinks">${p }</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${page ne size }">
+				<li><a href="CName=${CName }&page=${p+1 }" class="pagelinks">다음</a></li>
+				<br />
+			</c:if>
+		</ul>
 	</div>
 </div>
 
@@ -288,10 +290,11 @@ body {
 	// 검색버튼 작동
 	$("#sc").on("click", function() {
 		search();
-	});	
-
+	});
+	
 	function search() {
-		var search = $("#search").val();
+		
+		var CName = $("#search").val();
 		var chkSido = [];
 		var chkJinhakCode = [];
 		var chkSize = [];
@@ -310,12 +313,14 @@ body {
 		console.log(chkSido);
 		console.log(chkJinhakCode);
 		console.log(chkSize);
+		
+		jQuery.ajaxSettings.traditional = true;
 
 		$.ajax({
 			"url" : "/search/detail",
 			"method" : "post",
 			"data" : {
-				"search" : search,
+				"CName" : CName,
 				"chkSido" : chkSido,
 				"chkJinhakCode" : chkJinhakCode,
 				"chkSize" : chkSize
@@ -324,4 +329,25 @@ body {
 			$("#result").html(aw);
 		})
 	}
+	
+	// 페이지 버튼에 의한 목록 불러오기
+	$(".pagelinks").each(function() {
+
+		$(this).click(function() {
+			// 간단 로딩 처리
+			$("#result").html('<p class="loading"><img src="https://www.creditmutuel.fr/cmne/fr/banques/webservices/nswr/images/loading.gif" alt=""></p>');
+			
+			var key = $(this).attr("href");
+
+			jQuery.ajaxSettings.traditional = true;
+			
+			$.ajax({
+				"url" : "/search/detail?" + key,
+				"method" : "post"
+			}).done(function(rst) {
+				$("#result").html(rst);
+			})
+			return false;
+		});
+	});
 </script>

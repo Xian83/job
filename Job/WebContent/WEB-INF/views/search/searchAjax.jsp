@@ -36,8 +36,14 @@ body {
 .table-bordered {
 	border-top: 10px;
 }
+
+a.disabled {
+   pointer-events: none;
+   cursor: default;
+}
 </style>
 <div id="paging">
+	<b>검색결과 ${cnt}개</b>
 	<div class="container">
 		<table class="table table-bordered">
 			<c:forEach var="i" begin="0" end="${list.size()-1}" varStatus="vs">
@@ -70,48 +76,46 @@ body {
 	<div class="container" align="center">
 		<ul class="pagination">
 			<c:if test="${page ne 1 }">
-				<li><a href="/search/detail?${param }&page=${p-1 }">이전</a></li>
+				<li><a href="page=${p-1 }" class="pagelinks">이전</a></li>
 			</c:if>
-			<c:forEach var="p" begin="1" end="${size }" varStatus="vs">
+			<c:forEach var="p" begin="1" end="${size > 10 ? 10 : size }" varStatus="vs">
 				<c:choose>
 					<c:when test="${p eq page }">
-						<li class="active disabled"><a href="/search/detail?${param }&page=${p}">${p }</a></li>
+						<li class="active"><a href="page=${p}" class="pagelinks disabled">${p }</a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="/search/detail?${param }&page=${p}">${p }</a></li>
+						<li><a href="page=${p}" class="pagelinks">${p }</a></li>
 					</c:otherwise>
 				</c:choose>
-				<%-- 			<c:if test="${vs.last eq false }">|</c:if> --%>
 			</c:forEach>
 			<c:if test="${page ne size }">
-				<li><a href="/search/detail?${param }&page=${p+1}">다음</a></li>
+				<li><a href="page=${p+1 }" class="pagelinks">다음</a></li>
 				<br />
 			</c:if>
 		</ul>
 	</div>
-
 </div>
 <script>
-	
-	$("ul.pagination li a").each(function() {
-// 		$("#content").html('<p class="loading"><img src="/florakid_lib/images/icons/loading.gif" alt=""></p>');
-
+		
+	$(".pagelinks").each(function() {
+		
 		$(this).click(function() {
-			var url = $(this).attr("href");
-			search(url);
+			$("#paging").html('<p class="loading"><img src="https://www.creditmutuel.fr/cmne/fr/banques/webservices/nswr/images/loading.gif" alt=""></p>');
+			var page = $(this).attr("href");
+			var url = "/search/detail?" + page+ '${key}';
+
+			console.log(url);
+			
+			jQuery.ajaxSettings.traditional = true;
+			
+			$.ajax({
+				"url" : url,
+				"method" : "post"	
+			}).done(function(rst) {
+				$("#paging").html(rst);
+			})
 			return false;
 		});
 	});
 
-	function search(url) {
-		console.log(url);
-
-		$.ajax({
-			"url" : url,
-			"method" : "post"
-		}).done(function(rst) {
-			$("#default").html(rst);
-		})
-	}
-	
 </script>

@@ -6,6 +6,9 @@
 	<select id="search" parameterType="java.lang.String" resultType="java.util.HashMap">
 		select * from score where CMPN_NM like #{search}
 	</select>
+	<select id="getCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) as cnt from score where CMPN_NM like #{search}
+	</select>
 	<select id="pasing" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap">
 	<![CDATA[
@@ -17,7 +20,7 @@
 	]]>
 	</select>
 
-	<select id="pasinglist" parameterType="java.util.HashMap"
+	<select id="getDataByCName" parameterType="java.util.HashMap"
 		resultType="java.util.HashMap">
 		SELECT * FROM SCORE WHERE CMPN_NM in
 		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
