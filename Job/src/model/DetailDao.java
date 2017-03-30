@@ -223,7 +223,11 @@ public class DetailDao {
 			Elements e2 = doc.select("h4 .fw_normal");
 			String[] ar2 = e2.text().trim().split("\\s+", 2);
 //			System.out.println("address : " + ar2[1]);
-			data.put("address", ar2[1]);
+			if(ar2.length > 2){
+				data.put("address", ar2[1]);
+			} else {
+				data.put("address", "");
+			}
 
 			// 회사 제도, 사내문화 / 분위기
 			int cnt = 0;
