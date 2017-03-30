@@ -248,7 +248,7 @@ div.col-sm-9 div {
 							<span style="color: #4682B4">(최근 스크랩한 기업 목록을 확인할 수 있습니다)</span>
 						</h6>
 						</br>
-						<div class="table-responsive">
+						<div class="table-responsive" id="scrap">
 							<table class="table">
 								<thead>
 									<tr>
@@ -266,9 +266,11 @@ div.col-sm-9 div {
 											<td><a href="/company/detail?cmpn_nm=${i.CMPN_NM }">${i.CMPN_NM }</a></td>
 											<td><fmt:formatDate value="${i.SDATE }"
 													pattern="yyyy-MM-dd" /></td>
-											<td><a
-												href="/my/company?email=${i.EMAIL }&company=${i.CMPN_NM }"><button
-														type="submit" class="btn" id="deleteScrap">삭제</button></a></td>
+											<td>
+<%-- 												<a href="/my/company?CMPN_NM=${i.CMPN_NM }"> --%>
+												<button type="button" class="btn" id="deleteScrap" name="${i.CMPN_NM }">삭제</button>
+												<!-- 												</a> -->
+											</td>
 
 										</tr>
 									</c:forEach>
@@ -317,7 +319,9 @@ div.col-sm-9 div {
 								<span style="color: #4682B4">(최근 비교한 10개의 목록을 확인하실 수
 									있습니다)</span>
 							</h6>
-							</br>
+							<br/>
+							<div class="row">
+ 								 <div class="col-sm-7">
 							<div class="table-responsive">
 								<table class="table">
 									<thead>
@@ -336,14 +340,30 @@ div.col-sm-9 div {
 												<td><a href="/company/detail?cmpn_nm=${i.CM1 }">${i.CM1 }</a></td>
 												<td><a href="/company/detail?cmpn_nm=${i.CM2 }">${i.CM2 }</a></td>
 												<td>
-													<form action="/compare/result">
-														<button type="submit" class="btn">비교</button>
+											 <form action="/compare/result?cm1=${i.CM1 }&cm2=${i.CM2 }">
+														<button type="submit" class="btn">비교</button> 
 													</form>
 												</td>
 											</tr>
 										</c:forEach>
 									</tbody>
 								</table>
+								</div>
+						<%-- 	 <div class="col-sm-5">
+
+										<div class="container">
+												<c:forEach var="i" begin="0" end="${csize-1 }">
+													<input type="checkbox" value="${clist[i] }" id="check_${i}"
+														class="chk"> ${clist[i] } 
+												</c:forEach>
+
+										</div>
+
+
+									</div> --%>
+								</div>
+		
+								
 								<br /> <br />
 
 							</div>
@@ -356,6 +376,12 @@ div.col-sm-9 div {
 
 
 <script>
+
+// compare button
+
+
+
+
 
 // 추천기업 목록 - <>버튼 누르면 추천 기업 버튼 하나씩 움직이는 기능
 var amt = 30;   // 움직임 값 (클수록 빠름)
@@ -395,31 +421,48 @@ function scroll_left(){
     cnt = cnt + amt;
 }
 
-	// 스크랩한 기업 삭제할 때 alert 뜸
-  	$("#deleteScrap").on("click", function() {
-  		window.alert("스크랩 기업이 삭제되었습니다");
-    });
+	$("#scrap td button").each(function() {
+		$(this).click(function() {
+			var CMPN_NM = $(this).attr("name");
+			
+			console.log(CMPN_NM);
+			console.log('${sessionScope.email}');
+			
+			$.ajax({
+				"url" : "/my/deleteScrap",
+				"method" : "post",
+				"data" : {
+					"email" : '${sessionScope.email}',
+					"CMPN_NM" : CMPN_NM
+				}
+			}).done(function(rst) {
+				location.reload();
+				window.alert("스크랩 기업이 삭제되었습니다");
+			})
+			return false;
+		});
+	});
 
-	    //param 만들기
-	   	var param = "";
-	    $(".chkclass :checked").each(function() {
-	    	if($(this.prop("cheked"))){
-	        	param += "&name="+$(this).val();	    		
-	    	}
-	        console.log('param : ' + param);
-	    });
-	           
-	    $.ajax({
-	        url : '/my/interestAjax',
-	        type : 'post',
-	        data : param,
-	        success : function(data) {
-	        	console.log('return string : ' + data);
-	    	},
-        	error : function() { 
-        		console.log('error');
-	     	}
-    	});
+  /*   //param 만들기
+   	var param = "";
+    $(".chkclass :checked").each(function() {
+    	if($(this.prop("cheked"))){
+        	param += "&name="+$(this).val();	    		
+    	}
+        console.log('param : ' + param);
+    });
+           
+    $.ajax({
+        url : '/my/interestAjax',
+        type : 'post',
+        data : param,
+        success : function(data) {
+        	console.log('return string : ' + data);
+    	},
+       	error : function() { 
+       		console.log('error');
+     	}
+   	}); */
   
 
 </script>

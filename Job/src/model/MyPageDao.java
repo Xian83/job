@@ -95,10 +95,10 @@ public class MyPageDao {
 
 	
 	// 스크랩한 기업 삭제
-	public boolean deleteScrap(String email2, String company) {
+	public boolean deleteScrap(String email, String CMPN_NM) {
 		HashMap<String, Object> data = new HashMap<>();
-		data.put("email", email2);
-		data.put("company", company);
+		data.put("email", email);
+		data.put("CMPN_NM", CMPN_NM);
 
 		SqlSession sql = null;
 		try {

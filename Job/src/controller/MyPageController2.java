@@ -41,22 +41,24 @@ public class MyPageController2 {
 	FileUploadDao fdao;
 
 	@RequestMapping("/result")
-	public ModelAndView resultHandler(HttpServletResponse response, HttpSession session, @RequestParam Map data) throws Exception {
+	public ModelAndView resultHandler(HttpServletResponse response, HttpSession session, @RequestParam Map data)
+			throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
 		mav.addObject("main", "/my/result");
 
 		String email = (String) session.getAttribute("email");
 		data.put("email", email);
-		int rst = mydao.update(data);	
-		
-		// Changing New Password 
+		int rst = mydao.update(data);
+
+		// Changing New Password
 		Map map = mDao.getData(email);
 		String pass1 = (String) map.get("PASS");
 		String pass = (String) data.get("passcheck");
-		if(pass == "") {
+		if (pass == "") {
 			pass = pass1;
-		} if (pass != null && pass1 != pass) {
+		}
+		if (pass != null && pass1 != pass) {
 			Map m = new HashMap<>();
 			m.put("pass", pass);
 			m.put("email", email);
@@ -65,11 +67,11 @@ public class MyPageController2 {
 
 		String birth = (String) data.get("birth");
 		Map b = new HashMap<>();
-			b.put("birth", birth);
-			b.put("email", email);
+		b.put("birth", birth);
+		b.put("email", email);
 		int rst3 = mydao.updateBirth(b);
 
-		mav.addObject("msg", "개인정보가 변경되었습니다");	
+		mav.addObject("msg", "개인정보가 변경되었습니다");
 		mav.addObject("url2", "/my/edit");
 		mav.setViewName("util/alert");
 
@@ -85,7 +87,8 @@ public class MyPageController2 {
 		return mav;
 	}
 
-//	@RequestMapping(name="/leave_result", produces="application/text; charset=utf8")
+	// @RequestMapping(name="/leave_result", produces="application/text;
+	// charset=utf8")
 	// return result by ajax - 탈퇴 처리 / 비밀번호 3회 오류시, 자동로그아웃 기능 추가 필요
 	@ResponseBody
 	@RequestMapping("/leave_result")
@@ -104,11 +107,11 @@ public class MyPageController2 {
 		boolean res = mDao.existCheck(data);
 
 		String result = "";
-		
-		if(res){
+
+		if (res) {
 			// 탈퇴처리
 			mDao.delete(data);
-			result = "redirect:/login/logout";	// 로그아웃 화면 이동			
+			result = "redirect:/login/logout"; // 로그아웃 화면 이동
 		} else {
 			// increase password error count up
 			session.setAttribute("leave_try", cnt++);
@@ -147,8 +150,7 @@ public class MyPageController2 {
 	}
 
 	@RequestMapping("/company")
-	public ModelAndView my_companyHandler(HttpServletResponse response, HttpSession session, @RequestParam Map map)
-			throws Exception {
+	public ModelAndView my_companyHandler(HttpServletResponse response, HttpSession session) throws Exception {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
@@ -162,14 +164,13 @@ public class MyPageController2 {
 		HashMap data = mDao.getInfo(email); // get data from member_Info table
 		List reco = mypage.getRecommand(data); // get data from mongoDB(company)
 		List list_r = mypage.getRecommand02(reco); // get data from score &
-													// salary table
+		// salary table
 
 		mav.addObject("member", data); // 관심지역(AREA),산업군(STNDD_BIG_GB),
-										// 연봉min/max
+		// 연봉min/max
 		mav.addObject("data", data);
 		mav.addObject("reco", reco);
 		mav.addObject("list_r", list_r);
-		
 
 		// 자주 본 기업(visit) - 데이터 잘 안 넘어 옴
 		List<HashMap> list_v = mypage.getVisitData(email);
@@ -182,14 +183,15 @@ public class MyPageController2 {
 		mav.addObject("list_s", list_s);
 		System.out.println("스크랩 = " + list_s);
 
-		// System.out.println("email = "+email);
+//		System.out.println("CMPN_NM = " + CMPN_NM);
 
-		String email2 = (String) map.get("email");
-		String company = (String) map.get("company");
-		boolean rst = mypage.deleteScrap(email, company);
-		if (rst)
-			response.sendRedirect("/my/company");
-
+//		if (CMPN_NM != null) {
+//			boolean rst = mypage.deleteScrap(email, CMPN_NM);
+//			System.out.println("삭제 됐어유");
+//			/*
+//			 * if (rst) response.sendRedirect("/my/company");
+//			 */
+//		}
 		// 비교한 기업(compare)
 		List<HashMap> list_c = mypage.getCompareData(email);
 		mav.addObject("list_c", list_c);
@@ -312,11 +314,19 @@ public class MyPageController2 {
 
 		System.out.println("추천 = " + list_r);
 	}
-	
+
 	@RequestMapping("/applyInfo")
-	public ModelAndView link(){
+	public ModelAndView link() {
 		ModelAndView mav = new ModelAndView("t1");
-		mav.addObject("main","/my/applyInfo");
+		mav.addObject("main", "/my/applyInfo");
 		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/deleteScrap")
+	public boolean deleteScrapHandler(@RequestParam(name="email")String email, @RequestParam(name="CMPN_NM")String name){
+		boolean rst = mypage.deleteScrap(email, name);
+		System.out.println("사사삭제 완료");
+		return rst;
 	}
 }
