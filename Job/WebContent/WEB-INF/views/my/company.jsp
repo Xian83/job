@@ -87,7 +87,8 @@ div.col-sm-9 div {
 						<span style="color: #6A5ACD"> <b>[추천 기업
 								조건]&nbsp;&nbsp;&nbsp;지역 : ${data.AREA} | 산업 :
 								${data.STNDD_BIG_GB} | 연봉 : ${data.SALARY_MIN}만원 ~
-								${data.SALARY_MIN}만원 </b>
+								${data.SALARY_MIN}만원<br/><br/>
+								총 추천기업은 ${list_r.size()}개 입니다 </b>
 						</span>
 					</h5>
 					<br />
@@ -328,7 +329,10 @@ div.col-sm-9 div {
 									<!-- <div class="container-fluid" align="center">
 										</div> -->
 									<div class="responsive" id="compareResult">
-										<br/>
+									
+									<img src="${chartURL }">
+									
+									<!-- 	<br/>
 										<br/>
 										<br/>
 										<br/>
@@ -337,7 +341,7 @@ div.col-sm-9 div {
 										<br/>
 										<span style="color: #4682B4">
 										<h5>비교 결과를 원하시는 목록의 <br/><br/>
-										<button type="button" class="btn" >간단 비교</button> 버튼을 눌러주세요</h5></span>
+										<button type="button" class="btn" >간단 비교</button> 버튼을 눌러주세요</h5></span> -->
 									
 									</div>
 									

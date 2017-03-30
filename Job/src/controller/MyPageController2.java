@@ -204,6 +204,8 @@ public class MyPageController2 {
 		List<HashMap> list_c = mypage.getCompareData(email);
 		mav.addObject("list_c", list_c);
 		System.out.println("비교 compare = " + list_c);
+	/*	String a = list_c[0];
+		System.out.println("비교 compare 0번째 = " + list_c[0].CM1);*/
 
 		// 사진 불러오기
 		String picURL = mydao.getLastetImageURL(email);
@@ -375,6 +377,7 @@ public class MyPageController2 {
 	public ModelAndView InitHandler1(@RequestParam(name = "cm1") String cm1, @RequestParam(name = "cm2") String cm2,
 				HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+			//mav.addObject("default", );
 		String auth = (String) session.getAttribute("auth");
 
 		if (auth.equals("yes")) {
