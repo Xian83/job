@@ -24,30 +24,6 @@ div.col-sm-9 div {
 	font-size: 20px;
 }
 
-/* #section1 {
-	color: #fff;
-
-}
-
-#section2 {
-	color: #fff;
-	background-color: #673ab7;
-}
-
-#section3 {
-	color: #fff;
-	background-color: #ff9800;
-}
-
-#section4 {
-	color: #fff;
-	background-color: #00bcd4;
-}
-
-#section5 {
-	color: #fff;
-	background-color: #009688;
-} */
 #section1, #section2, #section3, #section4, #section5 {
 	padding-top: 50px;
 }
@@ -267,9 +243,8 @@ div.col-sm-9 div {
 											<td><fmt:formatDate value="${i.SDATE }"
 													pattern="yyyy-MM-dd" /></td>
 											<td>
-<%-- 												<a href="/my/company?CMPN_NM=${i.CMPN_NM }"> --%>
-												<button type="button" class="btn" id="deleteScrap" name="${i.CMPN_NM }">삭제</button>
-												<!-- 												</a> -->
+												<button type="button" class="btn" id="deleteScrap"
+													name="${i.CMPN_NM }">삭제</button>
 											</td>
 
 										</tr>
@@ -290,15 +265,15 @@ div.col-sm-9 div {
 						</br>
 						<div id="donutchart" style="width: 900px; height: 500px;"></div>
 						<script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-	        ['기업명', '방문횟수'],
-    	    <c:forEach var="i" items="${list_v }" varStatus="vs">
-				['${i.CMPN_NM }', ${i.CNT }]<c:if test="${!vs.last }">,</c:if>		
-			</c:forEach>
-        ]);
+					      google.charts.load("current", {packages:["corechart"]});
+					      google.charts.setOnLoadCallback(drawChart);
+					      function drawChart() {
+					        var data = google.visualization.arrayToDataTable([
+						        ['기업명', '방문횟수'],
+					    	    <c:forEach var="i" items="${list_v }" varStatus="vs">
+									['${i.CMPN_NM }', ${i.CNT }]<c:if test="${!vs.last }">,</c:if>		
+								</c:forEach>
+					        ]);
 
         var options = {
 //           title: '내가 자주 본 기업 Top 5',	// Chart Title
@@ -316,72 +291,68 @@ div.col-sm-9 div {
 								<b>비교한 기업 목록</b>
 							</h2>
 							<h6>
-								<span style="color: #4682B4">(최근 비교한 10개의 목록을 확인하실 수
-									있습니다)</span>
+								<span style="color: #4682B4">(최근 비교한 10개의 목록을 확인하실 수있습니다 &nbsp;<b>자세한 비교를 원하시면 기업명을 클릭해 주세요</b>)</span>
+						
 							</h6>
-							<br/>
-							<div class="row">
- 								 <div class="col-sm-7">
-							<div class="table-responsive">
-								<table class="table">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Company Name A</th>
-											<th>Company Name B</th>
-											<th>Compare</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="i" begin="0" end="9" items="${list_c }"
-											varStatus="vs">
-											<tr>
-												<td>${vs.count }</td>
-												<td><a href="/company/detail?cmpn_nm=${i.CM1 }">${i.CM1 }</a></td>
-												<td><a href="/company/detail?cmpn_nm=${i.CM2 }">${i.CM2 }</a></td>
-												<td>
-											 <form action="/compare/result?cm1=${i.CM1 }&cm2=${i.CM2 }">
-														<button type="submit" class="btn">비교</button> 
-													</form>
-												</td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-								</div>
-						<%-- 	 <div class="col-sm-5">
-
-										<div class="container">
-												<c:forEach var="i" begin="0" end="${csize-1 }">
-													<input type="checkbox" value="${clist[i] }" id="check_${i}"
-														class="chk"> ${clist[i] } 
+							<br />
+							<div class="row content">
+								<div class="col-md-7">
+									<div class="table-responsive" id="compare">
+										<table class="table">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>Company Name A</th>
+													<th>Company Name B</th>
+													<th>Compare</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach var="i" begin="0" end="9" items="${list_c }"
+													varStatus="vs">
+													<tr>
+														<td>${vs.count }</td>
+														<td><a href="/company/detail?cmpn_nm=${i.CM1 }">${i.CM1 }</a></td>
+														<td><a href="/company/detail?cmpn_nm=${i.CM2 }">${i.CM2 }</a></td>
+														<td>
+															<button type="button" class="btn" id="compareView"
+																name="${i.CM1 }#${i.CM2 }" >간단 비교</button>
+														</td>
+													</tr>
 												</c:forEach>
-
-										</div>
-
-
-									</div> --%>
+											</tbody>
+										</table>
+									</div>
+									</div>
+									<div class="col-md-5" >
+									<!-- <div class="container-fluid" align="center">
+										</div> -->
+									<div class="responsive" id="compareResult">
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<span style="color: #4682B4">
+										<h5>비교 결과를 원하시는 목록의 <br/><br/>
+										<button type="button" class="btn" >간단 비교</button> 버튼을 눌러주세요</h5></span>
+									
+									</div>
+									
 								</div>
-		
-								
-								<br /> <br />
-
-							</div>
+						
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		</div>
 </body>
 
 
 <script>
-
-// compare button
-
-
-
-
 
 // 추천기업 목록 - <>버튼 누르면 추천 기업 버튼 하나씩 움직이는 기능
 var amt = 30;   // 움직임 값 (클수록 빠름)
@@ -420,7 +391,7 @@ function scroll_left(){
     }
     cnt = cnt + amt;
 }
-
+	// scrap button
 	$("#scrap td button").each(function() {
 		$(this).click(function() {
 			var CMPN_NM = $(this).attr("name");
@@ -442,8 +413,34 @@ function scroll_left(){
 			return false;
 		});
 	});
+	
+	
+	// compare button
+	$("#compare td button").each(function() {
+		$(this).click(function() {
+			var CMPN_NM = $(this).attr("name");
+			var strArray = CMPN_NM.split('#');
+			console.log(strArray[0] + strArray[1]);
 
-  /*   //param 만들기
+			$.ajax({
+				"url" : "/my/compare",
+				"method" : "post",
+				"data" : {
+					"cm1" : strArray[0],
+					"cm2" : strArray[1]
+				}
+			}).done(function(img) {
+				/* $("#compareResult").html("<img src=\"" + img +"\">"); */
+				$("#compareResult").html(img);
+			})
+			return false;
+		});
+	});
+	
+	
+	
+
+   /* //param 만들기
    	var param = "";
     $(".chkclass :checked").each(function() {
     	if($(this.prop("cheked"))){
@@ -462,7 +459,7 @@ function scroll_left(){
        	error : function() { 
        		console.log('error');
      	}
-   	}); */
-  
+   	}); 
+   */
 
 </script>

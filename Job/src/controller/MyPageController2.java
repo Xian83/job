@@ -16,11 +16,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import model.CompareDao;
 import model.DetailDao;
 import model.FileUploadDao;
 import model.MemberDao;
 import model.MyInfoDao;
 import model.MyPageDao;
+import model.SearchDao;
 
 @Controller
 @RequestMapping("/my")
@@ -39,6 +41,12 @@ public class MyPageController2 {
 
 	@Autowired
 	FileUploadDao fdao;
+	
+	@Autowired
+	SearchDao search;
+	
+	@Autowired
+	CompareDao cdao;
 
 	@RequestMapping("/result")
 	public ModelAndView resultHandler(HttpServletResponse response, HttpSession session, @RequestParam Map data)
@@ -183,15 +191,15 @@ public class MyPageController2 {
 		mav.addObject("list_s", list_s);
 		System.out.println("스크랩 = " + list_s);
 
-//		System.out.println("CMPN_NM = " + CMPN_NM);
+		// System.out.println("CMPN_NM = " + CMPN_NM);
 
-//		if (CMPN_NM != null) {
-//			boolean rst = mypage.deleteScrap(email, CMPN_NM);
-//			System.out.println("삭제 됐어유");
-//			/*
-//			 * if (rst) response.sendRedirect("/my/company");
-//			 */
-//		}
+		// if (CMPN_NM != null) {
+		// boolean rst = mypage.deleteScrap(email, CMPN_NM);
+		// System.out.println("삭제 됐어유");
+		// /*
+		// * if (rst) response.sendRedirect("/my/company");
+		// */
+		// }
 		// 비교한 기업(compare)
 		List<HashMap> list_c = mypage.getCompareData(email);
 		mav.addObject("list_c", list_c);
@@ -316,12 +324,84 @@ public class MyPageController2 {
 	}
 
 
-	
+	@RequestMapping("/applyInfo")
+	public ModelAndView link() {
+		ModelAndView mav = new ModelAndView("t1");
+		mav.addObject("main", "/my/applyInfo");
+		return mav;
+	}
+
+
 	@ResponseBody
 	@RequestMapping("/deleteScrap")
-	public boolean deleteScrapHandler(@RequestParam(name="email")String email, @RequestParam(name="CMPN_NM")String name){
+	public boolean deleteScrapHandler(@RequestParam(name = "email") String email,
+			@RequestParam(name = "CMPN_NM") String name) {
 		boolean rst = mypage.deleteScrap(email, name);
 		System.out.println("사사삭제 완료");
 		return rst;
 	}
+
+	
+	public String makeChart_2(String cm1, String cm2) {
+		System.out.println("cm1 =" + cm1 + " / cm2 = " + cm2);
+
+		HashMap data1 = detail.getScore02(cm1);
+		HashMap data2 = detail.getScore02(cm2);
+		
+		int size = 400;
+		String img = "https://chart.googleapis.com/chart?cht=r&chs=" + size + "x" + size;
+		img += "&chd=t:";
+		img += data1.get("LABEL01") + "," + data1.get("LABEL02") + "," + data1.get("LABEL03") + ",";
+		img += data1.get("LABEL04") + "," + data1.get("LABEL05") + "," + data1.get("LABEL06") + ",";
+		img += data1.get("LABEL07") + "," + data1.get("LABEL08") + "," + data1.get("LABEL09") + ","
+				+ data1.get("LABEL01") + "|";
+
+		img += data2.get("LABEL01") + "," + data2.get("LABEL02") + "," + data2.get("LABEL03") + ",";
+		img += data2.get("LABEL04") + "," + data2.get("LABEL05") + "," + data2.get("LABEL06") + ",";
+		img += data2.get("LABEL07") + "," + data2.get("LABEL08") + "," + data2.get("LABEL09") + ","
+				+ data2.get("LABEL01");
+
+		img += "&chco=FF0000,FF9900"; // 선 색깔
+		img += "&chls=2.0,4.0,0.0|2.0,4.0,0.0&chxt=x";
+		img += "&chxl=0:|규모·형태|안정성|성장성|수익성|조직문화·분위기|급여·복리후생|근무시간·휴가|성장·경력|경영진·경영";
+		img += "&chxr=0,0.0,360.0";
+		img += "&chdl=" + cm1 + "|" + cm2 + "&chdlp=t";
+
+		return img;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/compare")
+	public ModelAndView InitHandler1(@RequestParam(name = "cm1") String cm1, @RequestParam(name = "cm2") String cm2,
+				HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		String auth = (String) session.getAttribute("auth");
+
+		if (auth.equals("yes")) {
+		String email = (String) session.getAttribute("email");
+				
+		// 마이페이지용 비교 데이터 쌓기
+		Map map = new HashMap();
+			map.put("email", email);
+			map.put("cm1", cm1);
+			map.put("cm2", cm2);
+		int rst = cdao.insertclist(map);
+				
+				// data setting
+				// 회사명, 점수(재무평가,재직자평가), 방사형 그래프, 숫자(매출액, 영업이익, 당기 손익, 사원수)			
+		String chartURL = makeChart_2(cm1, cm2);// graph
+				
+			mav.setViewName("t5");
+			mav.addObject("main", "my/compareResult");
+			mav.addObject("score01", detail.score(cm1));	// FINANCE_SCORE, EMPLOYEE_SCORE
+			mav.addObject("score02", detail.score(cm2));
+			mav.addObject("info01", detail.getInfo02(search.getCompID(cm1)));	// HashMap (summary - List)
+			mav.addObject("info02", detail.getInfo02(search.getCompID(cm2)));
+			mav.addObject("chartURL", chartURL);
+				
+			}
+			return mav;
+	
+	
+}
 }
