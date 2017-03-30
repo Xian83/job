@@ -315,12 +315,7 @@ public class MyPageController2 {
 		System.out.println("추천 = " + list_r);
 	}
 
-	@RequestMapping("/applyInfo")
-	public ModelAndView link() {
-		ModelAndView mav = new ModelAndView("t1");
-		mav.addObject("main", "/my/applyInfo");
-		return mav;
-	}
+
 	
 	@ResponseBody
 	@RequestMapping("/deleteScrap")

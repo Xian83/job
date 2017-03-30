@@ -68,15 +68,23 @@
 	</insert>
 
 	<select id="man" parameterType="java.lang.String" resultType="java.util.HashMap">
-		select * from MEMBER_INFO, VISIT where VISIT.CMPN_NM=#{COMPANYNAME} and
+		select * from MEMBER_INFO, VISIT where VISIT.CMPN_NM=#{COMPANYNAME} and  VISIT.EMAIL=MEMBER_INFO.EMAIL and
 		MEMBER_INFO.GENDER='male'
 	</select>
 	<select id="woman" parameterType="java.lang.String" resultType="java.util.HashMap">
-		select * from MEMBER_INFO, VISIT where VISIT.CMPN_NM=#{COMPANYNAME} and
+		select * from MEMBER_INFO, VISIT where VISIT.CMPN_NM=#{COMPANYNAME} and  VISIT.EMAIL=MEMBER_INFO.EMAIL and
 		MEMBER_INFO.GENDER='female'
 	</select>
 	<select id="visi" parameterType="java.lang.String" resultType="java.util.HashMap">
 		select * from MEMBER_INFO, VISIT where VISIT.CMPN_NM=#{COMPANYNAME}
 	</select>
+	
+	<update id="inqur" parameterType="java.lang.String">
+		update INQUIRY set NUM = NUM +1 where CMPN_NM=#{CMPN_NM} and to_char(DATE2) = to_char(sysdate)
+	</update>
+		<select id="total" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select sum(NUM) as sum from INQUIRY where CMPN_NM=#{COMPANYNAME}
+	</select>
+	
 
 </mapper>
