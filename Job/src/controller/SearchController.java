@@ -78,13 +78,14 @@ public class SearchController {
 
 		// 페이지 분할 데이터
 		list = sdao.pasing2(start, end, list);
-
+		
 		// 상세 검색 목록 뷰
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/search/searchAjax");
 		mav.addObject("list", list);
 		mav.addObject("page", pStr);
 		mav.addObject("size", size);
+		mav.addObject("param", sdao.getParam(req)); //paging 처리용
 
 		return mav;
 	}

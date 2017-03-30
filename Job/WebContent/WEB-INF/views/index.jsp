@@ -33,7 +33,7 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox" align="center">
 				
-               <div class="item active"> <b> < 평균연봉 top3 > </b>
+               <div class="item active"> <span class="label label-primary" style="font-size: 20px;">평균연봉 top3</span><div><br/></div>
                   <div class="container" align="center">
                      <div class="row" align="center">
                       	
@@ -94,7 +94,7 @@
                   </div>
  				</div>
 
-                <div class="item"> <b> < 신입연봉 top3 > </b>
+                <div class="item"> <span class="label label-primary" style="font-size: 20px;">신입연봉 top3</span><div><br/></div>
                   <div class="container" align="center">
                      <div class="row" align="center">
                       	
@@ -153,7 +153,7 @@
                   </div>
  				</div>
 
-                <div class="item"> <b> < 재무평점 top3 > </b>
+                <div class="item"> <span class="label label-primary" style="font-size: 20px;">재무평점 top3</span><div><br/></div>
                   <div class="container" align="center">
                      <div class="row" align="center">
                       	
@@ -204,16 +204,14 @@
 </div>
 
 
+<div><br/><br/><br/><br/></div>
 
-<br/>
-<br/>
-<br/>
-<br/>
 <div align="center">
 	<p>
 		<i class="fa fa-hand-o-down" style="font-size:24px"></i> 바로가기 <i class="fa fa-hand-o-down" style="font-size:24px"></i>
-	</p><hr/>
+	</p>
 </div>
+<hr/>
 
 <!--  여기서부터 바로가기  -->
 

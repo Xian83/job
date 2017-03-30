@@ -166,8 +166,10 @@ public class MyPageController2 {
 
 		mav.addObject("member", data); // 관심지역(AREA),산업군(STNDD_BIG_GB),
 										// 연봉min/max
+		mav.addObject("data", data);
+		mav.addObject("reco", reco);
 		mav.addObject("list_r", list_r);
-		System.out.println("추천 = " + list_r);
+		
 
 		// 자주 본 기업(visit) - 데이터 잘 안 넘어 옴
 		List<HashMap> list_v = mypage.getVisitData(email);
