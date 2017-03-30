@@ -52,4 +52,9 @@
 			#{item.CMPN_NM}
 		</foreach>
 	</select>
+	
+	<select id="ppp" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select num from INQUIRY where CMPN_NM=#{com}
+	</select>
+	
 </mapper>

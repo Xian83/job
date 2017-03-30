@@ -112,4 +112,17 @@ public class RankDao {
 		}
 		return list2;
 	}
+	
+	public List ppp(String com){
+		SqlSession sql = null;
+		List list2 = null;
+		try{
+			sql = factory.openSession();
+			list2 = sql.selectList("mappers.rank.ppp", com);
+			System.out.println(list2);
+		}finally{
+			sql.close();
+		}
+		return list2;
+	}
 }
