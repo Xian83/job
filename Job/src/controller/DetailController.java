@@ -96,13 +96,12 @@ public class DetailController {
 		mav.addObject("industry", industry); // HashMap(avg, rookie)
 		mav.addObject("allCompany", allCompany);// HashMap(avg, rookie)
 		mav.addObject("info01", info01);// HashMap<List>(rank8, employee, scale)
-		mav.addObject("info02", info02);// HashMap (summary, address, system,
-										// culture)
+		mav.addObject("info02", info02);// HashMap (summary, address, system, culture)
 		mav.addObject("json", google.map((String) info02.get("address")));
 		mav.addObject("chartURL", chartURL); // 방사형 그래프 주소
+		mav.addObject("rate", rate); // 상세페이지를 클릭한 남녀비율 hashmap(man, woman)
+		mav.addObject("total", totalvisit); // 전체 조회수 hashmap(sum)
 
-		mav.addObject("rate", rate); // 상세페이지를 클리간 남녀비율 hashmap(man, woman)
-		mav.addObject("total", totalvisit); // 전체 조회수hashmap(sum)
 
 		// 쿠키생성
 		String[] arr = origin.split("#"); // 봤던 쿠키 목록
@@ -146,15 +145,11 @@ public class DetailController {
 		String auth = (String) session.getAttribute("auth");
 
 		if (auth != null && auth.equals("yes")) {
-			HashMap data = mDao.getInfo(email); // get data from member_Info
-												// table
-			List reco = mypage.getRecommand(data); // get data from
-													// mongoDB(company)
-			List list_r = mypage.getRecommand02(reco); // get data from score &
-														// salary table
+			HashMap data = mDao.getInfo(email); // get data from member_Info table
+			List reco = mypage.getRecommand(data); // get data from mongoDB(company)
+			List list_r = mypage.getRecommand02(reco); // get data from score & salary table
 
-			mav.addObject("member", data); // 관심지역(AREA),산업군(STNDD_BIG_GB),
-											// 연봉min/max
+			mav.addObject("member", data); // 관심지역(AREA),산업군(STNDD_BIG_GB), 연봉min/max
 			mav.addObject("list_r", list_r);
 			System.out.println("추천 = " + list_r);
 		}

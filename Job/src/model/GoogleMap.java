@@ -17,6 +17,7 @@ public class GoogleMap {
 		Map json = new HashMap();
 		
 		// address blank 처리
+		System.out.println("address =" + address);
 		String[] arr = address.split("\\s+");
 		address = "";
 		for(String str : arr){

@@ -6,15 +6,18 @@
 <title>itJOB</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 .logo-small {
 	color: #f4511e;
@@ -25,23 +28,18 @@
 	color: #f4511e;
 	font-size: 200px;
 }
-
 </style>
 
 </head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+<body id="myPage" data-spy="scroll" data-target=".navbar"
+	data-offset="60">
 
-	<div style="min-height: 5%;">
-		<tiles:insertAttribute name="nav" />
-	</div>
-	 <div style="min-height: 5%;">
-		<tiles:insertAttribute name="header" />
-	</div>  
-	<div style="min-height: 60%; margin-left: 50px; margin-right: 50px;">
+	
+	<div style="min-height: 100%; margin-left: 10px; margin-right: 10px;">
+		
 		<tiles:insertAttribute name="main" />
+
 	</div>
-	<div style="min-height: 10%;">
-		<tiles:insertAttribute name="footer" />
-	</div>
+
 </body>
 </html>

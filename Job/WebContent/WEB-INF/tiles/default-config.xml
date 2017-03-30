@@ -29,6 +29,9 @@
 	<definition name="default4" template="/WEB-INF/views/template/template4.jsp">
 		<put-attribute name="title" value="Job" />
 	</definition>
+	
+		<definition name="default5" template="/WEB-INF/views/template/template5.jsp">
+	</definition>
 
 	<definition name="index" template="/WEB-INF/views/template/templateIndex.jsp">
 		<put-attribute name="title" value="Job" />
@@ -44,6 +47,10 @@
 
 	<definition name="t1" extends="default">
 		<put-attribute name="main" expression="/WEB-INF/views/${main}.jsp" />
+	</definition>
+	
+		<definition name="t5" extends="default5">
+		<put-attribute name="main" expression="/WEB-INF/views/${main}.jsp" />	
 	</definition>
 
 <!-- 
