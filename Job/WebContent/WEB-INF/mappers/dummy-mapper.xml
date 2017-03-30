@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.dummy">
+	<select id="name" resultType="java.lang.String"
+	>
+		select cmpn_nm from score
+	</select>
+	
+	
+	<insert id="push" parameterType="java.util.HashMap">
+		insert into inquiry VALUES(#{CMPN_NM}, sysdate-2, #{NUM})
+	</insert>
+	
+	
+</mapper>

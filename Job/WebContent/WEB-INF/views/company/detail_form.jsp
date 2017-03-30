@@ -348,8 +348,7 @@ th {
 	</div>
 	<div class="row content">
 		<div class="col-md-6" align="center"><h2 style="font-family: monospace; color: #595959">관심도</h2>
-		
-			<b>이 회사를 클릭 한 횟수 : ${rate.visi}</b>
+		<b> 조회수 : ${total.SUM }명</b>
 		<div id="boygirl" style="width: 700px; height: 500px;"></div>
 		<script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
@@ -366,7 +365,7 @@ th {
       ]);
 
       var options = {
-        title: '남/여 비율',
+        title: '클릭 비율(비회원은 집계되지 않습니다.)',
         sliceVisibilityThreshold: .2
       };
 
