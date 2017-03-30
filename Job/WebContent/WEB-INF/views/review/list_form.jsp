@@ -79,7 +79,7 @@ hr {
 
 
 
-		<div class="col-md-2">
+		<div class="col-md-2" >
 			<div class="container">
 				<div class="well" id="result"
 					style="height: 40%; width: 30%; overflow-y: scroll; margin-top: 0px; background: #FFE4E1; border-style: double;">
