@@ -161,12 +161,12 @@ body {
 </div>
 <br />
 
-<div align="right">
-	<button type="button" class="btn btn-default btn btn-sm">재무평가순
-	</button>
-	<button type="button" class="btn btn-default btn btn-sm">가나다순</button>
-	<br />
-</div>
+<!-- <div align="right"> -->
+<!-- 	<button type="button" class="btn btn-default btn btn-sm">재무평가순 -->
+<!-- 	</button> -->
+<!-- 	<button type="button" class="btn btn-default btn btn-sm">가나다순</button> -->
+<!-- 	<br /> -->
+<!-- </div> -->
 
 
 
@@ -187,10 +187,10 @@ body {
 							</a>
 						</div>
 						<div class="media-body">
-							<a href="/company/detail?cmpn_nm=${i.CMPN_NM }"><h4>
+							<a href="/company/detail?cmpn_nm=${i.CMPN_NM }"><h5>
 									<b>${i.CMPN_NM }</b>
-								</h4></a>
-							<h5>${i.DIVISION }|${i.SCALE }</h5>
+								</h5></a>
+							${i.DIVISION }|${i.SCALE }<br/>
 							<button type="button" class="btn btn-default">재무평가
 								${i.FINANCE_SCORE }점</button>
 							<button type="button" class="btn btn-default">재직자 평판
@@ -290,7 +290,7 @@ body {
 		search();
 	});	
 
-	function search(var ptn) {
+	function search() {
 		var search = $("#search").val();
 		var chkSido = [];
 		var chkJinhakCode = [];

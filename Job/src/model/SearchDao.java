@@ -25,7 +25,7 @@ public class SearchDao {
 
 	@Autowired
 	SqlSessionFactory factory;
-	
+
 	// get Search Result by Company Name
 	public List getData(String CName) throws IOException {
 		SqlSession sql = null;
@@ -143,28 +143,28 @@ public class SearchDao {
 
 		// area condition add
 		if (area != null) {
-			if (!area[0].equals("�쟾泥�")) {
+			if (!area[0].equals("전체")) {
 				for (int i = 0; i < area.length; i++)
 					condition += "&AreaSido=" + area[i];
 			}
 		}
 		// industry condition add
 		if (industry != null) {
-			if (!industry[0].equals("�쟾泥�")) {
+			if (!industry[0].equals("전체")) {
 				for (int i = 0; i < industry.length; i++)
 					condition += "&JCode=" + industry[i];
 			}
 		}
 		// company size condition add
 		if (size != null) {
-			if (!size[0].equals("�쟾泥�")) {
+			if (!size[0].equals("전체")) {
 				for (int i = 0; i < size.length; i++)
 					condition += "&Size=" + size[i];
 			}
 		}
 
 		String url = "http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?flag=Search" + condition
-				+ "&intCurrentPage=1&intPageSize=20";
+				+ "&intCurrentPage=1&intPageSize=20&Sort=a.TotJum%20desc";
 
 		System.out.println("URL = " + url);
 		return url + "&CurrentPage=" + page;
@@ -172,22 +172,27 @@ public class SearchDao {
 
 	// 회사별 CompID 가져오기
 	public String getCompID(String CName) {
+//		String url = "http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?"
+//				+"flag=Search&AreaSido=%EC%A0%84%EC%B2%B4&JCode=%EC%A0%84%EC%B2%B4&IsStock=&Size=%EC%A0%84%EC%B2%B4"
+//				+"&GangsoType=&PublicCode=&IPO=%EC%A0%84%EC%B2%B4&ThemeName=&SubName=&GroupCode=&ReportGubun=&CName="
+//				+CName+"&UserSetting=N&TypeJum=0&StableJum=0&GrowJum=0&ProfitJum=0&Sort=a.TotJum%20desc";
+		
 		String url = "http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?flag=Search"
-				+ "&intCurrentPage=1&intPageSize=20&CName=" + CName;
-
+				+ "&intCurrentPage=1&intPageSize=20&Sort=a.TotJum%20desc&CName=" + CName;
+		System.out.println("찾아본 주소 : " + url);
 		int start = 0;
 		int end = 0;
 		String CompID = "";
 		try {
 			Document doc = Jsoup.connect(url).get();
-			Elements e = doc.select(".company_info a");
+			Elements e = doc.select(".company_info dt a");
 			for (Element t : e) {
+				System.out.println("회사이름 : " + t.text());
+				System.out.println("===== " + t.attr("href"));
 				if (t.text().equals(CName)) {
 					CompID = t.attr("href");
-
 					if (CompID.startsWith("/Comp/CompInfo.aspx?CompID=") && CompID.endsWith("&flag=Search")
 							&& t.text().length() != 0) {
-
 						start = CompID.indexOf("=");
 						end = CompID.indexOf("&");
 						CompID = CompID.substring(start + 1, end);
@@ -201,4 +206,38 @@ public class SearchDao {
 		}
 		return CompID;
 	}
+
+	// get param
+	public String getParam(HttpServletRequest req) {
+		String name = req.getParameter("search");
+		String[] area = req.getParameterValues("chkSido");
+		String[] industry = req.getParameterValues("chkJinhakCode");
+		String[] size = req.getParameterValues("chkSize");
+
+		String param = "";
+		// Search Condition Setting
+		// company name condition add
+		if (name != null)
+			param += "&CName=" + name;
+
+		// area condition add
+		if (area != null) {
+			for (int i = 0; i < area.length; i++)
+				param += "&AreaSido=" + area[i];
+		}
+		// industry condition add
+		if (industry != null) {
+			for (int i = 0; i < industry.length; i++)
+				param += "&JCode=" + industry[i];
+		}
+		// company size condition add
+		if (size != null) {
+			for (int i = 0; i < size.length; i++)
+				param += "&Size=" + size[i];
+		}
+
+		System.out.println("param : " +param);
+		return param;
+	}
+
 }
