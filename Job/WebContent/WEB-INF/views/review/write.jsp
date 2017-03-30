@@ -26,9 +26,8 @@ textarea {
 	</select>
 	<hr />
 	<label for="fname">¸®ºä</label> :<br />
-	<form>
 		<textarea></textarea>
-	</form><br/>
+	<br/>
 	<button type="submit">¿Ã¸®±â</button>
 
 </form>

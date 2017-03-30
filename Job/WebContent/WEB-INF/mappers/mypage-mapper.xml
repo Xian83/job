@@ -14,26 +14,37 @@
 		order by r.salary desc) where rownum <=5
 		]]>
 	</select>
-	
+
 	<insert id="addDummy" parameterType="java.util.HashMap">
-		insert into VISIT VALUES (#{email}, #{company}, sysdate)
+		insert into VISIT VALUES
+		(#{email}, #{company}, sysdate)
 	</insert>
-	
-	<select id="getVisited" parameterType="java.lang.String" resultType="java.util.HashMap">
+
+	<select id="getVisited" parameterType="java.lang.String"
+		resultType="java.util.HashMap">
 		<![CDATA[
 			select * from (select CMPN_NM, count(*) as CNT from VISIT 
 			where email=#{email}
 			group by CMPN_NM order by count(*) desc) where rownum <=5
 		]]>
 	</select>
-	
-	<select id="getScarpData" parameterType="java.lang.String" resultType="java.util.HashMap">
-		select * from (select * from INTEREST where EMAIL=#{email} order by INTEREST.SDATE desc) where LOVE=1
+
+	<select id="getScarpData" parameterType="java.lang.String"
+		resultType="java.util.HashMap">
+		select * from (select * from INTEREST where EMAIL=#{email}
+		order by INTEREST.SDATE desc) where LOVE=1
 	</select>
-	<select id="getCompareData" parameterType="java.lang.String" resultType="java.util.HashMap">
-		select * from COMPARE where EMAIL=#{email} order by COMPAREDATE DESC
+	<select id="getCompareData" parameterType="java.lang.String"
+		resultType="java.util.HashMap">
+		select * from COMPARE where EMAIL=#{email} order by
+		COMPAREDATE DESC
 	</select>
-		<delete id="deleteScrap" parameterType="java.util.HashMap" >
-		delete from INTEREST where EMAIL=#{email} and CMPN_NM=#{CMPN_NM} and LOVE=1
+	<delete id="deleteScrap" parameterType="java.util.HashMap">
+		delete from INTEREST where EMAIL=#{email} and CMPN_NM=#{CMPN_NM} and
+		LOVE=1
 	</delete>
+
+	<select id="visit" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select num from INQUIRY where CMPN_NM=#{cname}
+	</select>
 </mapper>
