@@ -291,12 +291,12 @@ div.col-sm-9 div {
 								<b>비교한 기업 목록</b>
 							</h2>
 							<h6>
-								<span style="color: #4682B4">(최근 비교한 10개의 목록을 확인하실 수
-									있습니다)</span>
+								<span style="color: #4682B4">(최근 비교한 10개의 목록을 확인하실 수있습니다 &nbsp;<b>자세한 비교를 원하시면 기업명을 클릭해 주세요</b>)</span>
+						
 							</h6>
 							<br />
 							<div class="row content">
-								<div class="col-md-6">
+								<div class="col-md-7">
 									<div class="table-responsive" id="compare">
 										<table class="table">
 											<thead>
@@ -316,7 +316,7 @@ div.col-sm-9 div {
 														<td><a href="/company/detail?cmpn_nm=${i.CM2 }">${i.CM2 }</a></td>
 														<td>
 															<button type="button" class="btn" id="compareView"
-																name="${i.CM1 }#${i.CM2 }">비교</button>
+																name="${i.CM1 }#${i.CM2 }" >간단 비교</button>
 														</td>
 													</tr>
 												</c:forEach>
@@ -324,12 +324,20 @@ div.col-sm-9 div {
 										</table>
 									</div>
 									</div>
-									<div class="col-md-6" >
+									<div class="col-md-5" >
 									<!-- <div class="container-fluid" align="center">
 										</div> -->
 									<div class="responsive" id="compareResult">
-									
-									
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<span style="color: #4682B4">
+										<h5>비교 결과를 원하시는 목록의 <br/><br/>
+										<button type="button" class="btn" >간단 비교</button> 버튼을 눌러주세요</h5></span>
 									
 									</div>
 									

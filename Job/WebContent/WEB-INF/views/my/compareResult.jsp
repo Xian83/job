@@ -13,6 +13,7 @@
 	<div class="compare_fixname">
 		<div class="name left"><span class="label label-danger" style="font-size: 15px;"><b>${score01.CMPN_NM }</b></span><br/> </div>
 	</div>
+	<br/>
 		<img src="${score01.LOGO }" class="img-circle" style="width: 70%;"><br/>
 
 </div>
@@ -23,6 +24,7 @@
 <div class="compare_fixname">
 		<div class="name right"><span class="label label-primary" style="font-size: 15px;"><b>${score02.CMPN_NM }</b></span><br/></div>
 	</div>
+	<br/>
 		<img src="${score02.LOGO }" class="img-circle" style="width: 70%;"><br/>
 
 </div>
