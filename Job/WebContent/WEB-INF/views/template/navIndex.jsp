@@ -61,7 +61,7 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav navbar-right nav navbar-nav w3-padding">
-				<li><a href="/search/company"
+				<li><a href="/search"
 					class="w3-bar-item w3-button w3-mobile">Search</a></li>
 				<li class="dropdown"><a
 					class="dropdown-toggl w3-bar-item w3-button w3-mobilee"

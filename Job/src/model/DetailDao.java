@@ -283,11 +283,26 @@ public class DetailDao {
 
 			data.put("man", session.selectList("mappers.career.man", COMPANYNAME).size());		
 			data.put("woman", session.selectList("mappers.career.woman", COMPANYNAME).size());	
-			data.put("visi", session.selectList("mappers.career.visi", COMPANYNAME).size());
+			System.out.println("남자===================="+session.selectList("mappers.career.man", COMPANYNAME).size());
+			System.out.println("여자===================="+session.selectList("mappers.career.woman", COMPANYNAME).size());
+			//data.put("visi", session.selectList("mappers.career.visi", COMPANYNAME).size());
 		} finally {
 			session.close();
 		}
 		return data;
+	}
+	
+	public HashMap inqurity(String COMPANYNAME){
+		SqlSession session = factory.openSession();
+		HashMap<String, Number> map = new HashMap<>();
+		try{
+			session.update("mappers.career.inqur", COMPANYNAME);//회사들어올때 조회수
+			map = session.selectOne("mappers.career.total",COMPANYNAME);//sum으로 들어옴
+			
+		}finally {
+			session.close();
+		}
+		return map;
 	}
 
 }

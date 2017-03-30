@@ -27,20 +27,19 @@ public class SearchDao {
 	SqlSessionFactory factory;
 
 	// get Search Result by Company Name
-	public List getData(String CName) throws IOException {
+	public int getCount(String CName) throws IOException {
 		SqlSession sql = null;
-		List list = new ArrayList();
-
+		int cnt = 0;
 		try {
 			sql = factory.openSession();
-			list = sql.selectList("mappers.search.search", "%" + CName + "%");
+			cnt = sql.selectOne("mappers.search.getCount", "%" + CName + "%");
 		} catch (Exception e) {
 			e.printStackTrace();
 
 		} finally {
 			sql.close();
 		}
-		return list;
+		return cnt;
 	}
 
 	// page 처리
@@ -63,6 +62,7 @@ public class SearchDao {
 	}
 
 	// get Search Result by detail condition
+	// 한 페이지만 접근함
 	public List getData(HttpServletRequest req) {
 		List list = new ArrayList();
 		try {
@@ -80,20 +80,15 @@ public class SearchDao {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		return list;
 	}
 
-	// detail search result paging
-	public List<HashMap> pasing2(int start, int end, List list) {
+	// detail search result
+	public List<HashMap> getDataByCName(List list) {
 		List<HashMap> cmpn_info = new ArrayList<>();
 		SqlSession sql = factory.openSession();
 		try {
-			Map map = new HashMap();
-			map.put("list", list);
-			map.put("start", start);
-			map.put("end", end);
-			cmpn_info = sql.selectList("mappers.search.pasinglist", list);
+			cmpn_info = sql.selectList("mappers.search.getDataByCName", list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -116,10 +111,11 @@ public class SearchDao {
 
 			// get total count
 			Element cnt = doc.select(".iframe p").first();
+			System.out.println("cnt " + cnt.text());
 			String[] ar = cnt.text().split("\\s+");
 			ar[1] = ar[1].replaceAll("\\,", "");
 			total = Integer.parseInt(ar[1].substring(0, ar[1].length() - 1));
-			System.out.println(total);
+			System.out.println("total " + total);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -129,7 +125,7 @@ public class SearchDao {
 
 	// get URL
 	public String getURL(HttpServletRequest req) {
-		String name = req.getParameter("search");
+		String name = req.getParameter("CName");
 		String[] area = req.getParameterValues("chkSido");
 		String[] industry = req.getParameterValues("chkJinhakCode");
 		String[] size = req.getParameterValues("chkSize");
@@ -172,10 +168,14 @@ public class SearchDao {
 
 	// 회사별 CompID 가져오기
 	public String getCompID(String CName) {
-//		String url = "http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?"
-//				+"flag=Search&AreaSido=%EC%A0%84%EC%B2%B4&JCode=%EC%A0%84%EC%B2%B4&IsStock=&Size=%EC%A0%84%EC%B2%B4"
-//				+"&GangsoType=&PublicCode=&IPO=%EC%A0%84%EC%B2%B4&ThemeName=&SubName=&GroupCode=&ReportGubun=&CName="
-//				+CName+"&UserSetting=N&TypeJum=0&StableJum=0&GrowJum=0&ProfitJum=0&Sort=a.TotJum%20desc";
+		// String url =
+		// "http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?"
+		// +"flag=Search&AreaSido=%EC%A0%84%EC%B2%B4&JCode=%EC%A0%84%EC%B2%B4&IsStock=&Size=%EC%A0%84%EC%B2%B4"
+		// +"&GangsoType=&PublicCode=&IPO=%EC%A0%84%EC%B2%B4&ThemeName=&SubName=&GroupCode=&ReportGubun=&CName="
+		// +CName+"&UserSetting=N&TypeJum=0&StableJum=0&GrowJum=0&ProfitJum=0&Sort=a.TotJum%20desc";
+		
+		if(CName.equals("LG"))	return "350079";
+		if(CName.equals("세바른병원"))	return "L80530";
 		
 		String url = "http://www.careercatch.co.kr/Comp/Controls/ifrmCompList.aspx?flag=Search"
 				+ "&intCurrentPage=1&intPageSize=20&Sort=a.TotJum%20desc&CName=" + CName;
@@ -209,35 +209,35 @@ public class SearchDao {
 
 	// get param
 	public String getParam(HttpServletRequest req) {
-		String name = req.getParameter("search");
+		String name = req.getParameter("CName");
 		String[] area = req.getParameterValues("chkSido");
 		String[] industry = req.getParameterValues("chkJinhakCode");
 		String[] size = req.getParameterValues("chkSize");
 
-		String param = "";
+		String keyword = "";
 		// Search Condition Setting
 		// company name condition add
 		if (name != null)
-			param += "&CName=" + name;
+			keyword += "&CName=" + name;
 
 		// area condition add
 		if (area != null) {
 			for (int i = 0; i < area.length; i++)
-				param += "&AreaSido=" + area[i];
+				keyword += "&chkSido=" + area[i];
 		}
 		// industry condition add
 		if (industry != null) {
 			for (int i = 0; i < industry.length; i++)
-				param += "&JCode=" + industry[i];
+				keyword += "&chkJinhakCode=" + industry[i];
 		}
 		// company size condition add
 		if (size != null) {
 			for (int i = 0; i < size.length; i++)
-				param += "&Size=" + size[i];
+				keyword += "&chkSize=" + size[i];
 		}
 
-		System.out.println("param : " +param);
-		return param;
+		System.out.println("keyword : " + keyword);
+		return keyword;
 	}
 
 }

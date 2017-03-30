@@ -220,7 +220,7 @@
   <div class="row">
   	 <div class="col-md-1"></div>
      <div class="col-md-2" style="border: none;" class="thumbnail">
-        <a href="/search/company"><i class="fa fa-search" style="font-size:36px; color: orange;"></i>
+        <a href="/search"><i class="fa fa-search" style="font-size:36px; color: orange;"></i>
         	<div class="caption">
         	검색
         	</div>
@@ -240,8 +240,8 @@
         	</div>
         </button></a>
      </div>
-     <div class="col-md-2" style="border: none;" class="thumbnail">
-        <a href="/my/applyInfo"><i class="fa fa-calendar" style="font-size:36px; color: orange;"></i>
+     <div class="col-md-2" style="border: none;" class="thumbnail" >
+        <a href="/candler/applyInfo"><i class="fa fa-calendar" style="font-size:36px; color: orange;"></i>
         	<div class="caption">
         	공채달력
         	</div>

@@ -52,7 +52,8 @@ public class DetailController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("ttt");
 		mav.addObject("main", "company/detail_form");
-
+		HashMap totalvisit = ddao.inqurity(companyname);//회사 조회수 증가 and 총 조회수
+	
 		// get data by Company name
 		HashMap scorelist = ddao.score(companyname);
 		HashMap salarylist = ddao.salary(companyname);
@@ -102,6 +103,10 @@ public class DetailController {
 
 		mav.addObject("rate", rate); // 상세페이지를 클리간 남녀비율 hashmap(man, woman,
 										// visi)
+
+		mav.addObject("chartURL", chartURL);	//방사형 그래프 주소
+		mav.addObject("rate",rate);  //상세페이지를 클리간 남녀비율  hashmap(man, woman)
+		mav.addObject("total", totalvisit); //전체 조회수hashmap(sum)
 
 		// 쿠키생성
 		String[] arr = origin.split("#"); // 봤던 쿠키 목록

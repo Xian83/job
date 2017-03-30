@@ -59,7 +59,7 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right nav navbar-nav">
-					<li><a href="/search/company">Search</a></li>
+					<li><a href="/search">Search</a></li>
 					<li class="dropdown"><a class="dropdown-toggle" 
 						data-toggle="dropdown" href="#">Company<span class="caret"></span></a>
 						<ul class="dropdown-menu" style="background: #f4511e;  min-width: 1px ">
