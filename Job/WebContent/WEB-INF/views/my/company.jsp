@@ -6,21 +6,24 @@
 
 
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
- <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
- <script
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
- <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 body {
 	position: relative;
+}
+
+th {
+	font-size: 80%;
 }
 
 .affix {
@@ -56,7 +59,7 @@ div.col-sm-9 div {
 
 <body data-spy="scroll" data-target="#myScrollspy" data-offset="150">
 	<div class="container">
-		<div class="row" >
+		<div class="row">
 			<div class="col-sm-3" id="myScrollspy">
 				<ul class="nav nav-pills nav-stacked" data-spy="affix"
 					data-offset-top="205">
@@ -75,14 +78,14 @@ div.col-sm-9 div {
 					<li><a href="#section1"><i class="fa fa-thumbs-o-up"
 							style="font-size: 36px"></i><b> 추천 기업 정보</b></a></li>
 					<li><a href="#section2"><i class="fa fa-refresh"
-							style="font-size: 36px"></i><b> 비교한 기업 정보</b></a></li>					
+							style="font-size: 36px"></i><b> 비교한 기업 정보</b></a></li>
 					<li><a href="#section3"><i class="fa fa-eye"
 							style="font-size: 36px"></i><b> 자주 본 기업 정보</b></a></li>
 					<li><a href="#section4"><i class="fa fa-files-o"
 							style="font-size: 36px"></i><b> 스크랩한 기업 정보</b></a></li>
 				</ul>
 			</div>
-			<div class="col-sm-9" >
+			<div class="col-sm-9">
 				<div id="section1">
 					<hr />
 					<h2>
@@ -92,8 +95,7 @@ div.col-sm-9 div {
 						<span style="color: #4682B4">(관심 조건을 바꾸시려면 개인정보에서 변경해 주세요)</span>
 					</h6>
 					<h5>
-					<br/>
-						<span style="color: #6A5ACD"> <b>[추천 기업
+						<br /> <span style="color: #6A5ACD"> <b>[추천 기업
 								조건]&nbsp;&nbsp;&nbsp;지역 : ${data.AREA} | 산업 :
 								${data.STNDD_BIG_GB} | 연봉 : ${data.SALARY_MIN}만원 ~
 								${data.SALARY_MIN}만원<br /> <br /> 총 추천기업은 ${list_r.size()}개
@@ -102,10 +104,10 @@ div.col-sm-9 div {
 						</span>
 					</h5>
 					<br />
-					
+
 					<div id="img_list"
 						style="width: 850px; height: 210px; overflow: hidden;">
-						<table class="" style="width :2500" align="center" cellpadding="0"
+						<table class="" style="width: 2500" align="center" cellpadding="0"
 							cellspacing="0">
 							<tr>
 								<td><c:forEach var="i" items="${list_r }">
@@ -344,80 +346,54 @@ div.col-sm-9 div {
 
 						<div id="section4">
 							<hr />
-						<h2>
-							<b>스크랩한 기업 목록</b>
-						</h2>
-						<h6>
-							<span style="color: #4682B4">(최근 스크랩한 기업 목록을 확인할 수 있습니다)</span>
-						</h6>
-						</br>
-						<div class="row content">
-							<div class="table-responsive col-md-6 " style="height: 500px; overflow: auto;" id="scrap">
-								<table class="table ">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Company Name</th>
-											<th>Scrap Date</th>
-											<th>Cancel</th>
-										</tr>
-									</thead>
-									<tbody>
-
-										<c:forEach var="i" items="${list_s }" varStatus="vs">
+							<h2>
+								<b>스크랩한 기업 목록</b>
+							</h2>
+							<h6>
+								<span style="color: #4682B4">(최근 스크랩한 기업 목록을 확인할 수 있습니다)</span>
+							</h6>
+							</br>
+							<div class="row content">
+								<div class="table-responsive col-md-7 "
+									style="height: 500px; overflow: auto;" id="scrap">
+									<table class="table ">
+										<thead>
 											<tr>
-												<td>${vs.count }</td>
-												<td><a href="/company/detail?cmpn_nm=${i.CMPN_NM }">${i.CMPN_NM }</a></td>
-												<td><fmt:formatDate value="${i.SDATE }"
-														pattern="yyyy-MM-dd" /></td>
-												<td>
-													<button type="button" class="btn" id="deleteScrap"
-														name="${i.CMPN_NM }">삭제</button>
-												</td>
-
+												<th>#</th>
+												<th>Company Name</th>
+												<th>check</th>
+												<th>Scrap Date</th>
+												<th>Cancel</th>
 											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
-							<div class="col-md-6">
-								<div id="visit_chart" style="width: 100%; height: 400px"></div>
-								<script>					
-google.charts.load('current', {packages: ['corechart', 'line']});
-google.charts.setOnLoadCallback(drawBasic);
+										</thead>
+										<tbody>
 
-function drawBasic() {
+											<c:forEach var="i" items="${list_s }" varStatus="vs">
+												<tr>
+													<td>${vs.count }</td>
+													<td><a href="/company/detail?cmpn_nm=${i.CMPN_NM }">${i.CMPN_NM }</a></td>
+													<td><input type="checkbox" name="inqurity" class="chk"
+														value="${i.CMPN_NM }"></td>
+													<td><fmt:formatDate value="${i.SDATE }"
+															pattern="yyyy-MM-dd" /></td>
+													<td>
+														<button type="button" class="btn" id="deleteScrap"
+															name="${i.CMPN_NM }">삭제</button>
+													</td>
 
-      var data = new google.visualization.DataTable();
-      data.addColumn('number', 'X');
-      data.addColumn('number', 'Dogs');
-		data.addColumn('number', 'ca');
-		data.addColumn('number', 'ttt');
-      data.addRows([
-        [0, 0, 0,0],   [1, 10, 15,20],  [2, 23, 15,20],  [3, 17, 13,20],  [4, 18, 19,20],  [5, 9, 20,20],
-        [6, 11, 60,20],  [7, 27, 0,20]
-      ]);
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+								<div class="col-md-5">
+									<div id="visit_chart" style="width: 100%; height: 400px"></div>
 
-      var options = {
-        hAxis: {
-          title: '조회수 비교'
-        },
-        vAxis: {
-          title: ''
-        }
-      };
 
-      var chart = new google.visualization.LineChart(document.getElementById('visit_chart'));
-
-      chart.draw(data, options);
-    }
-							
-</script>
-
+								</div>
 							</div>
 						</div>
-					</div>
-<<<<<<< HEAD
+						<%-- <<<<<<< HEAD
 =======
 				</div>
 
@@ -517,7 +493,7 @@ function drawBasic() {
 							</div>
 
 						</div>
->>>>>>> branch 'master' of https://github.com/Xian83/job
+>>>>>>> branch 'master' of https://github.com/Xian83/job --%>
 					</div>
 				</div>
 			</div>
@@ -525,9 +501,8 @@ function drawBasic() {
 	</div>
 </body>
 
-
 <script>
-
+google.charts.load('current', {packages: ['corechart', 'line']});
 // 추천기업 목록 - <>버튼 누르면 추천 기업 버튼 하나씩 움직이는 기능
 var amt = 30;   // 움직임 값 (클수록 빠름)
 var gap = 170;  // 이미지와 사이 공간의 합
@@ -611,10 +586,65 @@ function scroll_left(){
 		});
 	});
 	
+	$(".chk").on("change", function() {
+		if ($("input:checkbox[name='inqurity']:checked").length>=4) {
+			window.alert("최대3개까지만 선택가능합니다.");
+			$(this).prop("checked", false);
+		} else {
+			var checkname = [];
+			$("input:checkbox[name='inqurity']:checked").each(function(){
+				checkname.push($(this).val());	
+			});
+		
+			window.alert(checkname);
+			
+			$.ajax({
+				"url" : "/my/visitgraph",
+				"method" : "get",
+				"data" : {
+					"cm" : checkname
+				}
+			}).done(function(rst){
+				google.charts.setOnLoadCallback(drawBasic);
+				function drawBasic() {
+
+					var data = new google.visualization.DataTable();
+					data.addColumn('number', 'X');
+					data.addColumn('number', 'Dogs');
+					data.addColumn('number', 'ca');
+					data.addColumn('number', 'ttt');
+					data.addRows([
+					[0, 0, 0,0],   [1, 10, 15,20],  [2, 23, 15,20],  [3, 17, 13,20],  [4, 18, 19,20],  [5, 9, 20,20],
+					[6, 11, 60,20],  [7, 27, 0,20]
+					]);
+
+					var options = {
+						hAxis : {
+							title: '조회수 비교'
+						},
+						vAxis: {
+							title: ''
+						}
+					};
+
+					var chart = new google.visualization.LineChart(document.getElementById('visit_chart'));
+
+					chart.draw(data, options);
+				}
+
+			});
+		}
+		
+	});
 	
+	
+	
+/* 
+	
+		 */
 	
 
-   /* //param 만들기
+	   /* //param 만들기
    	var param = "";
     $(".chkclass :checked").each(function() {
     	if($(this.prop("cheked"))){
