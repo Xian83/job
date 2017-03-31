@@ -192,6 +192,28 @@ public class MyPageController2 {
       mav.addObject("list_s", list_s);
       // System.out.println("스크랩 = " + list_s);
 
+
+		// System.out.println("CMPN_NM = " + CMPN_NM);
+		// List<HashMap> visit = mypage.visitgraph("삼성전자");
+		// System.out.println("test 입니다 ===============" +
+		// visit.get(0).get("NUM"));
+		// System.out.println("visit==============="+visit.get(0).get("NUM"));
+		// 이렇게 쓰시오 조회수
+		// mav.addObject("visit",visit);
+		// if (CMPN_NM != null) {
+		// boolean rst = mypage.deleteScrap(email, CMPN_NM);
+		// System.out.println("삭제 됐어유");
+		// /*
+		// * if (rst) response.sendRedirect("/my/company");
+		// */
+		// }
+		// 비교한 기업(compare)
+		List<HashMap> list_c = mypage.getCompareData(email);
+		mav.addObject("list_c", list_c);
+		// System.out.println("비교 compare = " + list_c);
+		String CM1 = (String) list_c.get(0).get("CM1");
+		String CM2 = (String) list_c.get(0).get("CM2");
+
       // System.out.println("CMPN_NM = " + CMPN_NM);
       //List<HashMap> visit = mypage.visitgraph("삼성전자");
    //   System.out.println("test 입니다 ===============" + visit.get(0).get("NUM"));
@@ -206,11 +228,11 @@ public class MyPageController2 {
       // */
       // }
       // 비교한 기업(compare)
-      List<HashMap> list_c = mypage.getCompareData(email);
-      mav.addObject("list_c", list_c);
+     
+     
       // System.out.println("비교 compare = " + list_c);
-      String CM1 = (String) list_c.get(0).get("CM1");
-      String CM2 = (String) list_c.get(0).get("CM2");
+     
+ //branch 'master' of https://github.com/Xian83/job.git
 
       String chartURL = makeChart_2(CM1, CM2);// graph
 
@@ -418,6 +440,8 @@ public class MyPageController2 {
 
    }
 
+
+
    @ResponseBody
    @RequestMapping("/visitgraph")
    public HashMap visitGraph(@RequestParam(name = "cm[]") List cm) {
@@ -432,11 +456,13 @@ public class MyPageController2 {
          map.put(cm.get(t), list);   
       }
 
-      System.out.println("mapsize?=================="+map.size());
-   
-//      mav.setViewName("t5");
-//      mav.addObject("main", "my/company");
-//      mav.addObject("visit", map);
-      return map;
-   }
+		System.out.println(map);
+
+		// mav.setViewName("t5");
+		// mav.addObject("main", "my/company");
+		// mav.addObject("visit", map);
+		return map;
+	}
+
+
 }

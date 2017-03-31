@@ -596,7 +596,7 @@ function scroll_left(){
 				checkname.push($(this).val());	
 			});
 		
-			window.alert(checkname);
+		//window.alert(checkname);
 			
 			$.ajax({
 				"url" : "/my/visitgraph",
@@ -606,8 +606,9 @@ function scroll_left(){
 				}
 			}).done(function(rst){
 				google.charts.setOnLoadCallback(drawBasic);
+				window.alert(rst)
 				function drawBasic() {
-
+					
 					var data = new google.visualization.DataTable();
 					data.addColumn('number', 'X');
 					data.addColumn('number', 'Dogs');

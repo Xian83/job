@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -20,7 +20,7 @@ th {
 </style>
 <div class="container-fluid"
 	style="background: white-space; margin-left: 100px; margin-right: 100px">
-	<%-- <c:set var="check" value="${fn:split(info02.num01, '¾ï||¸¸¿ø||Á¶')}"></c:set>${check[0]}  ¸ÅÃâ¾×,¿µ¾÷ÀÌÀÍ,´ç±â¼ÕÀÍ ¼ıÀÚ·Î º¯È¯--%>
+	<%-- <c:set var="check" value="${fn:split(info02.num01, 'ì–µ||ë§Œì›||ì¡°')}"></c:set>${check[0]}  ë§¤ì¶œì•¡,ì˜ì—…ì´ìµ,ë‹¹ê¸°ì†ìµ ìˆ«ìë¡œ ë³€í™˜--%>
 
 	<div class="row content">
 		<div class="col-md-8">
@@ -37,10 +37,10 @@ th {
 							<c:otherwise>
 								<c:choose>
 									<c:when test="${scrape eq 0 }">
-										<button class="btn btn-primary ">°ü½É¸ñ·ÏÃß°¡</button>
+										<button class="btn btn-primary ">ê´€ì‹¬ëª©ë¡ì¶”ê°€</button>
 									</c:when>
 									<c:otherwise>
-										<button class="btn btn-primary " style="background: red;">°ü½É¸ñ·ÏÇØÁ¦</button>
+										<button class="btn btn-primary " style="background: red;">ê´€ì‹¬ëª©ë¡í•´ì œ</button>
 									</c:otherwise>
 								</c:choose>
 							</c:otherwise>
@@ -60,18 +60,18 @@ th {
 						</thead>
 						<tbody>
 							<tr>
-								<td>»ê¾÷±º : ${score.DIVISION }</td>
-								<td>±â¾÷±¸ºĞ : ${score.SCALE }</td>
+								<td>ì‚°ì—…êµ° : ${score.DIVISION }</td>
+								<td>ê¸°ì—…êµ¬ë¶„ : ${score.SCALE }</td>
 							</tr>
 					</table>
 
 
 					<c:choose>
 						<c:when test="${score.FINANCE_SCORE ==null}">
-							<p>Àç¹«Á¡¼ö : ${score.FINANCE_SCORE=0 }Á¡(ÇØ´çÈ¸»çÀÇ Á¤º¸°¡ ÀÔ·ÂµÇÁö ¾Ê¾Ò½À´Ï´Ù.)</p>
+							<p>ì¬ë¬´ì ìˆ˜ : ${score.FINANCE_SCORE=0 }ì (í•´ë‹¹íšŒì‚¬ì˜ ì •ë³´ê°€ ì…ë ¥ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.)</p>
 						</c:when>
 						<c:otherwise>
-							<p>Àç¹«Á¡¼ö : ${score.FINANCE_SCORE }Á¡</p>
+							<p>ì¬ë¬´ì ìˆ˜ : ${score.FINANCE_SCORE }ì </p>
 						</c:otherwise>
 					</c:choose>
 					<div
@@ -86,10 +86,10 @@ th {
 
 					<c:choose>
 						<c:when test="${score.EMPLOYEE_SCORE ==null}">
-							<p>ÀçÁ÷ÀÚÁ¡¼ö : ${score.EMPLOYEE_SCORE=0 }Á¡(ÇØ´çÈ¸»çÀÇ Á¤º¸°¡ ÀÔ·ÂµÇÁö ¾Ê¾Ò½À´Ï´Ù.)</p>
+							<p>ì¬ì§ìì ìˆ˜ : ${score.EMPLOYEE_SCORE=0 }ì (í•´ë‹¹íšŒì‚¬ì˜ ì •ë³´ê°€ ì…ë ¥ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.)</p>
 						</c:when>
 						<c:otherwise>
-							<p>ÀçÁ÷ÀÚÁ¡¼ö : ${score.EMPLOYEE_SCORE }Á¡</p>
+							<p>ì¬ì§ìì ìˆ˜ : ${score.EMPLOYEE_SCORE }ì </p>
 						</c:otherwise>
 					</c:choose>
 					<div
@@ -109,20 +109,20 @@ th {
 			<table class="table table-bordered" style="text-align: center;">
 				<thead>
 					<tr>
-						<th style="text-align: center;">Æò±Õ¿¬ºÀ</th>
-						<th style="text-align: center;">½ÅÀÔÆò±Õ¿¬ºÀ</th>
+						<th style="text-align: center;">í‰ê· ì—°ë´‰</th>
+						<th style="text-align: center;">ì‹ ì…í‰ê· ì—°ë´‰</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td><fmt:formatNumber value="${salary.AVG_SALARY / 10000 }"
-								groupingUsed="true" />¸¸¿ø</td>
+								groupingUsed="true" />ë§Œì›</td>
 						<td><fmt:formatNumber value="${salary.ROOKIE_SALARY/ 10000 }"
-								groupingUsed="true" />¸¸¿ø</td>
+								groupingUsed="true" />ë§Œì›</td>
 					</tr>
 			</table>
 			<div align="center">
-				<b>»ç¿ø¼ö : ${info02.num04} </b><br />
+				<b>ì‚¬ì›ìˆ˜ : ${info02.num04} </b><br />
 				<div id="curve_chart" style="width: 500px; height: 150px"
 					align="left"></div>
 			</div>
@@ -137,14 +137,14 @@ th {
 
 			function drawChart() {
 				var data = google.visualization.arrayToDataTable([
-						[ 'Year', '${score.CMPN_NM }' ,'ÀüÃ¼Æò±Õ','µ¿Á¾¾÷°èÆò±Õ'],
+						[ 'Year', '${score.CMPN_NM }' ,'ì „ì²´í‰ê· ','ë™ì¢…ì—…ê³„í‰ê· '],
 						[ '2013', ${info01.employee[0]},${info01.employee[3]}, ${info01.employee[6]}],
 						[ '2014', ${info01.employee[1]},${info01.employee[4]}, ${info01.employee[7]} ],
 						[ '2015', ${info01.employee[2]},${info01.employee[5]}, ${info01.employee[8]} ] 
 				]);
 
 				var options = {
-					title : '»ç¿ø¼ö Áõ°¡À²',
+					title : 'ì‚¬ì›ìˆ˜ ì¦ê°€ìœ¨',
 					curveType : 'function',
 					width : 400,	
 					vAxis : {textPosition : 'none'},
@@ -163,7 +163,7 @@ th {
 	</div>
 	<hr />
 	<div class="row content w3-myfont" align="center">
-		<h2 style="font-family: monospace; color: #595959">µ¿Á¾¾÷°è ÀÎ±â ¸¹Àº±â¾÷</h2>
+		<h2 style="font-family: monospace; color: #595959">ë™ì¢…ì—…ê³„ ì¸ê¸° ë§ì€ê¸°ì—…</h2>
 		<c:forEach var="i" begin="0" end="5">
 			<div class="col-md-2" style="border-style: none;">
 				<a href="/company/detail?cmpn_nm=${same[i].CMPN_NM }"> <img
@@ -182,8 +182,8 @@ th {
 			<thead>
 				<tr align="center" style="text-align: center;">
 					<th colspan="1" rowspan="2"
-						style="text-align: center; vertical-align: middle">¼Ò¼Ó»ê¾÷¸í</th>
-					<th colspan="3" style="text-align: center;">»ê¾÷¼øÀ§</th>
+						style="text-align: center; vertical-align: middle">ì†Œì†ì‚°ì—…ëª…</th>
+					<th colspan="3" style="text-align: center;">ì‚°ì—…ìˆœìœ„</th>
 				<tr>
 					<th colspan="1" style="text-align: center;">2013</th>
 					<th colspan="1" style="text-align: center;">2014</th>
@@ -208,7 +208,7 @@ th {
 	<div class="row content">
 		<br />
 		<div class="panel panel-default">
-			<div class="panel-heading">¸®ºä</div>
+			<div class="panel-heading">ë¦¬ë·°</div>
 			<c:forEach var="review" items="${review }">
 				<div class="panel-body">${review.EMAIL }:${review.CONTENTS }</div>
 			</c:forEach>
@@ -220,17 +220,17 @@ th {
 			<c:choose>
 				<c:when
 					test="${sessionScope.auth eq 'no' or sessionScope.auth eq null }">
-					<button type="submit" class="btn btn-success disabled">¿Ã¸®±â</button>
+					<button type="submit" class="btn btn-success disabled">ì˜¬ë¦¬ê¸°</button>
 				</c:when>
 				<c:otherwise>
-					<button type="submit" class="btn btn-success">¿Ã¸®±â</button>
+					<button type="submit" class="btn btn-success">ì˜¬ë¦¬ê¸°</button>
 				</c:otherwise>
 			</c:choose>
 		</form>
 	</div>
 
 	<div class="row content" align="center">
-		<h2 style="font-family: monospace; color: #595959">µ¿Á¾»ê¾÷ ºñ±³</h2>
+		<h2 style="font-family: monospace; color: #595959">ë™ì¢…ì‚°ì—… ë¹„êµ</h2>
 		<hr />
 		<div class="col-md-7">
 			<script>
@@ -243,30 +243,30 @@ th {
 
 
 			<script type="text/javascript">
-				// ·Îµù ¿Ï·á½Ã ÇÔ¼ö ½ÇÇàÇÏ¿© Â÷Æ® »ı¼º
+				// ë¡œë”© ì™„ë£Œì‹œ í•¨ìˆ˜ ì‹¤í–‰í•˜ì—¬ ì°¨íŠ¸ ìƒì„±
 				google.charts.setOnLoadCallback(drawChart);
 
 				var chart_options = {
-					title : '¿¬ºÀºñ±³',
+					title : 'ì—°ë´‰ë¹„êµ',
 					width : 600,
 					height : 400,
-					colors : [ 'blue', 'orange', 'red' ], // Ç×¸ñ °¹¼ö¿¡ ¸Â°Ô ÄÃ·¯ ¼³Á¤
+					colors : [ 'blue', 'orange', 'red' ], // í•­ëª© ê°¯ìˆ˜ì— ë§ê²Œ ì»¬ëŸ¬ ì„¤ì •
 					bar : {
 						groupWidth : '60%'
-					}, // ±×·¡ÇÁ ³Êºñ %
+					}, // ê·¸ë˜í”„ ë„ˆë¹„ %
 					isStacked : false,
-				// ±×·¡ÇÁ ½×±â(½ºÅÃ), ±âº»°ªÀº false
+				// ê·¸ë˜í”„ ìŒ“ê¸°(ìŠ¤íƒ), ê¸°ë³¸ê°’ì€ false
 					backgroundColor: '#f1f8e9'
 					
 				};
 
 				function drawChart() {
 
-					// Â÷Æ® µ¥ÀÌÅÍ
+					// ì°¨íŠ¸ ë°ì´í„°
 					var data = new google.visualization.arrayToDataTable([
-							[ '±¸ºĞ', '${score.CMPN_NM}', '¾÷°èÆò±Õ', 'ÀüÃ¼Æò±Õ', ],
-							[ 'Æò±Õ¿¬ºÀ', ${salary.AVG_SALARY}, ${industry.AVG}, ${allCompany.AVG} ],
-							[ '½ÅÀÔ¿¬ºÀ', ${salary.ROOKIE_SALARY}, ${industry.ROOKIE}, ${allCompany.ROOKIE} ]
+							[ 'êµ¬ë¶„', '${score.CMPN_NM}', 'ì—…ê³„í‰ê· ', 'ì „ì²´í‰ê· ', ],
+							[ 'í‰ê· ì—°ë´‰', ${salary.AVG_SALARY}, ${industry.AVG}, ${allCompany.AVG} ],
+							[ 'ì‹ ì…ì—°ë´‰', ${salary.ROOKIE_SALARY}, ${industry.ROOKIE}, ${allCompany.ROOKIE} ]
 							
 					]);
 
@@ -283,16 +283,16 @@ th {
 			<table class="table table-bordered" style="text-align: center;">
 				<thead>
 					<tr align="center" style="text-align: center;">
-						<th colspan="1" style="text-align: center;">±¸ºĞ</th>
-						<th colspan="1" style="text-align: center;">¼øÀ§</th>
-						<th colspan="2" style="text-align: center;">±â¾÷¸í</th>
-						<th colspan="1" style="text-align: center;">Á¡¼ö</th>
+						<th colspan="1" style="text-align: center;">êµ¬ë¶„</th>
+						<th colspan="1" style="text-align: center;">ìˆœìœ„</th>
+						<th colspan="2" style="text-align: center;">ê¸°ì—…ëª…</th>
+						<th colspan="1" style="text-align: center;">ì ìˆ˜</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="1" rowspan="9" style="vertical-align: middle;">µ¿Á¾»ê¾÷
-							ÃÖ»óÀ§</td>
+						<td colspan="1" rowspan="9" style="vertical-align: middle;">ë™ì¢…ì‚°ì—…
+							ìµœìƒìœ„</td>
 					</tr>
 					<c:forEach var="i" items="${info01.rank8}">
 						<tr>
@@ -311,8 +311,8 @@ th {
 					var data = google.visualization.arrayToDataTable([
 							[ "Element", "Density", {
 								role : "style"
-							} ], [ "¸ÅÃâ¾×", 60, "#b87333" ],
-							[ "¿µ¾÷ÀÌÀÍ", 30, "silver" ], [ "´ç±â¼ÕÀÍ", 50, "gold" ],
+							} ], [ "ë§¤ì¶œì•¡", 60, "#b87333" ],
+							[ "ì˜ì—…ì´ìµ", 30, "silver" ], [ "ë‹¹ê¸°ì†ìµ", 50, "gold" ],
 
 					]);
 
@@ -325,7 +325,7 @@ th {
 					}, 2 ]);
 
 					var options = {
-						title : "${score.CMPN_NM} ¼öÀÍ",
+						title : "${score.CMPN_NM} ìˆ˜ìµ",
 						width : 500,
 						height : 400,
 						bar : {
@@ -347,8 +347,8 @@ th {
 		</div>
 	</div>
 	<div class="row content">
-		<div class="col-md-6" align="center"><h2 style="font-family: monospace; color: #595959">°ü½Éµµ</h2>
-		<b> Á¶È¸¼ö : ${total.SUM }¸í</b>
+		<div class="col-md-6" align="center"><h2 style="font-family: monospace; color: #595959">ê´€ì‹¬ë„</h2>
+		<b> ì¡°íšŒìˆ˜ : ${total.SUM }ëª…</b>
 		<div id="boygirl" style="width: 700px; height: 500px;"></div>
 		<script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
@@ -359,13 +359,13 @@ th {
       data.addColumn('string', 'Pizza');
       data.addColumn('number', 'Populartiy');
       data.addRows([
-        ['³²ÀÚ', ${rate.man }],
-        ['¿©ÀÚ', ${rate.woman }],
+        ['ë‚¨ì', ${rate.man }],
+        ['ì—¬ì', ${rate.woman }],
 
       ]);
 
       var options = {
-        title: 'Å¬¸¯ ºñÀ²(ºñÈ¸¿øÀº Áı°èµÇÁö ¾Ê½À´Ï´Ù.)',
+        title: 'í´ë¦­ ë¹„ìœ¨(ë¹„íšŒì›ì€ ì§‘ê³„ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤.)',
         sliceVisibilityThreshold: .2
       };
 
@@ -375,20 +375,20 @@ th {
 		</script>
 		</div>
 		<div class="col-md-6" align="center">
-			<h2 style="font-family: monospace; color: #595959">¼öÀÍ</h2>
+			<h2 style="font-family: monospace; color: #595959">ìˆ˜ìµ</h2>
 			<hr />
 			<table class="table table-bordered" style="text-align: center;">
 				<thead>
 					<tr align="center" style="text-align: center;">
-						<th colspan="1" style="text-align: center;">±¸ºĞ</th>
-						<th colspan="1" style="text-align: center;">¸ÅÃâ¾×</th>
-						<th colspan="1" style="text-align: center;">¿µ¾÷ÀÌÀÍ</th>
-						<th colspan="1" style="text-align: center;">´ç±â¼ÕÀÍ</th>
+						<th colspan="1" style="text-align: center;">êµ¬ë¶„</th>
+						<th colspan="1" style="text-align: center;">ë§¤ì¶œì•¡</th>
+						<th colspan="1" style="text-align: center;">ì˜ì—…ì´ìµ</th>
+						<th colspan="1" style="text-align: center;">ë‹¹ê¸°ì†ìµ</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="1" rowspan="8" style="vertical-align: middle;">¼öÀÍºñ±³</td>
+						<td colspan="1" rowspan="8" style="vertical-align: middle;">ìˆ˜ìµë¹„êµ</td>
 					</tr>
 
 					<td>${info02.num01}</td>
@@ -397,14 +397,14 @@ th {
 			</table>
 			<hr />
 			<div class="row content" align="center">
-				<h2 style="font-family: monospace; color: #595959">»ç¿ø¼ö Áõ°¡À²</h2>
+				<h2 style="font-family: monospace; color: #595959">ì‚¬ì›ìˆ˜ ì¦ê°€ìœ¨</h2>
 				<hr />
 				<div class="col-md-12">
 					<table class="table table-bordered">
 
 						<thead>
 							<tr align="center" style="text-align: center;">
-								<th colspan="1" style="text-align: center;">±¸ºĞ</th>
+								<th colspan="1" style="text-align: center;">êµ¬ë¶„</th>
 								<th colspan="1" style="text-align: center;">2013</th>
 								<th colspan="1" style="text-align: center;">2014</th>
 								<th colspan="1" style="text-align: center;">2015</th>
@@ -423,7 +423,7 @@ th {
 							</tr>
 							<tr style="height: 30px">
 								<td colspan="1" rowspan="1"
-									style="vertical-align: middle; text-align: center">ÀüÃ¼Æò±Õ</td>
+									style="vertical-align: middle; text-align: center">ì „ì²´í‰ê· </td>
 								<td colspan="1" rowspan="1"
 									style="vertical-align: middle; text-align: center">${info01.employee[3]}</td>
 								<td colspan="1" rowspan="1"
@@ -433,7 +433,7 @@ th {
 							</tr>
 							<tr style="height: 30px">
 								<td colspan="1" rowspan="1"
-									style="vertical-align: middle; text-align: center">¾÷°èÆò±Õ</td>
+									style="vertical-align: middle; text-align: center">ì—…ê³„í‰ê· </td>
 								<td colspan="1" rowspan="1"
 									style="vertical-align: middle; text-align: center">${info01.employee[6]}</td>
 								<td colspan="1" rowspan="1"
@@ -450,19 +450,19 @@ th {
 	<hr />
 	<div class="row content">
 
-		<h2 style="font-family: monospace; color: #595959">±Ù¹« È¯°æ ¹× º¹¸®ÈÄ»ı</h2>
+		<h2 style="font-family: monospace; color: #595959">ê·¼ë¬´ í™˜ê²½ ë° ë³µë¦¬í›„ìƒ</h2>
 		<div class="col-md-6">
-			<b>[È¸»çÀ§Ä¡]</b> ${info02.address }<br />
+			<b>[íšŒì‚¬ìœ„ì¹˜]</b> ${info02.address }<br />
 
 			<div id="map" style="width: 500; height: 500"></div>
 		</div>
 		<div class="col-md-6" align="center">
-			<b>[±Ù¹«È¯°æ]</b><br /> <br /> <img src="${chartURL}"
+			<b>[ê·¼ë¬´í™˜ê²½]</b><br /> <br /> <img src="${chartURL}"
 				style="border-style:">
 		</div>
 	</div>
 	<div class="row content">
-		<b>[È¸»çÁ¦µµ]</b><br /> ${info02.system }<br /> <b>[»ç³»¹®È­]</b><br />
+		<b>[íšŒì‚¬ì œë„]</b><br /> ${info02.system }<br /> <b>[ì‚¬ë‚´ë¬¸í™”]</b><br />
 		${info02.culture }<br />
 	</div>
 
@@ -483,5 +483,5 @@ th {
 		});
 	}
 </script>
-<!-- »ó¼¼ µ¥ÀÌÅÍ Å×½ºÆ®¿ë ¿µ¿ª -->
+<!-- ìƒì„¸ ë°ì´í„° í…ŒìŠ¤íŠ¸ìš© ì˜ì—­ -->
 <hr />
