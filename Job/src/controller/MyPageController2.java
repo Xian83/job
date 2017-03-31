@@ -383,12 +383,19 @@ public class MyPageController2 {
       if (auth.equals("yes")) {
          String email = (String) session.getAttribute("email");
 
-         // 마이페이지용 비교 데이터 쌓기
-         Map map = new HashMap();
-         map.put("email", email);
-         map.put("cm1", cm1);
-         map.put("cm2", cm2);
-         int rst = cdao.insertclist(map);
+      // 중복체크
+      			List list_cc = cdao.comparelist(email, cm1, cm2);
+      			List list_ccc = cdao.comparelist(email, cm2, cm1);
+      			System.out.println("중복체크 : "+list_cc);
+      				if (list_cc.size() == 0 && list_ccc.size() ==0) {
+      					
+      					// 마이페이지용 비교 데이터 쌓기
+      					Map map = new HashMap();
+      					map.put("email", email);
+      					map.put("cm1", cm1);
+      					map.put("cm2", cm2);
+      					int rst = cdao.insertclist(map);
+      				}
 
          // data setting
          // 회사명, 점수(재무평가,재직자평가), 방사형 그래프, 숫자(매출액, 영업이익, 당기 손익, 사원수)
