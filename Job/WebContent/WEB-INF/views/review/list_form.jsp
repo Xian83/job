@@ -2,94 +2,61 @@
 	pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<head>
 <style>
-body {
-
-	font-size: 15px;
+input[id=msg] {
+	width: 30%;
 }
-#floatMenu {
-	position: absolute;
-	width: 200px;
-	
+hr {
+	border: none;
+	color: gray;
+	background-color: gray;
+	height: 2px;
+	width: 100%;
 }
-</style>  
-  
+</style>
 </head>
 <body>
-
-
-
 	<div class="container">
 		<div class="col-md-10">
 
-			<h2>
-				<b>REVIEW</b>
-			</h2>
-			<h5>
-				<span style="color: #4682B4">(ªÛºº ±‚æ˜ ∆‰¿Ã¡ˆø° ≥≤∞‹¡¯ ∏Æ∫‰∏¶ »Æ¿Œ«œΩ« ºˆ ¿÷Ω¿¥œ¥Ÿ)</span>
-			</h5>
-			<br/>
-			<br/>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>Id</th>
-						<th>Company & Comment</th>
-						<th>Score</th>
-						<th>Write Date</th>
-					</tr>
-				</thead>
+			<c:forEach var="i" begin="0" end="${size-1 }">
+				<div class="media" style="background: white;">
+					<div class="media-left media-heading" align="center">
+						<%-- 				
+					ÏûêÍ∏∞ Ïª¥Ìì®ÌÑ∞(ÏÑúÎ≤Ñ)ÏóêÏÑú ÏóÖÎ°úÎìúÌïú ÌîÑÎ°úÌïÑ ÏÇ¨ÏßÑÏù¥ÎùºÎ©¥, Î≥¥Ïùº Í≤ÅÎãàÎã§.
+					<img src="${review[i].picURL }" class="media-object img-circle" style="width:120px; "> 
+--%>
+						<img src="${review[i].picURL }" class="media-object "
+							style="width: 60;" align="left">
 
-				<tbody>
+					</div>
+					<div class="media-body row content">
+						<h5 class="media-heading" style="display: inline-block;">
+							<a href="/company/detail?cmpn_nm=${review[i].CMPN_NM }">${page *6-5+i}.
+								${review[i].CMPN_NM } 
+						</h5>
+						</a> <b style="font-size: x-small;">${review[i].WDATE }</b><br />
+						<div
+							style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/spare.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
+							<p
+								style="WIDTH: 100%; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;">
+							</p>
 
-					<c:forEach var="i" begin="0" end="${size -1}">
-						<tr>
-							<td>${page *6-5+i}</td>
-							<td><img src="${review[i].picURL }"
-								class="media-object img-Rounded Corners" style="width: 80px;">
-								<br /> <%-- <img src="${review[i].picURL }" class="media-object "style="width: 60;" align="left"><br/> --%>
-							</td>
-							<td>
-								<p>
-									<a href="/company/detail?cmpn_nm=${review[i].CMPN_NM }"><span
-										style="color: w3-red"><b> ${review[i].CMPN_NM } </b></span></a><br />
-									<br />
-									<c:set var="email" value="${fn:split(review[i].EMAIL, '@')}"></c:set>
-									<span style="color: #4682B4"><b>${email[0]}¥‘ say</b></span> :
-									${ review[i].CONTENTS}
-								</p>
-							</td>
-							<td>
-								<div
-									style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/spare.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
-									<p
-										style="WIDTH: 100%; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;">
-									</p>
-								</div>
-							</td>
-							<td><fmt:formatDate value="${review[i].WDATE }"
-									pattern="yyyy-MM-dd" /></td>
-						</tr>
-					</c:forEach>
-			</table>
-			</tbody>
+						</div>
+						<br />
+						<p>
+							<c:set var="email" value="${fn:split(review[i].EMAIL, '@')}"></c:set>
+							${email[0]} : ${ review[i].CONTENTS}
+						</p>
+					</div>
+				</div>
+				<hr />
+			</c:forEach>
 
-
-
-
-			<!-- ∆‰¿Ã¬° √≥∏Æ -->
-			<div class="container" align="center">
-				<ul class="pagination">
+			<div align="center" class="well">
 				<c:if test="${page ne 1 }">
-					<a href="/review/list_form?page=${page -1 }" class="pagelinks">¿Ã¿¸</a>
+					<a href="/review/list_form?page=${page -1 }">Ïù¥Ï†Ñ</a>
 				</c:if>
 				<c:forEach var="p" begin="1" end="${size }" varStatus="vs">
 					<c:choose>
@@ -97,48 +64,37 @@ body {
 							<b style="color: red;">${p }</b>
 						</c:when>
 						<c:otherwise>
-							<a href="/review/list_form?page=${p }" class="pagelinks">${p }</a>
+							<a href="/review/list_form?page=${p }">${p }</a>
 						</c:otherwise>
 					</c:choose>
 					<c:if test="${vs.last eq false }">|</c:if>
 				</c:forEach>
 				<c:if test="${page ne size }">
-					<a href="/review/list_form?page=${page +1 }" class="pagelinks">¥Ÿ¿Ω</a>
+					<a href="/review/list_form?page=${page +1 }">Îã§Ïùå</a>
 				</c:if>
-				</ul>
 			</div>
 			<br />
 		</div>
 
-	
+
+
 		<div class="col-md-2" >
-			<div id="floatMenu" >  <!-- id="floatMenu" -->
-		<h2>
-				<b>CATH</b>
-			</h2>
-			<h5>
-				<span style="color: #4682B4">(¿⁄¿Ø∑”∞‘ ¿«∞ﬂ¿ª ∞¯¿Ø«œººø‰)</span>
-			</h5>
-			<br/>
-			<br/> 
-				<div class="well" id="result" 
-					style="height: 400px; width: 300px; overflow-y: scroll; margin-top: 0px; background: #F0F8FF; border-style: double;">
+			<div class="container">
+				<div class="well" id="result"
+					style="height: 40%; width: 30%; overflow-y: scroll; margin-top: 0px; background: #FFE4E1; border-style: double;">
 
 				</div>
-				<div style="width: 300px">
-					<input type="text" class="form-control" id="msg"
-						placeholder="∏ﬁºº¡ˆ∏¶ ≥≤∞‹¡÷ººø‰" />
-				</div>
+				<div>
+					<input type="text" class="form-control" id="msg" placeholder="ÎÇ®Í∏∏ÎÇ¥Ïö©" />
 				</div>
 			</div>
 		</div>
+	</div>
 
-</body>
-</html>
 	<script>
 		$(document).ready(function() {
 			if(session.getAttribute("name")==null){
-				var son = "º’¥‘"+(int)(Math.random()*10000)+1;
+				var son = "ÏÜêÎãò"+(int)(Math.random()*10000)+1;
 				session.setAttribute("name", son);
 			}
 		});
@@ -146,17 +102,14 @@ body {
 		$.ajax({
 			"url" : "/chat/chatAjax?msg=join1234555"
 		});
-
 		document.getElementById("msg").onkeyup = function(e) {
 			if (e.key == 'Enter') {
 				var xhr = new XMLHttpRequest();
-
 				xhr.open("get", "/chat/chatAjax?msg=" + this.value, true);
 				xhr.send();
 				this.value = "";
 			}
 		}
-
 		function getChatLog() {
 			var xhr = new XMLHttpRequest();
 			xhr.open("get", "/chat/logAjax", true);
@@ -164,10 +117,8 @@ body {
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					var obj = JSON.parse(xhr.responseText);
-
 					var html = "";
 					for (var i = 0; i < obj.length; i++) {
-
 						html += "<b>[" + obj[i].id + "]</b> ";
 						html += obj[i].msg + "<br>";
 					}
@@ -182,31 +133,5 @@ body {
 			}
 		}
 		setInterval(getChatLog, 200);
-		
-		
-		$(document).ready(function() {
-			 
-			// ±‚¡∏ cssø°º≠ «√∑Œ∆√ πË≥  ¿ßƒ°(top)∞™¿ª ∞°¡ÆøÕ ¿˙¿Â«—¥Ÿ.
-			var floatPosition = parseInt($("#floatMenu").css('top'));
-			// 250px ¿Ã∑±Ωƒ¿∏∑Œ ∞°¡Æø¿π«∑Œ ø©±‚º≠ º˝¿⁄∏∏ ∞°¡Æø¬¥Ÿ. parseInt( ∞™ );
-		 
-			$(window).scroll(function() {
-				// «ˆ¿Á Ω∫≈©∑— ¿ßƒ°∏¶ ∞°¡Æø¬¥Ÿ.
-				var scrollTop = $(window).scrollTop();
-				var newPosition = scrollTop + floatPosition + "px";
-		 
-				/* æ÷¥œ∏ﬁ¿Ãº« æ¯¿Ã πŸ∑Œ µ˚∂Û∞®
-				 $("#floatMenu").css('top', newPosition);
-				 */
-		 
-				$("#floatMenu").stop().animate({
-					"top" : newPosition
-				}, 500);
-		 
-			}).scroll();
-		 
-		});
-		
-		
 	</script>
-
+</body>
