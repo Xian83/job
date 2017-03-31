@@ -15,7 +15,22 @@ public class ReviewsDao {
 
 	@Autowired
 	MyInfoDao myDao;
-
+	
+	public List<HashMap> list() {
+		SqlSession session = factory.openSession();
+		List<HashMap> list = new ArrayList<>();
+		try {
+			list = session.selectList("mappers.review.review");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	
+	
+	
 	public HashMap totalCount() {
 		SqlSession session = factory.openSession();
 		HashMap map = new HashMap();

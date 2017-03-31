@@ -10,18 +10,20 @@
 	<![CDATA[
 		select * from (
 			select rownum RNUM, r.* from (
-				select * from REVIEWS order by wdate desc
+				select r.*, s.LOGO from SCORE s, REVIEWS r where
+		s.CMPN_NM=r.CMPN_NM
 			)r)
 		where RNUM>=${start} and RNUM<=${end}
 	]]>
 	</select>
 	<select id="review" resultType="java.util.HashMap">
-		select * from reviews order by
-		WDATE desc
+		select r.*, s.LOGO from SCORE s, REVIEWS r where
+		s.CMPN_NM=r.CMPN_NM order by
+		r.WDATE desc
 	</select>
 
 	<select id="rank" resultType="java.util.HashMap">
-		select reviews.CMPN_NM,
+		select reviews.CMPN_NM, 
 		SCORE.DIVISION, SCORE.SCALE from SCORE, REVIEWS where
 		SCORE.CMPN_NM=REVIEWS.CMPN_NM
 		order by REVIEWS.WDATE desc
