@@ -16,13 +16,17 @@ public class CompareDao {
 	@Autowired
 	SqlSessionFactory factory;
 	
-	// 선택된 회사명으로 score db에서 모든 정보 긁어오기
-	public List compare (String cmpn) {
+	// 선택된 회원이 본 비교리스트 불러오기 
+	public List comparelist (String email, String cm1, String cm2) {
 		SqlSession sql = null;
 		List list = new ArrayList();
 		try {
 			sql = factory.openSession();
-			list = sql.selectList("mappers.compare.select", cmpn);
+			HashMap map = new HashMap();
+			map.put("email", email);
+			map.put("cm1", cm1);
+			map.put("cm2", cm2);
+			list = sql.selectList("mappers.compare.listall", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

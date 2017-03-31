@@ -10,4 +10,8 @@
 	<insert id="insert" parameterType="java.util.HashMap">
 		insert into COMPARE values (#{email }, #{cm1 }, #{cm2 }, sysdate)
 	</insert>
+	
+	<select id="listall" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * from COMPARE where EMAIL = #{email} and CM1 = #{cm1} and CM2 = #{cm2}
+	</select>
 </mapper>

@@ -202,6 +202,7 @@ public class MyPageController2 {
 		// }
 		// 비교한 기업(compare)
 		List<HashMap> list_c = mypage.getCompareData(email);
+		
 			mav.addObject("list_c", list_c);
 		//System.out.println("비교 compare = " + list_c);
 		String CM1 = (String) list_c.get(0).get("CM1");
@@ -376,13 +377,32 @@ public class MyPageController2 {
 
 		if (auth.equals("yes")) {
 		String email = (String) session.getAttribute("email");
-				
+		
+		// 중복체크
+		/*List list_cc = cdao.comparelist(email, cm1, cm2);
+		List list_ccc = cdao.comparelist(email, cm2, cm1);
+		 
+			
+			
+		boolean rst = false;
+		for (int i=0; i<authclist.size()-1; i++) {
+			if(cm1.equals((authclist.get(i)).get("CM1")) && cm2.equals((authclist.get(i)).get("CM2"))){
+				if(cm1.equals((authclist.get(i)).get("CM2")) && cm2.equals((authclist.get(i)).get("CM1"))){
+					rst = true;
+					break;
+				}
+			}
+			
+			
+		}
+		System.out.println("중복 결과 : "+rst);*/
+		
 		// 마이페이지용 비교 데이터 쌓기
-		Map map = new HashMap();
+		/*Map map = new HashMap();
 			map.put("email", email);
 			map.put("cm1", cm1);
 			map.put("cm2", cm2);
-		int rst = cdao.insertclist(map);
+		int rst = cdao.insertclist(map);*/
 				
 		// data setting
 		// 회사명, 점수(재무평가,재직자평가), 방사형 그래프, 숫자(매출액, 영업이익, 당기 손익, 사원수)			
@@ -395,7 +415,7 @@ public class MyPageController2 {
 			mav.addObject("info01", detail.getInfo02(search.getCompID(cm1)));	// HashMap (summary - List)
 			mav.addObject("info02", detail.getInfo02(search.getCompID(cm2)));
 			mav.addObject("chartURL", chartURL);
-				
+
 			}
 			return mav;
 	
