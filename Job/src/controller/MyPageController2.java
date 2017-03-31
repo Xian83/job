@@ -193,8 +193,9 @@ public class MyPageController2 {
 		// System.out.println("스크랩 = " + list_s);
 
 		// System.out.println("CMPN_NM = " + CMPN_NM);
-		//List<HashMap> visit = mypage.visitgraph("삼성전자");
-	//	System.out.println("test 입니다 ===============" + visit.get(0).get("NUM"));
+		// List<HashMap> visit = mypage.visitgraph("삼성전자");
+		// System.out.println("test 입니다 ===============" +
+		// visit.get(0).get("NUM"));
 		// System.out.println("visit==============="+visit.get(0).get("NUM"));
 		// 이렇게 쓰시오 조회수
 		// mav.addObject("visit",visit);
@@ -414,22 +415,23 @@ public class MyPageController2 {
 	@ResponseBody
 	@RequestMapping("/visitgraph")
 	public HashMap visitGraph(@RequestParam(name = "cm[]") List cm) {
-		
-		System.out.println(cm.size());
-		ModelAndView mav = new ModelAndView();
+
+		// ModelAndView mav = new ModelAndView();
 		List<HashMap> list = new ArrayList<>();
+		List<HashMap> list2 = new ArrayList<>();
 		HashMap map = new HashMap<>();
-		
+
 		for (int t = 0; t < cm.size(); t++) {
-			list = mypage.visitgraph((String)cm.get(t));
-			map.put(cm.get(t), list);	
+			list = mypage.visitgraph((String) cm.get(t));
+
+			map.put(cm.get(t),list);
 		}
 
-		System.out.println("mapsize?=================="+map.size());
-	
-//		mav.setViewName("t5");
-//		mav.addObject("main", "my/company");
-//		mav.addObject("visit", map);
+		System.out.println(map);
+
+		// mav.setViewName("t5");
+		// mav.addObject("main", "my/company");
+		// mav.addObject("visit", map);
 		return map;
 	}
 }

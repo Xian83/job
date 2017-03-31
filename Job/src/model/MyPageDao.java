@@ -132,7 +132,7 @@ public class MyPageDao {
 		try {
 			sql = factory.openSession();
 			list = sql.selectList("mappers.mypage.visit", cname);
-			System.out.println("scrap list =" + list);
+			//System.out.println("scrap list =" + list);
 			
 			//list.get(0).get("CMPN_NM"); 회사이름만 뽑기
 		} catch (Exception e) {
