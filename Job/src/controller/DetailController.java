@@ -193,15 +193,27 @@ public class DetailController {
 		HashMap totalvisit = ddao.inqurity(CName);
 		HashMap rate = ddao.manWomanrate(CName);
 		
+		String CompID = search.getCompID(CName);
+		// career catch site data
+//		HashMap<String, List> info01 = ddao.getInfo01(CompID);
+		HashMap<String, Object> info02 = ddao.getInfo02(CompID);
+		
+		// 1주일간 조회수 그래프
+		List<HashMap> visitgraph = mypage.visitgraph(CName);
+		ArrayList vList = new ArrayList();
+		for(HashMap map : visitgraph){
+			vList.add(map.get("NUM"));
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
 		mav.addObject("main", "/company/basic_info");
 		mav.addObject("score", scorelist);
 		mav.addObject("salary", salarylist);
-		mav.addObject("chartURL", chartURL); // 방사형 그래프 주소
-		mav.addObject("total", totalvisit); // 전체 조회수 hashmap(sum)
-		mav.addObject("rate", rate); // 상세페이지를 클릭한 남녀비율 hashmap(man, woman)
+		mav.addObject("total", totalvisit); // 페이지 총 조회수 hashmap(sum)
+		mav.addObject("vList", vList);// 최근 1주일 조회수
+		mav.addObject("rate", rate); // 페이지 방문 남녀비율 hashmap(man, woman)
+		mav.addObject("info02", info02);// HashMap (summary, address, system, culture)
 		
 		return mav;
 	}
