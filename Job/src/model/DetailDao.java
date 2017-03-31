@@ -222,9 +222,10 @@ public class DetailDao {
 			// 회사 위치
 			Elements e2 = doc.select("h4 .fw_normal");
 			String[] ar2 = e2.text().trim().split("\\s+", 2);
-//			System.out.println("address : " + ar2[1]);
-			if(ar2.length > 2){
+//			System.out.println("주소 : " + e2.text());
+			if(ar2.length > 1){
 				data.put("address", ar2[1]);
+//				System.out.println("address : " + ar2[1]);
 			} else {
 				data.put("address", "");
 			}

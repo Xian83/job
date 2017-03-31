@@ -52,9 +52,7 @@ div.num_right {
 	padding-right: 1.5em;
 }
 </style>
-<script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdpNCYLer2YLqWD5YoIBaBqmD8SJm8b9k&callback=initMap"
-	async defer></script>
+
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
@@ -136,19 +134,7 @@ div.num_right {
 		
     }
       
-    //------------------------------------------------------------------------------
-	// Google Map API
-	function initMap() {
-		// Create a map object and specify the DOM element for display.
-		var map = new google.maps.Map(document.getElementById('map'), {
-			center : {
-				lat : ${json.results[0].geometry.location.lat},
-				lng : ${json.results[0].geometry.location.lng}
-			},
-			scrollwheel : true,
-			zoom : 15
-		});
-	}
+  
     </script>
 </head>
 <body>
@@ -319,20 +305,10 @@ div.num_right {
 					<div class="panel-body">${review.EMAIL }:${review.CONTENTS }</div>
 				</c:forEach>
 			</div>
-			<form role="form" action="/review/push">
-				<input type="hidden" name="cmpn_nm" value="${score.CMPN_NM }">
-				<input type="text" id="aaa" name="content" placeholder="contents"
-					style="width: 93%">
-				<c:choose>
-					<c:when
-						test="${sessionScope.auth eq 'no' or sessionScope.auth eq null }">
-						<button type="submit" class="btn btn-success disabled">올리기</button>
-					</c:when>
-					<c:otherwise>
-						<button type="submit" class="btn btn-success">올리기</button>
-					</c:otherwise>
-				</c:choose>
-			</form>
+			<div>
+				<input type="text" id="re_content" name="content" placeholder="내용 입력" style="width: 93%">
+				<button type="submit" class="btn btn-success ${auth eq 'no' or auth eq null ? 'disabled': '' }">올리기</button>
+			</div>
 		</div>
 	</div>
 	<hr/>
@@ -340,13 +316,13 @@ div.num_right {
 	<!-- 근무환경 및 복리후생 -->
 	<h1>근무환경 및 복리후생</h1>
 	<div class="row">
-		<div class="col-md-6" align="center">
+		<div class="col-md-5">
 			<p>
 				<b>[회사위치]</b> ${info02.address }
 			</p>
 			<div id="map" style="width: 500; height: 500"></div>
 		</div>
-		<div class="col-md-6" align="center">
+		<div class="col-md-7" align="left">
 			<b>[회사제도]</b><br /> 
 			${info02.system }<br /> 
 			<b>[사내문화]</b><br />
@@ -354,3 +330,29 @@ div.num_right {
 		</div>
 	</div>
 </body>
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdpNCYLer2YLqWD5YoIBaBqmD8SJm8b9k&callback=initMap"
+	async defer></script>
+<script>
+//------------------------------------------------------------------------------
+// Google Map API
+function initMap() {
+	// Create a map object and specify the DOM element for display.
+	var map = new google.maps.Map(document.getElementById('map'), {
+		center : {
+			lat : ${json.results[0].geometry.location.lat},
+			lng : ${json.results[0].geometry.location.lng}
+		},
+		scrollwheel : true,
+		zoom : 15
+	});
+}
+</script>
+
+<!-- Ajax 처리 해야 될 것 -->
+<script>
+	// 1 : 스크랩 처리 
+	
+	
+	// 2 : 리뷰 올리기 및 목록 갱신
+</script>
