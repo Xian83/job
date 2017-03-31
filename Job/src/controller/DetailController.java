@@ -191,12 +191,18 @@ public class DetailController {
 		HashMap salarylist = ddao.salary(CName);
 		String chartURL = makeChart(ddao.getScore02(CName));// graph
 		HashMap totalvisit = ddao.inqurity(CName);
-
+		HashMap rate = ddao.manWomanrate(CName);
+		
+		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("ttt");
+		mav.setViewName("t1");
 		mav.addObject("main", "/company/basic_info");
+		mav.addObject("score", scorelist);
+		mav.addObject("salary", salarylist);
 		mav.addObject("chartURL", chartURL); // 방사형 그래프 주소
-
+		mav.addObject("total", totalvisit); // 전체 조회수 hashmap(sum)
+		mav.addObject("rate", rate); // 상세페이지를 클릭한 남녀비율 hashmap(man, woman)
+		
 		return mav;
 	}
 }
