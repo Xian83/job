@@ -19,6 +19,11 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
 .logo-small {
 	color: #f4511e;
 	font-size: 50px;
@@ -27,6 +32,11 @@
 .logo {
 	color: #f4511e;
 	font-size: 200px;
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 </style>
 

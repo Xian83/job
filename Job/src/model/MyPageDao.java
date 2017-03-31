@@ -84,6 +84,7 @@ public class MyPageDao {
 			sql = factory.openSession();
 			list = sql.selectList("mappers.mypage.getScarpData", email);
 			//System.out.println("scrap list =" + list);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -92,6 +93,9 @@ public class MyPageDao {
 
 		return list;
 	}
+	
+	
+	
 
 	
 	// 스크랩한 기업 삭제
@@ -117,6 +121,27 @@ public class MyPageDao {
 		} finally {
 			sql.close();
 		}
+	}
+	
+	//스크랩한 기업 조회수 그래프 자료 뽑기
+	public List<HashMap> visitgraph(String cname) {
+
+		List<HashMap> list = new ArrayList<>();
+		SqlSession sql = null;
+
+		try {
+			sql = factory.openSession();
+			list = sql.selectList("mappers.mypage.visit", cname);
+			System.out.println("scrap list =" + list);
+			
+			//list.get(0).get("CMPN_NM"); 회사이름만 뽑기
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sql.close();
+		}
+
+		return list;
 	}
 	
 	public List<HashMap> getCompareData(String email) {

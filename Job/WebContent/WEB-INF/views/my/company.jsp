@@ -3,11 +3,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
  <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
  <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
  <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 <style>
@@ -48,7 +56,7 @@ div.col-sm-9 div {
 
 <body data-spy="scroll" data-target="#myScrollspy" data-offset="150">
 	<div class="container">
-		<div class="row">
+		<div class="row" >
 			<div class="col-sm-3" id="myScrollspy">
 				<ul class="nav nav-pills nav-stacked" data-spy="affix"
 					data-offset-top="205">
@@ -74,7 +82,7 @@ div.col-sm-9 div {
 							style="font-size: 36px"></i><b> 스크랩한 기업 정보</b></a></li>
 				</ul>
 			</div>
-			<div class="col-sm-9">
+			<div class="col-sm-9" >
 				<div id="section1">
 					<hr />
 					<h2>
@@ -88,8 +96,9 @@ div.col-sm-9 div {
 						<span style="color: #6A5ACD"> <b>[추천 기업
 								조건]&nbsp;&nbsp;&nbsp;지역 : ${data.AREA} | 산업 :
 								${data.STNDD_BIG_GB} | 연봉 : ${data.SALARY_MIN}만원 ~
-								${data.SALARY_MIN}만원<br/><br/>
-								총 추천기업은 ${list_r.size()}개 입니다 </b>
+								${data.SALARY_MIN}만원<br /> <br /> 총 추천기업은 ${list_r.size()}개
+								입니다
+						</b>
 						</span>
 					</h5>
 					<br />
@@ -342,40 +351,178 @@ div.col-sm-9 div {
 							<span style="color: #4682B4">(최근 스크랩한 기업 목록을 확인할 수 있습니다)</span>
 						</h6>
 						</br>
-						<div class="table-responsive" id="scrap">
-							<table class="table">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>Company Name</th>
-										<th>Scrap Date</th>
-										<th>Cancel</th>
-									</tr>
-								</thead>
-								<tbody>
-
-									<c:forEach var="i" items="${list_s }" varStatus="vs">
+						<div class="row content">
+							<div class="table-responsive col-md-6 " style="height: 500px; overflow: auto;" id="scrap">
+								<table class="table ">
+									<thead>
 										<tr>
-											<td>${vs.count }</td>
-											<td><a href="/company/detail?cmpn_nm=${i.CMPN_NM }">${i.CMPN_NM }</a></td>
-											<td><fmt:formatDate value="${i.SDATE }"
-													pattern="yyyy-MM-dd" /></td>
-											<td>
-												<button type="button" class="btn" id="deleteScrap"
-													name="${i.CMPN_NM }">삭제</button>
-											</td>
-
+											<th>#</th>
+											<th>Company Name</th>
+											<th>Scrap Date</th>
+											<th>Cancel</th>
 										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
+									</thead>
+									<tbody>
+
+										<c:forEach var="i" items="${list_s }" varStatus="vs">
+											<tr>
+												<td>${vs.count }</td>
+												<td><a href="/company/detail?cmpn_nm=${i.CMPN_NM }">${i.CMPN_NM }</a></td>
+												<td><fmt:formatDate value="${i.SDATE }"
+														pattern="yyyy-MM-dd" /></td>
+												<td>
+													<button type="button" class="btn" id="deleteScrap"
+														name="${i.CMPN_NM }">삭제</button>
+												</td>
+
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+							<div class="col-md-6">
+								<div id="visit_chart" style="width: 100%; height: 400px"></div>
+								<script>					
+google.charts.load('current', {packages: ['corechart', 'line']});
+google.charts.setOnLoadCallback(drawBasic);
+
+function drawBasic() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'X');
+      data.addColumn('number', 'Dogs');
+		data.addColumn('number', 'ca');
+		data.addColumn('number', 'ttt');
+      data.addRows([
+        [0, 0, 0,0],   [1, 10, 15,20],  [2, 23, 15,20],  [3, 17, 13,20],  [4, 18, 19,20],  [5, 9, 20,20],
+        [6, 11, 60,20],  [7, 27, 0,20]
+      ]);
+
+      var options = {
+        hAxis: {
+          title: '조회수 비교'
+        },
+        vAxis: {
+          title: ''
+        }
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('visit_chart'));
+
+      chart.draw(data, options);
+    }
+							
+</script>
+
+							</div>
 						</div>
 					</div>
+<<<<<<< HEAD
+=======
+				</div>
+
+
+				<div id="section3">
+					<hr />
+					<h2>
+						<b>자주 본 기업</b>
+					</h2>
+					<h6>
+						<span style="color: #4682B4">(많이 조회한 기업을 확인할 수 있습니다)</span>
+					</h6>
+					</br>
+					<div id="donutchart" style="width: 900px; height: 500px;"></div>
+					<script type="text/javascript">
+					      google.charts.load("current", {packages:["corechart"]});
+					      google.charts.setOnLoadCallback(drawChart);
+					      function drawChart() {
+					        var data = google.visualization.arrayToDataTable([
+						        ['기업명', '방문횟수'],
+					    	    <c:forEach var="i" items="${list_v }" varStatus="vs">
+									['${i.CMPN_NM }', ${i.CNT }]<c:if test="${!vs.last }">,</c:if>		
+								</c:forEach>
+					        ]);
+
+        var options = {
+//           title: '내가 자주 본 기업 Top 5',	// Chart Title
+          pieHole: 0.4,					// hole size ratio
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+
+					<div id="section4">
+						<hr />
+						<h2>
+							<b>비교한 기업 목록</b>
+						</h2>
+						<h6>
+							<span style="color: #4682B4">(최근 비교한 10개의 목록을 확인하실 수있습니다
+								&nbsp;<b>자세한 비교를 원하시면 기업명을 클릭해 주세요</b>)
+							</span>
+
+						</h6>
+						<br />
+						<div class="row content">
+							<div class="col-md-7">
+								<div class="table-responsive" id="compare">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>Company Name A</th>
+												<th>Company Name B</th>
+												<th>Compare</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="i" begin="0" end="9" items="${list_c }"
+												varStatus="vs">
+												<tr>
+													<td>${vs.count }</td>
+													<td><a href="/company/detail?cmpn_nm=${i.CM1 }">${i.CM1 }</a></td>
+													<td><a href="/company/detail?cmpn_nm=${i.CM2 }">${i.CM2 }</a></td>
+													<td>
+														<button type="button" class="btn" id="compareView"
+															name="${i.CM1 }#${i.CM2 }">간단 비교</button>
+													</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<!-- <div class="container-fluid" align="center">
+										</div> -->
+								<div class="responsive" id="compareResult">
+
+									<img src="${chartURL }">
+
+									<!-- 	<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<span style="color: #4682B4">
+										<h5>비교 결과를 원하시는 목록의 <br/><br/>
+										<button type="button" class="btn" >간단 비교</button> 버튼을 눌러주세요</h5></span> -->
+
+								</div>
+
+							</div>
+
+						</div>
+>>>>>>> branch 'master' of https://github.com/Xian83/job
 					</div>
 				</div>
 			</div>
 		</div>
-		</div>
+	</div>
 </body>
 
 

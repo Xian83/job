@@ -163,7 +163,7 @@ public class MyPageController2 {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
 		mav.addObject("main", "/my/company");
-
+		
 		String email = (String) session.getAttribute("email");
 
 		// 추천 기업(recommand)
@@ -171,7 +171,7 @@ public class MyPageController2 {
 		List reco = mypage.getRecommand(data); // get data from mongoDB(company)
 		List list_r = mypage.getRecommand02(reco); // get data from score &
 		// salary table
-
+		
 		mav.addObject("member", data); // 관심지역(AREA),산업군(STNDD_BIG_GB),
 		// 연봉min/max
 		mav.addObject("data", data);
@@ -190,7 +190,9 @@ public class MyPageController2 {
 		//System.out.println("스크랩 = " + list_s);
 
 		// System.out.println("CMPN_NM = " + CMPN_NM);
-
+		List<HashMap> visit = mypage.visitgraph("삼성전자");
+		//System.out.println("visit==============="+visit.get(0).get("NUM")); 이렇게 쓰시오 조회수
+		mav.addObject("visit",visit);
 		// if (CMPN_NM != null) {
 		// boolean rst = mypage.deleteScrap(email, CMPN_NM);
 		// System.out.println("삭제 됐어유");
