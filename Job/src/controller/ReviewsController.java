@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import model.CompareDao;
 import model.MyInfoDao;
 import model.ReviewsDao;
 
@@ -27,6 +28,9 @@ public class ReviewsController {
 	@Autowired
 	MyInfoDao myDao;
 	
+	@Autowired
+	CompareDao cDao;
+	
 	@RequestMapping("/list_form")
 	public ModelAndView reviewsHandler(@RequestParam(name="page", defaultValue="1")String page){
 		 
@@ -39,17 +43,19 @@ public class ReviewsController {
 		int end = Integer.parseInt(page) * div;
 				
 		List<HashMap> review = rdao.review(start, end);	// get reviews
-		review = addPicture(review); 				// add picURL
-		System.out.println("=====================================? "+review);
-		List<HashMap> rank = rdao.rank();				// ?? 				
+		List<HashMap> rank = rdao.rank();	
+		List <HashMap> list = rdao.list();
+		// review = addPicture(review); 				// add picURL
+		System.out.println("reviews>>>>" + review);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
 		mav.addObject("main","review/list_form");
 		mav.addObject("page", page);
 		mav.addObject("size", size);
-		mav.addObject("review", review);
+		// mav.addObject("review", review);
 		mav.addObject("rank",rank);
+		System.out.println("rank =" + rank);
 		
 		return mav;
 	}
