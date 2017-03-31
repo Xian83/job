@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.CompareDao;
 import model.DetailDao;
@@ -41,10 +44,10 @@ public class MyPageController2 {
 
 	@Autowired
 	FileUploadDao fdao;
-	
+
 	@Autowired
 	SearchDao search;
-	
+
 	@Autowired
 	CompareDao cdao;
 
@@ -163,7 +166,7 @@ public class MyPageController2 {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
 		mav.addObject("main", "/my/company");
-		
+
 		String email = (String) session.getAttribute("email");
 
 		// 추천 기업(recommand)
@@ -171,7 +174,7 @@ public class MyPageController2 {
 		List reco = mypage.getRecommand(data); // get data from mongoDB(company)
 		List list_r = mypage.getRecommand02(reco); // get data from score &
 		// salary table
-		
+
 		mav.addObject("member", data); // 관심지역(AREA),산업군(STNDD_BIG_GB),
 		// 연봉min/max
 		mav.addObject("data", data);
@@ -182,17 +185,19 @@ public class MyPageController2 {
 		List<HashMap> list_v = mypage.getVisitData(email);
 		mav.addObject("list_v", list_v);
 
-		//System.out.println("자주 본 기업 visit= " + list_v);
+		// System.out.println("자주 본 기업 visit= " + list_v);
 
 		// 스크랩한 기업(scrap)
 		List<HashMap> list_s = mypage.getScrapData(email);
 		mav.addObject("list_s", list_s);
-		//System.out.println("스크랩 = " + list_s);
+		// System.out.println("스크랩 = " + list_s);
 
 		// System.out.println("CMPN_NM = " + CMPN_NM);
-		List<HashMap> visit = mypage.visitgraph("삼성전자");
-		//System.out.println("visit==============="+visit.get(0).get("NUM")); 이렇게 쓰시오 조회수
-		mav.addObject("visit",visit);
+		//List<HashMap> visit = mypage.visitgraph("삼성전자");
+	//	System.out.println("test 입니다 ===============" + visit.get(0).get("NUM"));
+		// System.out.println("visit==============="+visit.get(0).get("NUM"));
+		// 이렇게 쓰시오 조회수
+		// mav.addObject("visit",visit);
 		// if (CMPN_NM != null) {
 		// boolean rst = mypage.deleteScrap(email, CMPN_NM);
 		// System.out.println("삭제 됐어유");
@@ -202,19 +207,23 @@ public class MyPageController2 {
 		// }
 		// 비교한 기업(compare)
 		List<HashMap> list_c = mypage.getCompareData(email);
-			mav.addObject("list_c", list_c);
-		//System.out.println("비교 compare = " + list_c);
+		mav.addObject("list_c", list_c);
+		// System.out.println("비교 compare = " + list_c);
 		String CM1 = (String) list_c.get(0).get("CM1");
 		String CM2 = (String) list_c.get(0).get("CM2");
-					
-			String chartURL = makeChart_2(CM1, CM2);// graph
-			
-			/*mav.addObject("main", "my/compareResult");*/
-			mav.addObject("score01", detail.score(CM1));	// FINANCE_SCORE, EMPLOYEE_SCORE
-			mav.addObject("score02", detail.score(CM2));
-			mav.addObject("info01", detail.getInfo02(search.getCompID(CM1)));	// HashMap (summary - List)
-			mav.addObject("info02", detail.getInfo02(search.getCompID(CM2)));
-			mav.addObject("chartURL", chartURL);
+
+		String chartURL = makeChart_2(CM1, CM2);// graph
+
+		/* mav.addObject("main", "my/compareResult"); */
+		mav.addObject("score01", detail.score(CM1)); // FINANCE_SCORE,
+														// EMPLOYEE_SCORE
+		mav.addObject("score02", detail.score(CM2));
+		mav.addObject("info01", detail.getInfo02(search.getCompID(CM1))); // HashMap
+																			// (summary
+																			// -
+																			// List)
+		mav.addObject("info02", detail.getInfo02(search.getCompID(CM2)));
+		mav.addObject("chartURL", chartURL);
 
 		// 사진 불러오기
 		String picURL = mydao.getLastetImageURL(email);
@@ -246,9 +255,9 @@ public class MyPageController2 {
 			if (picURL == null || picURL.equals("null"))
 				picURL = "/image/default.jpg";
 			mav.addObject("picURL", picURL);
-			//System.out.println("업데이트 picURL = " + picURL);
+			// System.out.println("업데이트 picURL = " + picURL);
 
-			//System.out.println("map = " + map);
+			// System.out.println("map = " + map);
 
 			// DB 사진 추가
 			String url = (String) map.get("filelink");
@@ -293,7 +302,7 @@ public class MyPageController2 {
 		// checked Value 가져오기
 		int i = 0;
 		for (String value : name) {
-			//System.out.println(">>> name's value : " + value);
+			// System.out.println(">>> name's value : " + value);
 			i++;
 		}
 
@@ -308,7 +317,7 @@ public class MyPageController2 {
 		// 추천 기업(recommand)
 		// member_Info(WKP_ADRS, STNDD_BIG_GB, SALARY_MIN, SALARY_MAX)
 		HashMap data = mDao.getInfo(email);
-		//System.out.println("info : " + data.toString());// 확인용
+		// System.out.println("info : " + data.toString());// 확인용
 
 		// 추천기업 정보 가져오기
 		List reco = mypage.getRecommand(data);
@@ -316,9 +325,8 @@ public class MyPageController2 {
 		// score db에서 cmpn_nm 기준으로 데이터 가져오기
 		List list_r = mypage.getRecommand02(reco);
 
-		//System.out.println("추천 = " + list_r);
+		// System.out.println("추천 = " + list_r);
 	}
-
 
 	@RequestMapping("/applyInfo")
 	public ModelAndView link() {
@@ -327,23 +335,21 @@ public class MyPageController2 {
 		return mav;
 	}
 
-
 	@ResponseBody
 	@RequestMapping("/deleteScrap")
 	public boolean deleteScrapHandler(@RequestParam(name = "email") String email,
 			@RequestParam(name = "CMPN_NM") String name) {
 		boolean rst = mypage.deleteScrap(email, name);
-		//System.out.println("사사삭제 완료");
+		// System.out.println("사사삭제 완료");
 		return rst;
 	}
 
-	
 	public String makeChart_2(String cm1, String cm2) {
 		System.out.println("cm1 =" + cm1 + " / cm2 = " + cm2);
 
 		HashMap data1 = detail.getScore02(cm1);
 		HashMap data2 = detail.getScore02(cm2);
-		
+
 		int size = 400;
 		String img = "https://chart.googleapis.com/chart?cht=r&chs=" + size + "x" + size;
 		img += "&chd=t:";
@@ -365,40 +371,65 @@ public class MyPageController2 {
 
 		return img;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/compare")
 	public ModelAndView InitHandler1(@RequestParam(name = "cm1") String cm1, @RequestParam(name = "cm2") String cm2,
-				HttpSession session) {
+			HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-			//mav.addObject("default", );
+		// mav.addObject("default", );
 		String auth = (String) session.getAttribute("auth");
 
 		if (auth.equals("yes")) {
-		String email = (String) session.getAttribute("email");
-				
-		// 마이페이지용 비교 데이터 쌓기
-		Map map = new HashMap();
+			String email = (String) session.getAttribute("email");
+
+			// 마이페이지용 비교 데이터 쌓기
+			Map map = new HashMap();
 			map.put("email", email);
 			map.put("cm1", cm1);
 			map.put("cm2", cm2);
-		int rst = cdao.insertclist(map);
-				
-		// data setting
-		// 회사명, 점수(재무평가,재직자평가), 방사형 그래프, 숫자(매출액, 영업이익, 당기 손익, 사원수)			
-		String chartURL = makeChart_2(cm1, cm2);// graph
-				
+			int rst = cdao.insertclist(map);
+
+			// data setting
+			// 회사명, 점수(재무평가,재직자평가), 방사형 그래프, 숫자(매출액, 영업이익, 당기 손익, 사원수)
+			String chartURL = makeChart_2(cm1, cm2);// graph
+
 			mav.setViewName("t5");
 			mav.addObject("main", "my/compareResult");
-			mav.addObject("score01", detail.score(cm1));	// FINANCE_SCORE, EMPLOYEE_SCORE
+			mav.addObject("score01", detail.score(cm1)); // FINANCE_SCORE,
+															// EMPLOYEE_SCORE
 			mav.addObject("score02", detail.score(cm2));
-			mav.addObject("info01", detail.getInfo02(search.getCompID(cm1)));	// HashMap (summary - List)
+			mav.addObject("info01", detail.getInfo02(search.getCompID(cm1))); // HashMap
+																				// (summary
+																				// -
+																				// List)
 			mav.addObject("info02", detail.getInfo02(search.getCompID(cm2)));
 			mav.addObject("chartURL", chartURL);
-				
-			}
-			return mav;
+
+		}
+		return mav;
+
+	}
+
+	@ResponseBody
+	@RequestMapping("/visitgraph")
+	public HashMap visitGraph(@RequestParam(name = "cm[]") List cm) {
+		
+		System.out.println(cm.size());
+		ModelAndView mav = new ModelAndView();
+		List<HashMap> list = new ArrayList<>();
+		HashMap map = new HashMap<>();
+		
+		for (int t = 0; t < cm.size(); t++) {
+			list = mypage.visitgraph((String)cm.get(t));
+			map.put(cm.get(t), list);	
+		}
+
+		System.out.println("mapsize?=================="+map.size());
 	
-	
-}
+//		mav.setViewName("t5");
+//		mav.addObject("main", "my/company");
+//		mav.addObject("visit", map);
+		return map;
+	}
 }
