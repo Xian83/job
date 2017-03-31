@@ -52,6 +52,9 @@ div.num_right {
 	padding-right: 1.5em;
 }
 </style>
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdpNCYLer2YLqWD5YoIBaBqmD8SJm8b9k&callback=initMap"
+	async defer></script>
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
@@ -78,6 +81,7 @@ div.num_right {
         
         chart.draw(data, options);
         
+      	//-----------------------------------------------------------------------------
         // 방문자수
         var data2 = new google.visualization.DataTable();
         data2.addColumn('date', 'Time of Day');
@@ -105,8 +109,46 @@ div.num_right {
         var chart2 = new google.visualization.LineChart(document.getElementById('visit_chart'));
 
         chart2.draw(data2, options2);
-        
+
+        //-----------------------------------------------------------------------------
+        //업계 연봉 비교
+		var data3 = new google.visualization.arrayToDataTable([
+				[ '구분', '${score.CMPN_NM}', '업계평균', '전체평균', ],
+				[ '평균연봉', ${salary.AVG_SALARY}, ${industry.AVG}, ${allCompany.AVG} ],
+				[ '신입연봉', ${salary.ROOKIE_SALARY}, ${industry.ROOKIE}, ${allCompany.ROOKIE} ]
+				
+		]);
+		var chart_options3 = {
+				title : '연봉비교',
+				width : 500,
+				height : 350,
+				colors : [ 'blue', 'orange', 'red' ], // 항목 갯수에 맞게 컬러 설정
+				bar : {
+					groupWidth : '60%'
+				}, // 그래프 너비 %
+				isStacked : false,
+				// 그래프 쌓기(스택), 기본값은 false
+				backgroundColor: '#f1f8e9'
+		};
+		
+		var chart3 = new google.visualization.ColumnChart(document.getElementById('salary_chart'));
+		chart3.draw(data3, chart_options3);
+		
     }
+      
+    //------------------------------------------------------------------------------
+	// Google Map API
+	function initMap() {
+		// Create a map object and specify the DOM element for display.
+		var map = new google.maps.Map(document.getElementById('map'), {
+			center : {
+				lat : ${json.results[0].geometry.location.lat},
+				lng : ${json.results[0].geometry.location.lng}
+			},
+			scrollwheel : true,
+			zoom : 15
+		});
+	}
     </script>
 </head>
 <body>
@@ -175,22 +217,140 @@ div.num_right {
 			<p>재직자평가</p>
 		</div>
 	</div>
+
+	<!-- 방문자 현황 : 방문자 구성비 + 최근 1주일 방문횟수 변화 -->
 	<div class="row">
 		<h1 style="padding: 10px;">
 			방문자 현황 <small> ${total.SUM }명</small>
 		</h1>
 	</div>
-	<!-- 그래프 2개 -->
 	<div class="row">
 		<div class="col-md-4" align="center">
 			<div class="graph01" id="boygirl" align="center"
 				style="height: 300px; margin: 0 auto"></div>
-				<h4>[방문자 구성비]</h4>
+			<h4>[방문자 구성비]</h4>
 		</div>
 		<div class="col-md-8" align="center">
 			<div id="visit_chart" style="width: 100%; height: 300px"></div>
 			<h4>[최근 1주일 간 방문횟수]</h4>
 		</div>
 	</div>
+	<hr />
+
+	<!-- 업계 동향 : 그래프 + 순위 -->
+	<div class="row">
+		<h1 style="padding: 10px;">
+			동종 업계 <small> ${score.DIVISION } </small>
+		</h1>
+	</div>
+	<div class="row">
+		<div class="col-md-6" align="center">
+			<h4>[ 평균연봉 비교 ]</h4>
+			<div id="salary_chart" align="center"></div>
+		</div>
+		<div class="col-md-6" align="center">
+			<h4>[ 동종업계 최상위 기업 ]</h4>
+			<div>
+				<table class="table table-hover" style="text-align: center;">
+					<thead>
+						<tr align="center" style="text-align: center;">
+							<th colspan="1" style="text-align: center;">순위</th>
+							<th colspan="2" style="text-align: center;">기업명</th>
+							<th colspan="1" style="text-align: center;">점수</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="i" items="${info01.rank8}">
+							<tr>
+								<td>${i.rank }</td>
+								<td colspan="2">${i.cmpn }</td>
+								<td>${i.score }</td>
+							</tr>
+						</c:forEach>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row" align="center">
+		<c:forEach var="i" begin="0" end="5">
+			<div class="col-md-2" style="border-style: none;">
+				<a href="/company/detail?cmpn_nm=${same[i].CMPN_NM }"> <img
+					src="${same[i].LOGO }" alt="Lights" style="width: 82" height="82" /><br />
+					${same[i].CMPN_NM }
+				</a>
+			</div>
+		</c:forEach>
+	</div>
+	<hr />
+
+	<!-- 사용자 리뷰 게시판 -->
+	<div class="row">
+		<div class="col-md-4">
+			<h1>기업 리뷰</h1>
+		</div>
+		<div class="col-md-3">
+			<h6>재무평가 ${score.FINANCE_SCORE }점</h6>
+			<div
+				style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/spare.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
+				<p
+					style="WIDTH: ${score.FINANCE_SCORE }%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+				</p>
+			</div>
+		</div>
+		<div class="col-md-5">
+			<h6>재직자평가 ${score.FINANCE_SCORE }점</h6>
+			<div
+				style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/spare.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
+				<p
+					style="WIDTH: ${score.EMPLOYEE_SCORE }%; PADDING-RIGHT:0px;	PADDING-LEFT:0px;	BACKGROUND: url(/star.gif) 0px 0px;	PADDING-BOTTOM: 0px;	MARGIN: 0px;	PADDING-TOP: 0px;	HEIGHT: 18px;">
+				</p>
+			</div>
+		</div>
+	</div>
+	<br/>
+	<div class="row">
+		<div class="col-md-4" align="center" style="width: 500">
+			<img src="${chartURL}">
+		</div>
+		<div class="col-md-8">
+			<div class="panel panel-default">
+				<div class="panel-heading">리뷰</div>
+				<c:forEach var="review" items="${review }">
+					<div class="panel-body">${review.EMAIL }:${review.CONTENTS }</div>
+				</c:forEach>
+			</div>
+			<form role="form" action="/review/push">
+				<input type="hidden" name="cmpn_nm" value="${score.CMPN_NM }">
+				<input type="text" id="aaa" name="content" placeholder="contents"
+					style="width: 93%">
+				<c:choose>
+					<c:when
+						test="${sessionScope.auth eq 'no' or sessionScope.auth eq null }">
+						<button type="submit" class="btn btn-success disabled">올리기</button>
+					</c:when>
+					<c:otherwise>
+						<button type="submit" class="btn btn-success">올리기</button>
+					</c:otherwise>
+				</c:choose>
+			</form>
+		</div>
+	</div>
 	<hr/>
+	
+	<!-- 근무환경 및 복리후생 -->
+	<h1>근무환경 및 복리후생</h1>
+	<div class="row">
+		<div class="col-md-6" align="center">
+			<p>
+				<b>[회사위치]</b> ${info02.address }
+			</p>
+			<div id="map" style="width: 500; height: 500"></div>
+		</div>
+		<div class="col-md-6" align="center">
+			<b>[회사제도]</b><br /> 
+			${info02.system }<br /> 
+			<b>[사내문화]</b><br />
+			${info02.culture }<br />
+		</div>
+	</div>
 </body>
