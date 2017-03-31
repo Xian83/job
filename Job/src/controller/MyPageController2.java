@@ -166,8 +166,6 @@ public class MyPageController2 {
 
 		String email = (String) session.getAttribute("email");
 
-		// 최근 본 기업(lately) : 별다른 추가 정보 없음
-
 		// 추천 기업(recommand)
 		HashMap data = mDao.getInfo(email); // get data from member_Info table
 		List reco = mypage.getRecommand(data); // get data from mongoDB(company)
@@ -184,12 +182,12 @@ public class MyPageController2 {
 		List<HashMap> list_v = mypage.getVisitData(email);
 		mav.addObject("list_v", list_v);
 
-		System.out.println("자주 본 기업 visit= " + list_v);
+		//System.out.println("자주 본 기업 visit= " + list_v);
 
 		// 스크랩한 기업(scrap)
 		List<HashMap> list_s = mypage.getScrapData(email);
 		mav.addObject("list_s", list_s);
-		System.out.println("스크랩 = " + list_s);
+		//System.out.println("스크랩 = " + list_s);
 
 		// System.out.println("CMPN_NM = " + CMPN_NM);
 
@@ -202,10 +200,19 @@ public class MyPageController2 {
 		// }
 		// 비교한 기업(compare)
 		List<HashMap> list_c = mypage.getCompareData(email);
-		mav.addObject("list_c", list_c);
-		System.out.println("비교 compare = " + list_c);
-	/*	String a = list_c[0];
-		System.out.println("비교 compare 0번째 = " + list_c[0].CM1);*/
+			mav.addObject("list_c", list_c);
+		//System.out.println("비교 compare = " + list_c);
+		String CM1 = (String) list_c.get(0).get("CM1");
+		String CM2 = (String) list_c.get(0).get("CM2");
+					
+			String chartURL = makeChart_2(CM1, CM2);// graph
+			
+			/*mav.addObject("main", "my/compareResult");*/
+			mav.addObject("score01", detail.score(CM1));	// FINANCE_SCORE, EMPLOYEE_SCORE
+			mav.addObject("score02", detail.score(CM2));
+			mav.addObject("info01", detail.getInfo02(search.getCompID(CM1)));	// HashMap (summary - List)
+			mav.addObject("info02", detail.getInfo02(search.getCompID(CM2)));
+			mav.addObject("chartURL", chartURL);
 
 		// 사진 불러오기
 		String picURL = mydao.getLastetImageURL(email);
@@ -216,21 +223,6 @@ public class MyPageController2 {
 
 		// 사진 등록
 		String url = (String) session.getAttribute("url");
-		System.out.println("사진 url =" + url);
-		/*
-		 * String ct = file.getContentType(); if (ct.startsWith("image")) { //
-		 * �뙆�씪 �뾽濡쒕뱶 Map map = fdao.execute(file); System.out.println("map = "
-		 * + map);
-		 * 
-		 * // DB 사진 추가 email = req.getParameter("email"); String url = (String)
-		 * map.get("filelink"); mav.addObject("url", url);
-		 * System.out.println("url = " + url); boolean res = fdao.insert(email,
-		 * url); if (res) mav.addObject("msg", "프로필 사진이 변경되었습니다"); else
-		 * mav.addObject("msg", "프로필 사진 등록에 실패하였습니다"); } else {
-		 * mav.addObject("msg", "Not Image File"); }
-		 * 
-		 * mav.addObject("url2", "/my/company"); mav.setViewName("util/alert");
-		 */
 
 		return mav;
 	}
@@ -252,9 +244,9 @@ public class MyPageController2 {
 			if (picURL == null || picURL.equals("null"))
 				picURL = "/image/default.jpg";
 			mav.addObject("picURL", picURL);
-			System.out.println("업데이트 picURL = " + picURL);
+			//System.out.println("업데이트 picURL = " + picURL);
 
-			System.out.println("map = " + map);
+			//System.out.println("map = " + map);
 
 			// DB 사진 추가
 			String url = (String) map.get("filelink");
@@ -299,7 +291,7 @@ public class MyPageController2 {
 		// checked Value 가져오기
 		int i = 0;
 		for (String value : name) {
-			System.out.println(">>> name's value : " + value);
+			//System.out.println(">>> name's value : " + value);
 			i++;
 		}
 
@@ -314,7 +306,7 @@ public class MyPageController2 {
 		// 추천 기업(recommand)
 		// member_Info(WKP_ADRS, STNDD_BIG_GB, SALARY_MIN, SALARY_MAX)
 		HashMap data = mDao.getInfo(email);
-		System.out.println("info : " + data.toString());// 확인용
+		//System.out.println("info : " + data.toString());// 확인용
 
 		// 추천기업 정보 가져오기
 		List reco = mypage.getRecommand(data);
@@ -322,7 +314,7 @@ public class MyPageController2 {
 		// score db에서 cmpn_nm 기준으로 데이터 가져오기
 		List list_r = mypage.getRecommand02(reco);
 
-		System.out.println("추천 = " + list_r);
+		//System.out.println("추천 = " + list_r);
 	}
 
 
@@ -339,7 +331,7 @@ public class MyPageController2 {
 	public boolean deleteScrapHandler(@RequestParam(name = "email") String email,
 			@RequestParam(name = "CMPN_NM") String name) {
 		boolean rst = mypage.deleteScrap(email, name);
-		System.out.println("사사삭제 완료");
+		//System.out.println("사사삭제 완료");
 		return rst;
 	}
 
@@ -390,8 +382,8 @@ public class MyPageController2 {
 			map.put("cm2", cm2);
 		int rst = cdao.insertclist(map);
 				
-				// data setting
-				// 회사명, 점수(재무평가,재직자평가), 방사형 그래프, 숫자(매출액, 영업이익, 당기 손익, 사원수)			
+		// data setting
+		// 회사명, 점수(재무평가,재직자평가), 방사형 그래프, 숫자(매출액, 영업이익, 당기 손익, 사원수)			
 		String chartURL = makeChart_2(cm1, cm2);// graph
 				
 			mav.setViewName("t5");

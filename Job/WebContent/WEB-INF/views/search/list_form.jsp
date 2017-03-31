@@ -7,6 +7,7 @@
 <style>
 .navbar-nav>li {
 	margin-left: 30;
+	float : center;
 	font-size: 12;
 }
 
@@ -39,6 +40,9 @@ body {
 a.disabled {
    pointer-events: none;
    cursor: default;
+}
+b {
+padding: 2%;
 }
 </style>
 <br />
@@ -100,21 +104,21 @@ a.disabled {
 					</dt>
 					<dd>
 						<hr />
-						<ul class="nav navbar-nav">
-							<li><input type="checkbox" name="chkJinhakCode"
-								id="chkJinhakCode전체" value="전체" /><label for="chkJinhakCode전체">전체</label></li>
+						<ul class="nav navbar-nav" >
+							<li ><input type="checkbox" name="chkJinhakCode"
+								id="chkJinhakCode전체" value="전체" /><label for="chkJinhakCode전체">전체&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></li>
 							<li><input type="checkbox" name="chkJinhakCode"
 								id="chkJinhakCodeJ1" value="J1" /><label for="chkJinhakCodeJ1">제조·화학</label></li>
 							<li><input type="checkbox" name="chkJinhakCode"
 								id="chkJinhakCodeJ2" value="J2" /><label for="chkJinhakCodeJ2">은행·금융</label></li>
 							<li><input type="checkbox" name="chkJinhakCode"
-								id="chkJinhakCodeJ3" value="J3" /><label for="chkJinhakCodeJ3">IT·미디어</label></li>
+								id="chkJinhakCodeJ3" value="J3" /><label for="chkJinhakCodeJ3">IT·미디어&nbsp;</label></li>
 							<li><input type="checkbox" name="chkJinhakCode"
 								id="chkJinhakCodeJ4" value="J4" /><label for="chkJinhakCodeJ4">의료·보건</label></li>
 							<li><input type="checkbox" name="chkJinhakCode"
 								id="chkJinhakCodeJ5" value="J5" /><label for="chkJinhakCodeJ5">건설·부동산</label></li>
 							<li><input type="checkbox" name="chkJinhakCode"
-								id="chkJinhakCodeJ6" value="J6" /><label for="chkJinhakCodeJ6">판매·유통</label></li>
+								id="chkJinhakCodeJ6" value="J6" /><label for="chkJinhakCodeJ6">판매·유통&nbsp;&nbsp;</label></li>
 							<li><input type="checkbox" name="chkJinhakCode"
 								id="chkJinhakCodeJ7" value="J7" /><label for="chkJinhakCodeJ7">교육·출판</label></li>
 							<li><input type="checkbox" name="chkJinhakCode"
@@ -171,13 +175,16 @@ a.disabled {
 <!-- 	<button type="button" class="btn btn-default btn btn-sm">가나다순</button> -->
 <!-- 	<br /> -->
 </div>
-
+<br/>
+<br/>
 <!-- 상세 조건 검색 - 체크박스 이벤트 처리  -->
-<div id="result">
-	<b>검색결과 ${cnt}개</b>
+<div id="result" align="center">
 	<!-- 검색 결과 리스트 출력되는 곳 -->
 	<div class="container">
-		<table class="table table-bordered">
+		<table class="table table-bordered" style="width:97%">
+		<p align="left">
+			<b>검색결과 ${cnt}개</b>
+		</p>
 			<c:forEach var="i" items="${list}" varStatus="vs">
 				<c:if test="${vs.count %2 == 1 }">
 					<tr>

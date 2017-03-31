@@ -66,7 +66,7 @@ public class MyPageDao {
 		try {
 			sql = factory.openSession();
 			list = sql.selectList("mappers.mypage.getVisited", email);
-			System.out.println("visit list =" + list);
+			//System.out.println("visit list =" + list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -83,7 +83,7 @@ public class MyPageDao {
 		try {
 			sql = factory.openSession();
 			list = sql.selectList("mappers.mypage.getScarpData", email);
-			System.out.println("scrap list =" + list);
+			//System.out.println("scrap list =" + list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -107,7 +107,7 @@ public class MyPageDao {
 
 			if (cnt == 1) {
 				sql.commit();
-				System.out.println("스크랩 목록 삭제");
+				//System.out.println("스크랩 목록 삭제");
 				return true;
 			} else
 				return false;
@@ -127,7 +127,7 @@ public class MyPageDao {
 		try {
 			sql = factory.openSession();
 			list = sql.selectList("mappers.mypage.getCompareData", email);
-			System.out.println("compare list =" + list);
+			//System.out.println("compare list =" + list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -170,7 +170,7 @@ public class MyPageDao {
 		query.limit(50);
 		
 		List<HashMap> list = template.find(query, HashMap.class, "company");
-		System.out.println("mongoDB에서 불러온 데이터 : " + list.size());
+		//System.out.println("mongoDB에서 불러온 데이터 : " + list.size());
 		
 		return list;
 	}
@@ -188,7 +188,7 @@ public class MyPageDao {
 			session.close();
 		}	
 		
-		System.out.println("최종 추천 목록 개수 : " + result.size());
+		//System.out.println("최종 추천 목록 개수 : " + result.size());
 		return result;
 	}
 }

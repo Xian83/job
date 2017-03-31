@@ -4,9 +4,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 
-<html>
-<head>
-<!--   <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -61,7 +60,7 @@ body {
 							<td>
 								<p>
 									<a href="/company/detail?cmpn_nm=${review[i].CMPN_NM }"><span
-										style="color: w3-red"><b>${review[i].CMPN_NM }</b></span></a><br />
+										style="color: w3-red"><b> ${review[i].CMPN_NM } </b></span></a><br />
 									<br />
 									<c:set var="email" value="${fn:split(review[i].EMAIL, '@')}"></c:set>
 									<span style="color: #4682B4"><b>${email[0]}님 say</b></span> :
@@ -87,9 +86,10 @@ body {
 
 
 			<!-- 페이징 처리 -->
-			<div align="center">
+			<div class="container" align="center">
+				<ul class="pagination">
 				<c:if test="${page ne 1 }">
-					<a href="/review/list_form?page=${page -1 }">이전</a>
+					<a href="/review/list_form?page=${page -1 }" class="pagelinks">이전</a>
 				</c:if>
 				<c:forEach var="p" begin="1" end="${size }" varStatus="vs">
 					<c:choose>
@@ -97,32 +97,35 @@ body {
 							<b style="color: red;">${p }</b>
 						</c:when>
 						<c:otherwise>
-							<a href="/review/list_form?page=${p }">${p }</a>
+							<a href="/review/list_form?page=${p }" class="pagelinks">${p }</a>
 						</c:otherwise>
 					</c:choose>
 					<c:if test="${vs.last eq false }">|</c:if>
 				</c:forEach>
 				<c:if test="${page ne size }">
-					<a href="/review/list_form?page=${page +1 }">다음</a>
+					<a href="/review/list_form?page=${page +1 }" class="pagelinks">다음</a>
 				</c:if>
+				</ul>
 			</div>
 			<br />
 		</div>
 
 	
 		<div class="col-md-2" >
-			<div>  <!-- id="floatMenu" -->
-		<!-- 	<br/>
+			<div id="floatMenu" >  <!-- id="floatMenu" -->
+		<h2>
+				<b>CATH</b>
+			</h2>
+			<h5>
+				<span style="color: #4682B4">(자유롭게 의견을 공유하세요)</span>
+			</h5>
 			<br/>
-			<br/>
-			<br/>
-			<br/>
-			<br/> -->
-				<div class="well" id="result"
-					style="height: 40%; width: 30%; overflow-y: scroll; margin-top: 0px; background: #F0F8FF; border-style: double;">
+			<br/> 
+				<div class="well" id="result" 
+					style="height: 400px; width: 300px; overflow-y: scroll; margin-top: 0px; background: #F0F8FF; border-style: double;">
 
 				</div>
-				<div style="width: 340px">
+				<div style="width: 300px">
 					<input type="text" class="form-control" id="msg"
 						placeholder="메세지를 남겨주세요" />
 				</div>
