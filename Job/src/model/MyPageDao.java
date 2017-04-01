@@ -143,6 +143,28 @@ public class MyPageDao {
 
 		return list;
 	}
+	public List<HashMap> visitgraph2(String cname) {
+
+		List<HashMap> list = new ArrayList<>();
+		SqlSession sql = null;
+
+		try {
+			sql = factory.openSession();
+			list = sql.selectList("mappers.mypage.visit2", cname);
+			
+			//System.out.println(list);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sql.close();
+		}
+
+		return list;
+	}
+	
+	
+	
 	
 	public List<HashMap> getCompareData(String email) {
 

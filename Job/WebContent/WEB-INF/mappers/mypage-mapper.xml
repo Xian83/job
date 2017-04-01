@@ -47,4 +47,8 @@
 	<select id="visit" resultType="java.util.HashMap" parameterType="java.lang.String">
 		select * from INQUIRY where CMPN_NM=#{cname}
 	</select>
+	<select id="visit2" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select num from INQUIRY where CMPN_NM=#{cname}
+	</select>
+	
 </mapper>

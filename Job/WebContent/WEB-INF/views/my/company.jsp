@@ -4,19 +4,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-
+<!-- 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-
+ -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <style>
 body {
 	position: relative;
@@ -95,7 +94,7 @@ div.col-sm-9 div {
 						<span style="color: #4682B4">(관심 조건을 바꾸시려면 개인정보에서 변경해 주세요)</span>
 					</h6>
 					<h5>
-						<br /> <span style="color: #6A5ACD"> <b>[추천 기업
+						<br /> <span style="color: #6A5ACD; font-size: 15px"> <b>[추천 기업
 								조건]&nbsp;&nbsp;&nbsp;지역 : ${data.AREA} | 산업 :
 								${data.STNDD_BIG_GB} | 연봉 : ${data.SALARY_MIN}만원 ~
 								${data.SALARY_MIN}만원<br /> <br /> 총 추천기업은 ${list_r.size()}개
@@ -104,7 +103,7 @@ div.col-sm-9 div {
 						</span>
 					</h5>
 					<br />
-
+					
 					<div id="img_list"
 						style="width: 850px; height: 210px; overflow: hidden;">
 						<table class="" style="width: 2500" align="center" cellpadding="0"
@@ -606,33 +605,33 @@ function scroll_left(){
 				}
 			}).done(function(rst){
 				google.charts.setOnLoadCallback(drawBasic);
-				window.alert(rst)
-				function drawBasic() {
-					
-					var data = new google.visualization.DataTable();
-					data.addColumn('number', 'X');
-					data.addColumn('number', 'Dogs');
-					data.addColumn('number', 'ca');
-					data.addColumn('number', 'ttt');
-					data.addRows([
-					[0, 0, 0,0],   [1, 10, 15,20],  [2, 23, 15,20],  [3, 17, 13,20],  [4, 18, 19,20],  [5, 9, 20,20],
-					[6, 11, 60,20],  [7, 27, 0,20]
-					]);
-
-					var options = {
-						hAxis : {
-							title: '조회수 비교'
-						},
-						vAxis: {
-							title: ''
+				
+					function drawBasic() {
+						
+						var data = new google.visualization.DataTable();
+						data.addColumn('number', 'X');
+						for(var i = 0 ; i<$("input:checkbox[name='inqurity']:checked").length ; i++){
+							data.addColumn('number', checkname[i]);
+							for(var t = 0 ; t<7 ; t++){
+							data.addRows([
+								 [0, rst.get(checkname[i]).get(t).get("NUM")]
+							]);
+							}
 						}
-					};
-
-					var chart = new google.visualization.LineChart(document.getElementById('visit_chart'));
-
-					chart.draw(data, options);
+						var options = {
+							hAxis : {
+								title: '조회수 비교'
+							},
+							vAxis: {
+								title: ''
+							}
+						};
+						
+						var chart = new google.visualization.LineChart(document.getElementById('visit_chart'));
+	
+						chart.draw(data, options);
+					
 				}
-
 			});
 		}
 		
