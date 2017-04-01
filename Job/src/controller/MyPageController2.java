@@ -193,60 +193,30 @@ public class MyPageController2 {
       // System.out.println("스크랩 = " + list_s);
 
 
-		// System.out.println("CMPN_NM = " + CMPN_NM);
-		// List<HashMap> visit = mypage.visitgraph("삼성전자");
-		// System.out.println("test 입니다 ===============" +
-		// visit.get(0).get("NUM"));
-		// System.out.println("visit==============="+visit.get(0).get("NUM"));
-		// 이렇게 쓰시오 조회수
-		// mav.addObject("visit",visit);
-		// if (CMPN_NM != null) {
-		// boolean rst = mypage.deleteScrap(email, CMPN_NM);
-		// System.out.println("삭제 됐어유");
-		// /*
-		// * if (rst) response.sendRedirect("/my/company");
-		// */
-		// }
-		// 비교한 기업(compare)
+	
 		List<HashMap> list_c = mypage.getCompareData(email);
 		mav.addObject("list_c", list_c);
-		// System.out.println("비교 compare = " + list_c);
-		String CM1 = (String) list_c.get(0).get("CM1");
-		String CM2 = (String) list_c.get(0).get("CM2");
-
-      // System.out.println("CMPN_NM = " + CMPN_NM);
-      //List<HashMap> visit = mypage.visitgraph("삼성전자");
-   //   System.out.println("test 입니다 ===============" + visit.get(0).get("NUM"));
-      // System.out.println("visit==============="+visit.get(0).get("NUM"));
-      // 이렇게 쓰시오 조회수
-      // mav.addObject("visit",visit);
-      // if (CMPN_NM != null) {
-      // boolean rst = mypage.deleteScrap(email, CMPN_NM);
-      // System.out.println("삭제 됐어유");
-      // /*
-      // * if (rst) response.sendRedirect("/my/company");
-      // */
-      // }
-      // 비교한 기업(compare)
-     
-     
-      // System.out.println("비교 compare = " + list_c);
-     
- //branch 'master' of https://github.com/Xian83/job.git
-
-      String chartURL = makeChart_2(CM1, CM2);// graph
-
-      /* mav.addObject("main", "my/compareResult"); */
-      mav.addObject("score01", detail.score(CM1)); // FINANCE_SCORE,
-                                          // EMPLOYEE_SCORE
-      mav.addObject("score02", detail.score(CM2));
-      mav.addObject("info01", detail.getInfo02(search.getCompID(CM1))); // HashMap
-                                                         // (summary
-                                                         // -
-                                                         // List)
-      mav.addObject("info02", detail.getInfo02(search.getCompID(CM2)));
-      mav.addObject("chartURL", chartURL);
-
+//여기서 널값이 들어옵니다 ㅠㅠ=================================================================================================
+//		String CM1 = (String) list_c.get(0).get("CM1");
+//		String CM2 = (String) list_c.get(0).get("CM2");
+//
+//
+//     
+//     
+// 
+//      String chartURL = makeChart_2(CM1, CM2);// graph
+//
+//      /* mav.addObject("main", "my/compareResult"); */
+//      mav.addObject("score01", detail.score(CM1)); // FINANCE_SCORE,
+//                                          // EMPLOYEE_SCORE
+//      mav.addObject("score02", detail.score(CM2));
+//      mav.addObject("info01", detail.getInfo02(search.getCompID(CM1))); // HashMap
+//                                                         // (summary
+//                                                         // -
+//                                                         // List)
+//      mav.addObject("info02", detail.getInfo02(search.getCompID(CM2)));
+//      mav.addObject("chartURL", chartURL);
+//=========================================================================================================
       // 사진 불러오기
       String picURL = mydao.getLastetImageURL(email);
       if (picURL == null || picURL.equals("null"))
