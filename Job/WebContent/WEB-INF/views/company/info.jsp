@@ -60,7 +60,8 @@ hr {
 }
 
 .star_rating {
-	display: inline; font-size : 0;
+	display: inline;
+	font-size: 0;
 	letter-spacing: -4px;
 	font-size: 0;
 }
@@ -341,12 +342,13 @@ hr {
 			<img src="${chartURL}">
 		</div>
 		<div class="col-md-6">
-			<div class="panel panel-default">
-				<div class="panel-heading">리뷰</div>
-				<c:forEach var="review" items="${review }">
-					<div class="panel-body">[ ${review.EMAIL } ]
-						${review.CONTENTS }</div>
-				</c:forEach>
+			<div id="reviewList">
+				<div class="panel panel-default">
+					<div class="panel-heading">리뷰</div>
+					<c:forEach var="review" items="${review }">
+						<div class="panel-body">${review.EMAIL }:${review.CONTENTS }</div>
+					</c:forEach>
+				</div>
 			</div>
 			<div>
 				<!-- Review Modal button -->
@@ -362,14 +364,15 @@ hr {
 								<h4 class="modal-title">Review</h4>
 							</div>
 							<div class="modal-body">
-								<div class="media" style="margin-bottom:1em;">
+								<div class="media" style="margin-bottom: 1em;">
 									<div class="media-left media-middle"
 										style="margin: 0; padding: 0">
 										<img src="${score.LOGO }" class="media-object"
 											style="width: 82px;">
 									</div>
 									<div class="media-body media-middle">
-										<h3 class="media-heading" style="color:#f4511e;margin-left:1em;">${score.CMPN_NM }</h3>
+										<h3 class="media-heading"
+											style="color: #f4511e; margin-left: 1em;">${score.CMPN_NM }</h3>
 										<p class="star_rating">
 											<a href="#" class="on" style="margin-left: 1em;">★</a> <a
 												href="#" class="on">★</a> <a href="#" class="on">★</a> <a
@@ -380,6 +383,9 @@ hr {
 								<div class="form-group">
 									<input class="form-control" id="content" type="text"
 										placeholder="리뷰를 입력하세요">
+									<c:if test="${auth eq 'no' or auth eq null }">
+										<p id="msg" style="color: red;">로그인을 한 상태에서만 리뷰를 작성할 수 있습니다</p>
+									</c:if>
 								</div>
 							</div>
 							<div class="modal-footer">
@@ -388,9 +394,12 @@ hr {
 									data-dismiss="modal">
 									<span class="glyphicon glyphicon-remove"></span> 취소
 								</button>
+								
 								<button type="button"
-									class="btn btn-default btn-success pull-right"
-									data-dismiss="modal" id="upload"><span class="glyphicon glyphicon-pencil" ></span> 작성하기</button>
+									class="btn btn-default btn-success pull-right ${auth eq 'no' or auth eq null ? 'disabled' : ''}"
+									data-dismiss="modal" id="upload">
+									<span class="glyphicon glyphicon-pencil"></span> 작성하기
+								</button>
 							</div>
 						</div>
 
@@ -408,7 +417,9 @@ hr {
 			<p>
 				<b>[회사위치]</b> ${info02.address }
 			</p>
+			<c:if test="${info02.address ne '' or info02.address ne null }">
 			<div id="map" style="width: 500; height: 500"></div>
+			</c:if>
 		</div>
 		<div class="info04 col-md-5" align="left">
 			<b>[회사제도]</b><br /> ${info02.system }<br /> <b>[사내문화]</b><br />
@@ -447,11 +458,11 @@ function initMap() {
   		}).done(function(rst) {
   			if(rst == "1"){
   				$("#scrap").removeClass("btn-success");
-  				$("#scrap").addClass("btn-danger");
+  				$("#scrap").addClass("btn-danger active");
   				$("#scrap").text("스크랩 해제");
   			}
   			else{
-  				$("#scrap").removeClass("btn-danger");
+  				$("#scrap").removeClass("btn-danger active");
   				$("#scrap").addClass("btn-success");
   				$("#scrap").text("스크랩 추가");
   			}
@@ -460,12 +471,6 @@ function initMap() {
 	
 	// 2 : 리뷰 올리기 및 목록 갱신
 	$("#upload").on("click", function() {
-		var login = '${auth}';
-		if(login == "no" || login == null){
-			window.alert("로그인이 필요합니다");
-			return false;
-		}
-		
 		var content = $("#content").val();
 		var rate = 0;
 		$(".star_rating a.on").each(function() {
@@ -481,8 +486,10 @@ function initMap() {
   			}
   		}).done(function(rst) {
   			$("#content").val("");
-  			console.log("리뷰 업로드 : " + rst);
+			$("#reviewModal").modal("hide");
+			$("#reviewList").html(rst);
   		})
+		return false;		
   	});
 
 	// 리뷰 modal 별 평점

@@ -1,7 +1,5 @@
 package controller;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -197,15 +195,22 @@ public class CompanyController {
 		return img;
 	}
 
-	@ResponseBody
 	@RequestMapping("/company/upload")
-	public int reviewUploadHandler(@RequestParam(name = "cmpn_nm") String CName,
+	public ModelAndView reviewUploadHandler(@RequestParam(name = "cmpn_nm") String CName,
 			@RequestParam(name = "content") String content, @RequestParam(name="rate")int rate, HttpSession session) {
 		
-		System.out.println("rate : " + rate);
-		String email = (String)session.getAttribute("email");
-		int rst = rDao.push(CName, content, email);
 		
-		return rst;
+		String email = (String)session.getAttribute("email");
+		System.out.println("rate : " + rate);
+		System.out.println("이메일 : " + email);
+		
+		int rst = rDao.push(CName, content, email);
+		List reviewList = ddao.review(CName);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/company/review_list");
+		mav.addObject("review", reviewList);
+		mav.addObject("cnt", rst);
+		return mav;
 	}
 }
