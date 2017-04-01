@@ -53,12 +53,12 @@ a.disabled {
 				<td>
 					<div class="media">
 						<div class="media-left media-middle">
-							<a href="/company/detail?cmpn_nm=${list[i].CMPN_NM }"> <img
+							<a href="/company?cmpn_nm=${list[i].CMPN_NM }"> <img
 								src="${list[i].LOGO }" class="media-object" style="width: 82px">
 							</a>
 						</div>
 						<div class="media-body">
-							<a href="/company/detail?cmpn_nm=${list[i].CMPN_NM }"><h4>
+							<a href="/company?cmpn_nm=${list[i].CMPN_NM }"><h4>
 									<b>${list[i].CMPN_NM }</b>
 								</h4></a>
 							<h5>${list[i].DIVISION }|${list[i].SCALE }</h5>

@@ -110,7 +110,7 @@ div.col-sm-9 div {
 							cellspacing="0">
 							<tr>
 								<td><c:forEach var="i" items="${list_r }">
-										<a href="/company/detail?cmpn_nm=${i.CMPN_NM}"><button
+										<a href="/company?cmpn_nm=${i.CMPN_NM}"><button
 												class="btn btn-default" type="submit"
 												style="background: white;">
 												<div class="thumbnail href1"
@@ -161,7 +161,7 @@ div.col-sm-9 div {
                      <div class="row" align="center">
                       	
                         <div class="col-md-3">
-									<a href="/company/detail?cmpn_nm=${list_r[0].CMPN_NM}"><button
+									<a href="/company?cmpn_nm=${list_r[0].CMPN_NM}"><button
 											class="btn btn-default" type="submit"
 											style="background: white;">
 											<div class="thumbnail href1"
@@ -189,7 +189,7 @@ div.col-sm-9 div {
 							<div class="container" align="center">
 							   <div class="row" align="center">
 								<c:forEach var="i" items="${list_r }">
-									<a href="/company/detail?cmpn_nm=${i.CMPN_NM}"><button
+									<a href="/company?cmpn_nm=${i.CMPN_NM}"><button
 											class="btn btn-default" type="submit"
 											style="background: white;">
 											<div class="thumbnail href1"
@@ -257,8 +257,8 @@ div.col-sm-9 div {
 												varStatus="vs">
 												<tr>
 													<td>${vs.count }</td>
-													<td><a href="/company/detail?cmpn_nm=${i.CM1 }">${i.CM1 }</a></td>
-													<td><a href="/company/detail?cmpn_nm=${i.CM2 }">${i.CM2 }</a></td>
+													<td><a href="/company?cmpn_nm=${i.CM1 }">${i.CM1 }</a></td>
+													<td><a href="/company?cmpn_nm=${i.CM2 }">${i.CM2 }</a></td>
 													<td>
 														<button type="button" class="btn" id="compareView"
 															name="${i.CM1 }#${i.CM2 }">간단 비교</button>
@@ -370,7 +370,7 @@ div.col-sm-9 div {
 											<c:forEach var="i" items="${list_s }" varStatus="vs">
 												<tr>
 													<td>${vs.count }</td>
-													<td><a href="/company/detail?cmpn_nm=${i.CMPN_NM }">${i.CMPN_NM }</a></td>
+													<td><a href="/company?cmpn_nm=${i.CMPN_NM }">${i.CMPN_NM }</a></td>
 													<td><input type="checkbox" name="inqurity" class="chk"
 														value="${i.CMPN_NM }"></td>
 													<td><fmt:formatDate value="${i.SDATE }"
@@ -457,8 +457,8 @@ div.col-sm-9 div {
 												varStatus="vs">
 												<tr>
 													<td>${vs.count }</td>
-													<td><a href="/company/detail?cmpn_nm=${i.CM1 }">${i.CM1 }</a></td>
-													<td><a href="/company/detail?cmpn_nm=${i.CM2 }">${i.CM2 }</a></td>
+													<td><a href="/company?cmpn_nm=${i.CM1 }">${i.CM1 }</a></td>
+													<td><a href="/company?cmpn_nm=${i.CM2 }">${i.CM2 }</a></td>
 													<td>
 														<button type="button" class="btn" id="compareView"
 															name="${i.CM1 }#${i.CM2 }">간단 비교</button>

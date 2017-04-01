@@ -8,7 +8,7 @@
 	<c:forEach var="i" items="${list }">
 	<div class="col-md-2">
 		<div class="thumbnail">
-			<a href="/company/detail?cmpn_nm=${i.CMPN_NM}"> 
+			<a href="/company?cmpn_nm=${i.CMPN_NM}"> 
 				<img src="${i.LOGO }"	alt="Lights" style="width: 100%">
 				<div class="caption">
 					<p align="center">

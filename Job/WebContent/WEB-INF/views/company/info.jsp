@@ -6,30 +6,26 @@
 <head>
 <style type="text/css">
 * {
-	margin: 0;
-	padding: 0;
+	/* 	margin: 0; */
+	/* 	padding: 0; */
 	box-sizing: border-box;
 }
 
 #top {
 	width: 100%;
 	/* 	border-top: 5px solid #f4511e; */
-	border-bottom: 2px solid #f4511e;
+	/* 	border-bottom: 2px solid #f4511e; */
 }
 
 #basic_info {
 	width: 100%;
-	color: white;
-	background: #f4511e;
+	color: black;
+	/* 	background: #f4511e; */
 }
 
-#top-follow {
-	margin-right: 1em;
-}
-
-h2.media-heading {
-	/* 	color: white; */
-	
+h1.media-heading {
+	color: #f4511e;
+	margin-left: 2em;
 }
 
 div.num_left {
@@ -37,11 +33,16 @@ div.num_left {
 	border-left: 2px solid #f4511e;
 	margin-bottom: 1em;
 }
-
+/*
 div.num_right {
 	height: 80px;
 	border-right: 2px solid #f4511e;
 	margin-bottom: 1em;
+}
+*/
+div.info04 {
+	margin:1.5em;
+	padding:0;
 }
 
 #scrap {
@@ -134,7 +135,18 @@ div.num_right {
 		
     }
       
-  
+	
+   // 스크랩 버튼
+  	$("#scrap").on("click", function() {
+  		$.ajax({
+  			"url" : "/company/scrap",
+  			"data" : {
+  				"CName" : CName,
+  			}
+  		}).done(function(aw) {
+  			$("#result").html(aw);
+  		})
+  	});
     </script>
 </head>
 <body>
@@ -142,14 +154,14 @@ div.num_right {
 	<!-- 로고, 회사명 -->
 	<div class="row" id="top">
 		<div class="media">
-			<div class="media-left media-middle">
-				<img src="${score.LOGO }" class="media-object" style="width: 82px">
+			<div class="media-left media-middle" style="margin: 0; padding: 0">
+				<img src="${score.LOGO }" class="media-object" style="width: 82px;">
 			</div>
 			<div class="media-body media-middle">
-				<h2 class="media-heading" style="font-color: white;">${score.CMPN_NM }
+				<h1 class="media-heading">${score.CMPN_NM }
 					<button class="btn btn-info" id="scrap">스크랩</button>
-				</h2>
-				<p style="font-color: grey">${score.DIVISION }|${score.SCALE }</p>
+				</h1>
+				<p style="font-color: grey; margin-left: 5em;">${score.DIVISION }|${score.SCALE }</p>
 			</div>
 		</div>
 	</div>
@@ -191,7 +203,7 @@ div.num_right {
 			<br />
 			<p>재무평가</p>
 		</div>
-		<div class="num_left num_right col-md-2">
+		<div class="num_left col-md-2">
 			<h3>${score.EMPLOYEE_SCORE }점</h3>
 			<div
 				style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/spare.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
@@ -271,7 +283,7 @@ div.num_right {
 
 	<!-- 사용자 리뷰 게시판 -->
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-6">
 			<h1>기업 리뷰</h1>
 		</div>
 		<div class="col-md-3">
@@ -283,7 +295,7 @@ div.num_right {
 				</p>
 			</div>
 		</div>
-		<div class="col-md-5">
+		<div class="col-md-3">
 			<h6>재직자평가 ${score.FINANCE_SCORE }점</h6>
 			<div
 				style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/spare.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
@@ -293,12 +305,12 @@ div.num_right {
 			</div>
 		</div>
 	</div>
-	<br/>
+	<br />
 	<div class="row">
-		<div class="col-md-4" align="center" style="width: 500">
+		<div class="col-md-4" align="center" style="min-width: 550px">
 			<img src="${chartURL}">
 		</div>
-		<div class="col-md-8">
+		<div class="col-md-6">
 			<div class="panel panel-default">
 				<div class="panel-heading">리뷰</div>
 				<c:forEach var="review" items="${review }">
@@ -306,26 +318,29 @@ div.num_right {
 				</c:forEach>
 			</div>
 			<div>
-				<input type="text" id="re_content" name="content" placeholder="내용 입력" style="width: 93%">
-				<button type="submit" class="btn btn-success ${auth eq 'no' or auth eq null ? 'disabled': '' }">올리기</button>
+				<form class="form-inline">
+					<div class="form-group">
+						<input type="text" class="form-control" id="review" style="min-width:450px;" placeholder="리뷰 입력">
+					</div>
+					<button type="button"
+						class="btn btn-success ${auth eq 'no' or auth eq null ? 'disabled': '' }">올리기</button>
+				</form>
 			</div>
 		</div>
 	</div>
-	<hr/>
-	
+	<hr />
+
 	<!-- 근무환경 및 복리후생 -->
 	<h1>근무환경 및 복리후생</h1>
 	<div class="row">
-		<div class="col-md-5">
+		<div class="info04 col-md-5">
 			<p>
 				<b>[회사위치]</b> ${info02.address }
 			</p>
 			<div id="map" style="width: 500; height: 500"></div>
 		</div>
-		<div class="col-md-7" align="left">
-			<b>[회사제도]</b><br /> 
-			${info02.system }<br /> 
-			<b>[사내문화]</b><br />
+		<div class="info04 col-md-5" align="left">
+			<b>[회사제도]</b><br /> ${info02.system }<br /> <b>[사내문화]</b><br />
 			${info02.culture }<br />
 		</div>
 	</div>

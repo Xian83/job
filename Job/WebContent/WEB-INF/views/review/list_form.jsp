@@ -33,7 +33,7 @@ hr {
 					</div>
 					<div class="media-body row content">
 						<h5 class="media-heading" style="display: inline-block;">
-							<a href="/company/detail?cmpn_nm=${review[i].CMPN_NM }">${page *6-5+i}.
+							<a href="/company?cmpn_nm=${review[i].CMPN_NM }">${page *6-5+i}.
 								${review[i].CMPN_NM } 
 						</h5>
 						</a> <b style="font-size: x-small;">${review[i].WDATE }</b><br />

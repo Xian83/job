@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import model.DetailDao;
@@ -25,8 +26,7 @@ import model.SalaryDao;
 import model.SearchDao;
 
 @Controller
-//@RequestMapping("/company")
-public class DetailController {
+public class CompanyController {
 	@Autowired
 	DetailDao ddao;
 
@@ -45,33 +45,33 @@ public class DetailController {
 	@Autowired
 	MyPageDao mypage;
 
-//	@RequestMapping("/detail")
-	public ModelAndView detailHandler(@RequestParam(name = "cmpn_nm") String companyname, HttpServletResponse response,
+	@RequestMapping("/company")
+	public ModelAndView detailHandler(@RequestParam(name = "cmpn_nm") String CName, HttpServletResponse response,
 			HttpSession session, @CookieValue(name = "cmpn_nm", defaultValue = "") String origin) {
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("ttt");
-		mav.addObject("main", "company/detail_form");
-		HashMap totalvisit = ddao.inqurity(companyname);// 회사 조회수 증가 and 총 조회수
+		mav.setViewName("company");
+		mav.addObject("main", "/company/info");
+		HashMap totalvisit = ddao.inqurity(CName);// 회사 조회수 증가 and 총 조회수
 
 		// get data by Company name
-		HashMap scorelist = ddao.score(companyname);
-		HashMap salarylist = ddao.salary(companyname);
-		List reviewList = ddao.review(companyname);
-		String chartURL = makeChart(ddao.getScore02(companyname));// graph
+		HashMap scorelist = ddao.score(CName);
+		HashMap salarylist = ddao.salary(CName);
+		List reviewList = ddao.review(CName);
+		String chartURL = makeChart(ddao.getScore02(CName));// graph
 
 		// member check & 관심기업 여부 확인
 		String email = (String) session.getAttribute("email");
 		if (email == null) {
 			email = "visitant";
 		} else {
-			int a = ddao.checkScrape(companyname, email);
+			int a = ddao.checkScrape(CName, email);
 			mav.addObject("scrape", a); // 0 : 아님, 1: 관심기업
 		}
 
 		// increase visit count to DB
-		ddao.insertVisit(companyname, email);
-		HashMap rate = ddao.manWomanrate(companyname);
+		ddao.insertVisit(CName, email);
+		HashMap rate = ddao.manWomanrate(CName);
 		// get same industry company list (finance score desc)
 		String div = (String) scorelist.get("DIVISION");
 		List samelist = ddao.same(div);
@@ -83,10 +83,17 @@ public class DetailController {
 		// System.out.println(industry.get("AVG") + " vs " +
 		// industry.get("ROOKIE")); // 확인용
 
-		String CompID = search.getCompID(companyname);
+		String CompID = search.getCompID(CName);
 		// career catch site data
 		HashMap<String, List> info01 = ddao.getInfo01(CompID);
 		HashMap<String, Object> info02 = ddao.getInfo02(CompID);
+
+		// 1주일간 조회수 그래프
+		List<HashMap> visitgraph = mypage.visitgraph(CName);
+		ArrayList vList = new ArrayList();
+		for (HashMap map : visitgraph) {
+			vList.add(map.get("NUM"));
+		}
 
 		// data set for view
 		mav.addObject("score", scorelist);
@@ -102,6 +109,7 @@ public class DetailController {
 		mav.addObject("chartURL", chartURL); // 방사형 그래프 주소
 		mav.addObject("rate", rate); // 상세페이지를 클릭한 남녀비율 hashmap(man, woman)
 		mav.addObject("total", totalvisit); // 전체 조회수 hashmap(sum)
+		mav.addObject("vList", vList); // 최근 1주일간 조회수 변화 그래프용
 
 		// 쿠키생성
 		String[] arr = origin.split("#"); // 봤던 쿠키 목록
@@ -110,13 +118,13 @@ public class DetailController {
 		// System.out.println("origin="+origin);
 		boolean rst = false;
 		for (String cc : arr) {
-			if (cc.equals(companyname)) {
+			if (cc.equals(CName)) {
 				rst = true;
 				break;
 			}
 		}
 		if (rst == false) {
-			origin = companyname + "#" + origin;
+			origin = CName + "#" + origin;
 			Cookie c = new Cookie("cmpn_nm", origin);
 			c.setPath("/");
 			response.addCookie(c);
@@ -161,14 +169,11 @@ public class DetailController {
 		return mav;
 	}
 
-//	@RequestMapping("/interest")
-	public ModelAndView interestHandler(@RequestParam(name = "cmpn_nm") String companyname,
-			HttpServletResponse response, HttpSession session) throws UnsupportedEncodingException {
-		ModelAndView mav = new ModelAndView();
-		int a = ddao.insertInterest(companyname, (String) session.getAttribute("email"));
-		mav.addObject("scrape", a);
-		mav.setViewName("redirect:/company/detail?cmpn_nm=" + URLEncoder.encode(companyname, "UTF-8"));
-		return mav;
+	@ResponseBody
+	@RequestMapping("/company/scrap")
+	public int interestHandler(@RequestParam(name = "cmpn_nm") String CName,
+			HttpSession session) {
+		return ddao.insertInterest(CName, (String) session.getAttribute("email"));
 	}
 
 	public String makeChart(HashMap data1) {
@@ -187,10 +192,10 @@ public class DetailController {
 		return img;
 	}
 
-//	@RequestMapping("/basic_info")
+	@RequestMapping("/company/basic_info")
 	public ModelAndView basicInfoHandler(@RequestParam(name = "cmpn_nm", defaultValue = "컴투스") String CName,
 			HttpSession session) {
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
 		mav.addObject("main", "/company/basic_info");
@@ -246,13 +251,14 @@ public class DetailController {
 		mav.addObject("industry", industry); // HashMap(avg, rookie)
 		mav.addObject("allCompany", allCompany);// HashMap(avg, rookie)
 		mav.addObject("info01", info01);// HashMap<List>(rank8, employee, scale)
-		mav.addObject("info02", info02);// HashMap (summary, address, system, culture)
+		mav.addObject("info02", info02);// HashMap (summary, address, system,
+										// culture)
 		mav.addObject("json", google.map((String) info02.get("address")));
 		mav.addObject("chartURL", chartURL); // 방사형 그래프 주소
 		mav.addObject("rate", rate); // 상세페이지를 클릭한 남녀비율 hashmap(man, woman)
 		mav.addObject("total", totalvisit); // 전체 조회수 hashmap(sum)
 		mav.addObject("vList", vList); // 최근 1주일간 조회수 변화 그래프용
-		
+
 		return mav;
 	}
 }
