@@ -200,8 +200,9 @@ public class CompanyController {
 	@ResponseBody
 	@RequestMapping("/company/upload")
 	public int reviewUploadHandler(@RequestParam(name = "cmpn_nm") String CName,
-			@RequestParam(name = "content") String content, HttpSession session) {
+			@RequestParam(name = "content") String content, @RequestParam(name="rate")int rate, HttpSession session) {
 		
+		System.out.println("rate : " + rate);
 		String email = (String)session.getAttribute("email");
 		int rst = rDao.push(CName, content, email);
 		

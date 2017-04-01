@@ -21,7 +21,7 @@
 	width: 100%;
 	color: black;
 	/* 	background: #f4511e; */
-	margin-top : 1em;
+	margin-top: 1em;
 }
 
 h1.media-heading {
@@ -42,8 +42,8 @@ div.num_right {
 }
 */
 div.info04 {
-	margin:1.5em;
-	padding:0;
+	margin: 1.5em;
+	padding: 0;
 }
 
 #scrap {
@@ -53,9 +53,42 @@ div.info04 {
 	padding-left: 1.5em;
 	padding-right: 1.5em;
 }
+
 hr {
-	margin-top : 2em;
-	margin-bottom : 2em;
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
+
+.star_rating {
+	display: inline; font-size : 0;
+	letter-spacing: -4px;
+	font-size: 0;
+}
+
+.star_rating a {
+	font-size: 22px;
+	letter-spacing: 0;
+	display: inline-block;
+	margin-left: 5px;
+	color: #ccc;
+	text-decoration: none;
+}
+
+.star_rating a:first-child {
+	margin-left: 0;
+}
+
+.star_rating a.on {
+	color: #FFE400;
+}
+
+.modal-dialog {
+	position: absolute;
+	left: 50%;
+	margin-left: -312px;
+	height: 500px;
+	top: 50%;
+	margin-top: -250px;
 }
 </style>
 
@@ -91,13 +124,13 @@ hr {
         data2.addColumn('date', 'Time of Day');
         data2.addColumn('number', '조회수');
         data2.addRows([
-        	[new Date(2017, 3, 28), ${vList[0]} ],
-        	[new Date(2017, 3, 29), ${vList[1]} ],
-        	[new Date(2017, 3, 30), ${vList[2]} ],
-        	[new Date(2017, 3, 31), ${vList[3]} ],
-        	[new Date(2017, 4, 1), ${vList[4]}	],
-        	[new Date(2017, 4, 2), ${vList[5]}	],
-        	[new Date(2017, 4, 3), ${vList[6]}	]
+        	[new Date(2017, 2, 28), ${vList[0]} ],
+        	[new Date(2017, 2, 29), ${vList[1]} ],
+        	[new Date(2017, 2, 30), ${vList[2]} ],
+        	[new Date(2017, 2, 31), ${vList[3]} ],
+        	[new Date(2017, 3, 1), ${vList[4]}	],
+        	[new Date(2017, 3, 2), ${vList[5]}	],
+        	[new Date(2017, 3, 3), ${vList[6]}	]
         ]);
 
         var options2 = {
@@ -153,7 +186,9 @@ hr {
 			<div class="media-body media-middle">
 				<h1 class="media-heading">${score.CMPN_NM }
 					<c:if test="${sessionScope.auth eq 'yes'}">
-						<button class="btn btn-lg ${scrap eq 0 ? 'btn-success' : 'btn-danger'}" id="scrap">스크랩 ${scrap eq 0 ? '하기' : '해제' }</button>
+						<button
+							class="btn btn-lg ${scrap eq 0 ? 'btn-success' : 'btn-danger'}"
+							id="scrap">스크랩 ${scrap eq 0 ? '하기' : '해제' }</button>
 					</c:if>
 				</h1>
 				<p style="font-color: grey; margin-left: 5em;">${score.DIVISION }|${score.SCALE }</p>
@@ -309,17 +344,58 @@ hr {
 			<div class="panel panel-default">
 				<div class="panel-heading">리뷰</div>
 				<c:forEach var="review" items="${review }">
-					<div class="panel-body">[ ${review.EMAIL } ] ${review.CONTENTS }</div>
+					<div class="panel-body">[ ${review.EMAIL } ]
+						${review.CONTENTS }</div>
 				</c:forEach>
 			</div>
 			<div>
-				<form class="form-inline">
-					<div class="form-group">
-						<input type="text" class="form-control" id="content" style="min-width:450px;" placeholder="리뷰 입력">
+				<!-- Review Modal button -->
+				<button type="button" id="open" class="btn btn-info"
+					data-toggle="modal" data-target="#reviewModal">리뷰 쓰기</button>
+
+				<!-- Modal -->
+				<div class="modal fade" id="reviewModal" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Review</h4>
+							</div>
+							<div class="modal-body">
+								<div class="media" style="margin-bottom:1em;">
+									<div class="media-left media-middle"
+										style="margin: 0; padding: 0">
+										<img src="${score.LOGO }" class="media-object"
+											style="width: 82px;">
+									</div>
+									<div class="media-body media-middle">
+										<h3 class="media-heading" style="color:#f4511e;margin-left:1em;">${score.CMPN_NM }</h3>
+										<p class="star_rating">
+											<a href="#" class="on" style="margin-left: 1em;">★</a> <a
+												href="#" class="on">★</a> <a href="#" class="on">★</a> <a
+												href="#">★</a> <a href="#">★</a>
+										</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<input class="form-control" id="content" type="text"
+										placeholder="리뷰를 입력하세요">
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button"
+									class="btn btn-danger btn-default pull-left"
+									data-dismiss="modal">
+									<span class="glyphicon glyphicon-remove"></span> 취소
+								</button>
+								<button type="button"
+									class="btn btn-default btn-success pull-right"
+									data-dismiss="modal" id="upload"><span class="glyphicon glyphicon-pencil" ></span> 작성하기</button>
+							</div>
+						</div>
+
 					</div>
-					<button type="button" id="upload" 
-						class="btn btn-success ${auth eq 'no' or auth eq null ? 'disabled': '' }">올리기</button>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -384,18 +460,36 @@ function initMap() {
 	
 	// 2 : 리뷰 올리기 및 목록 갱신
 	$("#upload").on("click", function() {
+		var login = '${auth}';
+		if(login == "no" || login == null){
+			window.alert("로그인이 필요합니다");
+			return false;
+		}
+		
 		var content = $("#content").val();
-		console.log(content);
+		var rate = 0;
+		$(".star_rating a.on").each(function() {
+			rate++;
+		});
 		
   		$.ajax({
   			"url" : "/company/upload",
   			"data" : {
   				"cmpn_nm" : '${score.CMPN_NM }',
-  				"content" : content
+  				"content" : content,
+  				"rate"	: rate
   			}
   		}).done(function(rst) {
+  			$("#content").val("");
   			console.log("리뷰 업로드 : " + rst);
   		})
   	});
-	
+
+	// 리뷰 modal 별 평점
+	$(".star_rating a").click(function() {
+	     $(this).parent().children("a").removeClass("on");
+	     $(this).addClass("on").prevAll("a").addClass("on");
+	     return false;
+	});
+
 </script>

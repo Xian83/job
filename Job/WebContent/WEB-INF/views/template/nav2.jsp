@@ -19,8 +19,7 @@
 
 .w3-myfont {
 	font-family: "Comic Sans MS", cursive, sans-serif;
-}
-
+ } 
 
 .navbar li a {
 	color: #fff !important;
@@ -35,7 +34,6 @@
 	background-color: #fff !important;
 }
 
-
 .navbar-nav li a:hover {
 	color: #f4511e !important;
 	background-color: #fff !important;
@@ -46,61 +44,61 @@
 	color: #fff !important;
 }
 </style>
-	<nav
-		class="navbar navbar-default navbar-fixed-top navbar navbar-inverse">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#myNavbar">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="/">itJOB</a>
-			</div>
-			<div class="collapse navbar-collapse" id="myNavbar">
-				<ul class="nav navbar-nav navbar-right nav navbar-nav">
-					<li><a href="/search">Search</a></li>
-					<li class="dropdown"><a class="dropdown-toggle" 
-						data-toggle="dropdown" href="#">Company<span class="caret"></span></a>
-						<ul class="dropdown-menu" style="background: #f4511e;  min-width: 1px ">
-							
-							<li><a href="/review/list_form">Review</a></li>
-							<li><a href="/rank/form">Rank</a></li>
-						</ul></li>
-					<li><a href="/contact/form">Contact</a></li>
-					<c:choose>
-						<c:when test="${auth eq null or auth eq 'no'}">
-							<li><a
+<nav
+	class="navbar navbar-default navbar-fixed-top navbar navbar-inverse">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#myNavbar">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/">itJOB</a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav navbar-right nav navbar-nav">
+				<li><a href="/search">Search</a></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Company<span class="caret"></span></a>
+					<ul class="dropdown-menu"
+						style="background: #f4511e; min-width: 1px">
+
+						<li><a href="/review/list_form">Review</a></li>
+						<li><a href="/rank/form">Rank</a></li>
+					</ul></li>
+				<li><a href="/contact/form">Contact</a></li>
+				<c:choose>
+					<c:when test="${auth eq null or auth eq 'no'}">
+						<li><a
 							onclick="document.getElementById('id01').style.display='block'"
 							class="w3-bar-item w3-button w3-mobile">Login</a></li>
-						</c:when>
-						<c:when test="${auth eq 'yes'}">
-							<li><a href="/my/company">My Page</a></li>
-							<li><a href="/login/logout">Logout</a></li>
-						</c:when>
-					</c:choose>
-				</ul>
-			</div>
+					</c:when>
+					<c:when test="${auth eq 'yes'}">
+						<li><a href="/my/company">My Page</a></li>
+						<li><a href="/login/logout">Logout</a></li>
+					</c:when>
+				</c:choose>
+			</ul>
 		</div>
-	</nav>
-	
-	<div id="id01" class="w3-modal">
+	</div>
+</nav>
+
+<div id="id01" class="w3-modal">
 	<div class="w3-modal-content w3-card-4 w3-animate-zoom"
-		style="max-width: 600px; ">
+		style="max-width: 600px;">
 
 		<div class="w3-center">
 			<br> <span
 				onclick="document.getElementById('id01').style.display='none'"
 				class="w3-button w3-xlarge w3-hover-red w3-display-topright"
 				title="Close Modal">&times;</span>
-			<h2>
-				<p class="w3-xxlarge w3-myfont">Welcome To ItJob</p>
-			</h2>
+			<h2>Login</h2>
 		</div>
 
 		<form action="/login/result" method="post">
 			<div class="w3-section" style="margin: 10%">
-			<input type="hidden" name="url" value="${requestScope['javax.servlet.forward.servlet_path']}">
+				<input type="hidden" name="url"
+					value="${requestScope['javax.servlet.forward.servlet_path']}">
 				<label><b>email</b></label> <input
 					class="w3-input w3-border w3-margin-bottom" type="text"
 					placeholder="Enter Useremail" name="email" id="flag1" required>
@@ -110,26 +108,24 @@
 				<button class="w3-button w3-block w3-green w3-section w3-padding"
 					type="submit">Login</button>
 				<input class="w3-check w3-margin-top" type="checkbox" name="keep"
-					checked> 로그인유지<hr/>
-			
+					checked> 로그인유지
+				<hr />
+			</div>
 			<!-- facebook 로그인 버튼 -->
-			
-			<fb:login-button scope="public_profile,email,user_birthday"
-				onlogin="checkLoginState();" data-auto-logout-link="true"></fb:login-button>
-			<!-- 	<div class="fb-login-button" data-max-rows="4" data-size="pinterest" data-show-faces="false" data-auto-logout-link="true"></div> -->
-			
-		</form>
-</div>
-		<div class="w3-container w3-border-top w3-padding-16 w3-light-grey"
-			align="left">
-			<button
-				onclick="document.getElementById('id01').style.display='none'"
-				type="button" class="w3-button w3-red">취소</button>
-			<b><span class="w3-right w3-padding w3-hide-small" style="color: blue;"> <a
-				href="/join/step01">회원가입</a></span></b>
-		</div>
 
+			<fb:login-button scope="public_profile,email,user_birthday" onlogin="checkLoginState();" data-auto-logout-link="true" />
+			<!-- 	<div class="fb-login-button" data-max-rows="4" data-size="pinterest" data-show-faces="false" data-auto-logout-link="true"></div> -->
+
+		</form>
 	</div>
+	<div class="w3-container w3-border-top w3-padding-16 w3-light-grey"
+		align="left">
+		<button onclick="document.getElementById('id01').style.display='none'"
+			type="button" class="w3-button w3-red">취소</button>
+		<b><span class="w3-right w3-padding w3-hide-small"
+			style="color: blue;"> <a href="/join/step01">회원가입</a></span></b>
+	</div>
+
 </div>
 
 <script>
