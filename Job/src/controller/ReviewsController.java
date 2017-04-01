@@ -53,7 +53,7 @@ public class ReviewsController {
 		mav.addObject("main","review/list_form");
 		mav.addObject("page", page);
 		mav.addObject("size", size);
-		// mav.addObject("review", review);
+		mav.addObject("review", review);
 		mav.addObject("rank",rank);
 		System.out.println("rank =" + rank);
 		
