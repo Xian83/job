@@ -21,6 +21,7 @@
 	width: 100%;
 	color: black;
 	/* 	background: #f4511e; */
+	margin-top : 1em;
 }
 
 h1.media-heading {
@@ -46,11 +47,15 @@ div.info04 {
 }
 
 #scrap {
-	margin-left: 10em;
+	margin-left: 7em;
 	padding-top: 0.7em;
 	padding-bottom: 0.7em;
 	padding-left: 1.5em;
 	padding-right: 1.5em;
+}
+hr {
+	margin-top : 2em;
+	margin-bottom : 2em;
 }
 </style>
 
@@ -135,18 +140,6 @@ div.info04 {
 		
     }
       
-	
-   // 스크랩 버튼
-  	$("#scrap").on("click", function() {
-  		$.ajax({
-  			"url" : "/company/scrap",
-  			"data" : {
-  				"CName" : CName,
-  			}
-  		}).done(function(aw) {
-  			$("#result").html(aw);
-  		})
-  	});
     </script>
 </head>
 <body>
@@ -159,7 +152,9 @@ div.info04 {
 			</div>
 			<div class="media-body media-middle">
 				<h1 class="media-heading">${score.CMPN_NM }
-					<button class="btn btn-info" id="scrap">스크랩</button>
+					<c:if test="${sessionScope.auth eq 'yes'}">
+						<button class="btn btn-lg ${scrap eq 0 ? 'btn-success' : 'btn-danger'}" id="scrap">스크랩 ${scrap eq 0 ? '하기' : '해제' }</button>
+					</c:if>
 				</h1>
 				<p style="font-color: grey; margin-left: 5em;">${score.DIVISION }|${score.SCALE }</p>
 			</div>
@@ -296,7 +291,7 @@ div.info04 {
 			</div>
 		</div>
 		<div class="col-md-3">
-			<h6>재직자평가 ${score.FINANCE_SCORE }점</h6>
+			<h6>재직자평가 ${score.EMPLOYEE_SCORE }점</h6>
 			<div
 				style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/spare.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
 				<p
@@ -314,15 +309,15 @@ div.info04 {
 			<div class="panel panel-default">
 				<div class="panel-heading">리뷰</div>
 				<c:forEach var="review" items="${review }">
-					<div class="panel-body">${review.EMAIL }:${review.CONTENTS }</div>
+					<div class="panel-body">[ ${review.EMAIL } ] ${review.CONTENTS }</div>
 				</c:forEach>
 			</div>
 			<div>
 				<form class="form-inline">
 					<div class="form-group">
-						<input type="text" class="form-control" id="review" style="min-width:450px;" placeholder="리뷰 입력">
+						<input type="text" class="form-control" id="content" style="min-width:450px;" placeholder="리뷰 입력">
 					</div>
-					<button type="button"
+					<button type="button" id="upload" 
 						class="btn btn-success ${auth eq 'no' or auth eq null ? 'disabled': '' }">올리기</button>
 				</form>
 			</div>
@@ -367,7 +362,40 @@ function initMap() {
 <!-- Ajax 처리 해야 될 것 -->
 <script>
 	// 1 : 스크랩 처리 
-	
+  	$("#scrap").on("click", function() {
+  		$.ajax({
+  			"url" : "/company/scrap",
+  			"data" : {
+  				"cmpn_nm" : '${score.CMPN_NM }'
+  			}
+  		}).done(function(rst) {
+  			if(rst == "1"){
+  				$("#scrap").removeClass("btn-success");
+  				$("#scrap").addClass("btn-danger");
+  				$("#scrap").text("스크랩 해제");
+  			}
+  			else{
+  				$("#scrap").removeClass("btn-danger");
+  				$("#scrap").addClass("btn-success");
+  				$("#scrap").text("스크랩 추가");
+  			}
+  		})
+  	});
 	
 	// 2 : 리뷰 올리기 및 목록 갱신
+	$("#upload").on("click", function() {
+		var content = $("#content").val();
+		console.log(content);
+		
+  		$.ajax({
+  			"url" : "/company/upload",
+  			"data" : {
+  				"cmpn_nm" : '${score.CMPN_NM }',
+  				"content" : content
+  			}
+  		}).done(function(rst) {
+  			console.log("리뷰 업로드 : " + rst);
+  		})
+  	});
+	
 </script>

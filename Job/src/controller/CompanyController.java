@@ -22,6 +22,7 @@ import model.DetailDao;
 import model.GoogleMap;
 import model.MemberDao;
 import model.MyPageDao;
+import model.ReviewsDao;
 import model.SalaryDao;
 import model.SearchDao;
 
@@ -44,6 +45,9 @@ public class CompanyController {
 
 	@Autowired
 	MyPageDao mypage;
+	
+	@Autowired
+	ReviewsDao rDao;
 
 	@RequestMapping("/company")
 	public ModelAndView detailHandler(@RequestParam(name = "cmpn_nm") String CName, HttpServletResponse response,
@@ -66,7 +70,7 @@ public class CompanyController {
 			email = "visitant";
 		} else {
 			int a = ddao.checkScrape(CName, email);
-			mav.addObject("scrape", a); // 0 : 아님, 1: 관심기업
+			mav.addObject("scrap", a); // 0 : 아님, 1: 관심기업
 		}
 
 		// increase visit count to DB
@@ -171,9 +175,10 @@ public class CompanyController {
 
 	@ResponseBody
 	@RequestMapping("/company/scrap")
-	public int interestHandler(@RequestParam(name = "cmpn_nm") String CName,
-			HttpSession session) {
-		return ddao.insertInterest(CName, (String) session.getAttribute("email"));
+	public int scrapHandler(@RequestParam(name = "cmpn_nm") String CName, HttpSession session) {
+		int rst = ddao.insertInterest(CName, (String) session.getAttribute("email"));
+		System.out.println("스크랩 결과 " + rst);
+		return rst;
 	}
 
 	public String makeChart(HashMap data1) {
@@ -192,73 +197,14 @@ public class CompanyController {
 		return img;
 	}
 
-	@RequestMapping("/company/basic_info")
-	public ModelAndView basicInfoHandler(@RequestParam(name = "cmpn_nm", defaultValue = "컴투스") String CName,
-			HttpSession session) {
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t1");
-		mav.addObject("main", "/company/basic_info");
-
-		HashMap totalvisit = ddao.inqurity(CName);// 회사 조회수 증가 and 총 조회수
-
-		// get data by Company name
-		HashMap scorelist = ddao.score(CName);
-		HashMap salarylist = ddao.salary(CName);
-		List reviewList = ddao.review(CName);
-		String chartURL = makeChart(ddao.getScore02(CName));// graph
-
-		// member check & 관심기업 여부 확인
-		String email = (String) session.getAttribute("email");
-		if (email == null) {
-			email = "visitant";
-		} else {
-			int a = ddao.checkScrape(CName, email);
-			mav.addObject("scrape", a); // 0 : 아님, 1: 관심기업
-		}
-
-		// increase visit count to DB
-		ddao.insertVisit(CName, email);
-		HashMap rate = ddao.manWomanrate(CName);
-		// get same industry company list (finance score desc)
-		String div = (String) scorelist.get("DIVISION");
-		List samelist = ddao.same(div);
-		// System.out.println("산업군 : " + div); //확인용
-
-		// salary info
-		HashMap industry = sDao.getSalary(div); // same industry
-		HashMap allCompany = sDao.getSalary("all"); // all company
-		// System.out.println(industry.get("AVG") + " vs " +
-		// industry.get("ROOKIE")); // 확인용
-
-		String CompID = search.getCompID(CName);
-		// career catch site data
-		HashMap<String, List> info01 = ddao.getInfo01(CompID);
-		HashMap<String, Object> info02 = ddao.getInfo02(CompID);
-
-		// 1주일간 조회수 그래프
-		List<HashMap> visitgraph = mypage.visitgraph(CName);
-		ArrayList vList = new ArrayList();
-		for (HashMap map : visitgraph) {
-			vList.add(map.get("NUM"));
-		}
-
-		// data set for view
-		mav.addObject("score", scorelist);
-		mav.addObject("same", samelist);
-		mav.addObject("review", reviewList);
-		mav.addObject("salary", salarylist);
-		mav.addObject("industry", industry); // HashMap(avg, rookie)
-		mav.addObject("allCompany", allCompany);// HashMap(avg, rookie)
-		mav.addObject("info01", info01);// HashMap<List>(rank8, employee, scale)
-		mav.addObject("info02", info02);// HashMap (summary, address, system,
-										// culture)
-		mav.addObject("json", google.map((String) info02.get("address")));
-		mav.addObject("chartURL", chartURL); // 방사형 그래프 주소
-		mav.addObject("rate", rate); // 상세페이지를 클릭한 남녀비율 hashmap(man, woman)
-		mav.addObject("total", totalvisit); // 전체 조회수 hashmap(sum)
-		mav.addObject("vList", vList); // 최근 1주일간 조회수 변화 그래프용
-
-		return mav;
+	@ResponseBody
+	@RequestMapping("/company/upload")
+	public int reviewUploadHandler(@RequestParam(name = "cmpn_nm") String CName,
+			@RequestParam(name = "content") String content, HttpSession session) {
+		
+		String email = (String)session.getAttribute("email");
+		int rst = rDao.push(CName, content, email);
+		
+		return rst;
 	}
 }
