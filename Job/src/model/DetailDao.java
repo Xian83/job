@@ -91,7 +91,6 @@ public class DetailDao {
 		try {
 			list = session.selectList("mappers.career.interest", map);
 			if (list.size() == 0) {
-				session.insert("mappers.career.push", map);
 				return 0;
 			} else {
 				BigDecimal bd = (BigDecimal) list.get(0).get("LOVE");

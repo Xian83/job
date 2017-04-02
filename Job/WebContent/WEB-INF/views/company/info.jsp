@@ -189,7 +189,7 @@ hr {
 					<c:if test="${sessionScope.auth eq 'yes'}">
 						<button
 							class="btn btn-lg ${scrap eq 0 ? 'btn-success' : 'btn-danger'}"
-							id="scrap">스크랩 ${scrap eq 0 ? '하기' : '해제' }</button>
+							id="scrap">스크랩 ${scrap eq 0 ? '추가' : '해제' }</button>
 					</c:if>
 				</h1>
 				<p style="font-color: grey; margin-left: 5em;">${score.DIVISION }|${score.SCALE }</p>
@@ -303,7 +303,7 @@ hr {
 	<div class="row" align="center">
 		<c:forEach var="i" begin="0" end="5">
 			<div class="col-md-2" style="border-style: none;">
-				<a href="/company/detail?cmpn_nm=${same[i].CMPN_NM }"> <img
+				<a href="/company?cmpn_nm=${same[i].CMPN_NM }"> <img
 					src="${same[i].LOGO }" alt="Lights" style="width: 82" height="82" /><br />
 					${same[i].CMPN_NM }
 				</a>
@@ -342,7 +342,7 @@ hr {
 			<img src="${chartURL}">
 		</div>
 		<div class="col-md-6">
-			<div id="reviewList" style="overflow-y:scroll;height:450px;" >
+			<div id="reviewList" style="overflow-y:auto;max-height:450px;" >
 				<c:forEach var="review" items="${review }">
 					<div class="well" >
 						<div

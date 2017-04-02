@@ -175,7 +175,7 @@ public class CompanyController {
 	@RequestMapping("/company/scrap")
 	public int scrapHandler(@RequestParam(name = "cmpn_nm") String CName, HttpSession session) {
 		int rst = ddao.insertInterest(CName, (String) session.getAttribute("email"));
-		System.out.println("스크랩 결과 " + rst);
+//		System.out.println("스크랩 결과 " + rst);
 		return rst;
 	}
 
