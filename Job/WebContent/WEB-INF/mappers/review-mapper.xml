@@ -32,7 +32,7 @@
 
 	<insert id="push" parameterType="java.util.HashMap">
 		insert into REVIEWS
-		VALUES(#{CMPN_NM},#{CONTENTS},SYSDATE,#{EMAIL})
+		VALUES(#{CMPN_NM},#{CONTENTS},SYSDATE,#{EMAIL},#{RATE})
 	</insert>
 	<select id="search" parameterType="java.lang.String" resultType="java.util.HashMap">
 		select * from Reviews where CMPN_NM like #{CName}

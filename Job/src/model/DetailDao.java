@@ -283,8 +283,8 @@ public class DetailDao {
 
 			data.put("man", session.selectList("mappers.career.man", COMPANYNAME).size());		
 			data.put("woman", session.selectList("mappers.career.woman", COMPANYNAME).size());	
-			System.out.println("남자===================="+session.selectList("mappers.career.man", COMPANYNAME).size());
-			System.out.println("여자===================="+session.selectList("mappers.career.woman", COMPANYNAME).size());
+//			System.out.println("남자===================="+session.selectList("mappers.career.man", COMPANYNAME).size());
+//			System.out.println("여자===================="+session.selectList("mappers.career.woman", COMPANYNAME).size());
 			//data.put("visi", session.selectList("mappers.career.visi", COMPANYNAME).size());
 		} finally {
 			session.close();

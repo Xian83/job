@@ -201,10 +201,10 @@ public class CompanyController {
 		
 		
 		String email = (String)session.getAttribute("email");
-		System.out.println("rate : " + rate);
-		System.out.println("이메일 : " + email);
+//		System.out.println("rate : " + rate);
+//		System.out.println("이메일 : " + email);
 		
-		int rst = rDao.push(CName, content, email);
+		int rst = rDao.push(CName, content, email, rate);
 		List reviewList = ddao.review(CName);
 		
 		ModelAndView mav = new ModelAndView();

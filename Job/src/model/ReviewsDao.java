@@ -74,8 +74,8 @@ public class ReviewsDao {
 		}
 		return list;
 	}
-
-	public int push(String cmpn_nm, String content, String email) {
+	
+	public int push(String cmpn_nm, String content, String email, int rate) {
 
 		SqlSession session = factory.openSession();
 		int a = 0;
@@ -83,6 +83,8 @@ public class ReviewsDao {
 		map.put("CMPN_NM", cmpn_nm);
 		map.put("CONTENTS", content);
 		map.put("EMAIL", email);
+		map.put("RATE", rate * 20);
+		
 		try {
 			a = session.insert("mappers.review.push", map);
 			System.out.println(a);
