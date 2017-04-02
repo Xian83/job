@@ -13,17 +13,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script type="text/javascript"
-	src="https://www.gstatic.com/charts/loader.js"></script>
-
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
 .logo-small {
 	color: #f4511e;
 	font-size: 50px;
@@ -36,27 +26,23 @@
 </style>
 
 </head>
-<body id="myPage" data-spy="scroll" data-target=".navbar"
-	data-offset="60">
+<body data-spy="scroll" data-target=".navbar" data-offset="60">
 
 	<div style="min-height: 5%;">
 		<tiles:insertAttribute name="nav" />
 	</div>
-	<div style="min-height: 5%;">
-		<tiles:insertAttribute name="header" />
-	</div>
-	<div style="min-height: 60%; margin-left: 10px; margin-right: 10px;">
+	<div style="min-height: 80%; margin-top:3em; margin-left:8em;margin-right:8em;">
 		<div class="row">
-		<div class="col-md-10">
-			<tiles:insertAttribute name="main" />
-		</div>
-		<div class="col-md-2">
-			<tiles:insertAttribute name="right" />
-		</div>
+			<div class="col-md-10">
+				<tiles:insertAttribute name="main" />
+			</div>
+			<div class="col-md-2">
+				<tiles:insertAttribute name="right" />
+			</div>
 		</div>
 	</div>
-	<div style="min-height: 15%;">
+	<div style="min-height: 5%;">
 		<tiles:insertAttribute name="footer" />
-	</div>	
+	</div>
 </body>
 </html>

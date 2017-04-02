@@ -193,12 +193,12 @@ padding: 2%;
 				<td>
 					<div class="media">
 						<div class="media-left media-middle">
-							<a href="/company/detail?cmpn_nm=${i.CMPN_NM }"> <img
+							<a href="/company?cmpn_nm=${i.CMPN_NM }"> <img
 								src="${i.LOGO }" class="media-object" style="width: 82px">
 							</a>
 						</div>
 						<div class="media-body">
-							<a href="/company/detail?cmpn_nm=${i.CMPN_NM }"><h5>
+							<a href="/company?cmpn_nm=${i.CMPN_NM }"><h5>
 									<b>${i.CMPN_NM }</b>
 								</h5></a> ${i.DIVISION }|${i.SCALE }<br />
 							<button type="button" class="btn btn-default">재무평가

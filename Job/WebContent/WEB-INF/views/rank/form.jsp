@@ -38,7 +38,7 @@
 						<img src="/picture/logo.jpg" width="50px;" height="40px;">	            		
 	            	</c:when>
 	            	<c:otherwise>
-		            	<a href="/company/detail?cmpn_nm=${avg[i].CMPN_NM }"><img src="${avg[i].LOGO }" width="50px;" height="40px;" /></a> 
+		            	<a href="/company?cmpn_nm=${avg[i].CMPN_NM }"><img src="${avg[i].LOGO }" width="50px;" height="40px;" /></a> 
 	            	</c:otherwise>
 	            </c:choose>
 	            </td>
@@ -49,7 +49,7 @@
 						회사명 없음	 
 			  	</c:when>
 	            	<c:otherwise>
-            			<a href="/company/detail?cmpn_nm=${avg[i].CMPN_NM }"><b>${avg[i].CMPN_NM }<b/></a> 
+            			<a href="/company?cmpn_nm=${avg[i].CMPN_NM }"><b>${avg[i].CMPN_NM }<b/></a> 
             	    </c:otherwise>
 	            </c:choose>
 	            </td>
@@ -129,7 +129,7 @@
 						<img src="/picture/logo.jpg" width="50px;" height="40px;">	            		
 	            	</c:when>
 	            	<c:otherwise>
-		            	<a href="/company/detail?cmpn_nm=${rookie[i].CMPN_NM }"><img src="${rookie[i].LOGO }" width="50px;" height="40px;" /></a> 
+		            	<a href="/company?cmpn_nm=${rookie[i].CMPN_NM }"><img src="${rookie[i].LOGO }" width="50px;" height="40px;" /></a> 
 	            	</c:otherwise>
 	            </c:choose>
 	            </td>
@@ -140,7 +140,7 @@
 						회사명 없음	 
 			  	</c:when>
 	            	<c:otherwise>
-            			<a href="/company/detail?cmpn_nm=${rookie[i].CMPN_NM }"><b>${rookie[i].CMPN_NM }<b/></a> 
+            			<a href="/company?cmpn_nm=${rookie[i].CMPN_NM }"><b>${rookie[i].CMPN_NM }<b/></a> 
             	    </c:otherwise>
 	            </c:choose>
 	            </td>
@@ -216,7 +216,7 @@
 						<img src="/picture/logo.jpg" width="50px;" height="40px;">	            		
 	            	</c:when>
 	            	<c:otherwise>
-		            	<a href="/company/detail?cmpn_nm=${finance[i].CMPN_NM }"><img src="${finance[i].LOGO }" width="50px;" height="40px;" /></a> 
+		            	<a href="/company?cmpn_nm=${finance[i].CMPN_NM }"><img src="${finance[i].LOGO }" width="50px;" height="40px;" /></a> 
 	            	</c:otherwise>
 	            </c:choose>
 	            </td>
@@ -227,7 +227,7 @@
 						회사명 없음	 
 			  	</c:when>
 	            	<c:otherwise>
-            			<a href="/company/detail?cmpn_nm=${finance[i].CMPN_NM }"><b>${finance[i].CMPN_NM }<b/></a> 
+            			<a href="/company?cmpn_nm=${finance[i].CMPN_NM }"><b>${finance[i].CMPN_NM }<b/></a> 
             	    </c:otherwise>
 	            </c:choose>
 	            </td>
@@ -297,7 +297,7 @@
 						<img src="/picture/logo.jpg" width="50px;" height="40px;">	            		
 	            	</c:when>
 	            	<c:otherwise>
-		            	<a href="/company/detail?cmpn_nm=${employee[i].CMPN_NM }"><img src="${employee[i].LOGO }" width="50px;" height="40px;" /></a> 
+		            	<a href="/company?cmpn_nm=${employee[i].CMPN_NM }"><img src="${employee[i].LOGO }" width="50px;" height="40px;" /></a> 
 	            	</c:otherwise>
 	            </c:choose>
 	            </td>
@@ -308,7 +308,7 @@
 						회사명 없음	 
 			  	</c:when>
 	            	<c:otherwise>
-            			<a href="/company/detail?cmpn_nm=${employee[i].CMPN_NM }"><b>${employee[i].CMPN_NM }<b/></a> 
+            			<a href="/company?cmpn_nm=${employee[i].CMPN_NM }"><b>${employee[i].CMPN_NM }<b/></a> 
             	    </c:otherwise>
 	            </c:choose>
 	            </td>

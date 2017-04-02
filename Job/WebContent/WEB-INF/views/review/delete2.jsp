@@ -56,7 +56,7 @@ body {
 							</td>
 							<td>
 								<h5 class="media-heading" style="display: inline-block;">
-									<a href="/company/detail?cmpn_nm=${review[i].CMPN_NM }"> ${review[i].CMPN_NM } </a> 
+									<a href="/company?cmpn_nm=${review[i].CMPN_NM }"> ${review[i].CMPN_NM } </a> 
 								</h5>
 								<b style="font-size: x-small;">${review[i].WDATE }</b><br />
 							<div style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/spare.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">

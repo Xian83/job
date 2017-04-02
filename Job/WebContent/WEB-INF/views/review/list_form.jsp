@@ -40,6 +40,7 @@ body {
 					placeholder="기업명을 입력해 주세요"
 					style="ime-mode: active; align : right; width: 400; height: 37" />
 
+<<<<<<< HEAD
 				 <button type="submit" class="btn">검색</button> 
 				</form>
 			</div>
@@ -52,6 +53,20 @@ body {
 						<th></th>
 					</tr>
 				</thead>
+=======
+					</div>
+					<div class="media-body row content">
+						<h5 class="media-heading" style="display: inline-block;">
+							<a href="/company?cmpn_nm=${review[i].CMPN_NM }">${page *6-5+i}.
+								${review[i].CMPN_NM } 
+						</h5>
+						</a> <b style="font-size: x-small;">${review[i].WDATE }</b><br />
+						<div
+							style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/spare.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
+							<p
+								style="WIDTH: 100%; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;">
+							</p>
+>>>>>>> branch 'master' of https://github.com/Xian83/job
 
 				<tbody>
 

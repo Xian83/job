@@ -6,30 +6,27 @@
 <head>
 <style type="text/css">
 * {
-	margin: 0;
-	padding: 0;
+	/* 	margin: 0; */
+	/* 	padding: 0; */
 	box-sizing: border-box;
 }
 
 #top {
 	width: 100%;
 	/* 	border-top: 5px solid #f4511e; */
-	border-bottom: 2px solid #f4511e;
+	/* 	border-bottom: 2px solid #f4511e; */
 }
 
 #basic_info {
 	width: 100%;
-	color: white;
-	background: #f4511e;
+	color: black;
+	/* 	background: #f4511e; */
+	margin-top: 1em;
 }
 
-#top-follow {
-	margin-right: 1em;
-}
-
-h2.media-heading {
-	/* 	color: white; */
-	
+h1.media-heading {
+	color: #f4511e;
+	margin-left: 2em;
 }
 
 div.num_left {
@@ -37,19 +34,62 @@ div.num_left {
 	border-left: 2px solid #f4511e;
 	margin-bottom: 1em;
 }
-
+/*
 div.num_right {
 	height: 80px;
 	border-right: 2px solid #f4511e;
 	margin-bottom: 1em;
 }
+*/
+div.info04 {
+	margin: 1.5em;
+	padding: 0;
+}
 
 #scrap {
-	margin-left: 10em;
+	margin-left: 7em;
 	padding-top: 0.7em;
 	padding-bottom: 0.7em;
 	padding-left: 1.5em;
 	padding-right: 1.5em;
+}
+
+hr {
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
+
+.star_rating {
+	display: inline;
+	font-size: 0;
+	letter-spacing: -4px;
+	font-size: 0;
+}
+
+.star_rating a {
+	font-size: 22px;
+	letter-spacing: 0;
+	display: inline-block;
+	margin-left: 5px;
+	color: #ccc;
+	text-decoration: none;
+}
+
+.star_rating a:first-child {
+	margin-left: 0;
+}
+
+.star_rating a.on {
+	color: #FFE400;
+}
+
+.modal-dialog {
+	position: absolute;
+	left: 50%;
+	margin-left: -312px;
+	height: 500px;
+	top: 50%;
+	margin-top: -250px;
 }
 </style>
 
@@ -85,13 +125,13 @@ div.num_right {
         data2.addColumn('date', 'Time of Day');
         data2.addColumn('number', '조회수');
         data2.addRows([
-        	[new Date(2017, 3, 28), ${vList[0]} ],
-        	[new Date(2017, 3, 29), ${vList[1]} ],
-        	[new Date(2017, 3, 30), ${vList[2]} ],
-        	[new Date(2017, 3, 31), ${vList[3]} ],
-        	[new Date(2017, 4, 1), ${vList[4]}	],
-        	[new Date(2017, 4, 2), ${vList[5]}	],
-        	[new Date(2017, 4, 3), ${vList[6]}	]
+        	[new Date(2017, 2, 28), ${vList[0]} ],
+        	[new Date(2017, 2, 29), ${vList[1]} ],
+        	[new Date(2017, 2, 30), ${vList[2]} ],
+        	[new Date(2017, 2, 31), ${vList[3]} ],
+        	[new Date(2017, 3, 1), ${vList[4]}	],
+        	[new Date(2017, 3, 2), ${vList[5]}	],
+        	[new Date(2017, 3, 3), ${vList[6]}	]
         ]);
 
         var options2 = {
@@ -134,7 +174,6 @@ div.num_right {
 		
     }
       
-  
     </script>
 </head>
 <body>
@@ -142,14 +181,18 @@ div.num_right {
 	<!-- 로고, 회사명 -->
 	<div class="row" id="top">
 		<div class="media">
-			<div class="media-left media-middle">
-				<img src="${score.LOGO }" class="media-object" style="width: 82px">
+			<div class="media-left media-middle" style="margin: 0; padding: 0">
+				<img src="${score.LOGO }" class="media-object" style="width: 82px;">
 			</div>
 			<div class="media-body media-middle">
-				<h2 class="media-heading" style="font-color: white;">${score.CMPN_NM }
-					<button class="btn btn-info" id="scrap">스크랩</button>
-				</h2>
-				<p style="font-color: grey">${score.DIVISION }|${score.SCALE }</p>
+				<h1 class="media-heading">${score.CMPN_NM }
+					<c:if test="${sessionScope.auth eq 'yes'}">
+						<button
+							class="btn btn-lg ${scrap eq 0 ? 'btn-success' : 'btn-danger'}"
+							id="scrap">스크랩 ${scrap eq 0 ? '하기' : '해제' }</button>
+					</c:if>
+				</h1>
+				<p style="font-color: grey; margin-left: 5em;">${score.DIVISION }|${score.SCALE }</p>
 			</div>
 		</div>
 	</div>
@@ -191,7 +234,7 @@ div.num_right {
 			<br />
 			<p>재무평가</p>
 		</div>
-		<div class="num_left num_right col-md-2">
+		<div class="num_left col-md-2">
 			<h3>${score.EMPLOYEE_SCORE }점</h3>
 			<div
 				style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/spare.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
@@ -271,7 +314,7 @@ div.num_right {
 
 	<!-- 사용자 리뷰 게시판 -->
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-6">
 			<h1>기업 리뷰</h1>
 		</div>
 		<div class="col-md-3">
@@ -283,8 +326,8 @@ div.num_right {
 				</p>
 			</div>
 		</div>
-		<div class="col-md-5">
-			<h6>재직자평가 ${score.FINANCE_SCORE }점</h6>
+		<div class="col-md-3">
+			<h6>재직자평가 ${score.EMPLOYEE_SCORE }점</h6>
 			<div
 				style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/spare.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
 				<p
@@ -293,39 +336,93 @@ div.num_right {
 			</div>
 		</div>
 	</div>
-	<br/>
+	<br />
 	<div class="row">
-		<div class="col-md-4" align="center" style="width: 500">
+		<div class="col-md-4" align="center" style="min-width: 550px">
 			<img src="${chartURL}">
 		</div>
-		<div class="col-md-8">
-			<div class="panel panel-default">
-				<div class="panel-heading">리뷰</div>
-				<c:forEach var="review" items="${review }">
-					<div class="panel-body">${review.EMAIL }:${review.CONTENTS }</div>
-				</c:forEach>
+		<div class="col-md-6">
+			<div id="reviewList">
+				<div class="panel panel-default">
+					<div class="panel-heading">리뷰</div>
+					<c:forEach var="review" items="${review }">
+						<div class="panel-body">${review.EMAIL }:${review.CONTENTS }</div>
+					</c:forEach>
+				</div>
 			</div>
 			<div>
-				<input type="text" id="re_content" name="content" placeholder="내용 입력" style="width: 93%">
-				<button type="submit" class="btn btn-success ${auth eq 'no' or auth eq null ? 'disabled': '' }">올리기</button>
+				<!-- Review Modal button -->
+				<button type="button" id="open" class="btn btn-info"
+					data-toggle="modal" data-target="#reviewModal">리뷰 쓰기</button>
+
+				<!-- Modal -->
+				<div class="modal fade" id="reviewModal" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Review</h4>
+							</div>
+							<div class="modal-body">
+								<div class="media" style="margin-bottom: 1em;">
+									<div class="media-left media-middle"
+										style="margin: 0; padding: 0">
+										<img src="${score.LOGO }" class="media-object"
+											style="width: 82px;">
+									</div>
+									<div class="media-body media-middle">
+										<h3 class="media-heading"
+											style="color: #f4511e; margin-left: 1em;">${score.CMPN_NM }</h3>
+										<p class="star_rating">
+											<a href="#" class="on" style="margin-left: 1em;">★</a> <a
+												href="#" class="on">★</a> <a href="#" class="on">★</a> <a
+												href="#">★</a> <a href="#">★</a>
+										</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<input class="form-control" id="content" type="text"
+										placeholder="리뷰를 입력하세요">
+									<c:if test="${auth eq 'no' or auth eq null }">
+										<p id="msg" style="color: red;">로그인을 한 상태에서만 리뷰를 작성할 수 있습니다</p>
+									</c:if>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button"
+									class="btn btn-danger btn-default pull-left"
+									data-dismiss="modal">
+									<span class="glyphicon glyphicon-remove"></span> 취소
+								</button>
+								
+								<button type="button"
+									class="btn btn-default btn-success pull-right ${auth eq 'no' or auth eq null ? 'disabled' : ''}"
+									data-dismiss="modal" id="upload">
+									<span class="glyphicon glyphicon-pencil"></span> 작성하기
+								</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-	<hr/>
-	
+	<hr />
+
 	<!-- 근무환경 및 복리후생 -->
 	<h1>근무환경 및 복리후생</h1>
 	<div class="row">
-		<div class="col-md-5">
+		<div class="info04 col-md-5">
 			<p>
 				<b>[회사위치]</b> ${info02.address }
 			</p>
+			<c:if test="${info02.address ne '' or info02.address ne null }">
 			<div id="map" style="width: 500; height: 500"></div>
+			</c:if>
 		</div>
-		<div class="col-md-7" align="left">
-			<b>[회사제도]</b><br /> 
-			${info02.system }<br /> 
-			<b>[사내문화]</b><br />
+		<div class="info04 col-md-5" align="left">
+			<b>[회사제도]</b><br /> ${info02.system }<br /> <b>[사내문화]</b><br />
 			${info02.culture }<br />
 		</div>
 	</div>
@@ -352,7 +449,54 @@ function initMap() {
 <!-- Ajax 처리 해야 될 것 -->
 <script>
 	// 1 : 스크랩 처리 
-	
+  	$("#scrap").on("click", function() {
+  		$.ajax({
+  			"url" : "/company/scrap",
+  			"data" : {
+  				"cmpn_nm" : '${score.CMPN_NM }'
+  			}
+  		}).done(function(rst) {
+  			if(rst == "1"){
+  				$("#scrap").removeClass("btn-success");
+  				$("#scrap").addClass("btn-danger active");
+  				$("#scrap").text("스크랩 해제");
+  			}
+  			else{
+  				$("#scrap").removeClass("btn-danger active");
+  				$("#scrap").addClass("btn-success");
+  				$("#scrap").text("스크랩 추가");
+  			}
+  		})
+  	});
 	
 	// 2 : 리뷰 올리기 및 목록 갱신
+	$("#upload").on("click", function() {
+		var content = $("#content").val();
+		var rate = 0;
+		$(".star_rating a.on").each(function() {
+			rate++;
+		});
+		
+  		$.ajax({
+  			"url" : "/company/upload",
+  			"data" : {
+  				"cmpn_nm" : '${score.CMPN_NM }',
+  				"content" : content,
+  				"rate"	: rate
+  			}
+  		}).done(function(rst) {
+  			$("#content").val("");
+			$("#reviewModal").modal("hide");
+			$("#reviewList").html(rst);
+  		})
+		return false;		
+  	});
+
+	// 리뷰 modal 별 평점
+	$(".star_rating a").click(function() {
+	     $(this).parent().children("a").removeClass("on");
+	     $(this).addClass("on").prevAll("a").addClass("on");
+	     return false;
+	});
+
 </script>
