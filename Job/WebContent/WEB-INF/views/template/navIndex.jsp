@@ -104,7 +104,7 @@
 				class="w3-button w3-xlarge w3-hover-red w3-display-topright"
 				title="Close Modal">&times;</span>
 			<h2>
-				<p class="w3-xxlarge w3-myfont">Welcome To ItJob</p>
+				<p class="w3-xxlarge">LOGIN</p>
 			</h2>
 		</div>
 

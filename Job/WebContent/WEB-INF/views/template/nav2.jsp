@@ -92,7 +92,7 @@
 				onclick="document.getElementById('id01').style.display='none'"
 				class="w3-button w3-xlarge w3-hover-red w3-display-topright"
 				title="Close Modal">&times;</span>
-			<h2>Login</h2>
+			<p class="w3-xxlarge">LOGIN</p>
 		</div>
 
 		<form action="/login/result" method="post">
