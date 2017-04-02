@@ -121,6 +121,21 @@ public class ReviewsDao {
 		return list_cnt;
 	}
 	
+	public List<HashMap> searchLogo(String CName) {
+		List<HashMap> list = new ArrayList<>();
+		
+	
+		SqlSession session = factory.openSession();
+		try {
+			list = session.selectList("mappers.review.searchLogo", CName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	
 //	public List<HashMap> getPicture(List<HashMap> list) {
 //		String email = "";
 //		String picURL = "";

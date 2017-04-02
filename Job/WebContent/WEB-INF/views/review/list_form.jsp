@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
@@ -8,9 +8,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
-body {
+/* body {
 	font-size: 15px;
-}
+} */
 #floatMenu {
 	position: absolute;
 	width: 200px;
@@ -30,12 +30,12 @@ body {
 			<br/>
 			
 			<div class="inp">
-				총 ${review.size() }개의 검색 결과
+				총 ${cnt }개의 검색 결과
 				<input name="CName" type="text" id="search"
 					placeholder="기업명을 입력해 주세요"
 					style="ime-mode: active; align : right; width: 400; height: 37" />
 
-				 <button type="button" id ="sc" class="btn">검색</button> 
+				 <button type="button" id ="sc" class="btn" onclick="scBtn()">검색</button> 
 		
 			</div>
 			<table class="table">
@@ -50,7 +50,7 @@ body {
 
 				<tbody>
 
-					<c:forEach var="i" begin="0" end="${size -1}">
+					<c:forEach var="i" begin="0" end="${size}">
 						<tr>
 							<td><img src="${review[i].LOGO }"
 								class="media-object img-Rounded Corners" style="width: 90px;">
@@ -134,24 +134,24 @@ body {
 
 
 	<script>
-		$(document).ready(function() {
-			if(session.getAttribute("name")==null){
-				var son = "손님"+(int)(Math.random()*10000)+1;
-				session.setAttribute("name", son);
-			}
-		});
+// 		$(document).ready(function() {
+// 			if(session.getAttribute("name")==null){
+// 				var son = "손님"+(int)(Math.random()*10000)+1;
+// 				session.setAttribute("name", son);
+// 			}
+// 		});
 		
 		$.ajax({
 			"url" : "/chat/chatAjax?msg=join1234555"
 		});
-		document.getElementById("msg").onkeyup = function(e) {
-			if (e.key == 'Enter') {
-				var xhr = new XMLHttpRequest();
-				xhr.open("get", "/chat/chatAjax?msg=" + this.value, true);
-				xhr.send();
-				this.value = "";
-			}
-		}
+// 		document.getElementById("msg").onkeyup = function(e) {
+// 			if (e.key == 'Enter') {
+// 				var xhr = new XMLHttpRequest();
+// 				xhr.open("get", "/chat/chatAjax?msg=" + this.value, true);
+// 				xhr.send();
+// 				this.value = "";
+// 			}
+// 		}
 		function getChatLog() {
 			var xhr = new XMLHttpRequest();
 			xhr.open("get", "/chat/logAjax", true);
@@ -174,7 +174,7 @@ body {
 				}
 			}
 		}
-		setInterval(getChatLog, 200);
+// 		setInterval(getChatLog, 200);
 		
 		
 		$(document).ready(function() {
@@ -202,9 +202,9 @@ body {
 		
 		
 		// 검색버튼 작동 - ajax 안 하면 지울 것
-		$("#sc").on("click", function() {
+		function scBtn() {
 			search();
-		});
+		};
 		
 		function search() {
 			

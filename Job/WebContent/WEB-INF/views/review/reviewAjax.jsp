@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
@@ -19,7 +19,7 @@ body {
 </style> 	
 	
 	
-	<div class="container" id="result2">
+	<div class="container" id="">
 		<div class="col-md-10">
 
 			<h2>
@@ -31,7 +31,7 @@ body {
 			<br/>
 			
 			<div class="inp">
-				총 ${review.size() }개의 검색 결과
+				총 ${cnt }개의 검색 결과
 				<input name="CName" type="text" id="search"
 					placeholder="기업명을 입력해 주세요"
 					style="ime-mode: active; align : right; width: 400; height: 37" />
@@ -51,9 +51,9 @@ body {
 
 				<tbody>
 
-					<c:forEach var="i" begin="0" end="${size -1}">
+					<c:forEach var="i" begin="0" end="${size }">
 						<tr>
-							<td><img src="${review[i].LOGO }"
+							<td><img src="${LOGO[i] }"
 								class="media-object img-Rounded Corners" style="width: 90px;">
 								<br /> 
 							</td>
@@ -112,7 +112,7 @@ body {
 
 	
 		<div class="col-md-2" >
-			<!-- <div id="floatMenu" >  id="floatMenu"
+			<div id="floatMenu" >
 		<h2>
 				<b>CHAT</b>
 			</h2>
@@ -130,6 +130,6 @@ body {
 						placeholder="메세지를 남겨주세요" />
 				</div>
 				</div>
-			</div> -->
+			</div>
 		</div>
 

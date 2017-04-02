@@ -60,6 +60,7 @@ public class ReviewsController {
 		mav.addObject("size", size);
 		mav.addObject("review", review);
 		mav.addObject("rank",rank);
+		mav.addObject("cnt",cnt);
 		System.out.println("rank =" + rank);
 		
 		return mav;
@@ -107,6 +108,9 @@ public class ReviewsController {
 		// 기업명 기준으로 DB에서 cnt 데이터 가져오기
 		int list_cnt = rDao.List_cnt(CName);
 		System.out.println("리뷰용 list_cnt = " + list_cnt);
+		
+		List<HashMap> list_logo = rDao.searchLogo(CName);
+		System.out.println("리뷰용 list_logo = " + list_logo);
 
 	
 		int size = list_cnt % 20 == 0 ? list_cnt / 20 : list_cnt / 20 + 1; // 총 페이지 수
@@ -115,11 +119,12 @@ public class ReviewsController {
 		
 		// 상세 검색 목록 뷰
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("t1");
-		mav.addObject("main","review/reviewAjax");
-		mav.addObject("list", list_search);
+		//mav.setViewName("t1");
+		//mav.setViewName
+		mav.setViewName("/review/reviewAjax");
+		mav.addObject("review", list_search);
 		mav.addObject("page", pStr);
-		
+		mav.addObject("logo",list_logo);
 		mav.addObject("size", size);
 		mav.addObject("cnt", list_cnt);
 		//mav.addObject("key", sdao.getParam(req)); // paging 처리용

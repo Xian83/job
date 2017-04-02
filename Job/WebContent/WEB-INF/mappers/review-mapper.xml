@@ -39,6 +39,7 @@
 	<select id="getCount" parameterType="java.lang.String" resultType="java.lang.Integer">
 		select count(*) as cnt from Reviews where CMPN_NM like #{CName}
 	</select>
-
-
+	<select id="searchLogo" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select LOGO from SCORE where CMPN_NM like #{CName}
+	</select>
 </mapper>
