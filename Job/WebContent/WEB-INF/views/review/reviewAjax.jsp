@@ -41,7 +41,7 @@ body {
 							</td>
 							<td>
 								<h5 class="media-heading" style="display: inline-block; font-size: 20px">
-									<a href="/company/detail?cmpn_nm=${review[i].CMPN_NM }"><b>${review[i].CMPN_NM }</b></a> 
+									<a href="/company?cmpn_nm=${review[i].CMPN_NM }"><b>${review[i].CMPN_NM }</b></a> 
 								</h5>
 								<fmt:formatDate value="${review[i].WDATE }" pattern="yyyy-MM-dd"/><br />
 							<div style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/spare.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
@@ -60,7 +60,7 @@ body {
 								</p>
 							
 							</td>
-							<td><a href="/company/detail?cmpn_nm=${review[i].CMPN_NM }"><b style="font-size: small;">몇개의 리뷰<br/> 더 보기</b></a>  </td>
+							<td><a href="/company?cmpn_nm=${review[i].CMPN_NM }"><b style="font-size: small;">몇개의 리뷰<br/> 더 보기</b></a>  </td>
 						</tr>
 					</c:forEach>
 			</tbody>
