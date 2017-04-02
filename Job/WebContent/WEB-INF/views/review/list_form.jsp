@@ -59,7 +59,6 @@
 						<th></th>
 						<th></th>
 						<th></th>
-						<th></th>
 					</tr>
 				</thead>
 
@@ -92,7 +91,6 @@
 								</p>
 							
 							</td>
-							<td><a href="/company/detail?cmpn_nm=${review[i].CMPN_NM }"><b style="font-size: small;">몇개의 리뷰<br/> 더 보기</b></a>  </td>
 						</tr>
 					</c:forEach>
 			</tbody>

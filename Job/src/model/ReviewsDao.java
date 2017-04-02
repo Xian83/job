@@ -99,7 +99,7 @@ public class ReviewsDao {
 		SqlSession session = factory.openSession();
 		List<HashMap> list = new ArrayList<>();
 		try {
-			list = session.selectList("mappers.review.search", CName);
+			list = session.selectList("mappers.review.search", "%" +CName+"%" );
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -112,7 +112,7 @@ public class ReviewsDao {
 		SqlSession session = factory.openSession();
 		int list_cnt = 0; 
 		try {
-			list_cnt = session.selectOne("mappers.review.getCount", CName);
+			list_cnt = session.selectOne("mappers.review.getCount", "%" +CName+"%" );
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -127,7 +127,7 @@ public class ReviewsDao {
 	
 		SqlSession session = factory.openSession();
 		try {
-			list = session.selectList("mappers.review.searchLogo", CName);
+			list = session.selectList("mappers.review.searchLogo", "%" +CName+"%" );
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
