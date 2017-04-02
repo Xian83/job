@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class ReviewsController {
 	
 	@Autowired
 	CompareDao cDao;
+	
+	@Autowired
+	ReviewsDao rDao;
 	
 	@RequestMapping("/list_form")
 	public ModelAndView reviewsHandler(@RequestParam(name="page", defaultValue="1")String page){
@@ -87,6 +91,35 @@ public class ReviewsController {
 			obj.put("picURL", picURL);
 		}
 		return review;
+	}
+	
+	@RequestMapping("/search")
+	public ModelAndView searchHandler(@RequestParam(name="CName") String CName) {
+
+		/*int cnt = sdao.getTotal(req); // 커리어 캐치에서 total data 개수 가져옴
+		int size = cnt % 20 == 0 ? cnt / 20 : cnt / 20 + 1; // 총 페이지 수
+		String pStr = req.getParameter("page") == null ? "1" : req.getParameter("page");*/
+
+		System.out.println("넘어온 파람 = " +CName);
+		// 기업명 기준으로 DB에서 데이터 가져오기
+		List list_search = rDao.List_search(CName); 
+		System.out.println("리뷰용 list_search = " + list_search);
+		
+		// 기업명 기준으로 DB에서 cnt 데이터 가져오기
+		List list_cnt = rDao.List_cnt(CName);
+		System.out.println("리뷰용 list_cnt = " + list_cnt);
+
+		// 상세 검색 목록 뷰
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("t1");
+		mav.addObject("main","review/search");
+		mav.addObject("list", list_search);
+		/*mav.addObject("page", pStr);*/
+		
+		mav.addObject("size", list_search.size());
+		mav.addObject("cnt", list_cnt);
+		//mav.addObject("key", sdao.getParam(req)); // paging 처리용
+		return mav;
 	}
 }
 

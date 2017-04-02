@@ -23,7 +23,7 @@ body {
 
 
 
-	<div class="container">
+	<div class="container" >
 		<div class="col-md-10">
 
 			<h2>
@@ -33,7 +33,16 @@ body {
 				<span style="color: #4682B4">(상세 기업 페이지에 남겨진 리뷰를 확인하실 수 있습니다)</span>
 			</h5>
 			<br/>
-			<br/>
+			 <form action="/review/search" method="get"> 
+			<div class="inp">
+				총 ${review.size() }개의 검색 결과
+				<input name="CName" type="text" id="search"
+					placeholder="기업명을 입력해 주세요"
+					style="ime-mode: active; align : right; width: 400; height: 37" />
+
+				 <button type="submit" class="btn">검색</button> 
+				</form>
+			</div>
 			<table class="table">
 				<thead>
 					<tr>
@@ -199,5 +208,45 @@ body {
 		 
 		});
 		
+		
+		/* // 검색버튼 작동 - ajax 안 하면 지울 것
+		$("#sc").on("click", function() {
+			search();
+		});
+		
+		function search() {
+			
+			var CName = $("#search").val();
+			var chkSido = [];
+			var chkJinhakCode = [];
+			var chkSize = [];
+
+			$("input[name='chkSido']:checked").each(function() {
+				chkSido.push($(this).val());
+			});
+			$("input[name='chkJinhakCode']:checked").each(function() {
+				chkJinhakCode.push($(this).val());
+			});
+			$("input[name='chkSize']:checked").each(function() {
+				chkSize.push($(this).val());
+			});
+
+			console.log(search);
+			console.log(chkSido);
+			console.log(chkJinhakCode);
+			console.log(chkSize);
+			
+			jQuery.ajaxSettings.traditional = true;
+
+			$.ajax({
+				"url" : "/review/search",
+				"method" : "post",
+				"data" : {
+					"search" : search
+				}
+			}).done(function(aw) {
+				$("#result").html(aw);
+			})
+		} */
 		
 	</script>

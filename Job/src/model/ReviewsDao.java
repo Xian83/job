@@ -95,6 +95,32 @@ public class ReviewsDao {
 		return a;
 	}
 
+	public List<HashMap> List_search(String CName) {
+		SqlSession session = factory.openSession();
+		List<HashMap> list = new ArrayList<>();
+		try {
+			list = session.selectList("mappers.review.search", CName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	
+	public List<HashMap> List_cnt(String CName) {
+		SqlSession session = factory.openSession();
+		List<HashMap> list_cnt = new ArrayList<>();
+		try {
+			list_cnt = session.selectList("mappers.review.getCount", CName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return list_cnt;
+	}
+	
 //	public List<HashMap> getPicture(List<HashMap> list) {
 //		String email = "";
 //		String picURL = "";
