@@ -32,7 +32,7 @@ body {
 				</thead>
 
 				<tbody>
-
+				<span style="color: #4682B4; "><b>검색 결과 총 ${cnt }개<b/></span>
 					<c:forEach var="i" begin="0" end="${size }">
 						<tr>
 							<td><img src="${logo[i].LOGO }"
@@ -95,14 +95,6 @@ body {
 	
 		<div class="col-md-2" >
 			<div id="floatMenu" >
-		<h2>
-				<b>CHAT</b>
-			</h2>
-			<h5>
-				<span style="color: #4682B4">(자유롭게 의견을 공유하세요)</span>
-			</h5>
-			<br/>
-			<br/> 
 				<div class="well" id="result" 
 					style="height: 400px; width: 300px; overflow-y: scroll; margin-top: 0px; background: #F0F8FF; border-style: double;">
 

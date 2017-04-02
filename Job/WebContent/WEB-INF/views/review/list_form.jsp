@@ -3,23 +3,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">  -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+ <!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <style>
 /* body {
 	font-size: 15px;
 } */
 #floatMenu {
 	position: absolute;
-	width: 200px;
+	 width: 200px; 
 	
 }
 
 </style>  
 
 			<div class="container">
+			<div class="col-md-10">
 			<h2>
 				<b>REVIEW</b>
 			</h2>
@@ -28,15 +30,24 @@
 			</h5>
 			<br/>
 			
-			<div class="inp">
-				총 ${cnt }개의 검색 결과
+			<div class="inp" >
+			<div align="right">
 				<input name="CName" type="text" id="search"
 					placeholder="기업명을 입력해 주세요"
-					style="ime-mode: active; align : right; width: 400; height: 37"
+					style="ime-mode: active; width: 400; height: 37"
 					onkeypress="if(event.keyCode==13){javascript:search();}" />
 
 				 <button type="button" id ="sc" class="btn" onclick="scBtn()">검색</button> 
-		
+			</div>
+			</div>
+			</div>
+			<div class="col-md-2">
+					<h2>
+				<b>CHAT</b>
+			</h2>
+			<h5>
+				<span style="color: #4682B4">(채팅에 참여하세요)</span>
+			</h5>
 			</div>
 			</div>
 			<div class="container" id="result2">
@@ -53,7 +64,7 @@
 				</thead>
 
 				<tbody>
-
+				<span style="color: #4682B4; "><b>검색 결과 총 ${cnt }개<b/></span>
 					<c:forEach var="i" begin="0" end="${size}">
 						<tr>
 							<td><img src="${review[i].LOGO }"
@@ -116,14 +127,7 @@
 	
 		<div class="col-md-2" >
 			  <div id="floatMenu" > 
-		<h2>
-				<b>CHAT</b>
-			</h2>
-			<h5>
-				<span style="color: #4682B4">(자유롭게 의견을 공유하세요)</span>
-			</h5>
-			<br/>
-			<br/> 
+
 				<div class="well" id="result" 
 					style="height: 400px; width: 300px; overflow-y: scroll; margin-top: 0px; background: #F0F8FF; border-style: double;">
 

@@ -195,23 +195,24 @@ public class MyPageController2 {
 
 		List<HashMap> list_c = mypage.getCompareData(email);
 		mav.addObject("list_c", list_c);
-		// 여기서 널값이 들어옵니다
-		// ㅠㅠ=================================================================================================
-//	
-//			String CM1 = (String) list_c.get(0).get("CM1");
-//			String CM2 = (String) list_c.get(0).get("CM2");
-//
-//			String chartURL = makeChart_2(CM1, CM2);// graph
-//
-//			/* mav.addObject("main", "my/compareResult"); */
-//			mav.addObject("score01", detail.score(CM1)); // FINANCE_SCORE,
-//			// EMPLOYEE_SCORE
-//			mav.addObject("score02", detail.score(CM2));
-//			mav.addObject("info01", detail.getInfo02(search.getCompID(CM1)));
-//			mav.addObject("info02", detail.getInfo02(search.getCompID(CM2)));
-//			mav.addObject("chartURL", chartURL);
-//	
-//	
+		/*if(list_c.get(0).get("CM1")==null){
+			mav.addObject("info01", detail.getInfo02(search.getCompID("1")));
+			mav.addObject("info02", detail.getInfo02(search.getCompID("")));
+		}*/
+			String CM1 = (String) list_c.get(0).get("CM1");
+			String CM2 = (String) list_c.get(0).get("CM2");
+
+			String chartURL = makeChart_2(CM1, CM2);// graph
+
+			/* mav.addObject("main", "my/compareResult"); */
+			mav.addObject("score01", detail.score(CM1)); // FINANCE_SCORE,
+			// EMPLOYEE_SCORE
+			mav.addObject("score02", detail.score(CM2));
+			mav.addObject("info01", detail.getInfo02(search.getCompID(CM1)));
+			mav.addObject("info02", detail.getInfo02(search.getCompID(CM2)));
+			mav.addObject("chartURL", chartURL);
+	
+	
 
 		
 		// HashMap
