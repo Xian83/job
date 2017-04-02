@@ -67,19 +67,19 @@ public class ReviewsController {
 	}
 
 	
-	@RequestMapping("/push")
-	public ModelAndView reviewsPushHandler(@RequestParam Map map, HttpSession session) throws UnsupportedEncodingException{
-		ModelAndView mav = new ModelAndView();
-		String email = (String)session.getAttribute("email");
-		String content = (String)map.get("content");
-		String company = (String)map.get("cmpn_nm");
-		
-		rdao.push(company, content, email);
-		
-		mav.setViewName("redirect:/company/detail?cmpn_nm="+URLEncoder.encode(company,"UTF-8"));
-	
-		return mav;
-	}
+//	@RequestMapping("/push")
+//	public ModelAndView reviewsPushHandler(@RequestParam Map map, HttpSession session) throws UnsupportedEncodingException{
+//		ModelAndView mav = new ModelAndView();
+//		String email = (String)session.getAttribute("email");
+//		String content = (String)map.get("content");
+//		String company = (String)map.get("cmpn_nm");
+//		
+//		rdao.push(company, content, email);
+//		
+//		mav.setViewName("redirect:/company?cmpn_nm="+URLEncoder.encode(company,"UTF-8"));
+//	
+//		return mav;
+//	}
 	
 	public List addPicture(List<HashMap> review){
 		String email = "";
