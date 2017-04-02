@@ -4,9 +4,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <style>
 body {
 	font-size: 15px;
@@ -41,7 +41,7 @@ body {
 							</td>
 							<td>
 								<h5 class="media-heading" style="display: inline-block; font-size: 20px">
-									<a href="/company/detail?cmpn_nm=${review[i].CMPN_NM }"><b>${review[i].CMPN_NM }</b></a> 
+									<a href="/company?cmpn_nm=${review[i].CMPN_NM }"><b>${review[i].CMPN_NM }</b></a> 
 								</h5>
 								<fmt:formatDate value="${review[i].WDATE }" pattern="yyyy-MM-dd"/><br />
 							<div style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/spare.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
@@ -60,7 +60,7 @@ body {
 								</p>
 							
 							</td>
-							<td><a href="/company/detail?cmpn_nm=${review[i].CMPN_NM }"><b style="font-size: small;">몇개의 리뷰<br/> 더 보기</b></a>  </td>
+							<td><a href="/company?cmpn_nm=${review[i].CMPN_NM }"><b style="font-size: small;">몇개의 리뷰<br/> 더 보기</b></a>  </td>
 						</tr>
 					</c:forEach>
 			</tbody>
