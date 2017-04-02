@@ -16,11 +16,10 @@
 	width: 200px;
 	
 }
+
 </style>  
 
-	<div class="container" id="result2">
-		<div class="col-md-10">
-
+			<div class="container">
 			<h2>
 				<b>REVIEW</b>
 			</h2>
@@ -33,11 +32,16 @@
 				총 ${cnt }개의 검색 결과
 				<input name="CName" type="text" id="search"
 					placeholder="기업명을 입력해 주세요"
-					style="ime-mode: active; align : right; width: 400; height: 37" />
+					style="ime-mode: active; align : right; width: 400; height: 37"
+					onkeypress="if(event.keyCode==13){javascript:search();}" />
 
 				 <button type="button" id ="sc" class="btn" onclick="scBtn()">검색</button> 
 		
 			</div>
+			</div>
+			<div class="container" id="result2">
+			<div class="col-md-10">
+			
 			<table class="table">
 				<thead>
 					<tr>
@@ -111,7 +115,7 @@
 
 	
 		<div class="col-md-2" >
-			 <!-- <div id="floatMenu" > 
+			  <div id="floatMenu" > 
 		<h2>
 				<b>CHAT</b>
 			</h2>
@@ -128,30 +132,30 @@
 					<input type="text" class="form-control" id="msg"
 						placeholder="메세지를 남겨주세요" />
 				</div>
-				</div> -->
+				</div>
 			</div>
 		</div>
 
 
 	<script>
-// 		$(document).ready(function() {
-// 			if(session.getAttribute("name")==null){
-// 				var son = "손님"+(int)(Math.random()*10000)+1;
-// 				session.setAttribute("name", son);
-// 			}
-// 		});
+		$(document).ready(function() {
+			if(session.getAttribute("name")==null){
+ 				var son = "손님"+(int)(Math.random()*10000)+1;
+			session.setAttribute("name", son);
+ 			}
+		});
 		
 		$.ajax({
 			"url" : "/chat/chatAjax?msg=join1234555"
 		});
-// 		document.getElementById("msg").onkeyup = function(e) {
-// 			if (e.key == 'Enter') {
-// 				var xhr = new XMLHttpRequest();
-// 				xhr.open("get", "/chat/chatAjax?msg=" + this.value, true);
-// 				xhr.send();
-// 				this.value = "";
-// 			}
-// 		}
+ 		document.getElementById("msg").onkeyup = function(e) {
+			if (e.key == 'Enter') {
+ 				var xhr = new XMLHttpRequest();
+				xhr.open("get", "/chat/chatAjax?msg=" + this.value, true);
+ 				xhr.send();
+ 				this.value = "";
+			}
+ 		}
 		function getChatLog() {
 			var xhr = new XMLHttpRequest();
 			xhr.open("get", "/chat/logAjax", true);
@@ -174,7 +178,7 @@
 				}
 			}
 		}
-// 		setInterval(getChatLog, 200);
+		setInterval(getChatLog, 200);
 		
 		
 		$(document).ready(function() {

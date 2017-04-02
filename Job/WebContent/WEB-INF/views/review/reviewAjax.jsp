@@ -18,27 +18,9 @@ body {
 }
 </style> 	
 	
-	
-	<div class="container" id="">
-		<div class="col-md-10">
-
-			<h2>
-				<b>REVIEW</b>
-			</h2>
-			<h5>
-				<span style="color: #4682B4">(상세 기업 페이지에 남겨진 리뷰를 확인하실 수 있습니다)</span>
-			</h5>
-			<br/>
+			<div class="container" >
+			<div class="col-md-10">
 			
-			<div class="inp">
-				총 ${cnt }개의 검색 결과
-				<input name="CName" type="text" id="search"
-					placeholder="기업명을 입력해 주세요"
-					style="ime-mode: active; align : right; width: 400; height: 37" />
-
-				 <button type="button" id ="sc" class="btn">검색</button> 
-		
-			</div>
 			<table class="table">
 				<thead>
 					<tr>
@@ -53,7 +35,7 @@ body {
 
 					<c:forEach var="i" begin="0" end="${size }">
 						<tr>
-							<td><img src="${LOGO[i] }"
+							<td><img src="${logo[i].LOGO }"
 								class="media-object img-Rounded Corners" style="width: 90px;">
 								<br /> 
 							</td>
@@ -133,3 +115,27 @@ body {
 			</div>
 		</div>
 
+<script>
+	// 검색버튼 작동 - ajax 안 하면 지울 것
+	function scBtn() {
+		search();
+	};
+
+	function search() {
+
+		var CName = $("#search").val();
+
+		console.log(CName);
+
+		//jQuery.ajaxSettings.traditional = true;
+		$.ajax({
+			"url" : "/review/search",
+			"method" : "post",
+			"data" : {
+				"CName" : CName
+			}
+		}).done(function(aw) {
+			$("#result2").html(aw);
+		})
+	}
+</script>
