@@ -415,17 +415,22 @@ div.col-sm-9 div {
 				google.charts.setOnLoadCallback(drawBasic);
 				
 					function drawBasic() {
-						
+						//window.alert(JSON.stringify(rst));
 						var data = new google.visualization.DataTable();
 						data.addColumn('number', 'X');
-						for(var i = 0 ; i<$("input:checkbox[name='inqurity']:checked").length ; i++){
-							data.addColumn('number', checkname[i]);
-							for(var t = 0 ; t<7 ; t++){
-							data.addRows([
-								 [0, rst.get(checkname[i]).get(t).get("NUM")]
-							]);
-							}
+						for(var i = 0 ; i<rst.length ; i++){
+							data.addColumn('number', rst[i].cmpn);
 						}
+						var datas=[];
+						for(var i=0; i<7;i++) {
+							var tmp =[];
+							tmp.push(i);
+							for(var j =0; j<rst.length; j++){
+								tmp.push(rst[j].data[i].NUM);
+							}
+							datas.push(tmp);
+						}
+						data.addRows(datas);
 						var options = {
 							hAxis : {
 								title: '조회수 비교'
