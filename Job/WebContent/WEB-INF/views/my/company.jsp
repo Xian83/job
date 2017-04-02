@@ -295,7 +295,10 @@ div.col-sm-9 div {
 									</table>
 								</div>
 								<div class="col-md-5">
-									<div id="visit_chart" style="width: 100%; height: 400px"></div>
+								<b>일주일간 조회수 비교 그래프</b>
+									<div id="visit_chart" style="width: 100%; height: 400px">
+									
+									</div>
 
 
 								</div>
@@ -424,7 +427,7 @@ div.col-sm-9 div {
 						var datas=[];
 						for(var i=0; i<7;i++) {
 							var tmp =[];
-							tmp.push(i);
+							tmp.push(i+1);
 							for(var j =0; j<rst.length; j++){
 								tmp.push(rst[j].data[i].NUM);
 							}
@@ -433,7 +436,7 @@ div.col-sm-9 div {
 						data.addRows(datas);
 						var options = {
 							hAxis : {
-								title: '조회수 비교'
+								title: '일주일간 조회수 비교'
 							},
 							vAxis: {
 								title: ''
