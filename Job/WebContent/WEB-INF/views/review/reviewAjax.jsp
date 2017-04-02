@@ -16,8 +16,9 @@ body {
 	width: 200px;
 	
 }
-</style>  
-
+</style> 	
+	
+	
 	<div class="container" id="result2">
 		<div class="col-md-10">
 
@@ -111,7 +112,7 @@ body {
 
 	
 		<div class="col-md-2" >
-			 <!-- <div id="floatMenu" > 
+			<!-- <div id="floatMenu" >  id="floatMenu"
 		<h2>
 				<b>CHAT</b>
 			</h2>
@@ -128,100 +129,7 @@ body {
 					<input type="text" class="form-control" id="msg"
 						placeholder="메세지를 남겨주세요" />
 				</div>
-				</div> -->
-			</div>
+				</div>
+			</div> -->
 		</div>
 
-
-	<script>
-		$(document).ready(function() {
-			if(session.getAttribute("name")==null){
-				var son = "손님"+(int)(Math.random()*10000)+1;
-				session.setAttribute("name", son);
-			}
-		});
-		
-		$.ajax({
-			"url" : "/chat/chatAjax?msg=join1234555"
-		});
-		document.getElementById("msg").onkeyup = function(e) {
-			if (e.key == 'Enter') {
-				var xhr = new XMLHttpRequest();
-				xhr.open("get", "/chat/chatAjax?msg=" + this.value, true);
-				xhr.send();
-				this.value = "";
-			}
-		}
-		function getChatLog() {
-			var xhr = new XMLHttpRequest();
-			xhr.open("get", "/chat/logAjax", true);
-			xhr.send();
-			xhr.onreadystatechange = function() {
-				if (xhr.readyState == 4 && xhr.status == 200) {
-					var obj = JSON.parse(xhr.responseText);
-					var html = "";
-					for (var i = 0; i < obj.length; i++) {
-						html += "<b>[" + obj[i].id + "]</b> ";
-						html += obj[i].msg + "<br>";
-					}
-					console.log(document.getElementById("result").innerHTML);
-					console.log(html);
-					if (document.getElementById("result").innerHTML != html) {
-						document.getElementById("result").innerHTML = html;
-						document.getElementById("result").scrollTop = document
-								.getElementById("result").scrollHeight;
-					}
-				}
-			}
-		}
-		setInterval(getChatLog, 200);
-		
-		
-		$(document).ready(function() {
-			 
-			// 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
-			var floatPosition = parseInt($("#floatMenu").css('top'));
-			// 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
-		 
-			$(window).scroll(function() {
-				// 현재 스크롤 위치를 가져온다.
-				var scrollTop = $(window).scrollTop();
-				var newPosition = scrollTop + floatPosition + "px";
-		 
-				/* 애니메이션 없이 바로 따라감
-				 $("#floatMenu").css('top', newPosition);
-				 */
-		 
-				$("#floatMenu").stop().animate({
-					"top" : newPosition
-				}, 500);
-		 
-			}).scroll();
-		 
-		});
-		
-		
-		// 검색버튼 작동 - ajax 안 하면 지울 것
-		$("#sc").on("click", function() {
-			search();
-		});
-		
-		function search() {
-			
-			var CName = $("#search").val();
-			
-			console.log(CName);
-
-			//jQuery.ajaxSettings.traditional = true;
-			$.ajax({
-				"url" : "/review/search",
-				"method" : "post",
-				"data" : {
-					"CName" : CName
-				}
-			}).done(function(aw) {
-				$("#result2").html(aw);
-			})
-		}
-		
-	</script>

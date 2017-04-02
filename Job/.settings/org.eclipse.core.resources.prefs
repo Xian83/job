@@ -8,6 +8,7 @@ encoding//WebContent/WEB-INF/views/my/company.jsp=UTF-8
 encoding//WebContent/WEB-INF/views/review/delete.jsp=UTF-8
 encoding//WebContent/WEB-INF/views/review/delete2.jsp=UTF-8
 encoding//WebContent/WEB-INF/views/review/list_form.jsp=UTF-8
+encoding//WebContent/WEB-INF/views/review/reviewAjax.jsp=UTF-8
 encoding//WebContent/WEB-INF/views/search/list_form.jsp=UTF-8
 encoding//src/controller/DetailController.java=UTF-8
 encoding//src/controller/JoinController.java=UTF-8

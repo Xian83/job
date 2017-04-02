@@ -108,11 +108,11 @@ public class ReviewsDao {
 		return list;
 	}
 	
-	public List<HashMap> List_cnt(String CName) {
+	public int List_cnt(String CName) {
 		SqlSession session = factory.openSession();
-		List<HashMap> list_cnt = new ArrayList<>();
+		int list_cnt = 0; 
 		try {
-			list_cnt = session.selectList("mappers.review.getCount", CName);
+			list_cnt = session.selectOne("mappers.review.getCount", CName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
