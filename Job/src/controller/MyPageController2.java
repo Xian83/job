@@ -101,7 +101,8 @@ public class MyPageController2 {
 
 	// @RequestMapping(name="/leave_result", produces="application/text;
 	// charset=utf8")
-	// return result by ajax - �깉�눜 泥섎━ / 鍮꾨�踰덊샇 3�쉶 �삤瑜섏떆, �옄�룞濡쒓렇�븘�썐 湲곕뒫 異붽� �븘�슂
+	// return result by ajax - �깉�눜 泥섎━ / 鍮꾨�踰덊샇 3�쉶 �삤瑜섏떆, �옄�룞濡쒓렇�븘�썐 湲곕뒫 異붽�
+	// �븘�슂
 	@ResponseBody
 	@RequestMapping("/leave_result")
 	public boolean leave_resultHandler(HttpSession session, @RequestParam(name = "pass") String pass) {
@@ -195,31 +196,32 @@ public class MyPageController2 {
 
 		List<HashMap> list_c = mypage.getCompareData(email);
 		mav.addObject("list_c", list_c);
-//		if(list_c.get(0).get("CM1")==null){
-//			mav.addObject("info01", detail.getInfo02(search.getCompID("1")));
-//			mav.addObject("info02", detail.getInfo02(search.getCompID("")));
-//		}
-//			String CM1 = (String) list_c.get(0).get("CM1");
-//			String CM2 = (String) list_c.get(0).get("CM2");
-//
-//			String chartURL = makeChart_2(CM1, CM2);// graph
-//
-//			/* mav.addObject("main", "my/compareResult"); */
-//			mav.addObject("score01", detail.score(CM1)); // FINANCE_SCORE,
-//			// EMPLOYEE_SCORE
-//			mav.addObject("score02", detail.score(CM2));
-//			mav.addObject("info01", detail.getInfo02(search.getCompID(CM1)));
-//			mav.addObject("info02", detail.getInfo02(search.getCompID(CM2)));
-//			mav.addObject("chartURL", chartURL);
-//	
-	
 
+		String CM1="";
+		String CM2="";
+		try{
+			CM1=(String) list_c.get(0).get("CM1");
+			CM2=(String) list_c.get(0).get("CM2");
+		}catch(IndexOutOfBoundsException e){
+			CM1="네이버";
+			CM2="삼성전자";
+		}
 		
+		String chartURL = makeChart_2(CM1, CM2);// graph
+		//
+		mav.addObject("main", "my/company");
+		mav.addObject("score01", detail.score(CM1)); // FINANCE_SCORE,
+
+		mav.addObject("score02", detail.score(CM2));
+		mav.addObject("info01", detail.getInfo02(search.getCompID(CM1)));
+		mav.addObject("info02", detail.getInfo02(search.getCompID(CM2)));
+		mav.addObject("chartURL", chartURL);
+	
 		// HashMap
 		// (summary
 		// -
 		// List)
-		
+
 		// =========================================================================================================
 		// �궗吏� 遺덈윭�삤湲�
 		String picURL = mydao.getLastetImageURL(email);
@@ -233,6 +235,9 @@ public class MyPageController2 {
 
 		return mav;
 	}
+	
+	
+
 
 	@RequestMapping("/update_pic")
 	public ModelAndView update_pic(@RequestParam(name = "pic") MultipartFile file, HttpSession session,
@@ -394,7 +399,8 @@ public class MyPageController2 {
 			}
 
 			// data setting
-			// �쉶�궗紐�, �젏�닔(�옱臾댄룊媛�,�옱吏곸옄�룊媛�), 諛⑹궗�삎 洹몃옒�봽, �닽�옄(留ㅼ텧�븸, �쁺�뾽�씠�씡, �떦湲� �넀�씡, �궗�썝�닔)
+			// �쉶�궗紐�, �젏�닔(�옱臾댄룊媛�,�옱吏곸옄�룊媛�), 諛⑹궗�삎 洹몃옒�봽, �닽�옄(留ㅼ텧�븸,
+			// �쁺�뾽�씠�씡, �떦湲� �넀�씡, �궗�썝�닔)
 			String chartURL = makeChart_2(cm1, cm2);// graph
 
 			mav.setViewName("t5");
@@ -415,7 +421,7 @@ public class MyPageController2 {
 	}
 
 	@ResponseBody
-	@RequestMapping(path="/visitgraph", produces="application/json;charset=utf-8")
+	@RequestMapping(path = "/visitgraph", produces = "application/json;charset=utf-8")
 	public String visitGraph(@RequestParam(name = "cm[]") List cm) throws JsonProcessingException {
 
 		ModelAndView mav = new ModelAndView();
@@ -425,7 +431,7 @@ public class MyPageController2 {
 		for (int t = 0; t < cm.size(); t++) {
 			HashMap map = new HashMap<>();
 			list = mypage.visitgraph2((String) cm.get(t));
-			map.put("cmpn" , cm.get(t));
+			map.put("cmpn", cm.get(t));
 			map.put("data", list);
 			list2.add(map);
 		}
