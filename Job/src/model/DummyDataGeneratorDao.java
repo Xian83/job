@@ -17,7 +17,7 @@ public class DummyDataGeneratorDao {
 
 	public boolean insert(List<String> score) {
 		boolean res = false;
-		
+
 		// 랜덤 데이터 생성
 		List<HashMap> list = new ArrayList<>();
 		for (int i = 0, n = score.size(); i < n; i++) {
@@ -29,18 +29,18 @@ public class DummyDataGeneratorDao {
 			list.add(data);
 		}
 		System.out.println("랜덤 데이터 생성 : " + list.size() + "개");
-		
+
 		SqlSession sql = null;
 		try {
 			sql = factory.openSession();
 
 			int cnt = 0;
-			for(HashMap map : list){
-				cnt = sql.insert("mappers.company.inputD", map);				
+			for (HashMap map : list) {
+				cnt = sql.insert("mappers.company.inputD", map);
 				if (cnt == 1) {
 					sql.commit();
 					res = true;
-				}				
+				}
 			}
 
 		} catch (Exception e) {
@@ -52,14 +52,14 @@ public class DummyDataGeneratorDao {
 		}
 		return res;
 	}
-	
-	// score2 : 방사형 그래프용 
-	public boolean insert2(List<HashMap> score){
+
+	// score2 : 방사형 그래프용
+	public boolean insert2(List<HashMap> score) {
 		boolean res = false;
-		
+
 		// 랜덤 데이터 생성
 		List<HashMap> list = new ArrayList<>();
-		for(HashMap map : score) {
+		for (HashMap map : score) {
 			HashMap data = new HashMap();
 			data.put("CMPN_NM", map.get("CMPN_NM"));
 			data.put("LABEL01", (int) (Math.random() * 75) + 25);
@@ -71,22 +71,65 @@ public class DummyDataGeneratorDao {
 			data.put("LABEL07", (int) (Math.random() * 75) + 25);
 			data.put("LABEL08", (int) (Math.random() * 75) + 25);
 			data.put("LABEL09", (int) (Math.random() * 75) + 25);
-			
+
 			list.add(data);
 		}
 		System.out.println("랜덤 데이터 생성 : " + list.size() + "개");
-		
+
 		SqlSession sql = null;
 		try {
 			sql = factory.openSession();
 
 			int cnt = 0;
-			for(HashMap map : list){
-				cnt = sql.insert("mappers.company.inputE", map);				
+			for (HashMap map : list) {
+				cnt = sql.insert("mappers.company.inputE", map);
 				if (cnt == 1) {
 					sql.commit();
 					res = true;
-				}				
+				}
+			}
+
+		} catch (Exception e) {
+			res = false;
+			e.printStackTrace();
+		} finally {
+			System.out.println("랜덤 데이터 입력 완료");
+			sql.close();
+		}
+		return res;
+	}
+
+	// visit : 방문자 성별 분석. 원형 그래프
+	public boolean insertVisit(List<HashMap> score) {
+		boolean res = false;
+		System.out.println(score.size() + "원본 개수");
+		// 랜덤 데이터 생성 (email, cmpn_nm, sysdate)
+		List<HashMap> list = new ArrayList<>();
+		for (HashMap map : score) {
+			HashMap data = new HashMap();
+			data.put("CMPN_NM", map.get("CMPN_NM"));
+
+			for(int i = 0; i< (int)(Math.random()*10)+1; i++){
+				if(Math.random()*6 < Math.random()*3)
+					data.put("EMAIL", "dummy101@naver.com");
+				else
+					data.put("EMAIL", "dummy102@naver.com");
+				list.add(data);
+			}
+		}
+		System.out.println("랜덤 데이터 생성 : " + list.size() + "개");
+
+		SqlSession sql = null;
+		try {
+			sql = factory.openSession();
+
+			int cnt = 0;
+			for (HashMap map : list) {
+				cnt = sql.insert("mappers.company.inputVisit", map);
+				if (cnt == 1) {
+					sql.commit();
+					res = true;
+				}
 			}
 
 		} catch (Exception e) {
