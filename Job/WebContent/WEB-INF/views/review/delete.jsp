@@ -1,21 +1,3 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Gist
- @elkiki
- Sign out
- Watch 0
-  Star 0
-  Fork 0 Xian83/job
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Pulse  Graphs
-Tree: ca971aca1a Find file Copy pathjob/Job/WebContent/WEB-INF/views/review/list_form.jsp
-ca971ac  8 hours ago
- admin 효정 - 마이페이지 및 서치 페이지 세부 수정
-0 contributors
-RawBlameHistory     
-213 lines (176 sloc)  5.82 KB
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -222,6 +204,3 @@ body {
 		
 		
 	</script>
-
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help

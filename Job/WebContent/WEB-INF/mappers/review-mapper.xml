@@ -33,6 +33,12 @@
 		insert into REVIEWS
 		VALUES(#{CMPN_NM},#{CONTENTS},SYSDATE,#{EMAIL})
 	</insert>
+	<select id="search" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from Reviews where CMPN_NM like #{CName}
+	</select>
+	<select id="getCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) as cnt from Reviews where CMPN_NM like #{CName}
+	</select>
 
 
 </mapper>

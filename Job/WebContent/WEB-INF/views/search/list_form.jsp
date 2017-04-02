@@ -4,6 +4,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+
 <style>
 .navbar-nav>li {
 	margin-left: 30;
@@ -294,67 +295,4 @@ padding: 2%;
 			$('#' + chkName + '전체').prop("checked", false);
 	}
 
-	// 검색버튼 작동
-	$("#sc").on("click", function() {
-		search();
-	});
-	
-	function search() {
-		
-		var CName = $("#search").val();
-		var chkSido = [];
-		var chkJinhakCode = [];
-		var chkSize = [];
-
-		$("input[name='chkSido']:checked").each(function() {
-			chkSido.push($(this).val());
-		});
-		$("input[name='chkJinhakCode']:checked").each(function() {
-			chkJinhakCode.push($(this).val());
-		});
-		$("input[name='chkSize']:checked").each(function() {
-			chkSize.push($(this).val());
-		});
-
-		console.log(search);
-		console.log(chkSido);
-		console.log(chkJinhakCode);
-		console.log(chkSize);
-		
-		jQuery.ajaxSettings.traditional = true;
-
-		$.ajax({
-			"url" : "/search/detail",
-			"method" : "post",
-			"data" : {
-				"CName" : CName,
-				"chkSido" : chkSido,
-				"chkJinhakCode" : chkJinhakCode,
-				"chkSize" : chkSize
-			}
-		}).done(function(aw) {
-			$("#result").html(aw);
-		})
-	}
-	
-	// 페이지 버튼에 의한 목록 불러오기
-	$(".pagelinks").each(function() {
-
-		$(this).click(function() {
-			// 간단 로딩 처리
-			$("#result").html('<p class="loading"><img src="https://www.creditmutuel.fr/cmne/fr/banques/webservices/nswr/images/loading.gif" alt=""></p>');
-			
-			var key = $(this).attr("href");
-
-			jQuery.ajaxSettings.traditional = true;
-			
-			$.ajax({
-				"url" : "/search/detail?" + key,
-				"method" : "post"
-			}).done(function(rst) {
-				$("#result").html(rst);
-			})
-			return false;
-		});
-	});
 </script>
