@@ -80,7 +80,9 @@
 		for (var i = Number(cu); i <= 10000; i += 500) {
 			opt += "<option value='"+i+"'>최대 " + i + "이하</option>";
 		}
-		$("#max").html(opt);
+		var max = $("#max").val();
+		if(cu >= max)
+			$("#max").html(opt);
 	});
 
 	function enableBtn() {
