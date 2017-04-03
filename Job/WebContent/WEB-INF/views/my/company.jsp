@@ -241,14 +241,14 @@ div.col-sm-9 div {
 						</h6>
 						<br />
 						<div class="row content">
-							<div class="col-md-7">
+							<div class="col-md-6">
 								<div class="table-responsive" id="compare">
 									<table class="table">
 										<thead>
 											<tr>
 												<th>#</th>
-												<th>Company Name A</th>
-												<th>Company Name B</th>
+												<th>회사 A</th>
+												<th>회사 B</th>
 												<th>Compare</th>
 											</tr>
 										</thead>
@@ -257,8 +257,8 @@ div.col-sm-9 div {
 												varStatus="vs">
 												<tr>
 													<td>${vs.count }</td>
-													<td><a href="/company?cmpn_nm=${i.CM1 }">${i.CM1 }</a></td>
-													<td><a href="/company?cmpn_nm=${i.CM2 }">${i.CM2 }</a></td>
+													<td style="font-size: 15px;"><a href="/company?cmpn_nm=${i.CM1 }">${i.CM1 }</a></td>
+													<td style="font-size: 15px;"><a href="/company?cmpn_nm=${i.CM2 }">${i.CM2 }</a></td>
 													<td>
 														<button type="button" class="btn" id="compareView"
 															name="${i.CM1 }#${i.CM2 }">간단 비교</button>
@@ -270,7 +270,7 @@ div.col-sm-9 div {
 								</div>
 							</div>
 
-							<div class="col-md-5">
+							<div class="col-md-6">
 								<div class="responsive" id="compareResult">
 									<div class="container-fluid" align="center" style="width: 80%;">
 										<br /> <br />
