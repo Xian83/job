@@ -352,7 +352,9 @@ hr {
 							</p>
 						</div>
 						<p> &nbsp; &nbsp; ${review.CONTENTS }</p>
-						<p align="left">written by <i><b>${review.EMAIL }</b></i> | ${review.WDATE }</p>
+						<c:set var="email" value="${fn:split(review.EMAIL, '@')}" />
+						<p align="left">written by <i><b>${email[0]}</b></i> | 
+						<fmt:formatDate value="${review.WDATE }" pattern="yyyy-MM-dd" /></p>
 					</div>
 				</c:forEach>
 			</div>

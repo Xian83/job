@@ -1,13 +1,7 @@
 package controller;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,12 +40,8 @@ public class ReviewsController {
 
 		int start = (Integer.parseInt(page) - 1) * div + 1;
 		int end = Integer.parseInt(page) * div;
-				
+		
 		List<HashMap> review = rdao.review(start, end);	// get reviews
-		List<HashMap> rank = rdao.rank();	
-		List <HashMap> list = rdao.list();
-		// review = addPicture(review); 				// add picURL
-		System.out.println("reviews>>>>" + review);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("t1");
@@ -59,9 +49,7 @@ public class ReviewsController {
 		mav.addObject("page", page);
 		mav.addObject("size", size);
 		mav.addObject("review", review);
-		mav.addObject("rank",rank);
 		mav.addObject("cnt",cnt);
-		System.out.println("rank =" + rank);
 		
 		return mav;
 	}
