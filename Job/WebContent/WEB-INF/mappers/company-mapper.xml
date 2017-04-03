@@ -32,6 +32,12 @@
 		values(#{CMPN_NM}, #{LABEL01}, #{LABEL02}, #{LABEL03}, #{LABEL04},
 		#{LABEL05}, #{LABEL06},#{LABEL07}, #{LABEL08}, #{LABEL09})
 	</insert>
+	<insert id="inputVisit" parameterType="java.util.HashMap">
+		insert into visit values(#{EMAIL}, #{CMPN_NM}, sysdate-2)
+	</insert>
+	<insert id="inputReview" parameterType="java.util.HashMap">
+		insert into reviews values(#{CMPN_NM},#{CONTENTS}, sysdate, #{EMAIL}, #{RATE})
+	</insert>
 	<select id="getScore02" parameterType="java.lang.String"
 		resultType="java.util.HashMap">
 		select * from score2 where CMPN_NM=#{CMPN_NM}

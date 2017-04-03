@@ -189,7 +189,7 @@ hr {
 					<c:if test="${sessionScope.auth eq 'yes'}">
 						<button
 							class="btn btn-lg ${scrap eq 0 ? 'btn-success' : 'btn-danger'}"
-							id="scrap">스크랩 ${scrap eq 0 ? '하기' : '해제' }</button>
+							id="scrap">스크랩 ${scrap eq 0 ? '추가' : '해제' }</button>
 					</c:if>
 				</h1>
 				<p style="font-color: grey; margin-left: 5em;">${score.DIVISION }|${score.SCALE }</p>
@@ -303,7 +303,7 @@ hr {
 	<div class="row" align="center">
 		<c:forEach var="i" begin="0" end="5">
 			<div class="col-md-2" style="border-style: none;">
-				<a href="/company/detail?cmpn_nm=${same[i].CMPN_NM }"> <img
+				<a href="/company?cmpn_nm=${same[i].CMPN_NM }"> <img
 					src="${same[i].LOGO }" alt="Lights" style="width: 82" height="82" /><br />
 					${same[i].CMPN_NM }
 				</a>
@@ -342,15 +342,22 @@ hr {
 			<img src="${chartURL}">
 		</div>
 		<div class="col-md-6">
-			<div id="reviewList">
-				<div class="panel panel-default">
-					<div class="panel-heading">리뷰</div>
-					<c:forEach var="review" items="${review }">
-						<div class="panel-body">${review.EMAIL }:${review.CONTENTS }</div>
-					</c:forEach>
-				</div>
+			<div id="reviewList" style="overflow-y:auto;max-height:450px;" >
+				<c:forEach var="review" items="${review }">
+					<div class="well" >
+						<div
+							style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/spare.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
+							<p
+								style="WIDTH: ${review.RATE}%; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;">
+							</p>
+						</div>
+						<p> &nbsp; &nbsp; ${review.CONTENTS }</p>
+						<p align="left">written by <i><b>${review.EMAIL }</b></i> | ${review.WDATE }</p>
+					</div>
+				</c:forEach>
 			</div>
 			<div>
+				<br/>
 				<!-- Review Modal button -->
 				<button type="button" id="open" class="btn btn-info"
 					data-toggle="modal" data-target="#reviewModal">리뷰 쓰기</button>
@@ -384,7 +391,8 @@ hr {
 									<input class="form-control" id="content" type="text"
 										placeholder="리뷰를 입력하세요">
 									<c:if test="${auth eq 'no' or auth eq null }">
-										<p id="msg" style="color: red;">로그인을 한 상태에서만 리뷰를 작성할 수 있습니다</p>
+										<p id="msg" style="color: red;">로그인을 한 상태에서만 리뷰를 작성할 수
+											있습니다</p>
 									</c:if>
 								</div>
 							</div>
@@ -394,7 +402,7 @@ hr {
 									data-dismiss="modal">
 									<span class="glyphicon glyphicon-remove"></span> 취소
 								</button>
-								
+
 								<button type="button"
 									class="btn btn-default btn-success pull-right ${auth eq 'no' or auth eq null ? 'disabled' : ''}"
 									data-dismiss="modal" id="upload">
@@ -418,7 +426,7 @@ hr {
 				<b>[회사위치]</b> ${info02.address }
 			</p>
 			<c:if test="${info02.address ne '' or info02.address ne null }">
-			<div id="map" style="width: 500; height: 500"></div>
+				<div id="map" style="width: 500; height: 500"></div>
 			</c:if>
 		</div>
 		<div class="info04 col-md-5" align="left">

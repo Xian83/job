@@ -179,4 +179,38 @@ public class InputData {
 		mav.addObject("result", result);
 		return mav;
 	}
+
+	// dummy data input to visit table : 방문자 성별 분석용
+	@RequestMapping("/input_result07")
+	public ModelAndView inputDataHandler8() {
+		boolean result = false;
+
+		List<HashMap> list = cDao.getScore(); // score data
+
+		// generate dummy data
+		result = generate.insertVisit(list);
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("t1");
+		mav.addObject("main", "data/input_result");
+		mav.addObject("result", result);
+		return mav;
+	}
+
+	// dummy data input to visit table : 방문자 성별 분석용
+	@RequestMapping("/input_result08")
+	public ModelAndView inputDataHandler9() {
+		boolean result = false;
+
+		List<HashMap> list = cDao.getScore(); // score data
+
+		// generate dummy data
+		result = generate.insertReview(list);
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("t1");
+		mav.addObject("main", "data/input_result");
+		mav.addObject("result", result);
+		return mav;
+	}
 }

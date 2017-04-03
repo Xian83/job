@@ -27,7 +27,7 @@
 	<br/>
 		<img src="${score02.LOGO }" class="img-circle" style="width: 70%;"><br/>
 
-</div>
+</div> 
 
 </div>
 

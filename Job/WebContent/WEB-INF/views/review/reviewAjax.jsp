@@ -4,9 +4,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <style>
 body {
 	font-size: 15px;
@@ -18,27 +18,9 @@ body {
 }
 </style> 	
 	
-	
-	<div class="container" id="">
-		<div class="col-md-10">
-
-			<h2>
-				<b>REVIEW</b>
-			</h2>
-			<h5>
-				<span style="color: #4682B4">(상세 기업 페이지에 남겨진 리뷰를 확인하실 수 있습니다)</span>
-			</h5>
-			<br/>
+			<div class="container" >
+			<div class="col-md-10">
 			
-			<div class="inp">
-				총 ${cnt }개의 검색 결과
-				<input name="CName" type="text" id="search"
-					placeholder="기업명을 입력해 주세요"
-					style="ime-mode: active; align : right; width: 400; height: 37" />
-
-				 <button type="button" id ="sc" class="btn">검색</button> 
-		
-			</div>
 			<table class="table">
 				<thead>
 					<tr>
@@ -50,16 +32,16 @@ body {
 				</thead>
 
 				<tbody>
-
+				<span style="color: #4682B4; "><b>검색 결과 총 ${cnt }개<b/></span>
 					<c:forEach var="i" begin="0" end="${size }">
 						<tr>
-							<td><img src="${LOGO[i] }"
+							<td><img src="${logo[i].LOGO }"
 								class="media-object img-Rounded Corners" style="width: 90px;">
 								<br /> 
 							</td>
 							<td>
 								<h5 class="media-heading" style="display: inline-block; font-size: 20px">
-									<a href="/company/detail?cmpn_nm=${review[i].CMPN_NM }"><b>${review[i].CMPN_NM }</b></a> 
+									<a href="/company?cmpn_nm=${review[i].CMPN_NM }"><b>${review[i].CMPN_NM }</b></a> 
 								</h5>
 								<fmt:formatDate value="${review[i].WDATE }" pattern="yyyy-MM-dd"/><br />
 							<div style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/spare.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
@@ -78,7 +60,7 @@ body {
 								</p>
 							
 							</td>
-							<td><a href="/company/detail?cmpn_nm=${review[i].CMPN_NM }"><b style="font-size: small;">몇개의 리뷰<br/> 더 보기</b></a>  </td>
+							<td><a href="/company?cmpn_nm=${review[i].CMPN_NM }"><b style="font-size: small;">몇개의 리뷰<br/> 더 보기</b></a>  </td>
 						</tr>
 					</c:forEach>
 			</tbody>
@@ -113,14 +95,6 @@ body {
 	
 		<div class="col-md-2" >
 			<div id="floatMenu" >
-		<h2>
-				<b>CHAT</b>
-			</h2>
-			<h5>
-				<span style="color: #4682B4">(자유롭게 의견을 공유하세요)</span>
-			</h5>
-			<br/>
-			<br/> 
 				<div class="well" id="result" 
 					style="height: 400px; width: 300px; overflow-y: scroll; margin-top: 0px; background: #F0F8FF; border-style: double;">
 
@@ -133,3 +107,27 @@ body {
 			</div>
 		</div>
 
+<script>
+	// 검색버튼 작동 - ajax 안 하면 지울 것
+	function scBtn() {
+		search();
+	};
+
+	function search() {
+
+		var CName = $("#search").val();
+
+		console.log(CName);
+
+		//jQuery.ajaxSettings.traditional = true;
+		$.ajax({
+			"url" : "/review/search",
+			"method" : "post",
+			"data" : {
+				"CName" : CName
+			}
+		}).done(function(aw) {
+			$("#result2").html(aw);
+		})
+	}
+</script>
