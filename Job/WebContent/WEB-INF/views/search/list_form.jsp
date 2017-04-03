@@ -218,9 +218,9 @@ padding: 2%;
 	<div class="container" align="center">
 		<ul class="pagination">
 			<c:if test="${page ne 1 }">
-				<li><a href="CName=${CName }&page=${p-1 }" class="pagelinks">이전</a></li>
+				<li><a href="CName=${CName }&page=${page-1 }" class="pagelinks">이전</a></li>
 			</c:if>
-			<c:forEach var="p" begin="1" end="${size > 10 ? 10 : size }" varStatus="vs">
+			<c:forEach var="p" begin="${page >= 10 ? page/10+1 : 1 }" end="${size > 10 ? page/10 + 10 : size }" varStatus="vs">
 				<c:choose>
 					<c:when test="${p eq page }">
 						<li class="active"><a href="#CName=${CName }&page=${p}" class="pagelinks disabled">${p }</a></li>
@@ -231,7 +231,7 @@ padding: 2%;
 				</c:choose>
 			</c:forEach>
 			<c:if test="${page ne size }">
-				<li><a href="CName=${CName }&page=${p+1 }" class="pagelinks">다음</a></li>
+				<li><a href="CName=${CName }&page=${page eq null ? 2 : page+1 }" class="pagelinks">다음</a></li>
 				<br />
 			</c:if>
 		</ul>

@@ -83,9 +83,9 @@ b {
 	<div class="container" align="center">
 		<ul class="pagination">
 			<c:if test="${page ne 1 }">
-				<li><a href="page=${p-1 }" class="pagelinks">이전</a></li>
+				<li><a href="page=${page-1 }" class="pagelinks">이전</a></li>
 			</c:if>
-			<c:forEach var="p" begin="1" end="${size > 10 ? 10 : size }"
+			<c:forEach var="p" begin="${page >= 10 ? page/10+1 : 1 }" end="${size > 10 ? page/10 + 10 : size }"
 				varStatus="vs">
 				<c:choose>
 					<c:when test="${p eq page }">
@@ -98,7 +98,7 @@ b {
 				</c:choose>
 			</c:forEach>
 			<c:if test="${page ne size }">
-				<li><a href="page=${p+1 }" class="pagelinks">다음</a></li>
+				<li><a href="page=${page eq null ? 2 : page+1 }" class="pagelinks">다음</a></li>
 				<br />
 			</c:if>
 		</ul>
