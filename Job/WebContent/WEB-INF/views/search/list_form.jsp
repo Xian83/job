@@ -163,7 +163,7 @@ padding: 2%;
 					placeholder="기업명을 입력해 주세요"
 					style="ime-mode: active; width: 800; height: 37"
 					onkeypress="if(event.keyCode==13){ search();return false;}" />
-
+				
 				<button type="button" id="sc" class="btn">검색</button>
 			</div>
 		</div>
@@ -182,10 +182,10 @@ padding: 2%;
 <div id="result" align="center">
 	<!-- 검색 결과 리스트 출력되는 곳 -->
 	<div class="container">
-		<table class="table table-bordered" style="width:97%">
 		<p align="left">
 			<b>검색결과 ${cnt}개</b>
 		</p>
+		<table class="table table-bordered" style="width:97%">
 			<c:forEach var="i" items="${list}" varStatus="vs">
 				<c:if test="${vs.count %2 == 1 }">
 					<tr>

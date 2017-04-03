@@ -38,14 +38,21 @@ body {
 }
 
 a.disabled {
-   pointer-events: none;
-   cursor: default;
+	pointer-events: none;
+	cursor: default;
+}
+
+b {
+	padding: 2%;
 }
 </style>
 <div id="paging">
-	<b>검색결과 ${cnt}개</b>
 	<div class="container">
-		<table class="table table-bordered">
+		<div align="left">
+			<b>검색결과 ${cnt}개</b>
+			<br/>
+		</div>
+		<table class="table table-bordered" style="width: 97%">
 			<c:forEach var="i" begin="0" end="${list.size()-1}" varStatus="vs">
 				<c:if test="${vs.count %2 == 1 }">
 					<tr>
@@ -78,10 +85,12 @@ a.disabled {
 			<c:if test="${page ne 1 }">
 				<li><a href="page=${p-1 }" class="pagelinks">이전</a></li>
 			</c:if>
-			<c:forEach var="p" begin="1" end="${size > 10 ? 10 : size }" varStatus="vs">
+			<c:forEach var="p" begin="1" end="${size > 10 ? 10 : size }"
+				varStatus="vs">
 				<c:choose>
 					<c:when test="${p eq page }">
-						<li class="active"><a href="page=${p}" class="pagelinks disabled">${p }</a></li>
+						<li class="active"><a href="page=${p}"
+							class="pagelinks disabled">${p }</a></li>
 					</c:when>
 					<c:otherwise>
 						<li><a href="page=${p}" class="pagelinks">${p }</a></li>
@@ -96,26 +105,31 @@ a.disabled {
 	</div>
 </div>
 <script>
-		
-	$(".pagelinks").each(function() {
-		
-		$(this).click(function() {
-			$("#paging").html('<p class="loading"><img src="https://www.creditmutuel.fr/cmne/fr/banques/webservices/nswr/images/loading.gif" alt=""></p>');
-			var page = $(this).attr("href");
-			var url = "/search/detail?" + page+ '${key}';
+	$(".pagelinks")
+			.each(
+					function() {
 
-			console.log(url);
-			
-			jQuery.ajaxSettings.traditional = true;
-			
-			$.ajax({
-				"url" : url,
-				"method" : "post"	
-			}).done(function(rst) {
-				$("#paging").html(rst);
-			})
-			return false;
-		});
-	});
+						$(this)
+								.click(
+										function() {
+											$("#paging")
+													.html(
+															'<p class="loading"><img src="https://www.creditmutuel.fr/cmne/fr/banques/webservices/nswr/images/loading.gif" alt=""></p>');
+											var page = $(this).attr("href");
+											var url = "/search/detail?" + page
+													+ '${key}';
 
+											console.log(url);
+
+											jQuery.ajaxSettings.traditional = true;
+
+											$.ajax({
+												"url" : url,
+												"method" : "post"
+											}).done(function(rst) {
+												$("#paging").html(rst);
+											})
+											return false;
+										});
+					});
 </script>
