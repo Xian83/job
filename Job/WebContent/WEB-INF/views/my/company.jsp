@@ -7,7 +7,6 @@
 <!-- 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
  -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -20,24 +19,19 @@
 body {
 	position: relative;
 }
-
 th {
 	font-size: 80%;
 }
-
 .affix {
 	top: 20px;
 }
-
 div.col-sm-9 div {
 	height: auto;
 	font-size: 20px;
 }
-
 #section1, #section2, #section3, #section4, #section5 {
 	padding-top: 50px;
 }
-
 @media screen and (max-width: 810px) {
 	#section1, #section2, #section3, #section4, #section5 {
 		margin-left: 150px;
@@ -48,7 +42,6 @@ div.col-sm-9 div {
    width: 70%;
    margin: auto;
 }
-
 .thumbnail {
    margin-bottom: 0;
 }
@@ -256,12 +249,10 @@ div.col-sm-9 div {
 									['${i.CMPN_NM }', ${i.CNT }]<c:if test="${!vs.last }">,</c:if>		
 								</c:forEach>
 					        ]);
-
         var options = {
 //           title: '내가 자주 본 기업 Top 5',	// Chart Title
           pieHole: 0.4,					// hole size ratio
         };
-
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
       }
@@ -395,7 +386,6 @@ div.col-sm-9 div {
 			var CMPN_NM = $(this).attr("name");
 			var strArray = CMPN_NM.split('#');
 			console.log(strArray[0] + strArray[1]);
-
 			$.ajax({
 				"url" : "/my/compare",
 				"method" : "post",
@@ -461,12 +451,3 @@ div.col-sm-9 div {
 						var chart = new google.visualization.LineChart(document.getElementById('visit_chart'));
 	
 						chart.draw(data, options);
-					
-				}
-			});
-		}
-		
-	});
-	
-
-</script>
