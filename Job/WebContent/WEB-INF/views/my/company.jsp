@@ -150,7 +150,7 @@ div.col-sm-9 div {
 						</h6>
 						<br />
 						<div class="row content">
-							<div class="col-md-7">
+							<div class="col-md-6">
 								<div class="table-responsive" id="compare">
 									<table class="table">
 										<thead>
@@ -192,7 +192,7 @@ div.col-sm-9 div {
 								</div>
 							</div>
 
-							<div class="col-md-5">
+							<div class="col-md-6">
 							
 								<div class="responsive" id="compareResult">	
 										<div class="container-fluid" align="center"
@@ -202,10 +202,10 @@ div.col-sm-9 div {
 									<div class="col-md-6" align="center">
 
 										<div class="compare_fixname">
-											<div class="name left">
-												<span class="label label-danger" style="font-size: 15px;"><b>${score01.CMPN_NM }</b></span><br />
+									 		<div class="name left">
+												<span class="label label-danger" style="font-size: 10px;"><b>${score01.CMPN_NM }</b></span><br />
 											</div>
-										</div>
+										</div>  
 										<br /> <img src="${score01.LOGO }" class="img-circle"
 											style="width: 70%;"><br />
 
@@ -215,9 +215,9 @@ div.col-sm-9 div {
 									<div class="col-md-6" align="center">
 
 										<div class="compare_fixname">
-											<div class="name right">
-												<span class="label label-primary" style="font-size: 15px;"><b>${score02.CMPN_NM }</b></span><br />
-											</div>
+											 <div class="name right">
+												<span class="label label-primary" style="font-size: 10px;"><b>${score02.CMPN_NM }</b></span><br />
+											</div> 
 										</div>
 										<br /> <img src="${score02.LOGO }" class="img-circle"
 											style="width: 70%;"><br />
