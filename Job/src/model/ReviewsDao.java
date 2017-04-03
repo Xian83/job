@@ -43,6 +43,19 @@ public class ReviewsDao {
 		}
 		return map;
 	}
+	
+	public HashMap totalCount(String CName) {
+		SqlSession session = factory.openSession();
+		HashMap map = new HashMap();
+		try {
+			map = session.selectOne("mappers.review.totalbyName", "%" +CName+"%");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return map;
+	}
 
 	public List<HashMap> review(int start, int end) {
 		List<HashMap> list = new ArrayList<>();
@@ -110,18 +123,18 @@ public class ReviewsDao {
 		return list;
 	}
 	
-	public int List_cnt(String CName) {
-		SqlSession session = factory.openSession();
-		int list_cnt = 0; 
-		try {
-			list_cnt = session.selectOne("mappers.review.getCount", "%" +CName+"%" );
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return list_cnt;
-	}
+//	public int List_cnt(String CName) {
+//		SqlSession session = factory.openSession();
+//		int list_cnt = 0; 
+//		try {
+//			list_cnt = session.selectOne("mappers.review.getCount", "%" +CName+"%" );
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			session.close();
+//		}
+//		return list_cnt;
+//	}
 	
 	public List<HashMap> searchLogo(String CName) {
 		List<HashMap> list = new ArrayList<>();
@@ -130,6 +143,37 @@ public class ReviewsDao {
 		SqlSession session = factory.openSession();
 		try {
 			list = session.selectList("mappers.review.searchLogo", "%" +CName+"%" );
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	
+	public List<HashMap> getByName(String CName, int start, int end, List<HashMap> logo) {
+		
+		List<HashMap> list = new ArrayList<>();
+		
+		HashMap<String, Object> logoMap = new HashMap();
+		for(HashMap map : logo){
+			logoMap.put((String) map.get("CMPN_NM"), (String) map.get("LOGO"));
+		}
+		
+		HashMap data = new HashMap();
+		data.put("CName", "%" + CName + "%");
+		data.put("start", start);
+		data.put("end", end);
+	
+		SqlSession session = factory.openSession();
+		try {
+			list = session.selectList("mappers.review.getPageData", data);
+			String tmp = "";
+			for(HashMap map : list){
+				tmp = (String) map.get("CMPN_NM");
+				map.put("LOGO", (String) logoMap.get(tmp));
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

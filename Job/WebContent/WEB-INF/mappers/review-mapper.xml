@@ -4,9 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mappers.review">
 	<select id="total" resultType="java.util.HashMap">
-		select count(*) as COUNT from REVIEWS
+		select count(*) as COUNT from
+		REVIEWS
 	</select>
-	<select id="getPage" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	<select id="totalbyName" resultType="java.util.HashMap">
+		select count(*) as COUNT from REVIEWS where CMPN_NM like #{CName} order by WDATE desc
+	</select>
+	<select id="getPage" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
 	<![CDATA[
 		select * from (
 			select rownum RNUM, r.* from (
@@ -18,13 +23,14 @@
 	]]>
 	</select>
 	<select id="review" resultType="java.util.HashMap">
-		select r.*, s.LOGO from SCORE s, REVIEWS r where
+		select r.*, s.LOGO from SCORE s,
+		REVIEWS r where
 		s.CMPN_NM=r.CMPN_NM order by
 		r.WDATE desc
 	</select>
 
 	<select id="rank" resultType="java.util.HashMap">
-		select reviews.CMPN_NM, 
+		select reviews.CMPN_NM,
 		SCORE.DIVISION, SCORE.SCALE from SCORE, REVIEWS where
 		SCORE.CMPN_NM=REVIEWS.CMPN_NM
 		order by REVIEWS.WDATE desc
@@ -35,12 +41,27 @@
 		VALUES(#{CMPN_NM},#{CONTENTS},SYSDATE,#{EMAIL},#{RATE})
 	</insert>
 	<select id="search" parameterType="java.lang.String" resultType="java.util.HashMap">
-		select * from Reviews where CMPN_NM like #{CName}
+		select * from Reviews where CMPN_NM like #{CName} order by WDATE desc
 	</select>
-	<select id="getCount" parameterType="java.lang.String" resultType="java.lang.Integer">
-		select count(*) as cnt from Reviews where CMPN_NM like #{CName}
+	<select id="getCount" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(*) as cnt from Reviews where CMPN_NM like
+		#{CName}
 	</select>
-	<select id="searchLogo" parameterType="java.lang.String" resultType="java.util.HashMap">
-		select LOGO from SCORE where CMPN_NM like #{CName}
+	<select id="searchLogo" parameterType="java.lang.String"
+		resultType="java.util.HashMap">
+		select * from SCORE where CMPN_NM like #{CName}
+	</select>
+
+	<select id="getPageData" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		<![CDATA[
+		select * from (
+		select rownum RNUM, r.* from (
+		select * from REVIEWS where CMPN_NM like #{CName}
+		order by WDATE desc
+		)r)
+		where RNUM>=#{start} and RNUM<=#{end}
+		]]>
 	</select>
 </mapper>

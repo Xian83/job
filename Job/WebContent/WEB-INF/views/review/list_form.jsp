@@ -161,8 +161,8 @@
 						html += "<b>[" + obj[i].id + "]</b> ";
 						html += obj[i].msg + "<br>";
 					}
-					console.log(document.getElementById("result").innerHTML);
-					console.log(html);
+// 					console.log(document.getElementById("result").innerHTML);
+// 					console.log(html);
 					if (document.getElementById("result").innerHTML != html) {
 						document.getElementById("result").innerHTML = html;
 						document.getElementById("result").scrollTop = document
@@ -171,7 +171,7 @@
 				}
 			}
 		}
-		setInterval(getChatLog, 200);
+		setInterval(getChatLog, 1000);
 		
 		
 		$(document).ready(function() {

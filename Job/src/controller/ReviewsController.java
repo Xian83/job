@@ -88,34 +88,30 @@ public class ReviewsController {
 	@ResponseBody
 	public ModelAndView searchHandler(@RequestParam(name="CName") String CName, @RequestParam(name="page", defaultValue="1")String page) {
 		
-		System.out.println("넘어온 파람 = " +CName + "/" + page);
-		// 기업명 기준으로 DB에서 데이터 가져오기
-		List list_search = rDao.List_search(CName); 
-		System.out.println("리뷰용 list_search = " + list_search);
+		// 기업명 기준으로 DB에서 데이터 개수 가져오기
+		int cnt = Integer.parseInt(String.valueOf(rdao.totalCount(CName).get("COUNT")));	// total data count
 		
-		// 기업명 기준으로 DB에서 cnt 데이터 가져오기
-		int list_cnt = rDao.List_cnt(CName);
-		System.out.println("리뷰용 list_cnt = " + list_cnt);
-		
+		// 기업명 기준으로 DB에서 로고 가져오기
 		List<HashMap> list_logo = rDao.searchLogo(CName);
-		System.out.println("리뷰용 list_logo = " + list_logo);
-
-	
-		int size = list_cnt % 20 == 0 ? list_cnt / 20 : list_cnt / 20 + 1; // 총 페이지 수
-		String pStr = page == null ? "1" : page;
-
+		
+		int div = 6;
+		int size = cnt % div == 0 ? cnt / div : cnt / div + 1; // 총 페이지 수
+		
+		int start = (Integer.parseInt(page) - 1) * div + 1;
+		int end = Integer.parseInt(page) * div;
+		
+//		기업명 기준으로 DB에서 해당 페이지 데이터 가져오기
+		List<HashMap> review = rdao.getByName(CName, start, end, list_logo);	// get reviews
 		
 		// 상세 검색 목록 뷰
 		ModelAndView mav = new ModelAndView();
-		//mav.setViewName("t1");
-		//mav.setViewName
 		mav.setViewName("/review/reviewAjax");
-		mav.addObject("review", list_search);
-		mav.addObject("page", pStr);
-		mav.addObject("logo",list_logo);
+		mav.addObject("review", review);
+		mav.addObject("page", page);
+//		mav.addObject("logo",list_logo);
 		mav.addObject("size", size);
-		mav.addObject("cnt", list_cnt);
-		//mav.addObject("key", sdao.getParam(req)); // paging 처리용
+		mav.addObject("cnt", cnt);
+		mav.addObject("CName", CName);
 		return mav;
 	}
 }
