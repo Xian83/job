@@ -19,19 +19,24 @@
 body {
 	position: relative;
 }
+
 th {
 	font-size: 80%;
 }
+
 .affix {
 	top: 20px;
 }
+
 div.col-sm-9 div {
 	height: auto;
 	font-size: 20px;
 }
+
 #section1, #section2, #section3, #section4, #section5 {
 	padding-top: 50px;
 }
+
 @media screen and (max-width: 810px) {
 	#section1, #section2, #section3, #section4, #section5 {
 		margin-left: 150px;
@@ -159,8 +164,10 @@ div.col-sm-9 div {
 												<c:when test="${empty list_c }">
 
 													<td colspan="4" style="text-align: center"><b>비교한
-															기업이 없습니다 </b></td></tr>
-													<td colspan="4" style="text-align: center"><b> 가장 인기많은 기업을 비교합니다.</b></td>
+															기업이 없습니다 </b></td>
+													</tr>
+													<td colspan="4" style="text-align: center"><b> 가장
+															인기많은 기업을 비교합니다.</b></td>
 												</c:when>
 												<c:otherwise>
 													<c:forEach var="i" begin="0" end="9" items="${list_c }"
@@ -186,60 +193,59 @@ div.col-sm-9 div {
 							</div>
 
 							<div class="col-md-6">
-							
-								<div class="responsive" id="compareResult">	
-										<div class="container-fluid" align="center"
-											style="width: 80%;">
-											<br /> <br />
-								
-									<div class="col-md-6" align="center">
 
-										<div class="compare_fixname">
-									 		<div class="name left">
-												<span class="label label-danger" style="font-size: 10px;"><b>${score01.CMPN_NM }</b></span><br />
+								<div class="responsive" id="compareResult">
+									<div class="container-fluid" align="center" style="width: 80%;">
+										<br /> <br />
+
+										<div class="col-md-6" align="center">
+
+											<div class="compare_fixname">
+												<div class="name left">
+													<span class="label label-danger" style="font-size: 10px;"><b>${score01.CMPN_NM }</b></span><br />
+												</div>
 											</div>
-										</div>  
-										<br /> <img src="${score01.LOGO }" class="img-circle"
-											style="width: 70%;"><br />
+											<br /> <img src="${score01.LOGO }" class="img-circle"
+												style="width: 70%;"><br />
 
-									</div>
-
-
-									<div class="col-md-6" align="center">
-
-										<div class="compare_fixname">
-											 <div class="name right">
-												<span class="label label-primary" style="font-size: 10px;"><b>${score02.CMPN_NM }</b></span><br />
-											</div> 
 										</div>
-										<br /> <img src="${score02.LOGO }" class="img-circle"
-											style="width: 70%;"><br />
+
+
+										<div class="col-md-6" align="center">
+
+											<div class="compare_fixname">
+												<div class="name right">
+													<span class="label label-primary" style="font-size: 10px;"><b>${score02.CMPN_NM }</b></span><br />
+												</div>
+											</div>
+											<br /> <img src="${score02.LOGO }" class="img-circle"
+												style="width: 70%;"><br />
+
+										</div>
 
 									</div>
 
+									<hr />
+									<div class="container-fluid" align="center">
+										<img src="${chartURL }">
+									</div>
 								</div>
 
-								<hr />
-								<div class="container-fluid" align="center">
-									<img src="${chartURL }">
-								</div>
 							</div>
 
 						</div>
-
 					</div>
-				</div>
-				<div id="section3">
-					<hr />
-					<h2>
-						<b>자주 본 기업</b>
-					</h2>
-					<h6>
-						<span style="color: #4682B4">(조회수 높은 기업을 확인할 수 있습니다)</span>
-					</h6>
-					</br>
-					<div id="donutchart" style="width: 900px; height: 500px;"></div>
-					<script type="text/javascript">
+					<div id="section3">
+						<hr />
+						<h2>
+							<b>자주 본 기업</b>
+						</h2>
+						<h6>
+							<span style="color: #4682B4">(조회수 높은 기업을 확인할 수 있습니다)</span>
+						</h6>
+						</br>
+						<div id="donutchart" style="width: 900px; height: 500px;"></div>
+						<script type="text/javascript">
 					      google.charts.load("current", {packages:["corechart"]});
 					      google.charts.setOnLoadCallback(drawChart);
 					      function drawChart() {
@@ -258,62 +264,62 @@ div.col-sm-9 div {
       }
     </script>
 
-					<div id="section4">
-						<hr />
-						<h2>
-							<b>스크랩한 기업 목록</b>
-						</h2>
-						<h6>
-							<span style="color: #4682B4">(최근 스크랩한 기업을 확인할 수 있습니다)</span>
-						</h6>
-						</br>
-						<div class="row content">
-							<div class="table-responsive col-md-7 "
-								style="height: 500px; overflow: auto;" id="scrap">
-								<table class="table ">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Company Name</th>
-											<th>check</th>
-											<th>Scrap Date</th>
-											<th>Cancel</th>
-										</tr>
-									</thead>
-									<tbody>
-
-										<c:forEach var="i" items="${list_s }" varStatus="vs">
+						<div id="section4">
+							<hr />
+							<h2>
+								<b>스크랩한 기업 목록</b>
+							</h2>
+							<h6>
+								<span style="color: #4682B4">(최근 스크랩한 기업을 확인할 수 있습니다)</span>
+							</h6>
+							<br/>
+							<div class="row content">
+								<div class="table-responsive col-md-7 "
+									style="height: 500px; overflow: auto;" id="scrap">
+									<table class="table ">
+										<thead>
 											<tr>
-												<td>${vs.count }</td>
-												<td><a href="/company?cmpn_nm=${i.CMPN_NM }">${i.CMPN_NM }</a></td>
-												<td><input type="checkbox" name="inqurity" class="chk"
-													value="${i.CMPN_NM }"></td>
-												<td><fmt:formatDate value="${i.SDATE }"
-														pattern="yyyy-MM-dd" /></td>
-												<td>
-													<button type="button" class="btn" id="deleteScrap"
-														name="${i.CMPN_NM }">삭제</button>
-												</td>
-
+												<th>#</th>
+												<th>Company Name</th>
+												<th>check</th>
+												<th>Scrap Date</th>
+												<th>Cancel</th>
 											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
-							<div class="col-md-5">
-								<b>일주일간 조회수 비교 그래프</b>
-								<div id="visit_chart" style="width: 100%; height: 400px">
+										</thead>
+										<tbody>
+
+											<c:forEach var="i" items="${list_s }" varStatus="vs">
+												<tr>
+													<td>${vs.count }</td>
+													<td><a href="/company?cmpn_nm=${i.CMPN_NM }">${i.CMPN_NM }</a></td>
+													<td><input type="checkbox" name="inqurity" class="chk"
+														value="${i.CMPN_NM }"></td>
+													<td><fmt:formatDate value="${i.SDATE }"
+															pattern="yyyy-MM-dd" /></td>
+													<td>
+														<button type="button" class="btn" id="deleteScrap"
+															name="${i.CMPN_NM }">삭제</button>
+													</td>
+
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+								<div class="col-md-5">
+									<b>일주일간 조회수 비교 그래프</b>
+									<div id="visit_chart" align="left" style="margin-left:0;width: 100%; height: 400px">
+
+									</div>
+
 
 								</div>
-
-
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </body>
 
@@ -445,9 +451,19 @@ div.col-sm-9 div {
 							},
 							vAxis: {
 								title: ''
-							}
+							},
+							width: 600,
+					        height: 300,
+					        legend: { position: 'bottom' }
 						};
 						
 						var chart = new google.visualization.LineChart(document.getElementById('visit_chart'));
 	
 						chart.draw(data, options);
+					}
+			});
+		}
+		
+	});
+	
+</script>
