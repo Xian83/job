@@ -83,9 +83,9 @@
 						<li><a href="/login/logout" class="w3-bar-item w3-button w3-mobile">Logout</a></li>
 					</c:when>
 				</c:choose>
-				<li><form action="/search/company" >
-					<input type="text" name="search" class="w3-bar-item form-control"
-						placeholder="회사명" style="display: inline-block; width: 150px; height: 50%; margin-top: 10px; ">
+				<li><form action="/search" >
+					<input type="text" name="CName" class="w3-bar-item form-control"
+						placeholder="기업명" style="display: inline-block; width: 150px; height: 50%; margin-top: 10px; ">
 					<button class="btn btn-default " type="submit" ><i class="glyphicon glyphicon-search"></i></button>
 				</form>
 				</li>
